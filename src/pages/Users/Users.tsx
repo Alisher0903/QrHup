@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BottomNavigation, BottomNavigationAction, Box, Card, CardContent, Typography, Avatar, Divider, Link } from '@mui/material';
+import { BottomNavigation, BottomNavigationAction, Box, Card, CardContent, Typography, Avatar, Divider, } from '@mui/material';
 import Attendance from './Views/Attendance';
 import Leave from './Views/Leave';
 import Folder from './Views/Folder';
@@ -12,6 +12,11 @@ import Address from './Views/Address';
 import Contacts from './Views/Contacts';
 import Social from './Views/Social';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
+import { BsBag, BsPhone } from 'react-icons/bs';
+import { LuWallet } from "react-icons/lu";
+import { IoMdTime } from 'react-icons/io';
+import { Link } from 'react-router-dom';
+import { MdLanguage } from "react-icons/md";
 
 const Users = () => {
   const [selectedTab, setSelectedTab] = useState<number>(0);
@@ -54,9 +59,8 @@ const Users = () => {
       <Breadcrumb pageName="Users" />
 
       <Box sx={{ maxWidth: 'lg', mx: 'auto', mt: 4 }} gap={5} display={'flex'} >
-        <Card className='w-auto'>
+        <Card className='w-[35%]'>
           <CardContent>
-            {/* User Info */}
             <Box
               sx={{
                 display: 'flex',
@@ -69,51 +73,142 @@ const Users = () => {
                 justifyContent: 'start',
               }}
             >
-              <Box sx={{display:'flex', }}>
+              <Box sx={{ display: 'flex', marginBottom: 2, justifyContent: 'center', gap: 1, alignItems: 'center' }}>
                 <Avatar
                   src="https://picsum.photos/500"
                   alt="User Avatar"
-                  sx={{ width: 96, height: 96, border: '2px solid', borderColor: 'grey.300' }}
+                  sx={{ width: 70, height: 70, border: '2px solid', borderColor: 'grey.300' }}
                 />
-                <Typography variant="h6" mb={3} fontWeight="bold">
+                <Typography mt={2} mb={3} fontWeight="bold">
                   Kimi Räikkönen
-                  <Typography color="text.secondary">UX Designer</Typography>
+                  <Typography
+                    color="text.secondary"
+                    fontWeight='normal'
+                    className='font-normal'
+                  >UX Designer</Typography>
                 </Typography>
               </Box>
               <Box sx={{ mt: { xs: 2, md: 0 } }}>
 
-                <Typography mb={3} variant="body2" color="text.secondary" mt={1}>
-                  Admin & HRM Department
+                <Typography sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row', gap: 2 }} mb={3} variant="body1" fontWeight="bold" >
+                  <Box sx={{ padding: 1, bgcolor: 'lightgray', borderRadius: 1 }}>
+                    <BsBag size={25} />
+                  </Box>
+                  <div className="flex flex-col">
+                    <span>
+                      Admin & HRM
+                    </span>
+                    <span className='text-sm font-normal text-gray-400'>
+                      Department
+                    </span>
+                  </div>
                 </Typography>
-                <Typography sx={{ display: 'flex', flexDirection: 'column' }} mb={3} variant="body1" fontWeight="bold" color="success.main">
-                  <span>
-                    $40,000
-                  </span>
-                  <span className='text-sm text-gray'>
-                    Salary
-                  </span>
+                <Typography sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row', gap: 2 }} mb={3} variant="body1" fontWeight="bold">
+                  {/* <BsBag size={25} /> */}
+                  <Box sx={{ padding: 1, bgcolor: 'lightgray', borderRadius: 1 }}>
+                    <LuWallet size={25} />
+
+                  </Box>
+                  <div className="flex flex-col">
+                    <Typography fontWeight={'bold'} color="success.main">
+                      $40,000
+                    </Typography>
+                    <span className='text-sm font-normal text-gray-400'>
+                      Salary
+                    </span>
+                  </div>
                 </Typography>
-                <Typography color="text.secondary">Regular Work Shift</Typography>
-                <Typography color="text.secondary">Joined: 12 February 2023</Typography>
+                <Typography sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row', gap: 2 }} mb={3} variant="body1" fontWeight="bold" >
+                  {/* <BsBag size={25} /> */}
+                  <Box sx={{ padding: 1, bgcolor: 'lightgray', borderRadius: 1 }}>
+                    <IoMdTime size={25} />
+                  </Box>
+                  <div className="flex flex-col font-bold">
+                    <span>
+                      Regular
+                    </span>
+                    <span className='text-sm font-normal text-gray-400'>
+                      Work Shift
+                    </span>
+                  </div>
+                </Typography>
+                <Typography sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row', gap: 2 }} mb={3} variant="body1" fontWeight="bold">
+                  <Box sx={{ padding: 1, bgcolor: 'lightgray', borderRadius: 1 }}>
+                    <LuWallet size={25} />
+                  </Box>
+                  <div className="flex flex-col">
+                    <span>
+                      $40,000
+                    </span>
+                    <span className='text-sm font-normal text-gray-400'>
+                      Salary
+                    </span>
+                  </div>
+                </Typography>
               </Box>
             </Box>
             <Box mb={3}>
               <Typography variant="subtitle1" fontWeight="bold">
                 Contact
               </Typography>
-              <Typography color="text.secondary">Email: alwisyuryatmaja@gmail.com</Typography>
-              <Typography color="text.secondary">Phone: +6282233836756</Typography>
-              <Link href="#" color="primary" underline="hover">
-                Website
-              </Link>
+              <Typography sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row', gap: 2, color: "gray" }} mb={3} variant="body1" fontWeight="bold">
+                <Box
+                  sx={{ padding: 0.2, borderRadius: 1 }}
+                >
+                  <LuWallet size={25} />
+                </Box>
+                <div className="flex flex-col">
+                  <span className='text-sm font-normal text-gray-400'>
+                    Email
+                  </span>
+                  <span className='text-sm text-black-2'>
+                    alwissuryatmaja@gmail.com
+                  </span>
+                </div>
+              </Typography>
+              <Typography sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row', gap: 2, color: "gray" }} mb={3} variant="body1" fontWeight="bold">
+                <Box
+                  sx={{ padding: 0.2, borderRadius: 1 }}
+                >
+                  <BsPhone size={25} />
+                </Box>
+                <div className="flex flex-col">
+                  <span className='text-sm font-normal text-gray-400'>
+                    Phone
+                  </span>
+                  <span className='text-sm text-black-2'>
+                    +6282283386756
+                  </span>
+                </div>
+              </Typography>
+              <Typography sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row', gap: 2, color: "gray" }} mb={3} variant="body1" fontWeight="bold">
+                <Box
+                  sx={{ padding: 0.2, borderRadius: 1 }}
+                >
+                  <MdLanguage size={25} />
+                </Box>
+                <div className="flex flex-col">
+                  <span className='text-sm font-normal text-gray-400'>
+                    Website
+                  </span>
+                  <Link to='/' className='text-sm text-blue-500 underline'>
+                    https://bit.ly/3uOJF79
+                  </Link>
+                </div>
+              </Typography>
             </Box>
 
 
           </CardContent>
         </Card>
-        <Card sx={{ width: '70%', paddingX: '10px' }}>
-          <BottomNavigation className='overflow-x-auto' sx={{paddingX: '10px', paddingLeft:'20px'}} value={selectedTab} onChange={handleChange} showLabels>
-            <BottomNavigationAction sx={{marginLeft: '20px'}} label="Attendance" />
+        <Card sx={{ width: '70', paddingX: '10px' }}>
+          <BottomNavigation
+            className='overflow-x-auto'
+            sx={{ paddingX: '10px', paddingLeft: '150px' }}
+            value={selectedTab} onChange={handleChange}
+            showLabels
+          >
+            <BottomNavigationAction label="Attendance" />
             <BottomNavigationAction label="Leave" />
             <BottomNavigationAction label="Folder" />
             <BottomNavigationAction label="Assets" />
