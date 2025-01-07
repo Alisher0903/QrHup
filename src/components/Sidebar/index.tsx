@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import Logo from '../../images/logo/logo.svg';
 import { RxDashboard } from "react-icons/rx";
-import { TbUsers } from "react-icons/tb";
 import { FaRegUser } from "react-icons/fa";
 import { TfiControlSkipBackward } from "react-icons/tfi";
-import { IoMdTime } from "react-icons/io";
 import { FaRegFolderClosed } from "react-icons/fa6";
+import { PiUsersThreeBold } from "react-icons/pi";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -62,7 +61,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <aside
       ref={sidebar}
-      className={`absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-white duration-300 ease-linear lg:static lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+      className={`absolute left-0 top-0 z-99 flex h-screen w-72.5 flex-col overflow-y-hidden bg-white duration-300 ease-linear lg:static lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
     >
       <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
@@ -95,56 +94,43 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </NavLink>
               <li>
                 <NavLink
-                  to="/users"
+                  to="/User"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-gray 
-                    ${(pathname === '/users' ||
-                      pathname.includes('/users')) &&
-                    'bg-gray-100 text-black'
-                    }`}
-                >
-                  <TbUsers />
-                  Users
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/employee"
-                  className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-gray 
-                    ${(pathname === '/employee' ||
-                      pathname.includes('/employee')) &&
+                    ${(pathname === '/User' ||
+                      pathname.includes('/User')) &&
                     'bg-gray-100 text-black'
                     }`}
                 >
                   <FaRegUser />
-                  Employee
+                  User
                 </NavLink>
               </li>
 
 
               <li>
                 <NavLink
-                  to="/leave"
+                  to="/transactions"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-gray 
-                    ${(pathname === '/leave' ||
-                      pathname.includes('/leave')) &&
+                    ${(pathname === '/transactions' ||
+                      pathname.includes('/transactions')) &&
                     'bg-gray-100 text-black'
                     }`}
                 >
                   <TfiControlSkipBackward />
-                  Leave
+                  Transactions
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/attendance"
+                  to="/partners"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-gray 
-                    ${(pathname === '/attendance' ||
-                      pathname.includes('/attendance')) &&
+                    ${(pathname === '/partners' ||
+                      pathname.includes('/partners')) &&
                     'bg-gray-100 text-black'
                     }`}
                 >
-                  <IoMdTime  />
-                  Attendance
+                  <PiUsersThreeBold  />
+                  Partners
                 </NavLink>
               </li>
               <li>
@@ -156,7 +142,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     'bg-gray-100 text-black'
                     }`}
                 >
-                  <FaRegFolderClosed  />
+                  <FaRegFolderClosed />
                   Administration
                 </NavLink>
               </li>
