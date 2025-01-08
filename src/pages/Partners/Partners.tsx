@@ -22,7 +22,7 @@ import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
 import { useGlobalRequest } from "../../hooks/GlobalHook";
 import { useState, useEffect } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { AddUser, UserGet, DeleteUser, EditUser, PartnerGet } from "../../hooks/url";
+import { AddUser, UserGet, DeleteUser, EditUser, PartnerGet, PartnerCreate } from "../../hooks/url";
 import { toast } from "react-hot-toast";
 import { Pagination } from "antd";
 import { FaEye } from "react-icons/fa";
@@ -59,7 +59,6 @@ export default function Partners() {
         serviceFee: 0,
         mfo: "",
         account: "",
-        password: "",
     });
 
     const { error, globalDataFunc, response, loading } = useGlobalRequest(
@@ -68,12 +67,18 @@ export default function Partners() {
     );
 
     const { globalDataFunc: postData, response: postRes, error: postError } = useGlobalRequest(
-        AddUser,
+        PartnerCreate,
         "POST",
         {
-            name: data.name,
-            phone: data.phone.replaceAll("+", ""),
-            password: data.password,
+            name: data.name, // 1
+            phone: data.phone.replaceAll("+", ""), // 2
+            url: data.url, // 4
+            address: data.address, // 5
+            email: data.email, // 6
+            inn: data.inn, // 7
+            serviceFee: data.serviceFee, // 9
+            mfo: data.mfo, // 10
+            account: data.account, // 11
         }
     );
     const { globalDataFunc: EditData, response: EditRes, error: EditError } = useGlobalRequest(
@@ -82,7 +87,7 @@ export default function Partners() {
         {
             name: data.name,
             phone: data.phone.replaceAll("+", ""),
-            password: data.password,
+            // password: data.password,
         }
     );
 
@@ -93,7 +98,7 @@ export default function Partners() {
 
     useEffect(() => {
         globalDataFunc();
-    }, [page, size, nameFilter, numFilter,emailFilter, status, fromDate, toDate, inn]);
+    }, [page, size, nameFilter, numFilter, emailFilter, status, fromDate, toDate, inn]);
 
     // Modal Handlers
     const handleAddOpen = () => {
@@ -107,7 +112,7 @@ export default function Partners() {
             serviceFee: 0,
             mfo: "",
             account: "",
-            password: "",
+            // password: "",
         });
         setOpenAddModal(true);
     };
@@ -133,7 +138,7 @@ export default function Partners() {
     }, [postRes, postError]);
 
 
-    
+
     useEffect(() => {
         if (EditRes) {
             toast.success("User edited successfully!");
@@ -352,11 +357,10 @@ export default function Partners() {
                                 },
                             }}
                         />
-                        <select className="min-w-[200px] p-2 border" onChange={
+                        <select className="min-w-[200px] p-2 border border-black text-black" onChange={
                             (e: any) => {
                                 setStatus(e.target.value);
                                 console.log(e.target.value);
-
                             }
                         }>
                             <option selected value='ACTIVE'>
@@ -589,21 +593,11 @@ export default function Partners() {
                             }
                         }}
                     />
-                    <TextField
-                        margin="dense"
-                        label="Password"
-                        type="password"
-                        fullWidth
-                        value={data.password}
-                        onChange={(e) =>
-                            setData({ ...data, password: e.target.value })
-                        }
-                    />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleEditClose}>Cancel</Button>
                     <Button
-                        disabled={!data.name || !data.phone || data?.password?.length < 3}
+                        disabled={!data.name}
                         onClick={() => {
                             HandleEdit();
                         }}

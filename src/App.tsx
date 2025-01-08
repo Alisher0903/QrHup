@@ -11,6 +11,7 @@ import DefaultLayout from './layout/DefaultLayout';
 import User from './pages/User';
 import Transactions from './pages/Transactions';
 import Partners from './pages/Partners/Partners';
+import PartnerDetials from './pages/Partners/partnerDetials';
 
 interface RouteConfig {
   path: string;
@@ -30,7 +31,7 @@ function App() {
     { path: '/settings', element: <Settings />, title: 'Settings | TailAdmin - Tailwind CSS Admin Dashboard Template' },
     { path: '/chart', element: <Chart />, title: 'Basic Chart | TailAdmin - Tailwind CSS Admin Dashboard Template' },
     { path: '/partners', element: <Partners />, title: 'Alerts | TailAdmin - Tailwind CSS Admin Dashboard Template' },
-    { path: '/ui/buttons', element: <Buttons />, title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template' },
+    { path: '/partnerDetials/:id', element: <PartnerDetials />, title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template' },
     { path: '/auth/signin', element: <SignIn />, title: 'Signin | TailAdmin - Tailwind CSS Admin Dashboard Template' },
   ];
 

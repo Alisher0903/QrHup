@@ -14,3 +14,4 @@ export const LeaveGet: string = `${baseUrl}`;
 // Partners Page
 
 export const PartnerGet: string = `${baseUrl}api/partner/page?`;
+export const PartnerCreate: string = `${baseUrl}api/partner/create`;
