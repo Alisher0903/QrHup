@@ -22,12 +22,13 @@ import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
 import { useGlobalRequest } from "../../hooks/GlobalHook";
 import { useState, useEffect } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { AddUser, UserGet, DeleteUser, EditUser, PartnerGet, PartnerCreate } from "../../hooks/url";
+import { AddUser, UserGet, DeleteUser, EditUser, PartnerGet, PartnerCreate, PartnerEdit } from "../../hooks/url";
 import { toast } from "react-hot-toast";
 import { Pagination } from "antd";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Option } from "antd/es/mentions";
+import { CiEdit } from "react-icons/ci";
 
 
 export default function Partners() {
@@ -60,9 +61,23 @@ export default function Partners() {
         mfo: "",
         account: "",
     });
+    const getPartnerUrl = () => {
+        const queryParams: string = [
+            nameFilter ? `name=${nameFilter}` : '',
+            numFilter ? `phone=${numFilter}` : '',
+            emailFilter ? `email=${emailFilter}` : '',
+            inn ? `inn=${inn}` : '',
+            fromDate ? `from=${fromDate}` : '',
+            toDate ? `to=${toDate}` : '',
+            status ? `status=${status}` : '',
+
+        ].filter(Boolean).join('&');
+
+        return `${PartnerGet}?page=${page}&size=${size}${queryParams ? `&${queryParams}` : ''}`;
+    }
 
     const { error, globalDataFunc, response, loading } = useGlobalRequest(
-        `${PartnerGet}${nameFilter && `name=${nameFilter}&`}${numFilter && `phone=${numFilter}&`}${emailFilter && `email=${emailFilter}&`} ${inn && `inn=${inn}&`} ${fromDate && `from=${fromDate}&`}${toDate && `to=${toDate}&`}${status && `status=${status}&`} page=${page}&size=${size}`,
+        getPartnerUrl(),
         "GET"
     );
 
@@ -82,12 +97,18 @@ export default function Partners() {
         }
     );
     const { globalDataFunc: EditData, response: EditRes, error: EditError } = useGlobalRequest(
-        `${EditUser}id=${getId}`,
+        `${PartnerEdit}id=${getId}`,
         "PUT",
         {
-            name: data.name,
-            phone: data.phone.replaceAll("+", ""),
-            // password: data.password,
+            name: data.name, // 1
+            phone: data.phone.replaceAll("+", ""), // 2
+            url: data.url, // 4
+            address: data.address, // 5
+            email: data.email, // 6
+            inn: data.inn, // 7
+            serviceFee: data.serviceFee, // 9
+            mfo: data.mfo, // 10
+            account: data.account, // 11
         }
     );
 
@@ -439,6 +460,25 @@ export default function Partners() {
                                                 >
                                                     <FaEye size={25} color="black" />
                                                 </Button>
+                                                <Button
+                                                    onClick={() => {
+                                                        setOpenEditModal(true);
+                                                        setData({
+                                                            name: partner.name,
+                                                            phone: partner.phone,
+                                                            account: partner.account,
+                                                            mfo: partner.mfo,
+                                                            inn: partner.inn,
+                                                            email: partner.email,
+                                                            serviceFee: partner.serviceFee,
+                                                            address: partner.address,
+                                                            url: partner.url,
+                                                        });
+                                                        setGetId(partner.id)
+                                                    }}
+                                                >
+                                                    <MdEdit  size={25} color="black" />
+                                                </Button>
                                             </TableCell>
                                         </TableRow>
                                     )
@@ -572,9 +612,21 @@ export default function Partners() {
                         label="Name"
                         fullWidth
                         value={data.name}
-                        onChange={(e) =>
-                            setData({ ...data, name: e.target.value })
-                        }
+                        onChange={(e) => setData({ ...data, name: e.target.value })}
+                    />
+                    <TextField
+                        margin="dense"
+                        label="URL"
+                        fullWidth
+                        value={data.url}
+                        onChange={(e) => setData({ ...data, url: e.target.value })}
+                    />
+                    <TextField
+                        margin="dense"
+                        label="Address"
+                        fullWidth
+                        value={data.address}
+                        onChange={(e) => setData({ ...data, address: e.target.value })}
                     />
                     <TextField
                         margin="dense"
@@ -593,11 +645,56 @@ export default function Partners() {
                             }
                         }}
                     />
+                    <TextField
+                        margin="dense"
+                        label="Email"
+                        fullWidth
+                        value={data.email}
+                        onChange={(e) => setData({ ...data, email: e.target.value })}
+                    />
+                    <TextField
+                        margin="dense"
+                        label="INN"
+                        fullWidth
+                        value={data.inn}
+                        onChange={(e) => setData({ ...data, inn: e.target.value })}
+                    />
+                    <TextField
+                        margin="dense"
+                        label="Service Fee"
+                        fullWidth
+                        type="number"
+                        value={data.serviceFee}
+                        onChange={(e) => setData({ ...data, serviceFee: Number(e.target.value) })}
+                    />
+                    <TextField
+                        margin="dense"
+                        label="MFO"
+                        fullWidth
+                        value={data.mfo}
+                        onChange={(e) => setData({ ...data, mfo: e.target.value })}
+                    />
+                    <TextField
+                        margin="dense"
+                        label="Account"
+                        fullWidth
+                        value={data.account}
+                        onChange={(e) => setData({ ...data, account: e.target.value })}
+                    />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleEditClose}>Cancel</Button>
                     <Button
-                        disabled={!data.name}
+                        disabled={
+                            !data.name ||
+                            !data.account ||
+                            !data.address ||
+                            !data.email ||
+                            !data.inn ||
+                            !data.mfo ||
+                            !data.phone ||
+                            !data.serviceFee ||
+                            !data.url}
                         onClick={() => {
                             HandleEdit();
                         }}

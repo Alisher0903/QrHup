@@ -5,13 +5,14 @@ import PageTitle from './components/PageTitle';
 import SignIn from './pages/Authentication/SignIn';
 import Chart from './pages/Chart';
 import ECommerce from './pages/Dashboard/ECommerce';
-import Settings from './pages/Settings';
+import Settings from './pages/Merchant';
 import Buttons from './pages/UiElements/Buttons';
 import DefaultLayout from './layout/DefaultLayout';
 import User from './pages/User';
 import Transactions from './pages/Transactions';
 import Partners from './pages/Partners/Partners';
 import PartnerDetials from './pages/Partners/partnerDetials';
+import Merchant from './pages/Merchant';
 
 interface RouteConfig {
   path: string;
@@ -28,7 +29,7 @@ function App() {
     { path: '/', element: <ECommerce />, title: 'Admin | Statistics' },
     { path: '/User', element: <User />, title: 'Admin | User' },
     { path: '/transactions', element: <Transactions />, title: 'Tables | Leave' },
-    { path: '/settings', element: <Settings />, title: 'Settings | TailAdmin - Tailwind CSS Admin Dashboard Template' },
+    { path: '/merchant', element: <Merchant />, title: 'Settings | TailAdmin - Tailwind CSS Admin Dashboard Template' },
     { path: '/chart', element: <Chart />, title: 'Basic Chart | TailAdmin - Tailwind CSS Admin Dashboard Template' },
     { path: '/partners', element: <Partners />, title: 'Alerts | TailAdmin - Tailwind CSS Admin Dashboard Template' },
     { path: '/partnerDetials/:id', element: <PartnerDetials />, title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template' },

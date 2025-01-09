@@ -4,8 +4,9 @@ import Logo from '../../images/logo/logo.svg';
 import { RxDashboard } from "react-icons/rx";
 import { FaRegUser } from "react-icons/fa";
 import { TfiControlSkipBackward } from "react-icons/tfi";
-import { FaRegFolderClosed } from "react-icons/fa6";
 import { PiUsersThreeBold } from "react-icons/pi";
+import { CiShop } from "react-icons/ci";
+
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -61,7 +62,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <aside
       ref={sidebar}
-      className={`absolute left-0 top-0 z-99 flex h-screen w-72.5 flex-col overflow-y-hidden bg-white duration-300 ease-linear lg:static lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+      style={{position: 'static'}}
+      className={` left-0 top-0 z-99 flex h-screen w-72.5 flex-col overflow-y-hidden bg-white duration-300 ease-linear lg:static lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
     >
       <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
@@ -107,7 +109,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </li>
 
 
-              <li>
+              {/* <li>
                 <NavLink
                   to="/transactions"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-gray 
@@ -119,7 +121,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   <TfiControlSkipBackward />
                   Transactions
                 </NavLink>
-              </li>
+              </li> */}
               <li>
                 <NavLink
                   to="/partners"
@@ -129,7 +131,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     'bg-gray-100 text-black'
                     }`}
                 >
-                  <PiUsersThreeBold  />
+                  <PiUsersThreeBold />
                   Partners
                 </NavLink>
               </li>
@@ -142,18 +144,20 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     'bg-gray-100 text-black'
                     }`}
                 >
-                  <FaRegFolderClosed />
                   Administration
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/settings"
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${pathname.includes('settings') &&
-                    'bg-graydark dark:bg-meta-4'
+                  to="/merchant"
+                  className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-gray 
+                    ${(pathname === '/merchant' ||
+                      pathname.includes('/merchant')) &&
+                    'bg-gray-100 text-black'
                     }`}
                 >
-                  Settings
+                  <CiShop />
+                  Merchant
                 </NavLink>
               </li>
             </ul>
