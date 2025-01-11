@@ -10,44 +10,26 @@ import {
     Typography,
     CircularProgress,
     Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    TextField,
-    Select,
-
 } from "@mui/material";
 import { useState, useEffect } from "react";
-import { MdEdit } from "react-icons/md";
-import { DeleteUser, PartnerGet, PartnerCreate, PartnerEdit, MerchantGet, QrGet } from "../../hooks/url";
-import { toast } from "react-hot-toast";
-import { Pagination } from "antd";
+import { DatePicker, Input, Pagination, Select } from "antd";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useGlobalRequest } from "../../hooks/GlobalHook";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
-
-
+import { QrGet } from "../../hooks/url";
+import { datePicker } from "../../common/global-functions/date-sort";
+const { RangePicker } = DatePicker;
 
 export default function Partners() {
-    // const [openAddModal, setOpenAddModal] = useState(false);
-    // const [openEditModal, setOpenEditModal] = useState(false);
-    // const [openDeleteModal, setOpenDeleteModal] = useState(false);
-
-
-    // Filter states
-
     const [nameFilter, setNameFilter] = useState('');
     const [numFilter, setNumFilter] = useState('');
     const [emailFilter, setEmailFilter] = useState('');
-    const [inn, setInn] = useState('');
-    const [fromDate, setFromDate] = useState('');
-    const [toDate, setToDate] = useState('');
-    const [account, setAccount] = useState(0);
-    // const [mfo, setMfo] = useState(0);
     const [amount, setAmount] = useState(0);
-    const [status, setStatus] = useState<boolean>();
+    const [inn, setInn] = useState('');
+    const [status, setStatus] = useState('');
+    const [date, setDate] = useState<any>([]);
+    const [secondDate, setSecondDate] = useState<string>("");
 
     // Another states
     const [page, setPage] = useState(0);
@@ -56,15 +38,12 @@ export default function Partners() {
     const getPartnerUrl = () => {
         const queryParams: string = [
             nameFilter ? `name=${nameFilter}` : '',
-            // numFilter ? `phone=${numFilter}` : '',
-            // emailFilter ? `email=${emailFilter}` : '',
             inn ? `inn=${inn}` : '',
-            fromDate ? `from=${fromDate}` : '',
-            toDate ? `to=${toDate}` : '',
-            status ? `status=${status}` : '',
-            account ? `account=${account}` : '',
+            datePicker(0, date) ? `from=${datePicker(0, date)}` : '',
+            datePicker(1, date) ? `to=${datePicker(1, date)}` : '',
+            secondDate ? `expire=${secondDate}` : '',
             amount ? `amount=${amount}` : '',
-
+            status ? `status=${status}` : '',
         ].filter(Boolean).join('&');
 
         return `${QrGet}?page=${page}&size=${size}${queryParams ? `&${queryParams}` : ''}`;
@@ -75,10 +54,9 @@ export default function Partners() {
         "GET"
     );
 
-
     useEffect(() => {
         globalDataFunc();
-    }, [page, size, nameFilter, numFilter, emailFilter, status, fromDate, toDate, inn, amount]);
+    }, [page, size, nameFilter, numFilter, emailFilter, date, inn]);
 
     return (
         <Container>
@@ -89,272 +67,137 @@ export default function Partners() {
                 <Typography className="mb-2" color="textPrimary" fontSize={30}>
                     Filters
                 </Typography>
-                <Box sx={{ display: "flex", flexDirection: "column" }} gap={2}>
-                    <Box sx={{
-                        display: 'grid',
-                        alignItems: "center",
-                        justifyContent: "center",
-                        marginBottom: 5,
-                        gap: 2,
-                        gridTemplateColumns: 'repeat(1, 1fr)',
-                        '@media (min-width: 600px)': {
-                            gridTemplateColumns: 'repeat(2, 1fr)',
-                        },
-                        '@media (min-width: 900px)': {
-                            gridTemplateColumns: 'repeat(3, 1fr)',
-                        },
-                        '@media (min-width: 1200px)': {
-                            gridTemplateColumns: 'repeat(3, 1fr)',
-                        },
-                    }}>
-                        <TextField
-                            type="text"
-                            label="Search with username"
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
+                <div className="flex flex-row gap-5 mb-5">
+                    <div className="w-[25%] ">
+                        <Input
+                            allowClear
+                            size="large"
+                            placeholder="Search with username"
                             onChange={
                                 (e) => setNameFilter(e.target.value)
                             }
                         />
-                        <TextField
-                            type="text"
-                            label="Search with Ext-ID"
+                    </div>
+                    <div className="w-[25%] ">
+                        <Input
+                            allowClear
+                            size="large"
+                            placeholder="Search with Ext-ID"
                             onChange={
                                 (e) => setNumFilter(e.target.value)
                             }
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
                         />
-                        <TextField
-                            type="email"
-                            label="filter with email"
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
+                    </div>
+                    <div className="w-[25%] ">
+                        <Input
+                            allowClear
+                            size="large"
+                            placeholder="Search with email"
                             onChange={
                                 (e) => setEmailFilter(e.target.value)
                             }
                         />
-                        <TextField
-                            type="text"
-                            label="Search with INN"
+                    </div>
+                    <div className="w-[25%] ">
+                        <Input
+                            allowClear
+                            size="large"
+                            placeholder="Search with INN"
                             onChange={
                                 (e) => setInn(e.target.value)
                             }
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
+                        />
+                    </div>
+                </div>
+                <div className="flex flex-row gap-5 mb-5">
+                    <div className="w-[25%] ">
+                        <RangePicker
+                            size="large"
+                            allowClear
+                            onChange={(dates) => setDate(dates)}
+                        />
+                    </div>
+                    <div className="w-[25%]">
+                        <DatePicker
+                            size="large"
+                            className="w-full"
+                            allowClear
+                            onChange={(dates) => {
+                                let date, month, year;
+
+                                date = dates.date();
+                                month = dates.month() + 1;
+                                year = dates.year();
+
+                                if (month > 0 && month < 10) month = `0${month}`;
+                                if (date > 0 && date < 10) date = `0${date}`;
+
+                                setSecondDate(`${year}-${month}-${date}`);
                             }}
                         />
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                            <Typography>
-                                From:
-                            </Typography>
-                            <TextField
-                                type="date"
-                                placeholder=""
-                                // label="From (Date)"
-                                // value={new Date}
-                                onChange={
-                                    (e) => setFromDate(e.target.value)
-                                }
-                                sx={{
-                                    '& .MuiOutlinedInput-root': {
-                                        '& fieldset': {
-                                            borderColor: 'black',
-                                        },
-                                        '&:hover fieldset': {
-                                            borderColor: 'black',
-                                        },
-                                        '&.Mui-focused fieldset': {
-                                            borderColor: 'black',
-                                        },
-                                    },
-                                    '& .MuiInputLabel-root': {
-                                        color: 'black',
-                                    },
-                                    '& .MuiInputLabel-root.Mui-focused': {
-                                        color: 'black',
-                                    },
-                                }}
-                            />
-                        </Box>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                            <Typography>
-                                To:
-                            </Typography>
-                            <TextField
-                                type="date"
-                                placeholder=""
-                                // label="From (Date)"
-                                // value={new Date}
-                                onChange={
-                                    (e) => setToDate(e.target.value)
-                                }
-                                sx={{
-                                    '& .MuiOutlinedInput-root': {
-                                        '& fieldset': {
-                                            borderColor: 'black',
-                                        },
-                                        '&:hover fieldset': {
-                                            borderColor: 'black',
-                                        },
-                                        '&.Mui-focused fieldset': {
-                                            borderColor: 'black',
-                                        },
-                                    },
-                                    '& .MuiInputLabel-root': {
-                                        color: 'black',
-                                    },
-                                    '& .MuiInputLabel-root.Mui-focused': {
-                                        color: 'black',
-                                    },
-                                }}
-                            />
-                        </Box>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <Typography>
-                                Exp-Date:
-                            </Typography>
-                            <TextField
-                                type="date"
-                                placeholder=""
-                                // label="From (Date)"
-                                // value={new Date}
-                                onChange={
-                                    (e) => setToDate(e.target.value)
-                                }
-                                sx={{
-                                    '& .MuiOutlinedInput-root': {
-                                        '& fieldset': {
-                                            borderColor: 'black',
-                                        },
-                                        '&:hover fieldset': {
-                                            borderColor: 'black',
-                                        },
-                                        '&.Mui-focused fieldset': {
-                                            borderColor: 'black',
-                                        },
-                                    },
-                                    '& .MuiInputLabel-root': {
-                                        color: 'black',
-                                    },
-                                    '& .MuiInputLabel-root.Mui-focused': {
-                                        color: 'black',
-                                    },
-                                }}
-                            />
-                        </Box>
-                        <TextField
-                            type="text"
-                            label="Amount"
-                            placeholder="More than the amount entered"
+                    </div>
+                    <div className="w-[25%] ">
+                        <Input
+                            allowClear
+                            size="large"
+                            placeholder="Amount"
                             onChange={
                                 (e) => setAmount(+e.target.value)
                             }
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
                         />
-                        <select className="min-w-[200px] p-3 border-[2px] rounded-md border-black text-black" onChange={
-                            (e: any) => {
-                                setStatus(e.target.value);
-                                console.log(e.target.value);
-                            }
-                        }>
-                            <option selected disabled value={''}>
-                                Status
-                            </option>
-                            <option value='ACTIVE'>
-                                Active
-                            </option>
-                            <option value="INACTIVE">
-                                InActive
-                            </option>
-                        </select>
-                    </Box>
-                </Box>
+                    </div>
+                    <div className="w-[25%] ">
+                        <Select
+                            size="large"
+                            allowClear
+                            className="w-full"
+                            placeholder="Status"
+                            onChange={(value) => setStatus(value)}
+                            options={[
+                                {
+                                    value: 'ACTIVE',
+                                    label: 'Active',
+                                },
+                                {
+                                    value: 'INACTIVE',
+                                    label: 'InActive',
+                                },
+                                {
+                                    value: 'NEW',
+                                    label: 'New',
+                                },
+                                {
+                                    value: 'PENDING',
+                                    label: 'Pending',
+                                },
+                                {
+                                    value: 'VALIDATION',
+                                    label: 'Validation',
+                                },
+                                {
+                                    value: 'PARTIAL',
+                                    label: 'Patrial',
+                                },
+                                {
+                                    value: 'CLARIFICATION',
+                                    label: 'Clarification',
+                                },
+                                {
+                                    value: 'COMPLETED',
+                                    label: 'Completed',
+                                },
+                                {
+                                    value: 'CANCELED',
+                                    label: 'Canceled',
+                                },
+                                {
+                                    value: 'EXPIRED',
+                                    label: 'Expired',
+                                },
+                            ]}
+                        />
+                    </div>
+                </div>
                 {loading ? (
                     <Box
                         sx={{
@@ -400,7 +243,7 @@ export default function Partners() {
                                                 {partner.merchant || "-"}
                                             </TableCell>
                                             <TableCell align="left">
-                                                {partner.amount  || "-"} {partner.amouunt ? partner.currency : ''}
+                                                {partner.amount || "-"} {partner.amouunt ? partner.currency : ''}
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.type || "-"}

@@ -15,14 +15,13 @@ import {
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
 import { useGlobalRequest } from "../../hooks/GlobalHook";
 import { useState, useEffect } from "react";
-import { ActionGet, CurrencyGet } from "../../hooks/url";
-import { Pagination } from "antd";
+import { CurrencyGet } from "../../hooks/url";
+import { Input, Pagination } from "antd";
 
 
 export default function Currency() {
     const [nameFilter, setNameFilter] = useState('');
     const [table, setTable] = useState('');
-    const [tableName, setTableName] = useState('');
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(10);
 
@@ -30,7 +29,6 @@ export default function Currency() {
         const queryParams: string = [
             nameFilter ? `name=${nameFilter}` : '',
             table ? `code=${table}` : '',
-            tableName ? `tableName=${tableName}` : '',
         ].filter(Boolean).join('&');
         return `${CurrencyGet}${queryParams ? `&${queryParams}&page=${page}&size=${size}` : `page=${page}&size=${size}`}`;
     }
@@ -49,62 +47,32 @@ export default function Currency() {
             />
             <Box sx={{ bgcolor: "white", padding: 5 }}>
                 <Box sx={{ display: "flex", flexDirection: "column" }} gap={2}>
-                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2 }}>
-                        <TextField
-                            type="text"
-                            label="Search with name"
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
-                            onChange={
-                                (e) => setNameFilter(e.target.value)
-                            }
-                        />
-                        <TextField
-                            type="text"
-                            label="Search with Code..."
-                            onChange={
-                                (e) => setTable(e.target.value)
-                            }
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
-                        />
-                    </Box>
+                    < div className="flex flex-row gap-5">
+                        <div className="w-[25%]">
+                            <Input
+                                allowClear
+                                size="large"
+                                placeholder="Search with username"
+                                onChange={
+                                    (e) => setNameFilter(e.target.value)
+                                }
+                            />
+                        </div>
+                        <div className="w-[25%]">
+                            <Input
+                                allowClear
+                                size="large"
+                                placeholder="Search with Code"
+                                onChange={
+                                    (e) => setTable(e.target.value)
+                                }
+                            />
+                        </div>
+                        <div className="w-[25%]"></div>
+                        <div className="w-[25%]"></div>
+                    </div>
                     <Typography className="font-bold" color="textPrimary" mb={3}>
-                         
+
                     </Typography>
                 </Box>
                 {loading ? (
@@ -177,6 +145,6 @@ export default function Currency() {
                     />
                 </div>
             </Box>
-        </Container>
+        </Container >
     );
 }

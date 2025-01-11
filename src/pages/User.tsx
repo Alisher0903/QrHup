@@ -23,8 +23,7 @@ import { useState, useEffect } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { AddUser, UserGet, DeleteUser, EditUser } from "../hooks/url";
 import { toast } from "react-hot-toast";
-import { Pagination } from "antd";
-
+import { Input, Pagination } from "antd";
 
 export default function User() {
     const [openAddModal, setOpenAddModal] = useState(false);
@@ -32,6 +31,7 @@ export default function User() {
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
     const [nameFilter, setNameFilter] = useState('');
     const [numFilter, setNumFilter] = useState('');
+    // const [roleFilter, setRoleFilter] = useState('');
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(10);
     const [getId, setGetId] = useState(null);
@@ -89,7 +89,6 @@ export default function User() {
 
     const handleAddSubmit = async () => {
         await postData();
-
     };
     useEffect(() => {
         if (postRes) {
@@ -121,7 +120,7 @@ export default function User() {
             handleDeleteClose();
             globalDataFunc();
             setGetId(null);
-        } else if (deleteError){
+        } else if (deleteError) {
             toast.error("Failed to delete user!");
         }
     }, [deleteRes, deleteError]);
@@ -148,65 +147,26 @@ export default function User() {
                 }
             />
             <Box sx={{ bgcolor: "white", padding: 5 }}>
-                <Box sx={{ display: "flex", flexDirection: "column" }} gap={2}>
-                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2 }}>
-                        <TextField
-                            type="text"
-                            label="Search with username"
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
+                <div className="flex flex-row gap-5 mb-5">
+                    <div className="w-[25%]">
+                        <Input
+                            size="large"
+                            placeholder="Search with username"
                             onChange={
                                 (e) => setNameFilter(e.target.value)
                             }
                         />
-                        <TextField
-                            type="text"
-                            label="Search with phone"
+                    </div>
+                    <div className="w-[25%]">
+                        <Input
+                            size="large"
+                            placeholder="Search with phone"
                             onChange={
                                 (e) => setNumFilter(e.target.value)
                             }
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
                         />
-                    </Box>
-                    <Typography className="font-bold" color="textPrimary" mb={3}>
-                        Announcements
-                    </Typography>
-                </Box>
+                    </div>
+                </div>
                 {loading ? (
                     <Box
                         sx={{
@@ -278,7 +238,7 @@ export default function User() {
                         </Table>
                     </TableContainer>
                 )}
-                <div className="flex justify-center mt-5">
+                {!error && <div className="flex justify-center mt-5">
                     <Pagination
                         defaultCurrent={1}
                         current={page + 1}
@@ -291,7 +251,7 @@ export default function User() {
                         }}
                         showSizeChanger={true}
                     />
-                </div>
+                </div>}
             </Box>
 
             {/* Add User Modal */}

@@ -43,7 +43,7 @@ function App() {
     { path: '/transactions', element: <Transactions />, title: 'Tables | Leave' },
     { path: '/merchant', element: <Merchant />, title: 'Settings | TailAdmin - Tailwind CSS Admin Dashboard Template' },
     { path: '/chart', element: <Chart />, title: 'Basic Chart | TailAdmin - Tailwind CSS Admin Dashboard Template' },
-    { path: '/partners', element: <Partners />, title: 'Alerts | TailAdmin - Tailwind CSS Admin Dashboard Template' },
+    { path: '/partners', element: <Partners />, title: 'Admin | Partners' },
     { path: '/partnersDetials/:id', element: <PartnerDetials />, title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template' },
     { path: '/merchantDetials/:id', element: <MerchantDetials />, title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template' },
     { path: '/qrDetial/:id', element: <QrDetial />, title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template' },

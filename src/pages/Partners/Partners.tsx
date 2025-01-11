@@ -15,22 +15,19 @@ import {
     DialogContent,
     DialogTitle,
     TextField,
-    Select,
-
 } from "@mui/material";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
 import { useGlobalRequest } from "../../hooks/GlobalHook";
 import { useState, useEffect } from "react";
-import { MdDelete, MdEdit } from "react-icons/md";
-import { AddUser, UserGet, DeleteUser, EditUser, PartnerGet, PartnerCreate, PartnerEdit } from "../../hooks/url";
+import { MdEdit } from "react-icons/md";
+import { DeleteUser, PartnerGet, PartnerCreate, PartnerEdit } from "../../hooks/url";
 import { toast } from "react-hot-toast";
-import { Pagination } from "antd";
+import { Input, Pagination } from "antd";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { Option } from "antd/es/mentions";
-import { CiEdit } from "react-icons/ci";
-import { PartnersStore } from "../../hooks/Store/Partners/partnerStore";
-
+import { DatePicker, Select } from "antd";
+import { datePicker } from "../../common/global-functions/date-sort";
+const { RangePicker } = DatePicker;
 
 export default function Partners() {
     const [openAddModal, setOpenAddModal] = useState(false);
@@ -42,11 +39,8 @@ export default function Partners() {
     const [numFilter, setNumFilter] = useState('');
     const [emailFilter, setEmailFilter] = useState('');
     const [inn, setInn] = useState('');
-    const [fromDate, setFromDate] = useState('');
-    const [toDate, setToDate] = useState('');
+    const [date, setDate] = useState<any>([])
     const [status, setStatus] = useState<boolean>();
-    const { partners, setPartners } = PartnersStore();
-    // Another states
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(10);
     const [getId, setGetId] = useState(null);
@@ -68,8 +62,8 @@ export default function Partners() {
             numFilter ? `phone=${numFilter}` : '',
             emailFilter ? `email=${emailFilter}` : '',
             inn ? `inn=${inn}` : '',
-            fromDate ? `from=${fromDate}` : '',
-            toDate ? `to=${toDate}` : '',
+            datePicker(0, date) ? `from=${datePicker(0, date)}` : '',
+            datePicker(1, date) ? `to=${datePicker(1, date)}` : '',
             status ? `status=${status}` : '',
 
         ].filter(Boolean).join('&');
@@ -120,7 +114,7 @@ export default function Partners() {
 
     useEffect(() => {
         globalDataFunc();
-    }, [page, size, nameFilter, numFilter, emailFilter, status, fromDate, toDate, inn]);
+    }, [page, size, nameFilter, numFilter, emailFilter, status, date, inn]);
 
     // Modal Handlers
     const handleAddOpen = () => {
@@ -211,189 +205,80 @@ export default function Partners() {
                 }
             />
             <Box sx={{ bgcolor: "white", padding: 5 }}>
-                <Box sx={{ display: "flex", flexDirection: "column" }} gap={2}>
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', flexDirection: { xs: 'column', sm: 'row' }, marginBottom: 5, gap: 2 }}>
-                        <TextField
-                            type="text"
-                            label="Search with username"
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
+                <div className="flex flex-row gap-5 mb-5">
+                    <div className="w-[25%]">
+                        <Input
+                            allowClear
+                            size="large"
+                            placeholder="Search with username"
                             onChange={
                                 (e) => setNameFilter(e.target.value)
                             }
                         />
-                        <TextField
-                            type="text"
-                            label="Search with phone"
+                    </div>
+                    <div className="w-[25%]">
+                        <Input
+                            allowClear
+                            size="large"
+                            placeholder="Search with phone"
                             onChange={
                                 (e) => setNumFilter(e.target.value)
                             }
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
                         />
-                        <TextField
-                            type="email"
-                            label="filter with email"
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
+                    </div>
+                    <div className="w-[25%]">
+                        <Input
+                            allowClear
+                            size="large"
+                            placeholder="Search with email"
                             onChange={
                                 (e) => setEmailFilter(e.target.value)
                             }
                         />
-                        <TextField
-                            type="text"
-                            label="Search with INN"
+                    </div>
+                    <div className="w-[25%]">
+                        <Input
+                            allowClear
+                            size="large"
+                            placeholder="Search with INN"
                             onChange={
                                 (e) => setInn(e.target.value)
                             }
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
                         />
-                        <Typography>
-                            From:
-                        </Typography>
-                        <TextField
-                            type="date"
-                            placeholder=""
-                            // label="From (Date)"
-                            // value={new Date}
-                            onChange={
-                                (e) => setFromDate(e.target.value)
-                            }
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
+                    </div>
+                </div>
+                <div className="flex flex-row gap-5 mb-5">
+                    <div className="w-[25%]">
+                        <RangePicker
+                            size="large"
+                            allowClear
+                            onChange={(dates) => setDate(dates)}
                         />
-                        <Typography>
-                            To:
-                        </Typography>
-                        <TextField
-                            type="date"
-                            placeholder=""
-                            // label="From (Date)"
-                            // value={new Date}
-                            onChange={
-                                (e) => setToDate(e.target.value)
-                            }
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
+                    </div>
+                    <div className="w-[25%]">
+                        <Select
+                            size="large"
+                            allowClear
+                            className="w-full"
+                            placeholder="Status"
+                            onChange={(value) => setStatus(value)}
+                            options={[
+                                {
+                                    value: 'ACTIVE',
+                                    label: 'Active',
                                 },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
+                                {
+                                    value: 'INACTIVE',
+                                    label: 'InActive',
+                                }
+                            ]}
                         />
-                        <select className="min-w-[200px] p-2 border border-black text-black" onChange={
-                            (e: any) => {
-                                setStatus(e.target.value);
-                                console.log(e.target.value);
-                            }
-                        }>
-                            <option selected value='ACTIVE'>
-                                Active
-                            </option>
-                            <option value="INACTIVE">
-                                InActive
-                            </option>
-                        </select>
-                    </Box>
-                </Box>
+                    </div>
+                    <div className="w-[25%]">
+                    </div>
+                    <div className="w-[25%]">
+                    </div>
+                </div>
                 {loading ? (
                     <Box
                         sx={{
@@ -456,7 +341,6 @@ export default function Partners() {
                                             <TableCell align="center">
                                                 <Button
                                                     onClick={() => {
-                                                        setPartners(partner)
                                                         navigator(`/partnersDetials/${partner.id}`)
                                                     }}
                                                 >
@@ -508,32 +392,32 @@ export default function Partners() {
             {/* Add User Modal */}
             <Dialog open={openAddModal} onClose={handleAddClose}>
                 <DialogTitle>Add User</DialogTitle>
-                <DialogContent>
-                    <TextField
-                        margin="dense"
-                        label="Name"
-                        fullWidth
+                <DialogContent className="flex flex-col gap-3" style={{ width: '600px' }}>
+                    <Input
+                        allowClear
+                        placeholder="Name"
+                        size="large"
                         value={data.name}
                         onChange={(e) => setData({ ...data, name: e.target.value })}
                     />
-                    <TextField
-                        margin="dense"
-                        label="URL"
-                        fullWidth
+                    <Input
+                        allowClear
+                        placeholder="URL"
+                        size="large"
                         value={data.url}
                         onChange={(e) => setData({ ...data, url: e.target.value })}
                     />
-                    <TextField
-                        margin="dense"
-                        label="Address"
-                        fullWidth
+                    <Input
+                        allowClear
+                        placeholder="Address"
+                        size="large"
                         value={data.address}
                         onChange={(e) => setData({ ...data, address: e.target.value })}
                     />
-                    <TextField
-                        margin="dense"
-                        label="Phone"
-                        fullWidth
+                    <Input
+                        allowClear
+                        placeholder="Phone"
+                        size="large"
                         value={data.phone}
                         onChange={(e) => {
                             let newValue = e.target.value;
@@ -547,39 +431,40 @@ export default function Partners() {
                             }
                         }}
                     />
-                    <TextField
-                        margin="dense"
-                        label="Email"
-                        fullWidth
+                    <Input
+                        allowClear
+                        placeholder="Email"
+                        size="large"
                         value={data.email}
                         onChange={(e) => setData({ ...data, email: e.target.value })}
                     />
-                    <TextField
-                        margin="dense"
-                        label="INN"
-                        fullWidth
+                    <Input
+                        allowClear
+                        placeholder="INN"
+                        size="large"
                         value={data.inn}
                         onChange={(e) => setData({ ...data, inn: e.target.value })}
                     />
-                    <TextField
-                        margin="dense"
-                        label="Service Fee"
-                        fullWidth
-                        type="number"
+                    <Input
+                        allowClear
+                        placeholder="Service Fee"
+                        size="large"
                         value={data.serviceFee}
                         onChange={(e) => setData({ ...data, serviceFee: Number(e.target.value) })}
                     />
-                    <TextField
-                        margin="dense"
-                        label="MFO"
-                        fullWidth
+                    <Input
+                        allowClear
+                        placeholder="MFO"
+                        type="number"
+                        size="large"
                         value={data.mfo}
                         onChange={(e) => setData({ ...data, mfo: e.target.value })}
                     />
-                    <TextField
-                        margin="dense"
-                        label="Account"
-                        fullWidth
+                    <Input
+                        allowClear
+                        placeholder="Account"
+                        type="number"
+                        size="large"
                         value={data.account}
                         onChange={(e) => setData({ ...data, account: e.target.value })}
                     />

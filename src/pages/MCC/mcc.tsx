@@ -23,7 +23,7 @@ import { useState, useEffect } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { MccGet, MccCreate, MccEdit, MccDelete } from "../../hooks/url";
 import { toast } from "react-hot-toast";
-import { Pagination } from "antd";
+import { Input, Pagination } from "antd";
 
 
 export default function Mcc() {
@@ -126,7 +126,7 @@ export default function Mcc() {
         } else if (deleteError) {
             toast.error("Failed to delete user!");
         }
-    }, [deleteRes,deleteError]);
+    }, [deleteRes, deleteError]);
     const HandleEdit = async () => {
         await EditData();
     };
@@ -150,65 +150,30 @@ export default function Mcc() {
                 }
             />
             <Box sx={{ bgcolor: "white", padding: 5 }}>
-                <Box sx={{ display: "flex", flexDirection: "column" }} gap={2}>
-                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2 }}>
-                        <TextField
-                            type="text"
-                            label="Search with name"
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
+                <div className="flex flex-row gap-5 mb-5">
+                    <div className="w-[25%] ">
+                        <Input
+                            allowClear
+                            size="large"
+                            placeholder="Search with name"
                             onChange={
                                 (e) => setNameFilter(e.target.value)
                             }
                         />
-                        <TextField
-                            type="text"
-                            label="Search with code..."
+                    </div>
+                    <div className="w-[25%] ">
+                        <Input
+                            allowClear
+                            size="large"
+                            placeholder="Search with code"
                             onChange={
                                 (e) => setCode(e.target.value)
                             }
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
                         />
-                    </Box>
-                    <Typography className="font-bold" color="textPrimary" mb={3}>
-                         
-                    </Typography>
-                </Box>
+                    </div>
+                    <div className="w-[25%]"></div>
+                    <div className="w-[25%]"></div>
+                </div>
                 {loading ? (
                     <Box
                         sx={{
@@ -302,28 +267,30 @@ export default function Mcc() {
             {/* Add User Modal */}
             <Dialog open={openAddModal} onClose={handleAddClose}>
                 <DialogTitle>Add User</DialogTitle>
-                <DialogContent>
-                    <TextField
-                        margin="dense"
-                        label="Name"
-                        fullWidth
-                        value={data.name}
-                        onChange={(e) =>
-                            setData({ ...data, name: e.target.value })
-                        }
-                    />
-                    <TextField
-                        margin="dense"
-                        label="Code"
-                        fullWidth
-                        value={data.code}
-                        onChange={(e) => {
-                            const value = e.target.value;
-                            if (/^\d*$/.test(value) && value.length <= 4) {
-                                setData({ ...data, code: value });
+                <DialogContent style={{ width: '600px' }}>
+                    <div className="mb-3">
+                        <Input
+                            allowClear
+                            size="large"
+                            placeholder="Name"
+                            onChange={
+                                (e) => setData({ ...data, name: e.target.value })
                             }
-                        }}
-                    />
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <Input
+                            allowClear
+                            size="large"
+                            placeholder="Code"
+                            onChange={(e) => {
+                                const value = e.target.value;
+                                if (/^\d*$/.test(value) && value.length <= 4) {
+                                    setData({ ...data, code: value });
+                                }
+                            }}
+                        />
+                    </div>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleAddClose}>Cancel</Button>
@@ -338,29 +305,31 @@ export default function Mcc() {
             {/* Edit User Modal */}
             <Dialog open={openEditModal} onClose={handleEditClose}>
                 <DialogTitle>Edit User</DialogTitle>
-                <DialogContent>
-                    <TextField
-                        margin="dense"
-                        label="Name"
-                        fullWidth
-                        value={data.name}
-                        onChange={(e) =>
-                            setData({ ...data, name: e.target.value })
-                        }
-                    />
-                    <TextField
-                        margin="dense"
-                        label="Code"
-                        fullWidth
-                        value={data.code}
-                        onChange={(e) => {
-                            const value = e.target.value;
-                            // Faqat raqamlar va maksimal uzunlikni tekshirish
-                            if (/^\d*$/.test(value) && value.length <= 4) {
-                                setData({ ...data, code: value });
+                <DialogContent style={{ width: '600px' }}>
+
+                    <div className="mb-3">
+                        <Input
+                            size="large"
+                            value={data.name}
+                            placeholder="Name"
+                            onChange={
+                                (e) => setData({ ...data, name: e.target.value })
                             }
-                        }}
-                    />
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <Input
+                            size="large"
+                            value={data.code}
+                            placeholder="Code"
+                            onChange={(e) => {
+                                const value = e.target.value;
+                                if (/^\d*$/.test(value) && value.length <= 4) {
+                                    setData({ ...data, code: value });
+                                }
+                            }}
+                        />
+                    </div>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleEditClose}>Cancel</Button>

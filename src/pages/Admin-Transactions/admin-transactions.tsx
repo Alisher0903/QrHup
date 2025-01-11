@@ -17,10 +17,10 @@ import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useGlobalRequest } from "../../hooks/GlobalHook";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
-import { DatePicker, Select } from "antd";
 import { adminTransactionsGet } from "../../hooks/url";
-import { datePicker } from "../../common/global-functions/date-sort";
 import Dialog from '@mui/material/Dialog';
+import { datePicker } from "../../common/global-functions/date-sort";
+import { DatePicker, Select } from "antd";
 const { RangePicker } = DatePicker;
 
 export default function AdminTransactions() {
@@ -47,8 +47,6 @@ export default function AdminTransactions() {
 
     const getPartnerUrl = () => {
         const queryParams: string = [
-            page ? `page=${page}` : '',
-            size ? `size=${size}` : '',
             filters.merchantName ? `merchantName=${filters.merchantName}` : '',
             filters.partnerName ? `partnerName=${filters.partnerName}` : '',
             filters.status ? `status=${filters.status}` : '',

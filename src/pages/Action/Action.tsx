@@ -9,20 +9,18 @@ import {
     TableRow,
     Typography,
     CircularProgress,
-    TextField,
-
 } from "@mui/material";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
 import { useGlobalRequest } from "../../hooks/GlobalHook";
 import { useState, useEffect } from "react";
 import { ActionGet } from "../../hooks/url";
-import { Pagination } from "antd";
-
+import { Input, Pagination, Select } from "antd";
 
 export default function Action() {
     const [nameFilter, setNameFilter] = useState('');
     const [table, setTable] = useState('');
     const [tableName, setTableName] = useState('');
+    const [status, setStatus] = useState('');
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(10);
 
@@ -31,6 +29,7 @@ export default function Action() {
             nameFilter ? `name=${nameFilter}` : '',
             table ? `table=${table}` : '',
             tableName ? `tableName=${tableName}` : '',
+            status ? `status=${status}` : '',
         ].filter(Boolean).join('&');
         return `${ActionGet}?${queryParams ? `&${queryParams}&page=${page}&size=${size}` : `page=${page}&size=${size}`}`;
     }
@@ -40,7 +39,7 @@ export default function Action() {
     );
     useEffect(() => {
         globalDataFunc();
-    }, [page, size, nameFilter, table, tableName]);
+    }, [page, size, nameFilter, table, tableName, status]);
 
     return (
         <Container>
@@ -49,95 +48,53 @@ export default function Action() {
             />
             <Box sx={{ bgcolor: "white", padding: 5 }}>
                 <Box sx={{ display: "flex", flexDirection: "column" }} gap={2}>
-                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2 }}>
-                        <TextField
-                            type="text"
-                            label="Search with name"
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
+                    <div className="flex flex-row gap-5 mb-5">
+                        <div className="w-[25%]">
+                            <Input
+                                allowClear
+                                size="large"
+                                placeholder="Search with name"
+                                onChange={
+                                    (e) => setNameFilter(e.target.value)
+                                }
+                            />
+                        </div>
+                        <div className="w-[25%]">
+                            <Input
+                                allowClear
+                                size="large"
+                                placeholder="Search with tabled-ID.."
+                                onChange={(e) => setTable(e.target.value)}
+                            />
+                        </div>
+                        <div className="w-[25%]">
+                            <Input
+                                allowClear
+                                size="large"
+                                placeholder="Search with Table's Name..."
+                                onChange={(e) => setTableName(e.target.value)}
+                            />
+                        </div>
+                        <div className="w-[25%]">
+                            <Select
+                                size="large"
+                                allowClear
+                                className="w-full"
+                                placeholder="Status"
+                                onChange={(value) => setStatus(value)}
+                                options={[
+                                    {
+                                        value: 'PATRIAL',
+                                        label: 'Patrial',
                                     },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
-                            onChange={
-                                (e) => setNameFilter(e.target.value)
-                            }
-                        />
-                        <TextField
-                            type="text"
-                            label="Search with tabled-ID..."
-                            onChange={
-                                (e) => setTable(e.target.value)
-                            }
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
-                        />
-                        <TextField
-                            type="text"
-                            label="Search with Table's Name..."
-                            onChange={
-                                (e) => setTableName(e.target.value)
-                            }
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
-                        />
-                        <select className="border p-3 rounded-md border-black-2 text-black-2" name="" id="">
-                            <option selected disabled value="">Select Status</option>
-                            <option>
-
-                            </option>
-                        </select>
-                    </Box>
-                    <Typography className="font-bold" color="textPrimary" mb={3}>
-                        
-                    </Typography>
+                                    {
+                                        value: 'CLARIFICATION',
+                                        label: 'Clarification',
+                                    }
+                                ]}
+                            />
+                        </div>
+                    </div>
                 </Box>
                 {loading ? (
                     <Box
