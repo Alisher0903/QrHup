@@ -53,3 +53,7 @@ export const CurrencyGet: string = `${baseUrl}api/currency/page?`;
 
 // mdelator
 export const ClarifyGet: string = `${baseUrl}api/transaction/moderator?`;
+
+
+// Transactions
+export const adminTransactionsGet: string = `${baseUrl}api/transaction`
