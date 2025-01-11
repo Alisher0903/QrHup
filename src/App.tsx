@@ -17,6 +17,8 @@ import QrDetial from './pages/Qrs/QrDetial';
 import Mcc from './pages/MCC/mcc';
 import Action from './pages/Action/Action';
 import Currency from './pages/Currency/Currency';
+import ActionModerator from './pages/MaderatorPage/ActionModerator';
+import Clarify from './pages/MaderatorPage/clarify';
 
 interface RouteConfig {
   path: string;
@@ -44,6 +46,18 @@ function App() {
     { path: '/merchantDetials/:id', element: <MerchantDetials />, title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template' },
     { path: '/qrDetial/:id', element: <QrDetial />, title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template' },
     { path: '/auth/signin', element: <SignIn />, title: 'Signin | TailAdmin - Tailwind CSS Admin Dashboard Template' },
+
+    // Moderator
+    {
+      path: '/moderator/Action',
+      element: <ActionModerator />,
+      title: 'Action | Moderator',
+    },
+    {
+      path: '/moderator/clarify',
+      element: <Clarify />,
+      title: 'QRs To Clarify | Moderator',
+    },
   ];
 
   // Check authentication and navigate accordingly

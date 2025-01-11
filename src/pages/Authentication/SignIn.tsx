@@ -10,6 +10,7 @@ const SignIn: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const role = sessionStorage.getItem('role');
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,6 +36,11 @@ const SignIn: React.FC = () => {
         sessionStorage.setItem('token', response?.data?.data?.token);
         sessionStorage.setItem('role', response?.data?.data?.role);
         navigate('/');
+        if (role === "ROLE_ADMIN") {
+          navigate('/');
+        } else if (role === "ROLE_") {
+          navigate('/clarify');
+        }
       } else {
         toast.error('Something went wrong');
       }

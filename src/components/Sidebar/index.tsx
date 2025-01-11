@@ -205,7 +205,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           </nav>
         </div>
       </aside>
-    ) : <aside
+    ) : role === 'ROLE_MODERATOR' ? <aside
       ref={sidebar}
       style={{ position: 'static' }}
       className={`left-0 top-0 z-99 flex h-screen w-72.5 flex-col overflow-y-hidden bg-white duration-300 ease-linear lg:static lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
@@ -230,26 +230,26 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             <ul className="mb-6 flex flex-col gap-1.5">
               <li>
                 <NavLink
-                  to="/action"
+                  to="/moderator/clarify"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-gray 
-                  ${(pathname === '/action' ||
-                      pathname.includes('/action')) &&
+                  ${(pathname === '/moderator/clarify' ||
+                      pathname.includes('/moderator/clarify')) &&
                     'bg-gray-100 text-black'
                     }`}
                 >
                   <FaPersonChalkboard size={22} />
-                  Action
+                  QRs To Clarify
                 </NavLink>
                 <NavLink
-                  to="/currency"
+                  to="/moderator/Action"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-gray 
-                  ${(pathname === '/currency' ||
-                      pathname.includes('/currency')) &&
+                  ${(pathname === '/moderator/Action' ||
+                      pathname.includes('/moderator/Action')) &&
                     'bg-gray-100 text-black'
                     }`}
                 >
                   <MdCurrencyBitcoin size={22} />
-                  Currency
+                  My Action
                 </NavLink>
               </li>
             </ul>
@@ -257,7 +257,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         </nav>
       </div>
     </aside>
-  );
+      : null);
 };
 
 export default Sidebar;
