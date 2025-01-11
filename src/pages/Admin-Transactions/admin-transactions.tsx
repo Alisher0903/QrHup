@@ -44,7 +44,7 @@ export default function AdminTransactions() {
         status: ""
     })
     const [date, setDate] = useState<any>([])
-    
+
     const getPartnerUrl = () => {
         const queryParams: string = [
             page ? `page=${page}` : '',
@@ -228,7 +228,7 @@ export default function AdminTransactions() {
                         </Table>
                     </TableContainer>
                 )}
-                <div className="flex justify-end mt-5">
+                {!error && <div className="flex justify-end mt-5">
                     <Pagination
                         defaultCurrent={1}
                         current={page + 1}
@@ -241,7 +241,7 @@ export default function AdminTransactions() {
                         }}
                         showSizeChanger={true}
                     />
-                </div>
+                </div>}
             </div>
             <Dialog open={isOpen} onClose={toggleModal}>
                 <div style={{ padding: '20px', width: '600px', textAlign: 'left' }}>
