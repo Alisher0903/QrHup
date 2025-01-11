@@ -44,3 +44,7 @@ export const MccDelete: string = `${baseUrl}api/mcc/deleted?`;
 
 // ActionGet
 export const ActionGet: string = `${baseUrl}api/action`;
+
+
+// Transactions
+export const adminTransactionsGet: string = `${baseUrl}api/transaction`

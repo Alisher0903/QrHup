@@ -17,6 +17,7 @@ import QrDetial from './pages/Qrs/QrDetial';
 import Mcc from './pages/MCC/mcc';
 import Action from './pages/Action/Action';
 import Currency from './pages/Currency/Currency';
+import AdminTransactions from './pages/Admin-Transactions/admin-transactions';
 
 interface RouteConfig {
   path: string;
@@ -33,6 +34,7 @@ function App() {
     { path: '/', element: <ECommerce />, title: 'Admin | Statistics' },
     { path: '/User', element: <User />, title: 'Admin | User' },
     { path: '/Qrs', element: <Qrs />, title: 'Admin | Qrs' },
+    { path: '/admin/transactions', element: <AdminTransactions />, title: 'Admin | Transactions' },
     { path: '/mcc', element: <Mcc />, title: 'Admin | Mcc' },
     { path: '/action', element: <Action />, title: 'Admin | Action' },
     { path: '/currency', element: <Currency />, title: 'Admin | Currency' },
