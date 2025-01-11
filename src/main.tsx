@@ -18,6 +18,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <App />
         <Toaster position='top-left' />
       </Router>
-    </React.StrictMode>,
+    </React.StrictMode>
   </QueryClientProvider>
 );

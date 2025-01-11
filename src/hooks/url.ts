@@ -11,7 +11,7 @@ export const EditUser: string = `${baseUrl}api/user/update?`;
 export const LeaveGet: string = `${baseUrl}`;
 
 
-// Partners Page
+// Partners Api
 
 export const PartnerGet: string = `${baseUrl}api/partner/page`;
 export const PartnerCreate: string = `${baseUrl}api/partner/create`;
@@ -22,3 +22,25 @@ export const QrsPartner: string = `${baseUrl}api/qrcode/partner?`;
 export const MerchantPartner: string = `${baseUrl}api/merchant/partner/merchant?`;
 export const TerminalsPartner: string = `${baseUrl}api/terminal/partner?`;
 export const TransactionPartner: string = `${baseUrl}api/qrcode/partner/transaction?`;
+
+// Merchant Api
+export const MerchantGet: string = `${baseUrl}api/merchant/admin/page`;
+export const MerchantStatistic: string = `${baseUrl}api/merchant/statistic?`;
+export const MerchantTerminal: string = `${baseUrl}api/terminal/merchant?`;
+export const MerchantTransactions: string = `${baseUrl}api/qrcode/merchant/transaction?`;
+export const MerchantQrs: string = `${baseUrl}api/qrcode/merchant?`;
+
+// Qr Apis
+export const QrGet: string = `${baseUrl}api/qrcode/page`;
+export const QrGetOne: string = `${baseUrl}api/qrcode/check/`;
+export const QrTransactions: string = `${baseUrl}api/qrcode/transaction/`;
+
+
+// Mcc 
+export const MccGet: string = `${baseUrl}api/mcc/mcc/page`;
+export const MccCreate: string = `${baseUrl}api/mcc/create`;
+export const MccEdit: string = `${baseUrl}api/mcc/update?`;
+export const MccDelete: string = `${baseUrl}api/mcc/deleted?`;
+
+// ActionGet
+export const ActionGet: string = `${baseUrl}api/action`;

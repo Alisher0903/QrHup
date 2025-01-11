@@ -17,67 +17,70 @@ import {
     TextField,
 
 } from "@mui/material";
-import Breadcrumb from "../components/Breadcrumbs/Breadcrumb";
-import { useGlobalRequest } from "../hooks/GlobalHook";
+import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
+import { useGlobalRequest } from "../../hooks/GlobalHook";
 import { useState, useEffect } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { AddUser, UserGet, DeleteUser, EditUser } from "../hooks/url";
+import { MccGet, MccCreate, MccEdit, MccDelete } from "../../hooks/url";
 import { toast } from "react-hot-toast";
 import { Pagination } from "antd";
 
 
-export default function User() {
+export default function Mcc() {
     const [openAddModal, setOpenAddModal] = useState(false);
     const [openEditModal, setOpenEditModal] = useState(false);
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
     const [nameFilter, setNameFilter] = useState('');
-    const [numFilter, setNumFilter] = useState('');
+    const [code, setCode] = useState('');
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(10);
     const [getId, setGetId] = useState(null);
 
     const [data, setData] = useState({
         name: "",
-        phone: "+998",
-        password: "",
+        code: "",
     });
-
+    const getMccUrl = () => {
+        const queryParams: string = [
+            nameFilter ? `name=${nameFilter}` : '',
+            code ? `code=${code}` : '',
+        ].filter(Boolean).join('&');
+        return `${MccGet}?page=${page}&size=${size}${queryParams ? `&${queryParams}` : ''}`;
+    }
     const { error, globalDataFunc, response, loading } = useGlobalRequest(
-        `${UserGet}${`fullName=${nameFilter}&`}${`phone=${numFilter}&`}page=${page}&size=${size}`,
+        getMccUrl(),
         "GET"
     );
 
     const { globalDataFunc: postData, response: postRes, error: postError } = useGlobalRequest(
-        AddUser,
+        MccCreate,
         "POST",
         {
             name: data.name,
-            phone: data.phone.replaceAll("+", ""),
-            password: data.password,
+            code: data.code,
         }
     );
     const { globalDataFunc: EditData, response: EditRes, error: EditError } = useGlobalRequest(
-        `${EditUser}id=${getId}`,
+        `${MccEdit}id=${getId}`,
         "PUT",
         {
             name: data.name,
-            phone: data.phone.replaceAll("+", ""),
-            password: data.password,
+            code: data.code,
         }
     );
 
     const { globalDataFunc: deleteData, response: deleteRes, error: deleteError } = useGlobalRequest(
-        `${DeleteUser}id=${getId}`,
+        `${MccDelete}id=${getId}`,
         "DELETE",
     );
 
     useEffect(() => {
         globalDataFunc();
-    }, [page, size, nameFilter, numFilter]);
+    }, [page, size, nameFilter, code]);
 
     // Modal Handlers
     const handleAddOpen = () => {
-        setData({ name: "", phone: "+998", password: "" });
+        setData({ name: "", code: "" });
         setOpenAddModal(true);
     };
 
@@ -114,24 +117,23 @@ export default function User() {
     const handleDeleteSubmit = async () => {
         await deleteData();
     };
-
     useEffect(() => {
         if (deleteRes) {
             toast.success("User deleted successfully!");
             handleDeleteClose();
             globalDataFunc();
             setGetId(null);
-        } else if (deleteError){
+        } else if (deleteError) {
             toast.error("Failed to delete user!");
         }
-    }, [deleteRes, deleteError]);
+    }, [deleteRes,deleteError]);
     const HandleEdit = async () => {
         await EditData();
     };
     return (
         <Container>
             <Breadcrumb
-                pageName="All User"
+                pageName="MCC"
                 child={
                     <Button
                         className="bg-gray-900 rounded-xl text-white"
@@ -143,7 +145,7 @@ export default function User() {
                         }}
                         onClick={handleAddOpen}
                     >
-                        + Add User
+                        + Add MCC
                     </Button>
                 }
             />
@@ -152,7 +154,7 @@ export default function User() {
                     <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2 }}>
                         <TextField
                             type="text"
-                            label="Search with username"
+                            label="Search with name"
                             sx={{
                                 '& .MuiOutlinedInput-root': {
                                     '& fieldset': {
@@ -178,9 +180,9 @@ export default function User() {
                         />
                         <TextField
                             type="text"
-                            label="Search with phone"
+                            label="Search with code..."
                             onChange={
-                                (e) => setNumFilter(e.target.value)
+                                (e) => setCode(e.target.value)
                             }
                             sx={{
                                 '& .MuiOutlinedInput-root': {
@@ -231,10 +233,11 @@ export default function User() {
                         >
                             <TableHead>
                                 <TableRow className="bg-gray-300">
-                                    <TableCell>No</TableCell>
-                                    <TableCell align="right">Name</TableCell>
-                                    <TableCell align="right">Phone</TableCell>
-                                    <TableCell align="center">Action</TableCell>
+                                    <TableCell className="border-l">No</TableCell>
+                                    <TableCell className="border-l" align="left">MCC name</TableCell>
+                                    <TableCell className="border-l" align="left">MCC code</TableCell>
+                                    <TableCell className="border-l" align="left">Create Time</TableCell>
+                                    <TableCell className="border-l" align="center">Action</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -242,11 +245,14 @@ export default function User() {
                                     (user: any, index: number) => (
                                         <TableRow key={user.id || index}>
                                             <TableCell>{(page * 10 + index + 1)}</TableCell>
-                                            <TableCell align="right">
+                                            <TableCell align="left">
                                                 {user.name || "-"}
                                             </TableCell>
-                                            <TableCell align="right">
-                                                {user.phone || "-"}
+                                            <TableCell align="left">
+                                                {user.code || "-"}
+                                            </TableCell>
+                                            <TableCell align="left">
+                                                {user.createdAt || "-"}
                                             </TableCell>
                                             <TableCell align="center">
                                                 <Button
@@ -262,8 +268,7 @@ export default function User() {
                                                         setGetId(user.id);
                                                         setData({
                                                             name: user.name,
-                                                            phone: user.phone,
-                                                            password: "",
+                                                            code: user.code,
                                                         });
                                                         setOpenEditModal(true);
                                                     }}
@@ -309,35 +314,21 @@ export default function User() {
                     />
                     <TextField
                         margin="dense"
-                        label="Phone"
+                        label="Code"
                         fullWidth
-                        value={data.phone}
+                        value={data.code}
                         onChange={(e) => {
-                            let newValue = e.target.value;
-                            if (/^\+?\d*$/.test(newValue)) {
-                                if (!newValue.startsWith("+998")) {
-                                    newValue = "+998";
-                                }
-                                if (newValue.length <= 13) {
-                                    setData({ ...data, phone: newValue });
-                                }
+                            const value = e.target.value;
+                            if (/^\d*$/.test(value) && value.length <= 4) {
+                                setData({ ...data, code: value });
                             }
                         }}
-                    />
-                    <TextField
-                        margin="dense"
-                        label="Password"
-                        type="password"
-                        fullWidth
-                        onChange={(e) =>
-                            setData({ ...data, password: e.target.value })
-                        }
                     />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleAddClose}>Cancel</Button>
                     <Button
-                        disabled={!data.name || !data.phone || data?.password?.length < 3}
+                        disabled={!data.name || !data.code}
                         onClick={handleAddSubmit}
                     >
                         Add
@@ -359,36 +350,22 @@ export default function User() {
                     />
                     <TextField
                         margin="dense"
-                        label="Phone"
+                        label="Code"
                         fullWidth
-                        value={data.phone}
+                        value={data.code}
                         onChange={(e) => {
-                            let newValue = e.target.value;
-                            if (/^\+?\d*$/.test(newValue)) {
-                                if (!newValue.startsWith("+998")) {
-                                    newValue = "+998";
-                                }
-                                if (newValue.length <= 13) {
-                                    setData({ ...data, phone: newValue });
-                                }
+                            const value = e.target.value;
+                            // Faqat raqamlar va maksimal uzunlikni tekshirish
+                            if (/^\d*$/.test(value) && value.length <= 4) {
+                                setData({ ...data, code: value });
                             }
                         }}
-                    />
-                    <TextField
-                        margin="dense"
-                        label="Password"
-                        type="password"
-                        fullWidth
-                        value={data.password}
-                        onChange={(e) =>
-                            setData({ ...data, password: e.target.value })
-                        }
                     />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleEditClose}>Cancel</Button>
                     <Button
-                        disabled={!data.name || !data.phone || data?.password?.length < 3}
+                        disabled={!data.name || !data.code}
                         onClick={() => {
                             HandleEdit();
                         }}

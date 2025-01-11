@@ -18,63 +18,67 @@ import {
     Select,
 
 } from "@mui/material";
-import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
-import { useGlobalRequest } from "../../hooks/GlobalHook";
 import { useState, useEffect } from "react";
-import { MdDelete, MdEdit } from "react-icons/md";
-import { AddUser, UserGet, DeleteUser, EditUser, PartnerGet, PartnerCreate, PartnerEdit } from "../../hooks/url";
+import { MdEdit } from "react-icons/md";
+import { DeleteUser, PartnerGet, PartnerCreate, PartnerEdit, MerchantGet } from "../../hooks/url";
 import { toast } from "react-hot-toast";
 import { Pagination } from "antd";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { Option } from "antd/es/mentions";
-import { CiEdit } from "react-icons/ci";
-import { PartnersStore } from "../../hooks/Store/Partners/partnerStore";
+import { useGlobalRequest } from "../../hooks/GlobalHook";
+import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
+
 
 
 export default function Partners() {
-    const [openAddModal, setOpenAddModal] = useState(false);
-    const [openEditModal, setOpenEditModal] = useState(false);
-    const [openDeleteModal, setOpenDeleteModal] = useState(false);
+    // const [openAddModal, setOpenAddModal] = useState(false);
+    // const [openEditModal, setOpenEditModal] = useState(false);
+    // const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
 
     // Filter states
+
     const [nameFilter, setNameFilter] = useState('');
     const [numFilter, setNumFilter] = useState('');
     const [emailFilter, setEmailFilter] = useState('');
     const [inn, setInn] = useState('');
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
+    const [account, setAccount] = useState(0);
+    const [mfo, setMfo] = useState(0);
     const [status, setStatus] = useState<boolean>();
-    const { partners, setPartners } = PartnersStore();
+
     // Another states
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(10);
-    const [getId, setGetId] = useState(null);
     const navigator = useNavigate()
-    const [data, setData] = useState({
-        name: "",
-        url: "",
-        address: "",
-        phone: "+998",
-        email: "",
-        inn: "",
-        serviceFee: 0,
-        mfo: "",
-        account: "",
-    });
+    // const [getId, setGetId] = useState(null);
+    // const [data, setData] = useState({
+    //     name: "",
+    //     url: "",
+    //     address: "",
+    //     phone: "+998",
+    //     email: "",
+    //     inn: "",
+    //     serviceFee: 0,
+    //     mfo: "",
+    //     account: "",
+    // });
     const getPartnerUrl = () => {
         const queryParams: string = [
             nameFilter ? `name=${nameFilter}` : '',
-            numFilter ? `phone=${numFilter}` : '',
-            emailFilter ? `email=${emailFilter}` : '',
+            // numFilter ? `phone=${numFilter}` : '',
+            // emailFilter ? `email=${emailFilter}` : '',
             inn ? `inn=${inn}` : '',
             fromDate ? `from=${fromDate}` : '',
             toDate ? `to=${toDate}` : '',
             status ? `status=${status}` : '',
+            account ? `account=${account}` : '',
+            mfo ? `mfo=${mfo}` : '',
 
         ].filter(Boolean).join('&');
 
-        return `${PartnerGet}?page=${page}&size=${size}${queryParams ? `&${queryParams}` : ''}`;
+        return `${MerchantGet}?page=${page}&size=${size}${queryParams ? `&${queryParams}` : ''}`;
     }
 
     const { error, globalDataFunc, response, loading } = useGlobalRequest(
@@ -82,137 +86,153 @@ export default function Partners() {
         "GET"
     );
 
-    const { globalDataFunc: postData, response: postRes, error: postError } = useGlobalRequest(
-        PartnerCreate,
-        "POST",
-        {
-            name: data.name, // 1
-            phone: data.phone.replaceAll("+", ""), // 2
-            url: data.url, // 4
-            address: data.address, // 5
-            email: data.email, // 6
-            inn: data.inn, // 7
-            serviceFee: data.serviceFee, // 9
-            mfo: data.mfo, // 10
-            account: data.account, // 11
-        }
-    );
-    const { globalDataFunc: EditData, response: EditRes, error: EditError } = useGlobalRequest(
-        `${PartnerEdit}id=${getId}`,
-        "PUT",
-        {
-            name: data.name, // 1
-            phone: data.phone.replaceAll("+", ""), // 2
-            url: data.url, // 4
-            address: data.address, // 5
-            email: data.email, // 6
-            inn: data.inn, // 7
-            serviceFee: data.serviceFee, // 9
-            mfo: data.mfo, // 10
-            account: data.account, // 11
-        }
-    );
+    // const { globalDataFunc: postData, response: postRes, error: postError } = useGlobalRequest(
+    //     PartnerCreate,
+    //     "POST",
+    //     {
+    //         name: data.name, // 1
+    //         phone: data.phone.replaceAll("+", ""), // 2
+    //         url: data.url, // 4
+    //         address: data.address, // 5
+    //         email: data.email, // 6
+    //         inn: data.inn, // 7
+    //         serviceFee: data.serviceFee, // 9
+    //         mfo: data.mfo, // 10
+    //         account: data.account, // 11
+    //     }
+    // );
+    // const { globalDataFunc: EditData, response: EditRes, error: EditError } = useGlobalRequest(
+    //     `${PartnerEdit}id=${getId}`,
+    //     "PUT",
+    //     {
+    //         name: data.name, // 1
+    //         phone: data.phone.replaceAll("+", ""), // 2
+    //         url: data.url, // 4
+    //         address: data.address, // 5
+    //         email: data.email, // 6
+    //         inn: data.inn, // 7
+    //         serviceFee: data.serviceFee, // 9
+    //         mfo: data.mfo, // 10
+    //         account: data.account, // 11
+    //     }
+    // );
 
-    const { globalDataFunc: deleteData, response: deleteRes } = useGlobalRequest(
-        `${DeleteUser}id=${getId}`,
-        "DELETE",
-    );
+    // const { globalDataFunc: deleteData, response: deleteRes } = useGlobalRequest(
+    //     `${DeleteUser}id=${getId}`,
+    //     "DELETE",
+    // );
 
     useEffect(() => {
         globalDataFunc();
-    }, [page, size, nameFilter, numFilter, emailFilter, status, fromDate, toDate, inn]);
+    }, [page, size, nameFilter, numFilter, emailFilter, status, fromDate, toDate, inn, account, mfo]);
 
     // Modal Handlers
-    const handleAddOpen = () => {
-        setData({
-            name: "",
-            url: "",
-            address: "",
-            phone: "+998",
-            email: "",
-            inn: "",
-            serviceFee: 0,
-            mfo: "",
-            account: "",
-            // password: "",
-        });
-        setOpenAddModal(true);
-    };
+    // const handleAddOpen = () => {
+    //     setData({
+    //         name: "",
+    //         url: "",
+    //         address: "",
+    //         phone: "+998",
+    //         email: "",
+    //         inn: "",
+    //         serviceFee: 0,
+    //         mfo: "",
+    //         account: "",
+    //         // password: "",
+    //     });
+    //     setOpenAddModal(true);
+    // };
 
-    const handleAddClose = () => setOpenAddModal(false);
+    // const handleAddClose = () => setOpenAddModal(false);
 
-    const handleEditClose = () => setOpenEditModal(false);
+    // const handleEditClose = () => setOpenEditModal(false);
 
-    const handleDeleteClose = () => setOpenDeleteModal(false);
+    // const handleDeleteClose = () => setOpenDeleteModal(false);
 
-    const handleAddSubmit = async () => {
-        await postData();
+    // const handleAddSubmit = async () => {
+    //     await postData();
+    // };
 
-    };
-    useEffect(() => {
-        if (postRes) {
-            toast.success("User added successfully!");
-            handleAddClose();
-            globalDataFunc();
-        } else if (postError) {
-            toast.error("Failed to add user!");
-        }
-    }, [postRes, postError]);
+    // useEffect(() => {
+    //     if (postRes) {
+    //         toast.success("User added successfully!");
+    //         handleAddClose();
+    //         globalDataFunc();
+    //     } else if (postError) {
+    //         toast.error("Failed to add user!");
+    //     }
+    // }, [postRes, postError]);
 
 
 
-    useEffect(() => {
-        if (EditRes) {
-            toast.success("User edited successfully!");
-            globalDataFunc()
-            handleEditClose();
-            setGetId(null);
-        } else if (EditError) {
-            toast.error("Failed to edit user!");
-        }
-    }, [EditRes, EditError]);
-    const handleDeleteSubmit = async () => {
-        await deleteData();
-        try {
-            if (deleteRes) {
-                toast.success("User deleted successfully!");
-                handleDeleteClose();
-                globalDataFunc();
-                setGetId(null);
-            } else {
-                toast.error("Failed to delete user!");
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
-    console.log("FormData", data);
+    // useEffect(() => {
+    //     if (EditRes) {
+    //         toast.success("User edited successfully!");
+    //         globalDataFunc()
+    //         handleEditClose();
+    //         setGetId(null);
+    //     } else if (EditError) {
+    //         toast.error("Failed to edit user!");
+    //     }
+    // }, [EditRes, EditError]);
+    // const handleDeleteSubmit = async () => {
+    //     await deleteData();
+    //     try {
+    //         if (deleteRes) {
+    //             toast.success("User deleted successfully!");
+    //             handleDeleteClose();
+    //             globalDataFunc();
+    //             setGetId(null);
+    //         } else {
+    //             toast.error("Failed to delete user!");
+    //         }
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
+    // console.log("FormData", data);
 
-    const HandleEdit = async () => {
-        await EditData();
-    };
+    // const HandleEdit = async () => {
+    //     await EditData();
+    // };
     return (
         <Container>
             <Breadcrumb
-                pageName="All Partners"
-                child={
-                    <Button
-                        className="bg-gray-900 rounded-xl text-white"
-                        style={{
-                            backgroundColor: "#212143",
-                            padding: "10px 25px",
-                            color: "white",
-                            borderRadius: "10px",
-                        }}
-                        onClick={handleAddOpen}
-                    >
-                        + Add Partner
-                    </Button>
-                }
+                pageName="All Merchants"
+            // child={
+            //     <Button
+            //         className="bg-gray-900 rounded-xl text-white"
+            //         style={{
+            //             backgroundColor: "#212143",
+            //             padding: "10px 25px",
+            //             color: "white",
+            //             borderRadius: "10px",
+            //         }}
+            //         onClick={handleAddOpen}
+            //     >
+            //         + Add Partner
+            //     </Button>
+            // }
             />
             <Box sx={{ bgcolor: "white", padding: 5 }}>
                 <Box sx={{ display: "flex", flexDirection: "column" }} gap={2}>
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', flexDirection: { xs: 'column', sm: 'row' }, marginBottom: 5, gap: 2 }}>
+                    <Box sx={{
+                        display: 'grid',
+                        alignItems: "center",
+                        justifyContent: "center",
+                        marginBottom: 5,
+                        gap: 2,
+                        gridTemplateColumns: 'repeat(1, 1fr)',
+                        '@media (min-width: 600px)': {
+                            gridTemplateColumns: 'repeat(2, 1fr)',
+                        },
+                        '@media (min-width: 900px)': {
+                            gridTemplateColumns: 'repeat(3, 1fr)',
+                        },
+                        '@media (min-width: 1200px)': {
+                            gridTemplateColumns: 'repeat(4, 1fr)',
+                        },
+                    }}>
                         <TextField
                             type="text"
                             label="Search with username"
@@ -241,7 +261,7 @@ export default function Partners() {
                         />
                         <TextField
                             type="text"
-                            label="Search with phone"
+                            label="Search with Ext-ID"
                             onChange={
                                 (e) => setNumFilter(e.target.value)
                             }
@@ -317,16 +337,78 @@ export default function Partners() {
                                 },
                             }}
                         />
-                        <Typography>
-                            From:
-                        </Typography>
+                        <Box sx={{ display: 'flex', alignItems: 'center',gap: 2 }}>
+                            <Typography>
+                                From:
+                            </Typography>
+                            <TextField
+                                type="date"
+                                placeholder=""
+                                // label="From (Date)"
+                                // value={new Date}
+                                onChange={
+                                    (e) => setFromDate(e.target.value)
+                                }
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                        '& fieldset': {
+                                            borderColor: 'black',
+                                        },
+                                        '&:hover fieldset': {
+                                            borderColor: 'black',
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: 'black',
+                                        },
+                                    },
+                                    '& .MuiInputLabel-root': {
+                                        color: 'black',
+                                    },
+                                    '& .MuiInputLabel-root.Mui-focused': {
+                                        color: 'black',
+                                    },
+                                }}
+                            />
+                        </Box>
+                        <Box sx={{ display: 'flex', alignItems: 'center' , gap: 2}}>
+                            <Typography>
+                                To:
+                            </Typography>
+                            <TextField
+                                type="date"
+                                placeholder=""
+                                // label="From (Date)"
+                                // value={new Date}
+                                onChange={
+                                    (e) => setToDate(e.target.value)
+                                }
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                        '& fieldset': {
+                                            borderColor: 'black',
+                                        },
+                                        '&:hover fieldset': {
+                                            borderColor: 'black',
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: 'black',
+                                        },
+                                    },
+                                    '& .MuiInputLabel-root': {
+                                        color: 'black',
+                                    },
+                                    '& .MuiInputLabel-root.Mui-focused': {
+                                        color: 'black',
+                                    },
+                                }}
+                            />
+                        </Box>
                         <TextField
-                            type="date"
-                            placeholder=""
-                            // label="From (Date)"
+                            type="text"
+                            label="Account"
                             // value={new Date}
                             onChange={
-                                (e) => setFromDate(e.target.value)
+                                (e) => setAccount(+e.target.value)
                             }
                             sx={{
                                 '& .MuiOutlinedInput-root': {
@@ -348,16 +430,12 @@ export default function Partners() {
                                 },
                             }}
                         />
-                        <Typography>
-                            To:
-                        </Typography>
                         <TextField
-                            type="date"
-                            placeholder=""
-                            // label="From (Date)"
+                            type="text"
+                            label="Mfo"
                             // value={new Date}
                             onChange={
-                                (e) => setToDate(e.target.value)
+                                (e) => setMfo(+e.target.value)
                             }
                             sx={{
                                 '& .MuiOutlinedInput-root': {
@@ -385,7 +463,10 @@ export default function Partners() {
                                 console.log(e.target.value);
                             }
                         }>
-                            <option selected value='ACTIVE'>
+                            <option selected disabled value={''}>
+                                Status
+                            </option>
+                            <option value='ACTIVE'>
                                 Active
                             </option>
                             <option value="INACTIVE">
@@ -419,11 +500,12 @@ export default function Partners() {
                             <TableHead>
                                 <TableRow className="bg-gray-300">
                                     <TableCell>No</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">Partner name</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">Merchants name</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">Account</TableCell>
                                     <TableCell className="min-w-[150px] border-l" align="left">MFO</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">Phone</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">Created Time</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">INN</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">Ext-ID</TableCell>
                                     <TableCell className="min-w-[160px] border-l" align="left">Status</TableCell>
                                     <TableCell className="min-w-[200px]" align="center">Action</TableCell>
                                 </TableRow>
@@ -443,26 +525,28 @@ export default function Partners() {
                                                 {partner.mfo || "-"}
                                             </TableCell>
                                             <TableCell align="left">
-                                                {partner.phone || "-"}
+                                                {partner.createdTime || "-"}
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.inn || "-"}
                                             </TableCell>
                                             <TableCell align="left">
-                                                <Typography className="bg-[#F0B732] text-center p-3 rounded-full ">
-                                                    {partner.status ? "ACTIVE" : "INACTIVE"}
+                                                {partner.extId || "-"}
+                                            </TableCell>
+                                            <TableCell align="left">
+                                                <Typography className="bg-[#F0B732] uppercase text-center p-3 rounded-full ">
+                                                    {partner.active ? "inactive" : "active"}
                                                 </Typography>
                                             </TableCell>
                                             <TableCell align="center">
                                                 <Button
                                                     onClick={() => {
-                                                        setPartners(partner)
-                                                        navigator(`/partnersDetials/${partner.id}`)
+                                                        navigator(`/merchantDetials/${partner.id}`)
                                                     }}
                                                 >
                                                     <FaEye size={25} color="black" />
                                                 </Button>
-                                                <Button
+                                                {/* <Button
                                                     onClick={() => {
                                                         setOpenEditModal(true);
                                                         setData({
@@ -480,7 +564,7 @@ export default function Partners() {
                                                     }}
                                                 >
                                                     <MdEdit size={25} color="black" />
-                                                </Button>
+                                                </Button> */}
                                             </TableCell>
                                         </TableRow>
                                     )
@@ -506,7 +590,7 @@ export default function Partners() {
             </Box>
 
             {/* Add User Modal */}
-            <Dialog open={openAddModal} onClose={handleAddClose}>
+            {/* <Dialog open={openAddModal} onClose={handleAddClose}>
                 <DialogTitle>Add User</DialogTitle>
                 <DialogContent>
                     <TextField
@@ -597,16 +681,16 @@ export default function Partners() {
                             !data.mfo ||
                             !data.account
                         }
-                        onClick={() => {
-                            handleAddSubmit();
-                        }}
+                        // onClick={() => {
+                        //     handleAddSubmit();
+                        // }}
                     >
                         Add
                     </Button>
                 </DialogActions>
-            </Dialog>
+            </Dialog> */}
             {/* Edit User Modal */}
-            <Dialog open={openEditModal} onClose={handleEditClose}>
+            {/* <Dialog open={openEditModal} onClose={handleEditClose}>
                 <DialogTitle>Edit User</DialogTitle>
                 <DialogContent>
                     <TextField
@@ -697,17 +781,17 @@ export default function Partners() {
                             !data.phone ||
                             !data.serviceFee ||
                             !data.url}
-                        onClick={() => {
-                            HandleEdit();
-                        }}
+                        // onClick={() => {
+                        //     HandleEdit();
+                        // }}
                     >
                         Save
                     </Button>
                 </DialogActions>
-            </Dialog>
+            </Dialog> */}
 
             {/* Delete User Modal */}
-            <Dialog open={openDeleteModal} onClose={handleDeleteClose}>
+            {/* <Dialog open={openDeleteModal} onClose={handleDeleteClose}>
                 <DialogTitle>Delete User</DialogTitle>
                 <DialogContent>
                     <Typography variant="h6">
@@ -720,7 +804,7 @@ export default function Partners() {
                         Delete
                     </Button>
                 </DialogActions>
-            </Dialog>
+            </Dialog> */}
         </Container>
     );
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { LogIn } from '../../hooks/url';
+import toast from 'react-hot-toast';
 
 const SignIn: React.FC = () => {
   const [phoneNumber, setPhoneNumber] = useState<string | undefined>();
@@ -30,12 +31,12 @@ const SignIn: React.FC = () => {
         password,
       });
       if (response?.data?.data) {
-        alert(`${response?.data?.data?.token, response?.data?.data?.role}`)
+        toast.success('Welcome! You have successfully signed')
         sessionStorage.setItem('token', response?.data?.data?.token);
         sessionStorage.setItem('role', response?.data?.data?.role);
         navigate('/');
       } else {
-        alert('kirishda xotilik')
+        toast.error('Something went wrong');
       }
     } finally {
       setLoading(false);

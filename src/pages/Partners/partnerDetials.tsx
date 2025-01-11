@@ -23,6 +23,7 @@ import {
 } from '@mui/material';
 import { IoChevronBackOutline } from 'react-icons/io5';
 import { Pagination } from 'antd';
+import { PartnersStore } from '../../hooks/Store/Partners/partnerStore';
 
 export default function PartnerDetials() {
   // States
@@ -31,6 +32,9 @@ export default function PartnerDetials() {
   const [pageTerminal, setPageTerminal] = useState(0);
   const [pageTransaction, setPageTransaction] = useState(0);
   const [selectedTab, setSelectedTab] = useState(0);
+  const { partners } = PartnersStore();
+  console.log("partners", partners);
+  
   const handleChange = (event: any | null, newValue: number) => {
     setSelectedTab(newValue);
   };
@@ -94,49 +98,61 @@ export default function PartnerDetials() {
               <div className="flex justify-between pb-2 border-b-2 border-gray-500">
                 <p className="text-sm font-semibold">Name</p>
                 <p className="text-sm font-semibold">
-                  {GettingDatass?.merchant || '-'}
+                  {partners.name || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                <p className="text-sm font-semibold">Partner</p>
+                <p className="text-sm font-semibold">Push url</p>
                 <p className="text-sm font-semibold">
-                  {GettingDatass?.partner || '-'}
+                  {partners?.url || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                <p className="text-sm font-semibold">Type</p>
+                <p className="text-sm font-semibold">Phone number</p>
                 <p className="text-sm font-semibold">
-                  {GettingDatass?.type || '-'}
+                  +{partners?.phone || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                <p className="text-sm font-semibold">Currency</p>
+                <p className="text-sm font-semibold">E-Mail</p>
                 <p className="text-sm font-semibold">
-                  {GettingDatass?.currency || '-'}
-                </p>
-              </div>
-              <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                <p className="text-sm font-semibold">Amount</p>
-                <p className="text-sm font-semibold">
-                  {GettingDatass?.amount || '-'}
-                </p>
-              </div>
-              <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                <p className="text-sm font-semibold">Create Date</p>
-                <p className="text-sm font-semibold">
-                  {GettingDatass?.createDate || '-'}
-                </p>
-              </div>
-              <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                <p className="text-sm font-semibold">Expire</p>
-                <p className="text-sm font-semibold">
-                  {GettingDatass?.expire || '-'}
+                  {partners?.email || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-2 border-gray-500">
                 <p className="text-sm font-semibold">Status</p>
                 <p className="text-sm font-semibold">
-                  {GettingDatass?.status || '-'}
+                  {partners?.status || '-'}
+                </p>
+              </div>
+              <div className="flex justify-between pb-2 border-b-2 border-gray-500">
+                <p className="text-sm font-semibold">Address</p>
+                <p className="text-sm font-semibold">
+                  {partners?.address || '-'}
+                </p>
+              </div>
+              <div className="flex justify-between pb-2 border-b-2 border-gray-500">
+                <p className="text-sm font-semibold">INN</p>
+                <p className="text-sm font-semibold">
+                  {partners?.inn || '-'}
+                </p>
+              </div>
+              <div className="flex justify-between pb-2 border-b-2 border-gray-500">
+                <p className="text-sm font-semibold">Account</p>
+                <p className="text-sm font-semibold">
+                  {partners?.account || '-'}
+                </p>
+              </div>
+              <div className="flex justify-between pb-2 border-b-2 border-gray-500">
+                <p className="text-sm font-semibold">MFO</p>
+                <p className="text-sm font-semibold">
+                  {partners?.mfo || '-'}
+                </p>
+              </div>
+              <div className="flex justify-between pb-2 border-b-2 border-gray-500">
+                <p className="text-sm font-semibold">Service fee</p>
+                <p className="text-sm font-semibold">
+                  {partners?.serviceFee || '0'} %
                 </p>
               </div>
             </div>
