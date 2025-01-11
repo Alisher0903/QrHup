@@ -136,7 +136,7 @@ export default function Action() {
                         </select>
                     </Box>
                     <Typography className="font-bold" color="textPrimary" mb={3}>
-                        Announcements
+                        
                     </Typography>
                 </Box>
                 {loading ? (

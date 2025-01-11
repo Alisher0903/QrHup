@@ -44,6 +44,15 @@ export const MccDelete: string = `${baseUrl}api/mcc/deleted?`;
 
 // ActionGet
 export const ActionGet: string = `${baseUrl}api/action`;
+export const ActionModeratorGet: string = `${baseUrl}api/action/moderator`;
+export const ActionModeratorGetOne: string = `${baseUrl}api/transaction/detail/`;
+
+
+// Currency 
+export const CurrencyGet: string = `${baseUrl}api/currency/page?`;
+
+// mdelator
+export const ClarifyGet: string = `${baseUrl}api/transaction/moderator?`;
 
 
 // Transactions

@@ -15,7 +15,7 @@ import {
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
 import { useGlobalRequest } from "../../hooks/GlobalHook";
 import { useState, useEffect } from "react";
-import { ActionGet } from "../../hooks/url";
+import { ActionGet, CurrencyGet } from "../../hooks/url";
 import { Pagination } from "antd";
 
 
@@ -29,10 +29,10 @@ export default function Currency() {
     const getMccUrl = () => {
         const queryParams: string = [
             nameFilter ? `name=${nameFilter}` : '',
-            table ? `table=${table}` : '',
+            table ? `code=${table}` : '',
             tableName ? `tableName=${tableName}` : '',
         ].filter(Boolean).join('&');
-        return `${ActionGet}?${queryParams ? `&${queryParams}&page=${page}&size=${size}` : `page=${page}&size=${size}`}`;
+        return `${CurrencyGet}${queryParams ? `&${queryParams}&page=${page}&size=${size}` : `page=${page}&size=${size}`}`;
     }
     const { error, globalDataFunc, response, loading } = useGlobalRequest(
         getMccUrl(),
@@ -40,7 +40,7 @@ export default function Currency() {
     );
     useEffect(() => {
         globalDataFunc();
-    }, [page, size, nameFilter, table, tableName]);
+    }, [page, size, nameFilter, table]);
 
     return (
         <Container>
@@ -78,7 +78,7 @@ export default function Currency() {
                         />
                         <TextField
                             type="text"
-                            label="Search with tabled-ID..."
+                            label="Search with Code..."
                             onChange={
                                 (e) => setTable(e.target.value)
                             }
@@ -102,41 +102,9 @@ export default function Currency() {
                                 },
                             }}
                         />
-                        <TextField
-                            type="text"
-                            label="Search with Table's Name..."
-                            onChange={
-                                (e) => setTableName(e.target.value)
-                            }
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: 'black',
-                                },
-                                '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'black',
-                                },
-                            }}
-                        />
-                        <select className="border p-3 rounded-md border-black-2 text-black-2" name="" id="">
-                            <option selected disabled value="">Select Status</option>
-                            <option>
-
-                            </option>
-                        </select>
                     </Box>
                     <Typography className="font-bold" color="textPrimary" mb={3}>
-                        Announcements
+                         
                     </Typography>
                 </Box>
                 {loading ? (
@@ -166,8 +134,8 @@ export default function Currency() {
                                     <TableCell className="border-l">No</TableCell>
                                     <TableCell className="border-l min-w-[200px]" align="left">Name</TableCell>
                                     <TableCell className="border-l min-w-[200px]" align="left">Code</TableCell>
-                                    <TableCell className="border-l min-w-[200px]" align="left">symbol</TableCell>
-                                    <TableCell className="border-l min-w-[200px]" align="left">Object id</TableCell>
+                                    <TableCell className="border-l min-w-[200px]" align="left">Symbol</TableCell>
+                                    <TableCell className="border-l min-w-[200px]" align="left">Active</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -176,22 +144,16 @@ export default function Currency() {
                                         <TableRow key={user.id || index}>
                                             <TableCell>{(page * 10 + index + 1)}</TableCell>
                                             <TableCell align="left">
-                                                {user.fullName || "-"}
+                                                {user.name || "-"}
                                             </TableCell>
                                             <TableCell align="left">
-                                                {user.status || "-"}
+                                                {user.code || "-"}
                                             </TableCell>
                                             <TableCell align="left">
-                                                {user?.createdAt
-                                                    ? new Date(user.createdAt).toISOString().split('T')[0]
-                                                    : "-"
-                                                }
+                                                {user.symbol || "-"}
                                             </TableCell>
                                             <TableCell align="left">
-                                                {user.tableName || "-"}
-                                            </TableCell>
-                                            <TableCell align="left">
-                                                {user.tableId || "-"}
+                                                {user.status ? "-" : ' sdqew'}
                                             </TableCell>
                                         </TableRow>
                                     )

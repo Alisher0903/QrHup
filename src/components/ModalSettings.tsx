@@ -44,7 +44,7 @@ export const Modal = ({ closeModal, onSubmit, defaultValue }) => {
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     console.log(formState.criterion);
     console.log(e.target.name);
     console.log(e.target.name=="para"&&e.target.value=='rating');
@@ -57,7 +57,7 @@ export const Modal = ({ closeModal, onSubmit, defaultValue }) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
 
     if (!validateForm()) return;
