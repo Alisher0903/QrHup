@@ -44,10 +44,7 @@ export default function AdminTransactions() {
         status: ""
     })
     const [date, setDate] = useState<any>([])
-
-    console.log(date);
-
-
+    
     const getPartnerUrl = () => {
         const queryParams: string = [
             page ? `page=${page}` : '',
