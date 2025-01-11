@@ -51,7 +51,7 @@ export default function AdminTransactions() {
             size ? `size=${size}` : '',
             filters.merchantName ? `merchantName=${filters.merchantName}` : '',
             filters.partnerName ? `partnerName=${filters.partnerName}` : '',
-            filters.status ? `status=${filters.merchantName}` : '',
+            filters.status ? `status=${filters.status}` : '',
             filters.amount ? `amount=${filters.amount}` : '',
             datePicker(0, date) ? `from=${datePicker(0, date)}` : '',
             datePicker(1, date) ? `to=${datePicker(1, date)}` : '',
