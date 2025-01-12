@@ -21,7 +21,7 @@ import {
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import { useGlobalRequest } from '../../hooks/GlobalHook';
 import { ActionModeratorGet, ActionModeratorGetOne } from '../../hooks/url';
-import { Pagination } from 'antd';
+import { Input, Pagination } from 'antd';
 import { FaEye } from 'react-icons/fa';
 
 export default function ActionModerator() {
@@ -90,47 +90,23 @@ export default function ActionModerator() {
                             marginBottom: 3,
                         }}
                     >
-                        <TextField
+                        <Input
                             type="text"
-                            label="Search with name"
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': { borderColor: 'black' },
-                                    '&:hover fieldset': { borderColor: 'black' },
-                                    '&.Mui-focused fieldset': { borderColor: 'black' },
-                                },
-                                '& .MuiInputLabel-root': { color: 'black' },
-                                '& .MuiInputLabel-root.Mui-focused': { color: 'black' },
-                            }}
+                            size='large'
+                            placeholder="Search with name"
                             onChange={(e) => setNameFilter(e.target.value)}
                         />
-                        <TextField
+                        <Input
                             type="text"
-                            label="Search with tabled-ID..."
+                            size='large'
+                            placeholder="Search with tabled-ID..."
                             onChange={(e) => setTable(e.target.value)}
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': { borderColor: 'black' },
-                                    '&:hover fieldset': { borderColor: 'black' },
-                                    '&.Mui-focused fieldset': { borderColor: 'black' },
-                                },
-                                '& .MuiInputLabel-root': { color: 'black' },
-                                '& .MuiInputLabel-root.Mui-focused': { color: 'black' },
-                            }}
                         />
-                        <TextField
+                        <Input
                             type="text"
-                            label="Search with Table's Name..."
-                            onChange={(e) => setTableName(e.target.value)}
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': { borderColor: 'black' },
-                                    '&:hover fieldset': { borderColor: 'black' },
-                                    '&.Mui-focused fieldset': { borderColor: 'black' },
-                                },
-                                '& .MuiInputLabel-root': { color: 'black' },
-                                '& .MuiInputLabel-root.Mui-focused': { color: 'black' },
-                            }}
+                            size='large'
+                            placeholder="Search with Table's Name..."
+                            onChange={(e: any) => setTableName(e.target.value)}
                         />
                     </Box>
                 </Box>

@@ -7,7 +7,6 @@ import Chart from './pages/Chart';
 import ECommerce from './pages/Dashboard/ECommerce';
 import DefaultLayout from './layout/DefaultLayout';
 import User from './pages/User';
-import Transactions from './pages/Transactions';
 import Partners from './pages/Partners/Partners';
 import PartnerDetials from './pages/Partners/partnerDetials';
 import Merchant from './pages/Merchant/Merchant';
@@ -40,7 +39,6 @@ function App() {
     { path: '/mcc', element: <Mcc />, title: 'Admin | Mcc' },
     { path: '/action', element: <Action />, title: 'Admin | Action' },
     { path: '/currency', element: <Currency />, title: 'Admin | Currency' },
-    { path: '/transactions', element: <Transactions />, title: 'Tables | Leave' },
     { path: '/merchant', element: <Merchant />, title: 'Settings | TailAdmin - Tailwind CSS Admin Dashboard Template' },
     { path: '/chart', element: <Chart />, title: 'Basic Chart | TailAdmin - Tailwind CSS Admin Dashboard Template' },
     { path: '/partners', element: <Partners />, title: 'Admin | Partners' },

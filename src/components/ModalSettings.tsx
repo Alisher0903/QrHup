@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import dataJSON from '../../public/data.json';
 
 
 
-export const Modal = ({ closeModal, onSubmit, defaultValue }) => {
+export const Modal = ({ closeModal, onSubmit, defaultValue }: any) => {
   const fields=Object.keys(Object.values(dataJSON)[0]).filter((item:any)=>!(item.startsWith("delta_")));
   
   const [formState, setFormState] = useState(
@@ -32,7 +32,7 @@ export const Modal = ({ closeModal, onSubmit, defaultValue }) => {
         }
         else{
         if (key=='id'){
-          if (!(Object.keys(dataJSON).includes(value)||value=="ALL")){
+          if (!(Object.keys(dataJSON).includes(`${value}`) || value=="ALL")){
             errorFields.push("INVALID_ID_"+value)
           }
         }
@@ -70,7 +70,7 @@ export const Modal = ({ closeModal, onSubmit, defaultValue }) => {
   return (
     <div
       className="modal-container fixed z-50 flex top-25 bottom-5 "
-      onClick={(e) => {
+      onClick={(e:  any) => {
         if (e.target.className === "modal-container") closeModal();
       }}
     >

@@ -8,6 +8,7 @@ import { PiUsersThreeBold } from "react-icons/pi";
 import { CiBarcode, CiShop } from "react-icons/ci";
 import { BsQrCode } from 'react-icons/bs';
 import { MdCurrencyBitcoin } from 'react-icons/md';
+import { GrTransaction } from "react-icons/gr";
 
 
 interface SidebarProps {
@@ -139,6 +140,19 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 </li>
                 <li>
                   <NavLink
+                    to="/admin/transactions"
+                    className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-gray 
+                      ${(pathname === '/admin/transactions' ||
+                        pathname.includes('/currency')) &&
+                      'bg-gray-100 text-black'
+                      }`}
+                  >
+                    <GrTransaction />
+                    Transactions
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
                     to="/Qrs"
                     className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-gray 
                       ${(pathname === '/Qrs' ||
@@ -188,6 +202,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     <FaPersonChalkboard size={22} />
                     Action
                   </NavLink>
+
+                </li>
+
+                <li>
                   <NavLink
                     to="/currency"
                     className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-gray 
@@ -198,17 +216,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   >
                     <MdCurrencyBitcoin size={22} />
                     Currency
-                  </NavLink>
-                  <NavLink
-                    to="/admin/transactions"
-                    className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-gray 
-                      ${(pathname === '/admin/transactions' ||
-                        pathname.includes('/currency')) &&
-                      'bg-gray-100 text-black'
-                      }`}
-                  >
-                    <MdCurrencyBitcoin size={22} />
-                    Transactions
                   </NavLink>
                 </li>
               </ul>

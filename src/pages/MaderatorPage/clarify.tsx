@@ -10,9 +10,7 @@ import {
     TableRow,
     Typography,
     CircularProgress,
-    TextField,
     Button,
-    Modal,
     Dialog,
     DialogTitle,
     DialogContent,
@@ -20,28 +18,30 @@ import {
 } from '@mui/material';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import { useGlobalRequest } from '../../hooks/GlobalHook';
-import { ActionModeratorGet, ActionModeratorGetOne, ClarifyGet } from '../../hooks/url';
-import { Input, Pagination, Select } from 'antd';
+import { ActionModeratorGetOne, ClarifyGet, ModeratorChangeStatus } from '../../hooks/url';
+import { DatePicker, Input, Pagination, Select } from 'antd';
 import { FaEye } from 'react-icons/fa';
+import { datePicker } from '../../common/global-functions/date-sort';
+import toast from 'react-hot-toast';
 
 export default function Clarify() {
     const [merchantNameFilter, setMerchantNameFilter] = useState('');
     const [amountFilter, setAmountFilter] = useState('');
     const [statusFilter, setStatusFilter] = useState('');
-    const [fromFilter, setFromFilter] = useState('');
-    const [toFilter, setToFilter] = useState('');
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(10);
+    const [date, setDate] = useState<any>([])
     const [id, setId] = useState('');
+    const [status, setStatus] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const { RangePicker } = DatePicker;
     const getMccUrl = () => {
         const queryParams: string = [
             merchantNameFilter ? `merchantName=${merchantNameFilter}` : '',
             amountFilter ? `amount=${amountFilter}` : '',
             statusFilter ? `status=${statusFilter}` : '',
-            fromFilter ? `from=${fromFilter}` : '',
-            toFilter ? `to=${toFilter}` : '',
+            datePicker(0, date) ? `from=${datePicker(0, date)}` : '',
+            datePicker(1, date) ? `to=${datePicker(1, date)}` : '',
         ]
             .filter(Boolean)
             .join('&');
@@ -55,15 +55,34 @@ export default function Clarify() {
         getMccUrl(),
         'GET',
     );
+    const { error: errorPost, globalDataFunc: EffectPost, response: rePost, loading: loadPost } = useGlobalRequest(
+        `${ModeratorChangeStatus}transId=${id}&status=${status}`,
+        'POST',
+        {}
+    );
     const {
         globalDataFunc: EffectGetOne,
         response: getOneRes,
     } = useGlobalRequest(`${ActionModeratorGetOne}${id}`, 'GET');
+    const HandleChangeStatus = () => {
+        if (status) {
+            return EffectPost();
+        } 
+    }
+    useEffect(() => {
+        if (rePost) {
+            toast.success('Status Successfuly changed',);
+            globalDataFunc();
+            EffectGetOne();
+        } else if (errorPost) {
+            toast.error('Error to change status')
+        }
+    }, [rePost, errorPost])
 
     useEffect(() => {
         globalDataFunc();
         EffectGetOne();
-    }, [page, size, merchantNameFilter, amountFilter, statusFilter, id]);
+    }, [page, size, merchantNameFilter, amountFilter, statusFilter, id, statusFilter]);
 
     console.log('getOne res', getOneRes);
 
@@ -80,18 +99,14 @@ export default function Clarify() {
         <Container>
             <Breadcrumb pageName="Action" />
             <Box sx={{ bgcolor: 'white', padding: 5 }}>
-                <Box sx={{ display: 'flex', flexDirection: 'column' }} gap={2}>
+                <Box sx={{ display: 'grid', flexDirection: 'column' }} gap={2}>
                     {/* Filters */}
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: { xs: 'column', sm: 'row' },
-                            gap: 2,
-                            marginBottom: 3,
-                        }}
+                    <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-2'
                     >
                         <Input
                             type='text'
+                            size='large'
+                            width={30}
                             placeholder="Search with merchant's Name"
                             value={merchantNameFilter}
                             onChange={(e) => {
@@ -106,23 +121,27 @@ export default function Clarify() {
                                 setAmountFilter(e.target.value);
                             }}
                         />
-                        <Input
-                            type=''
-                            placeholder="Search with merchant's Name"
-                            value={merchantNameFilter}
-                            onChange={(e) => {
-                                setMerchantNameFilter(e.target.value);
-                            }}
+                        <RangePicker
+                            allowClear
+                            onChange={(dates) => setDate(dates)}
                         />
-                        <Input
-                            type='text'
-                            placeholder="Search with merchant's Name"
-                            value={merchantNameFilter}
-                            onChange={(e) => {
-                                setMerchantNameFilter(e.target.value);
-                            }}
+                        <Select
+                            size="large"
+                            allowClear
+                            placeholder="Status"
+                            onChange={(e) => setStatusFilter(e)}
+                            options={[
+                                {
+                                    value: 'PARTIAL',
+                                    label: 'PARTIAL',
+                                },
+                                {
+                                    value: 'CLARIFICATION',
+                                    label: 'CLARIFICATION',
+                                }
+                            ]}
                         />
-                    </Box>
+                    </div>
                 </Box>
                 {/* Table */}
                 {loading ? (
@@ -178,7 +197,7 @@ export default function Clarify() {
                                                 ? new Date(user.createdAt).toISOString().split('T')[0]
                                                 : '-'}
                                         </TableCell>
-                                        <TableCell align="left">{user.amount || '-'}</TableCell>
+                                        <TableCell className={'uppercase'} align="left">{user.status || '-'}</TableCell>
                                         <TableCell align="center">
                                             <Button
                                                 onClick={() => {
@@ -478,11 +497,23 @@ export default function Clarify() {
                 </DialogContent>
                 <DialogActions>
                     <Button
-                        onClick={handleModalClose}
+                        onClick={async () => {
+                            await setStatus('CANCELED')
+                            HandleChangeStatus();
+                        }}
+                        className='bg-transparent text-black border'
+                    >
+                        Cancel payment
+                    </Button>
+                    <Button
+                        onClick={async () => {
+                            await setStatus('COMPLETED')
+                            HandleChangeStatus();
+                        }}
                         variant="contained"
                         color="primary"
                     >
-                        Close
+                        Confirm payment
                     </Button>
                 </DialogActions>
             </Dialog>

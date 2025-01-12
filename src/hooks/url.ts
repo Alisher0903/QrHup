@@ -57,3 +57,4 @@ export const ClarifyGet: string = `${baseUrl}api/transaction/moderator?`;
 
 // Transactions
 export const adminTransactionsGet: string = `${baseUrl}api/transaction`
+export const ModeratorChangeStatus: string = `${baseUrl}api/transaction/moderator/status?`
