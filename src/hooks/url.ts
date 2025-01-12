@@ -36,6 +36,7 @@ export const QrGet: string = `${baseUrl}api/qrcode/page`;
 export const QrGetOne: string = `${baseUrl}api/qrcode/check/`;
 export const QrTransactions: string = `${baseUrl}api/qrcode/transaction/`;
 export const qrGetone: string = `${baseUrl}api/qrcode/one`
+export const getTransactionsByQrId: string = `${baseUrl}api/transaction`
 
 // Mcc 
 export const MccGet: string = `${baseUrl}api/mcc/mcc/page`;
