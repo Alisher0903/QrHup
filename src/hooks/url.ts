@@ -22,13 +22,13 @@ export const PartnerStatistic: string = `${baseUrl}api/partner/statistic?`;
 export const QrsPartner: string = `${baseUrl}api/qrcode/partner?`;
 export const MerchantPartner: string = `${baseUrl}api/merchant/partner/merchant?`;
 export const TerminalsPartner: string = `${baseUrl}api/terminal/partner?`;
-export const TransactionPartner: string = `${baseUrl}api/qrcode/partner/transaction?`;
+export const TransactionPartner: string = `${baseUrl}api/transaction/partner?`;
 
 // Merchant Api
 export const MerchantGet: string = `${baseUrl}api/merchant/admin/page`;
 export const MerchantStatistic: string = `${baseUrl}api/merchant/statistic?`;
 export const MerchantTerminal: string = `${baseUrl}api/terminal/merchant?`;
-export const MerchantTransactions: string = `${baseUrl}api/qrcode/merchant/transaction?`;
+export const MerchantTransactions: string = `${baseUrl}api/transaction/merchant?`;
 export const MerchantQrs: string = `${baseUrl}api/qrcode/merchant?`;
 
 // Qr Apis

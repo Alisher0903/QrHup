@@ -58,7 +58,7 @@ export default function Partners() {
 
     useEffect(() => {
         globalDataFunc();
-    }, [page, size, nameFilter, numFilter, emailFilter, date, inn, type]);
+    }, [page, size, nameFilter, numFilter, emailFilter, date, inn, type, amount]);
 
     return (
         <Container>

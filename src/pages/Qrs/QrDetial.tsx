@@ -87,7 +87,7 @@ export default function QrDetial() {
                                 </p>
                             </div>
                             <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                                <p className="text-sm font-semibold min-w-20">Redirect url:</p>
+                                <p className="text-sm font-semibold min-w-20">Redirect url </p>
                                 <p className="text-sm font-semibold">
                                     {qrGetOne.response?.url || '-'}
                                 </p>
