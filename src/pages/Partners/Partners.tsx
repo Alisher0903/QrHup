@@ -41,6 +41,8 @@ export default function Partners() {
     const [numFilter, setNumFilter] = useState('');
     const [emailFilter, setEmailFilter] = useState('');
     const [inn, setInn] = useState('');
+    const [mFO, setMFO] = useState('');
+    const [account, setAccount] = useState('');
     const [date, setDate] = useState<any>([])
     const [status, setStatus] = useState<boolean>();
     const [page, setPage] = useState(0);
@@ -64,6 +66,8 @@ export default function Partners() {
             numFilter ? `phone=${numFilter}` : '',
             emailFilter ? `email=${emailFilter}` : '',
             inn ? `inn=${inn}` : '',
+            mFO ? `mfo=${mFO}` : '',
+            account ? `account=${account}` : '',
             datePicker(0, date) ? `from=${datePicker(0, date)}` : '',
             datePicker(1, date) ? `to=${datePicker(1, date)}` : '',
             status ? `status=${status}` : '',
@@ -116,7 +120,7 @@ export default function Partners() {
 
     useEffect(() => {
         globalDataFunc();
-    }, [page, size, nameFilter, numFilter, emailFilter, status, date, inn]);
+    }, [page, size, nameFilter, numFilter, emailFilter, status, date, inn, mFO, account]);
 
     // Modal Handlers
     const handleAddOpen = () => {
@@ -151,7 +155,7 @@ export default function Partners() {
             handleAddClose();
             globalDataFunc();
         } else if (postError) {
-            toast.error("Failed to add user!");
+            toast.error(postError);
         }
     }, [postRes, postError]);
 
@@ -164,7 +168,7 @@ export default function Partners() {
             handleEditClose();
             setGetId(null);
         } else if (EditError) {
-            toast.error("Failed to edit user!");
+            toast.error(EditError);
         }
     }, [EditRes, EditError]);
     const handleDeleteSubmit = async () => {
@@ -176,7 +180,7 @@ export default function Partners() {
                 globalDataFunc();
                 setGetId(null);
             } else {
-                toast.error("Failed to delete user!");
+                toast.error(error);
             }
         } catch (error) {
             console.log(error);
@@ -277,8 +281,24 @@ export default function Partners() {
                         />
                     </div>
                     <div className="w-[25%]">
+                        <Input
+                            allowClear
+                            size="large"
+                            placeholder="Search with MFO"
+                            onChange={
+                                (e) => setMFO(e.target.value)
+                            }
+                        />
                     </div>
                     <div className="w-[25%]">
+                        <Input
+                            allowClear
+                            size="large"
+                            placeholder="Search with Account"
+                            onChange={
+                                (e) => setAccount(e.target.value)
+                            }
+                        />
                     </div>
                 </div>
                 {loading ? (
@@ -310,6 +330,7 @@ export default function Partners() {
                                     <TableCell className="min-w-[200px] border-l" align="left">Account</TableCell>
                                     <TableCell className="min-w-[150px] border-l" align="left">MFO</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">Phone</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">Email</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">INN</TableCell>
                                     <TableCell className="min-w-[160px] border-l" align="left">Status</TableCell>
                                     <TableCell className="min-w-[200px]" align="center">Action</TableCell>
@@ -331,6 +352,9 @@ export default function Partners() {
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.phone || "-"}
+                                            </TableCell>
+                                            <TableCell align="left">
+                                                {partner.email || "-"}
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.inn || "-"}

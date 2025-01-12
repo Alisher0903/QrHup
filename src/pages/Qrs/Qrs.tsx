@@ -28,6 +28,7 @@ export default function Partners() {
     const [amount, setAmount] = useState(0);
     const [inn, setInn] = useState('');
     const [status, setStatus] = useState('');
+    const [type, setType] = useState('');
     const [date, setDate] = useState<any>([]);
     const [secondDate, setSecondDate] = useState<string>("");
 
@@ -44,6 +45,7 @@ export default function Partners() {
             secondDate ? `expire=${secondDate}` : '',
             amount ? `amount=${amount}` : '',
             status ? `status=${status}` : '',
+            type ? `type=${type}` : '',
         ].filter(Boolean).join('&');
 
         return `${QrGet}?page=${page}&size=${size}${queryParams ? `&${queryParams}` : ''}`;
@@ -56,7 +58,7 @@ export default function Partners() {
 
     useEffect(() => {
         globalDataFunc();
-    }, [page, size, nameFilter, numFilter, emailFilter, date, inn]);
+    }, [page, size, nameFilter, numFilter, emailFilter, date, inn, type]);
 
     return (
         <Container>
@@ -195,6 +197,25 @@ export default function Partners() {
                                     label: 'Expired',
                                 },
                             ]}
+                        />
+                    </div>
+                    <div className="w-[25%] ">
+                        <Select
+                             size="large"
+                             allowClear
+                             className="w-full"
+                             placeholder="Type"
+                             onChange={(value) => setType(value)}
+                             options={[
+                                {
+                                    value: 'STATIC',
+                                    label: 'STATIC',
+                                },
+                                {
+                                    value: 'DYNAMIC',
+                                    label: 'DYNAMIC',
+                                },
+                             ]}
                         />
                     </div>
                 </div>

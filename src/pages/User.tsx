@@ -14,8 +14,6 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
-    TextField,
-
 } from "@mui/material";
 import Breadcrumb from "../components/Breadcrumbs/Breadcrumb";
 import { useGlobalRequest } from "../hooks/GlobalHook";
@@ -96,7 +94,7 @@ export default function User() {
             handleAddClose();
             globalDataFunc();
         } else if (postError) {
-            toast.error("Failed to add user!");
+            toast.error(postError);
         }
     }, [postRes, postError]);
 
@@ -107,7 +105,7 @@ export default function User() {
             handleEditClose();
             setGetId(null);
         } else if (EditError) {
-            toast.error("Failed to edit user!");
+            toast.error(EditError);
         }
     }, [EditRes, EditError]);
     const handleDeleteSubmit = async () => {
@@ -187,14 +185,14 @@ export default function User() {
                         <Table
                             className="bg-white"
                             sx={{ minWidth: 650 }}
-                            aria-label="simple table"
+                            aria-placeholder="simple table"
                         >
                             <TableHead>
                                 <TableRow className="bg-gray-300">
-                                    <TableCell>No</TableCell>
-                                    <TableCell align="right">Name</TableCell>
-                                    <TableCell align="right">Phone</TableCell>
-                                    <TableCell align="center">Action</TableCell>
+                                    <TableCell >No</TableCell>
+                                    <TableCell className="border-l" align="left">Name</TableCell>
+                                    <TableCell className="border-l" align="left">Phone</TableCell>
+                                    <TableCell className="border-l" align="center">Action</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -202,10 +200,10 @@ export default function User() {
                                     (user: any, index: number) => (
                                         <TableRow key={user.id || index}>
                                             <TableCell>{(page * 10 + index + 1)}</TableCell>
-                                            <TableCell align="right">
+                                            <TableCell align="left">
                                                 {user.name || "-"}
                                             </TableCell>
-                                            <TableCell align="right">
+                                            <TableCell align="left">
                                                 {user.phone || "-"}
                                             </TableCell>
                                             <TableCell align="center">
@@ -222,7 +220,7 @@ export default function User() {
                                                         setGetId(user.id);
                                                         setData({
                                                             name: user.name,
-                                                            phone: user.phone,
+                                                            phone: `+${user.phone}`,
                                                             password: "",
                                                         });
                                                         setOpenEditModal(true);
@@ -258,19 +256,18 @@ export default function User() {
             <Dialog open={openAddModal} onClose={handleAddClose}>
                 <DialogTitle>Add User</DialogTitle>
                 <DialogContent>
-                    <TextField
-                        margin="dense"
-                        label="Name"
-                        fullWidth
+                    <Input
+                        size="large"
+                        placeholder="Name"
                         value={data.name}
                         onChange={(e) =>
                             setData({ ...data, name: e.target.value })
                         }
                     />
-                    <TextField
-                        margin="dense"
-                        label="Phone"
-                        fullWidth
+                    <Input
+                        size="large"
+                        // margin="dense"
+                        placeholder="Phone"
                         value={data.phone}
                         onChange={(e) => {
                             let newValue = e.target.value;
@@ -284,11 +281,10 @@ export default function User() {
                             }
                         }}
                     />
-                    <TextField
-                        margin="dense"
-                        label="Password"
+                    <Input
+                        size="large"
+                        placeholder="Password"
                         type="password"
-                        fullWidth
                         onChange={(e) =>
                             setData({ ...data, password: e.target.value })
                         }
@@ -307,38 +303,36 @@ export default function User() {
             {/* Edit User Modal */}
             <Dialog open={openEditModal} onClose={handleEditClose}>
                 <DialogTitle>Edit User</DialogTitle>
-                <DialogContent>
-                    <TextField
-                        margin="dense"
-                        label="Name"
-                        fullWidth
+                <DialogContent className="">
+                    <Input
+                        size="large"
+                        className="mb-3"
+                        placeholder="Name"
                         value={data.name}
                         onChange={(e) =>
                             setData({ ...data, name: e.target.value })
                         }
                     />
-                    <TextField
-                        margin="dense"
-                        label="Phone"
-                        fullWidth
+                    <Input
+                        className="mb-3"
+                        size="large"
+                        placeholder="Phone"
                         value={data.phone}
                         onChange={(e) => {
                             let newValue = e.target.value;
                             if (/^\+?\d*$/.test(newValue)) {
-                                if (!newValue.startsWith("+998")) {
-                                    newValue = "+998";
-                                }
                                 if (newValue.length <= 13) {
                                     setData({ ...data, phone: newValue });
                                 }
                             }
                         }}
                     />
-                    <TextField
-                        margin="dense"
-                        label="Password"
+                    <Input
+                        size="large"
+                        // margin="dense"
+                        placeholder="Password"
+                        // className="mb-3"
                         type="password"
-                        fullWidth
                         value={data.password}
                         onChange={(e) =>
                             setData({ ...data, password: e.target.value })

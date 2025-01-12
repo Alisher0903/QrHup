@@ -43,8 +43,8 @@ export default function ActionModerator() {
             .filter(Boolean)
             .join('&');
         return `${ActionModeratorGet}?${queryParams
-                ? `&${queryParams}&page=${page}&size=${size}`
-                : `page=${page}&size=${size}`
+            ? `&${queryParams}&page=${page}&size=${size}`
+            : `page=${page}&size=${size}`
             }`;
     };
 
