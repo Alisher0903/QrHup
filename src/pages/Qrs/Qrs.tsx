@@ -265,7 +265,7 @@ export default function Partners() {
                                             <TableCell align="center">
                                                 <Button
                                                     onClick={() => {
-                                                        navigator(`/qrDetial/${partner.extId}`)
+                                                        navigator(`/qrDetial/${partner.id}`)
                                                     }}
                                                 >
                                                     <FaEye size={25} color="black" />

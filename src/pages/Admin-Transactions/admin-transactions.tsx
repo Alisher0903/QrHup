@@ -21,10 +21,12 @@ import { adminTransactionsGet } from "../../hooks/url";
 import Dialog from '@mui/material/Dialog';
 import { datePicker } from "../../common/global-functions/date-sort";
 import { DatePicker, Select } from "antd";
+import { QrStore } from "../../hooks/Store/Qr/qrStore";
 const { RangePicker } = DatePicker;
 
 export default function AdminTransactions() {
     const navigator = useNavigate();
+    const { setQrData } = QrStore()
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState({
         paymentTime: "",

@@ -1,48 +1,26 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGlobalRequest } from '../../hooks/GlobalHook';
-import {
-  MerchantPartner,
-  PartnerDetialsUlr,
-  PartnerStatistic,
-  QrsPartner,
-  TerminalsPartner,
-  TransactionPartner,
-} from '../../hooks/url';
-import {
-  Box,
-  Button,
-  Tab,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Tabs,
-  Typography,
-} from '@mui/material';
+import { MerchantPartner, PartnerStatistic, QrsPartner, TerminalsPartner, TransactionPartner, } from '../../hooks/url';
+import { Box, Button, Tab, Table, TableBody, TableCell, TableHead, TableRow, Tabs, Typography, } from '@mui/material';
 import { IoChevronBackOutline } from 'react-icons/io5';
 import { Pagination } from 'antd';
 import { PartnersStore } from '../../hooks/Store/Partners/partnerStore';
 
 export default function PartnerDetials() {
   // States
+  const { id } = useParams<string>();
   const [pageQr, setPageQr] = useState(0);
   const [pageMerchant, setPageMerchant] = useState(0);
   const [pageTerminal, setPageTerminal] = useState(0);
   const [pageTransaction, setPageTransaction] = useState(0);
   const [selectedTab, setSelectedTab] = useState(0);
   const { partners } = PartnersStore();
-  console.log("partners", partners);
-  
-  const handleChange = (event: any | null, newValue: number) => {
+
+  const handleChange = (_: any | null, newValue: number) => {
     setSelectedTab(newValue);
   };
-  const { id } = useParams<string>();
-  const { response: resGet, globalDataFunc: GetData } = useGlobalRequest(
-    `${PartnerDetialsUlr}partnerId=${id}`,
-    'GET',
-  );
+
   const { response: statisticsGet, globalDataFunc: GetSattistics } =
     useGlobalRequest(`${PartnerStatistic}partnerId=${id}`, 'GET');
   const { response: QrGet, globalDataFunc: GetqrCall } = useGlobalRequest(
@@ -68,17 +46,13 @@ export default function PartnerDetials() {
 
   const navigator = useNavigate();
   useEffect(() => {
-    GetData();
     GetSattistics();
     GetqrCall();
     MerchantEffect();
     TerminalEffect();
     TransactionEffect();
   }, [id]);
-  // console.log('get response', resGet);
-  const GettingDatass = resGet?.object[0];
-  console.log('qr GEtting', QrGet);
-  console.log(id);
+
   return (
     <div className="bg-gray-100  flex flex-col items-center">
       <div className="flex justify-between mb-3 w-full">
@@ -95,96 +69,93 @@ export default function PartnerDetials() {
         <div className="flex justify-between gap-9">
           <div className="w-full bg-white shadow-xl rounded-xl p-6">
             <div className="flex flex-col gap-4">
-              <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                <p className="text-sm font-semibold">Name</p>
-                <p className="text-sm font-semibold">
-                  {partners.name || '-'}
+              <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
+                <p className="text-md font-semibold">Name</p>
+                <p className="text-md font-semibold">
+                  {partners?.name || '-'}
                 </p>
               </div>
-              <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                <p className="text-sm font-semibold">Push url</p>
-                <p className="text-sm font-semibold">
+              <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
+                <p className="text-md font-semibold">Push url</p>
+                <p className="text-md font-semibold">
                   {partners?.url || '-'}
                 </p>
               </div>
-              <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                <p className="text-sm font-semibold">Phone number</p>
-                <p className="text-sm font-semibold">
+              <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
+                <p className="text-md font-semibold">Phone number</p>
+                <p className="text-md font-semibold">
                   +{partners?.phone || '-'}
                 </p>
               </div>
-              <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                <p className="text-sm font-semibold">E-Mail</p>
-                <p className="text-sm font-semibold">
+              <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
+                <p className="text-md font-semibold">E-Mail</p>
+                <p className="text-md font-semibold">
                   {partners?.email || '-'}
                 </p>
               </div>
-              <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                <p className="text-sm font-semibold">Status</p>
-                <p className="text-sm font-semibold">
-                  {partners?.status || '-'}
-                </p>
+              <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
+                <p className="text-md font-semibold">Status</p>
+                <Typography className={!partners?.active ? "bg-yellow-500 text-center text-white p-3 rounded-lg" : "bg-green-500 text-white text-center p-3 rounded-lg"}>
+                  {partners?.active ? "ACTIVE" : "INACTIVE"}
+                </Typography>
               </div>
-              <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                <p className="text-sm font-semibold">Address</p>
-                <p className="text-sm font-semibold">
+              <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
+                <p className="text-md font-semibold">Address</p>
+                <p className="text-md font-semibold">
                   {partners?.address || '-'}
                 </p>
               </div>
-              <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                <p className="text-sm font-semibold">INN</p>
-                <p className="text-sm font-semibold">
+              <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
+                <p className="text-md font-semibold">INN</p>
+                <p className="text-md font-semibold">
                   {partners?.inn || '-'}
                 </p>
               </div>
-              <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                <p className="text-sm font-semibold">Account</p>
-                <p className="text-sm font-semibold">
+              <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
+                <p className="text-md font-semibold">Account</p>
+                <p className="text-md font-semibold">
                   {partners?.account || '-'}
                 </p>
               </div>
-              <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                <p className="text-sm font-semibold">MFO</p>
-                <p className="text-sm font-semibold">
+              <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
+                <p className="text-md font-semibold">MFO</p>
+                <p className="text-md font-semibold">
                   {partners?.mfo || '-'}
                 </p>
               </div>
-              <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                <p className="text-sm font-semibold">Service fee</p>
-                <p className="text-sm font-semibold">
+              <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
+                <p className="text-md font-semibold">Service fee</p>
+                <p className="text-md font-semibold">
                   {partners?.serviceFee || '0'} %
                 </p>
               </div>
             </div>
           </div>
           <div className="w-[40%] bg-white shadow-md rounded-xl border-l-2 flex flex-col p-6 gap-5">
-            <div className="flex justify-between pb-2  border-b-2 border-gray-500">
-              <p className="text-sm font-semibold">Merchants:</p>
-              <p className="text-sm font-semibold">
+            <div className="flex justify-between pb-2  border-b-[1px] border-gray-500">
+              <p className="text-md font-semibold">Merchants:</p>
+              <p className="text-md font-semibold">
                 {statisticsGet?.merchantCount || '0'}
               </p>
             </div>
-            <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-              <p className="text-sm font-semibold">Terminals:</p>
-              <p className="text-sm font-semibold">
+            <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
+              <p className="text-md font-semibold">Terminals:</p>
+              <p className="text-md font-semibold">
                 {statisticsGet?.terminalCount || '0'}
               </p>
             </div>
-            <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-              <p className="text-sm font-semibold">QRs:</p>
-              <p className="text-sm font-semibold">
+            <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
+              <p className="text-md font-semibold">QRs:</p>
+              <p className="text-md font-semibold">
                 {statisticsGet?.qrCount || '-'}
               </p>
             </div>
-            <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-              <p className="text-sm font-semibold">Transactions:</p>
-              <p className="text-sm font-semibold flex flex-col items-center justify-center">
-                <span>
-                  Count:
-                  {statisticsGet?.transactionCount || '0'},
-                </span>
-                <span>Amount: {statisticsGet?.transactionAmount || '0'}</span>
-              </p>
+            <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
+              <p className="text-md font-semibold">Transactions:</p>
+              <div className="text-md font-semibold flex flex-col items-start justify-start">
+                <span>{statisticsGet?.transactionCount || '0'} (Success)</span>
+                <span>{statisticsGet?.transactionAmount || '0'} UZS</span>
+              </div>
             </div>
           </div>
         </div>
@@ -238,7 +209,7 @@ export default function PartnerDetials() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {QrGet?.object?.map((partner: any, index: number) => (
+                  {QrGet?.object && QrGet.object.length !== 0 ? QrGet?.object?.map((partner: any, index: number) => (
                     <TableRow key={partner.id || index}>
                       <TableCell>{pageQr * 10 + index + 1}</TableCell>
                       <TableCell align="left">
@@ -262,39 +233,17 @@ export default function PartnerDetials() {
                           {partner.status}
                         </Typography>
                       </TableCell>
-                      {/* <TableCell align="center">
-                                                <Button
-                                                    onClick={() => {
-                                                        navigator(`/partnerDetials/${partner.id}`)
-                                                    }}
-                                                >
-                                                    <FaEye size={25} color="black" />
-                                                </Button>
-                                                <Button
-                                                    onClick={() => {
-                                                        setOpenEditModal(true);
-                                                        setData({
-                                                            name: partner.name,
-                                                            phone: partner.phone,
-                                                            account: partner.account,
-                                                            mfo: partner.mfo,
-                                                            inn: partner.inn,
-                                                            email: partner.email,
-                                                            serviceFee: partner.serviceFee,
-                                                            address: partner.address,
-                                                            url: partner.url,
-                                                        });
-                                                        setGetId(partner.id)
-                                                    }}
-                                                >
-                                                    <MdEdit  size={25} color="black" />
-                                                </Button>
-                                            </TableCell> */}
                     </TableRow>
-                  ))}
+                  )) : (
+                    <TableCell colSpan={10}>
+                      <Typography color="error" textAlign="center">
+                        Failed to load data
+                      </Typography>
+                    </TableCell>
+                  )}
                 </TableBody>
               </Table>
-              <Pagination
+              {QrGet?.object && QrGet.object.length !== 0 && <Pagination
                 defaultCurrent={1}
                 current={pageQr + 1}
                 total={QrGet?.totalElements || 0}
@@ -304,7 +253,7 @@ export default function PartnerDetials() {
                   await QrGet();
                 }}
                 showSizeChanger={false}
-              />
+              />}
             </Box>
           )}
           {selectedTab === 1 && (
@@ -323,52 +272,46 @@ export default function PartnerDetials() {
                     <TableCell className="min-w-[200px] border-l" align="left">
                       Addres
                     </TableCell>
-                    {/* <TableCell className="min-w-[150px] border-l" align="left">Ext-ID</TableCell> */}
                     <TableCell className="min-w-[200px] border-l" align="left">
                       Mfo
                     </TableCell>
                     <TableCell className="min-w-[200px] border-l" align="left">
                       Account
                     </TableCell>
-                    {/* <TableCell className="min-w-[160px] border-l" align="left">Status</TableCell> */}
-                    {/* <TableCell className="min-w-[200px]" align="center">Action</TableCell> */}
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {MerchantGet?.object?.map((qr: any, index: number) => (
+                  {MerchantGet?.object && MerchantGet?.object.length !== 0 ? MerchantGet?.object?.map((qr: any, index: number) => (
                     <TableRow key={qr.id || index}>
                       <TableCell>{pageQr * 10 + index + 1}</TableCell>
                       <TableCell align="left">{qr.name || '-'}</TableCell>
                       <TableCell align="left">
                         {qr.address || '-'}
                       </TableCell>
-                      {/* <TableCell align="left">
-                        {qr.extId || "-"}
-                      </TableCell> */}
                       <TableCell align="left">{qr.mfo || '-'}</TableCell>
                       <TableCell align="left">
                         {qr.account || '-'}
                       </TableCell>
-                      {/* <TableCell align="left">
-                        <Typography fontSize={15} className="bg-[#327bf0] text-white  text-center p-3 rounded-full ">
-                          {qr.status}
-                        </Typography>
-                      </TableCell> */}
                     </TableRow>
-                  ))}
+                  )) : (
+                    <TableCell colSpan={10}>
+                      <Typography color="error" textAlign="center">
+                        Failed to load data
+                      </Typography>
+                    </TableCell>
+                  )}
                 </TableBody>
               </Table>
-              <Pagination
+              {MerchantGet?.object && MerchantGet?.object.length !== 0 && <Pagination
                 defaultCurrent={1}
                 current={pageMerchant + 1}
                 total={MerchantGet?.totalElements || 0}
-                // pageSize={size || 10}
                 onChange={async (pageNumber: number) => {
                   await setPageMerchant(pageNumber - 1);
                   await QrGet();
                 }}
                 showSizeChanger={false}
-              />
+              />}
             </Box>
           )}
           {selectedTab === 2 && (
@@ -406,11 +349,10 @@ export default function PartnerDetials() {
                       >
                         Status
                       </TableCell>
-                      {/* <TableCell className="min-w-[200px]" align="center">Action</TableCell> */}
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {TerminalGet?.object?.map((terminal: any, index: number) => (
+                    {TerminalGet?.object && TerminalGet?.object.length ? TerminalGet?.object?.map((terminal: any, index: number) => (
                       <TableRow key={terminal.id || index}>
                         <TableCell>{pageQr * 10 + index + 1}</TableCell>
                         <TableCell align="left">
@@ -431,10 +373,16 @@ export default function PartnerDetials() {
                           </Typography>
                         </TableCell>
                       </TableRow>
-                    ))}
+                    )) : (
+                      <TableCell colSpan={10}>
+                        <Typography color="error" textAlign="center">
+                          Failed to load data
+                        </Typography>
+                      </TableCell>
+                    )}
                   </TableBody>
                 </Table>
-                <Pagination
+                {TerminalGet?.object && TerminalGet?.object.length !== 0 && <Pagination
                   defaultCurrent={1}
                   current={pageTerminal + 1}
                   total={TerminalGet?.totalElements || 0}
@@ -444,7 +392,7 @@ export default function PartnerDetials() {
                     await TerminalEffect();
                   }}
                   showSizeChanger={false}
-                />
+                />}
               </Box>
             </Typography>
           )}
@@ -495,11 +443,10 @@ export default function PartnerDetials() {
                       >
                         Service-Fee
                       </TableCell>
-                      {/* <TableCell className="min-w-[200px]" align="center">Action</TableCell> */}
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {TransactionGet?.object?.map((transaction: any, index: number) => (
+                    {TransactionGet?.object && TransactionGet?.object.length ? TransactionGet?.object?.map((transaction: any, index: number) => (
                       <TableRow key={transaction.id || index}>
                         <TableCell>{pageQr * 10 + index + 1}</TableCell>
                         <TableCell align="left">
@@ -520,19 +467,17 @@ export default function PartnerDetials() {
                         <TableCell align="left">
                           {transaction.serviceFee || '-'}
                         </TableCell>
-                        {/* <TableCell align="left">
-                          <Typography
-                            fontSize={15}
-                            className={` uppercase  text-center p-3 rounded-full ${transaction.active ? 'text-white bg-[#327bf0]' : 'text-red-500'} `}
-                          >
-                            {transaction.active ? 'active' : 'Inactive'}
-                          </Typography>
-                        </TableCell> */}
                       </TableRow>
-                    ))}
+                    )) : (
+                      <TableCell colSpan={10}>
+                        <Typography color="error" textAlign="center">
+                          Failed to load data
+                        </Typography>
+                      </TableCell>
+                    )}
                   </TableBody>
                 </Table>
-                <Pagination
+                {TransactionGet?.object && TransactionGet?.object.length !== 0 && <Pagination
                   defaultCurrent={1}
                   current={pageTransaction + 1}
                   total={TransactionGet?.totalElements || 0}
@@ -542,7 +487,7 @@ export default function PartnerDetials() {
                     await TransactionEffect();
                   }}
                   showSizeChanger={false}
-                />
+                />}
               </Box>
             </Typography>
           )}

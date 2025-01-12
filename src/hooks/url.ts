@@ -6,6 +6,7 @@ export const UserGet: string = `${baseUrl}api/user/moderator/page?`;
 export const AddUser: string = `${baseUrl}api/user/create`;
 export const DeleteUser: string = `${baseUrl}api/user/deleted?`;
 export const EditUser: string = `${baseUrl}api/user/update?`;
+export const getMe: string = `${baseUrl}api/user/get-me`
 
 // Leave 
 export const LeaveGet: string = `${baseUrl}`;
@@ -34,7 +35,7 @@ export const MerchantQrs: string = `${baseUrl}api/qrcode/merchant?`;
 export const QrGet: string = `${baseUrl}api/qrcode/page`;
 export const QrGetOne: string = `${baseUrl}api/qrcode/check/`;
 export const QrTransactions: string = `${baseUrl}api/qrcode/transaction/`;
-
+export const qrGetone: string = `${baseUrl}api/qrcode/one`
 
 // Mcc 
 export const MccGet: string = `${baseUrl}api/mcc/mcc/page`;

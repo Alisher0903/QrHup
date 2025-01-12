@@ -27,9 +27,11 @@ import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { DatePicker, Select } from "antd";
 import { datePicker } from "../../common/global-functions/date-sort";
+import { PartnersStore } from "../../hooks/Store/Partners/partnerStore";
 const { RangePicker } = DatePicker;
 
 export default function Partners() {
+    const { setPartners } = PartnersStore()
     const [openAddModal, setOpenAddModal] = useState(false);
     const [openEditModal, setOpenEditModal] = useState(false);
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -334,14 +336,15 @@ export default function Partners() {
                                                 {partner.inn || "-"}
                                             </TableCell>
                                             <TableCell align="left">
-                                                <Typography className="bg-[#F0B732] text-center p-3 rounded-full ">
-                                                    {partner.status ? "ACTIVE" : "INACTIVE"}
+                                                <Typography className={!partner.active ? "bg-yellow-500 text-center text-white p-3 rounded-lg" : "bg-green-500 text-white text-center p-3 rounded-lg"}>
+                                                    {partner.active ? "ACTIVE" : "INACTIVE"}
                                                 </Typography>
                                             </TableCell>
                                             <TableCell align="center">
                                                 <Button
                                                     onClick={() => {
-                                                        navigator(`/partnersDetials/${partner.id}`)
+                                                        navigator(`/partnersDetials/${partner.id}`);
+                                                        setPartners(partner);
                                                     }}
                                                 >
                                                     <FaEye size={25} color="black" />
