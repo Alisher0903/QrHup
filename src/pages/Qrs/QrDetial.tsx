@@ -129,40 +129,40 @@ export default function QrDetial() {
                 <p className='text-xl py-3'>Transactions</p>
                 {qrGetTransactions.response && qrGetTransactions.response?.object && qrGetTransactions.response.object.length !== 0 ?
                     qrGetTransactions.response.object.map((item: any, index: number) => (
-                        <div key={index} className='p-5 rounded-xl flex justify-between items-center border-[1px] border-black cursor-pointer'>
-                            <div className='w-[70%] flex justify-between'>
-                                <div>
-                                    <div className='flex gap-1'>
+                        <div key={index} className='p-5 rounded-xl flex justify-between gap-3 items-center border-[1px] border-black cursor-pointer'>
+                            <div className='grid grid-cols-1 lg:grid-cols-2 text-sm gap-3'>
+                                <div className=''>
+                                    <div className='flex justify-between  border-gray-400 gap-1'>
                                         <p className='text-md font-bold'>Amount:</p>
                                         <p>{item.amount || "--"}</p>
                                     </div>
-                                    <div className='flex gap-1'>
+                                    <div className='flex justify-between  border-gray-400 gap-1'>
                                         <p className='text-md font-bold'>Currency:</p>
                                         <p>{item.currency || "--"}</p>
                                     </div>
                                 </div>
                                 <div>
-                                    <div className='flex gap-1'>
+                                    <div className='flex justify-between  border-gray-400 gap-1'>
                                         <p className='text-md font-bold'>Payment date:</p>
                                         <p>{item.createdAt || "--"}</p>
                                     </div>
-                                    <div className='flex gap-1'>
+                                    <div className='flex justify-between  border-gray-400 gap-1'>
                                         <p className='text-md font-bold'>Payer bank:</p>
                                         <p>{item.bank || "--"}</p>
                                     </div>
                                 </div>
                                 <div>
-                                    <div className='flex gap-1'>
+                                    <div className='flex justify-between  border-gray-400 gap-1'>
                                         <p className='text-md font-bold'>External id:</p>
                                         <p>{item.createdAt || "--"}</p>
                                     </div>
-                                    <div className='flex gap-1'>
+                                    <div className='flex justify-between  border-gray-400 gap-1'>
                                         <p className='text-md font-bold'>Fee:</p>
                                         <p>{item.createdAt || "--"}</p>
                                     </div>
                                 </div>
                             </div>
-                            <div className='w-[10%] flex justify-end'><IoChevronForwardOutline color="black" size={30} /></div>
+                            <div className=' flex justify-end'><IoChevronForwardOutline color="black" size={30} /></div>
                         </div>
                     ))
 

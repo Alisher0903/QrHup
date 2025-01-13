@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGlobalRequest } from '../../hooks/GlobalHook';
 import {
+    MerchantGetOne,
     MerchantPartner,
     MerchantQrs,
     MerchantStatistic,
@@ -40,7 +41,7 @@ export default function MerchantDetials() {
     };
     const { id } = useParams<string>();
     const { response: resGet, globalDataFunc: GetData } = useGlobalRequest(
-        `${PartnerDetialsUlr}merchantId=${id}`,
+        `${MerchantGetOne}id=${id}`,
         'GET',
     );
     const { response: statisticsGet, globalDataFunc: GetSattistics } =
@@ -78,9 +79,9 @@ export default function MerchantDetials() {
         TransactionEffect();
     }, [id]);
     console.log('Statistic Merchant', statisticsGet);
-    const GettingDatass = resGet?.object[0];
-    console.log('qr GEtting', QrGet);
-    console.log(id);
+    const GettingDatass = resGet;
+    console.log('qr GEtting', resGet);
+    // console.log(id);
     return (
         <div className="bg-gray-100  flex flex-col items-center">
             <div className="flex justify-between mb-3 w-full">
@@ -100,40 +101,40 @@ export default function MerchantDetials() {
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
                                 <p className="text-sm font-semibold">Name</p>
                                 <p className="text-sm font-semibold">
-                                    {GettingDatass?.merchant || '-'}
+                                    {GettingDatass?.name || '-'}
                                 </p>
                             </div>
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                                <p className="text-sm font-semibold">Partner</p>
+                                <p className="text-sm font-semibold">Ext-ID</p>
                                 <p className="text-sm font-semibold">
-                                    {GettingDatass?.partner || '-'}
+                                    {GettingDatass?.extId || '-'}
                                 </p>
                             </div>
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                                <p className="text-sm font-semibold">Type</p>
+                                <p className="text-sm font-semibold">Adrres</p>
                                 <p className="text-sm font-semibold">
-                                    {GettingDatass?.type || '-'}
+                                    {GettingDatass?.address || '-'}
                                 </p>
                             </div>
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                                <p className="text-sm font-semibold">Currency</p>
+                                <p className="text-sm font-semibold">MFO</p>
                                 <p className="text-sm font-semibold">
-                                    {GettingDatass?.currency || '-'}
+                                    {GettingDatass?.mfo || '-'}
                                 </p>
                             </div>
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                                <p className="text-sm font-semibold">Amount</p>
+                                <p className="text-sm font-semibold">Account</p>
                                 <p className="text-sm font-semibold">
-                                    {GettingDatass?.amount || '-'}
+                                    {GettingDatass?.account|| '-'}
                                 </p>
                             </div>
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                                <p className="text-sm font-semibold">Create Date</p>
-                                <p className="text-sm font-semibold">
-                                    {GettingDatass?.createDate || '-'}
+                                <p className="text-sm font-semibold">Active</p>
+                                <p className="text-sm font-semibold uppercase">
+                                    {GettingDatass?.active ? 'inactive' : 'active'}
                                 </p>
                             </div>
-                            <div className="flex justify-between pb-2 border-b-2 border-gray-500">
+                            {/* <div className="flex justify-between pb-2 border-b-2 border-gray-500">
                                 <p className="text-sm font-semibold">Expire</p>
                                 <p className="text-sm font-semibold">
                                     {GettingDatass?.expire || '-'}
@@ -144,7 +145,7 @@ export default function MerchantDetials() {
                                 <p className="text-sm font-semibold">
                                     {GettingDatass?.status || '-'}
                                 </p>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className="w-[40%] bg-white shadow-md rounded-xl border-l-2 flex flex-col p-6 gap-5">

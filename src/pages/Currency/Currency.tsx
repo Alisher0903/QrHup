@@ -9,14 +9,13 @@ import {
     TableRow,
     Typography,
     CircularProgress,
-    TextField,
-
 } from "@mui/material";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
 import { useGlobalRequest } from "../../hooks/GlobalHook";
 import { useState, useEffect } from "react";
-import { CurrencyGet } from "../../hooks/url";
-import { Input, Pagination } from "antd";
+import { CurrencyEditActive, CurrencyGet } from "../../hooks/url";
+import { Input, Pagination, Checkbox } from "antd";
+import toast from "react-hot-toast";
 
 
 export default function Currency() {
@@ -24,6 +23,8 @@ export default function Currency() {
     const [table, setTable] = useState('');
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(10);
+    const [id, setId] = useState(0);
+    const [active, setActive] = useState<boolean>();
 
     const getMccUrl = () => {
         const queryParams: string = [
@@ -35,7 +36,22 @@ export default function Currency() {
     const { error, globalDataFunc, response, loading } = useGlobalRequest(
         getMccUrl(),
         "GET"
+    ); const { error: ErrorChange, globalDataFunc: effectChange, response: responseChange } = useGlobalRequest(
+        `${CurrencyEditActive}id=${id}&active=${active}`,
+        "POST",
+        {}
     );
+    const handleChangeActive = () => {
+        effectChange();
+    }
+    useEffect(() => {
+        if (responseChange) {
+            globalDataFunc();
+            toast.success(responseChange);
+        } else if (ErrorChange) {
+            toast.error(ErrorChange)
+        }
+    }, [id, active])
     useEffect(() => {
         globalDataFunc();
     }, [page, size, nameFilter, table]);
@@ -104,6 +120,7 @@ export default function Currency() {
                                     <TableCell className="border-l min-w-[200px]" align="left">Code</TableCell>
                                     <TableCell className="border-l min-w-[200px]" align="left">Symbol</TableCell>
                                     <TableCell className="border-l min-w-[200px]" align="left">Active</TableCell>
+                                    <TableCell className="border-l min-w-[200px]" align="left">Action</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -122,6 +139,14 @@ export default function Currency() {
                                             </TableCell>
                                             <TableCell align="left">
                                                 {user.status ? "-" : ' sdqew'}
+                                            </TableCell>
+                                            <TableCell align="left">
+                                                <Checkbox defaultChecked={user.active} value={active} onChange={(e:any) => {
+                                                    setId(user.id)
+                                                    console.log(e.target);
+                                                    setActive(e.target)
+                                                    handleChangeActive()
+                                                }} />
                                             </TableCell>
                                         </TableRow>
                                     )

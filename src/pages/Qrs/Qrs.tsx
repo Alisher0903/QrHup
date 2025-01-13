@@ -43,6 +43,7 @@ export default function Partners() {
             datePicker(0, date) ? `from=${datePicker(0, date)}` : '',
             datePicker(1, date) ? `to=${datePicker(1, date)}` : '',
             secondDate ? `expire=${secondDate}` : '',
+            secondDate ? `expire=${secondDate}` : '',
             amount ? `amount=${amount}` : '',
             status ? `status=${status}` : '',
             type ? `type=${type}` : '',
@@ -58,7 +59,7 @@ export default function Partners() {
 
     useEffect(() => {
         globalDataFunc();
-    }, [page, size, nameFilter, numFilter, emailFilter, date, inn, type, amount]);
+    }, [page, size, nameFilter, numFilter, emailFilter, date, inn, type, amount,secondDate]);
 
     return (
         <Container>

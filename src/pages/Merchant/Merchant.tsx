@@ -71,7 +71,7 @@ export default function Merchant() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Search with username"
+                            placeholder="Search with Mechants name..."
                             onChange={
                                 (e) => setNameFilter(e.target.value)
                             }

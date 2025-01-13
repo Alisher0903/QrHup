@@ -67,11 +67,12 @@ export default function Clarify() {
     const HandleChangeStatus = () => {
         if (status) {
             return EffectPost();
-        } 
+        }
     }
     useEffect(() => {
         if (rePost) {
             toast.success('Status Successfuly changed',);
+            handleModalClose()
             globalDataFunc();
             EffectGetOne();
         } else if (errorPost) {
@@ -82,7 +83,7 @@ export default function Clarify() {
     useEffect(() => {
         globalDataFunc();
         EffectGetOne();
-    }, [page, size, merchantNameFilter, amountFilter, statusFilter, id, statusFilter]);
+    }, [page, size, merchantNameFilter, amountFilter, statusFilter, id, statusFilter, date]);
 
     console.log('getOne res', getOneRes);
 
@@ -115,7 +116,7 @@ export default function Clarify() {
                         />
                         <Input
                             type='text'
-                            placeholder="Search with merchant's Name"
+                            placeholder="Search with Amount"
                             value={amountFilter}
                             onChange={(e) => {
                                 setAmountFilter(e.target.value);
@@ -481,16 +482,16 @@ export default function Clarify() {
                                     <TableCell>Terminal</TableCell>
                                     <TableCell>{getOneRes?.terminal || '-'}</TableCell>
                                 </TableRow>
-                                <TableRow>
+                                {/* <TableRow>
                                     <TableCell>Confirmed Date</TableCell>
                                     <TableCell>{getOneRes?.terminal || '-'}</TableCell>
-                                </TableRow>
-                                <TableRow>
+                                </TableRow> */}
+                                {/* <TableRow>
                                     <TableCell>Action</TableCell>
                                     <TableCell>
                                         {getOneRes?.action ? 'Confirm' : 'Canceled'}
                                     </TableCell>
-                                </TableRow>
+                                </TableRow> */}
                             </TableBody>
                         </Table>
                     </Box>

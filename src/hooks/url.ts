@@ -26,6 +26,7 @@ export const TransactionPartner: string = `${baseUrl}api/transaction/partner?`;
 
 // Merchant Api
 export const MerchantGet: string = `${baseUrl}api/merchant/admin/page`;
+export const MerchantGetOne: string = `${baseUrl}api/merchant/one?`;
 export const MerchantStatistic: string = `${baseUrl}api/merchant/statistic?`;
 export const MerchantTerminal: string = `${baseUrl}api/terminal/merchant?`;
 export const MerchantTransactions: string = `${baseUrl}api/transaction/merchant?`;
@@ -52,6 +53,7 @@ export const ActionModeratorGetOne: string = `${baseUrl}api/transaction/detail/`
 
 // Currency 
 export const CurrencyGet: string = `${baseUrl}api/currency/page?`;
+export const CurrencyEditActive: string = `${baseUrl}api/currency/active?`;
 
 // mdelator
 export const ClarifyGet: string = `${baseUrl}api/transaction/moderator?`;
