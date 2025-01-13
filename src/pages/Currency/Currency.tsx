@@ -51,7 +51,7 @@ export default function Currency() {
         } else if (ErrorChange) {
             toast.error(ErrorChange)
         }
-    }, [id, active])
+    }, [responseChange, ErrorChange])
     useEffect(() => {
         globalDataFunc();
     }, [page, size, nameFilter, table]);
@@ -119,7 +119,6 @@ export default function Currency() {
                                     <TableCell className="border-l min-w-[200px]" align="left">Name</TableCell>
                                     <TableCell className="border-l min-w-[200px]" align="left">Code</TableCell>
                                     <TableCell className="border-l min-w-[200px]" align="left">Symbol</TableCell>
-                                    <TableCell className="border-l min-w-[200px]" align="left">Active</TableCell>
                                     <TableCell className="border-l min-w-[200px]" align="left">Action</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -138,15 +137,16 @@ export default function Currency() {
                                                 {user.symbol || "-"}
                                             </TableCell>
                                             <TableCell align="left">
-                                                {user.status ? "-" : ' sdqew'}
-                                            </TableCell>
-                                            <TableCell align="left">
-                                                <Checkbox defaultChecked={user.active} value={active} onChange={(e:any) => {
-                                                    setId(user.id)
-                                                    console.log(e.target);
-                                                    setActive(e.target)
-                                                    handleChangeActive()
-                                                }} />
+                                                <Checkbox
+                                                    // defaultChecked={user.active}
+                                                    checked={user.active}
+                                                    onChange={async (e: any) => {
+                                                        await setId(user.id); 
+                                                        await setActive(e.target.checked);
+                                                        console.log(e.target.checked);
+                                                        handleChangeActive();
+                                                    }}
+                                                />
                                             </TableCell>
                                         </TableRow>
                                     )
