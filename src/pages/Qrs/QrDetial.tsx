@@ -203,7 +203,7 @@ export default function QrDetial() {
                                     </div>
                                     <div className='flex justify-between  border-gray-400 gap-1'>
                                         <p className='text-md font-bold'>Fee:</p>
-                                        <p>{item.createdAt || "--"}</p>
+                                        <p>{item.serviceFee || "--"}</p>
                                     </div>
                                 </div>
                             </div>

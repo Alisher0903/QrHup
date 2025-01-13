@@ -28,7 +28,7 @@ interface RouteConfig {
 }
 
 function App() {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -66,10 +66,12 @@ function App() {
   useEffect(() => {
     const checkAuth = () => {
       const token = sessionStorage.getItem('token');
+      const role = sessionStorage.getItem('role');
       const isApiKeyRoute = /^\/generated\/[^/]+$/.test(pathname);
 
-      if (!isApiKeyRoute && !token) {
+      if (!role && !isApiKeyRoute && !token) {
         navigate('/auth/signin');
+        setLoading(false);
       } else {
         setLoading(false);
       }
