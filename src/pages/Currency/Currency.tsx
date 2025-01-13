@@ -68,7 +68,7 @@ export default function Currency() {
                             <Input
                                 allowClear
                                 size="large"
-                                placeholder="Search with username"
+                                placeholder="Search with name"
                                 onChange={
                                     (e) => setNameFilter(e.target.value)
                                 }

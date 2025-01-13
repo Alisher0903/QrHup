@@ -56,7 +56,7 @@ export default function Partners() {
         phone: "+998",
         email: "",
         inn: "",
-        serviceFee: 0,
+        serviceFee: '',
         mfo: "",
         account: "",
     });
@@ -131,7 +131,7 @@ export default function Partners() {
             phone: "+998",
             email: "",
             inn: "",
-            serviceFee: 0,
+            serviceFee: '',
             mfo: "",
             account: "",
             // password: "",
@@ -418,7 +418,7 @@ export default function Partners() {
 
             {/* Add User Modal */}
             <Dialog open={openAddModal} onClose={handleAddClose}>
-                <DialogTitle>Add User</DialogTitle>
+                <DialogTitle>Add Partner</DialogTitle>
                 <DialogContent className="flex flex-col gap-3" style={{ width: '600px' }}>
                     <Input
                         allowClear
@@ -473,11 +473,12 @@ export default function Partners() {
                         onChange={(e) => setData({ ...data, inn: e.target.value })}
                     />
                     <Input
+                    type="number"
                         allowClear
                         placeholder="Service Fee"
                         size="large"
                         value={data.serviceFee}
-                        onChange={(e) => setData({ ...data, serviceFee: Number(e.target.value) })}
+                        onChange={(e) => setData({ ...data, serviceFee: e.target.value })}
                     />
                     <Input
                         allowClear
@@ -504,7 +505,7 @@ export default function Partners() {
                             !data.phone ||
                             data.phone.length < 13 ||
                             !data.email ||
-                            data.serviceFee <= 0 ||
+                            !data.serviceFee  ||
                             !data.inn ||
                             !data.mfo ||
                             !data.account
@@ -579,7 +580,7 @@ export default function Partners() {
                         fullWidth
                         type="number"
                         value={data.serviceFee}
-                        onChange={(e) => setData({ ...data, serviceFee: Number(e.target.value) })}
+                        onChange={(e) => setData({ ...data, serviceFee: e.target.value})}
                     />
                     <TextField
                         margin="dense"

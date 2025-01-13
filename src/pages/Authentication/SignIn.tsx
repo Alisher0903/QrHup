@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { LogIn } from '../../hooks/url';
@@ -10,7 +10,14 @@ const SignIn: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
-  const role = sessionStorage.getItem('role');
+  const [roles, setRoles] = useState('');
+
+  useEffect(() => {
+    if (roles) {
+      if (roles === "ROLE_ADMIN") navigate('/');
+      else if (roles === "ROLE_MODERATOR") navigate('/moderator/clarify');
+    }
+  }, [roles])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,12 +42,7 @@ const SignIn: React.FC = () => {
         toast.success('Welcome! You have successfully signed')
         sessionStorage.setItem('token', response?.data?.data?.token);
         sessionStorage.setItem('role', response?.data?.data?.role);
-        navigate('/');
-        if (role === "ROLE_ADMIN") {
-          navigate('/');
-        } else if (role === "ROLE_") {
-          navigate('/clarify');
-        }
+        setRoles(response?.data?.data?.role)
       } else {
         toast.error('Something went wrong');
       }

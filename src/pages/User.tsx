@@ -259,6 +259,7 @@ export default function User() {
                     <Input
                         size="large"
                         placeholder="Name"
+                        className="mb-3"
                         value={data.name}
                         onChange={(e) =>
                             setData({ ...data, name: e.target.value })
@@ -268,6 +269,7 @@ export default function User() {
                         size="large"
                         // margin="dense"
                         placeholder="Phone"
+                        className="mb-3"
                         value={data.phone}
                         onChange={(e) => {
                             let newValue = e.target.value;
