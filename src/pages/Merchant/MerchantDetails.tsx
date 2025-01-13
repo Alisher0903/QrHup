@@ -8,11 +8,6 @@ import {
     MerchantStatistic,
     MerchantTerminal,
     MerchantTransactions,
-    PartnerDetialsUlr,
-    PartnerStatistic,
-    QrsPartner,
-    TerminalsPartner,
-    TransactionPartner,
 } from '../../hooks/url';
 import {
     Box,
@@ -32,7 +27,6 @@ import { Pagination } from 'antd';
 export default function MerchantDetials() {
     // States
     const [pageQr, setPageQr] = useState(0);
-    const [pageMerchant, setPageMerchant] = useState(0);
     const [pageTerminal, setPageTerminal] = useState(0);
     const [pageTransaction, setPageTransaction] = useState(0);
     const [selectedTab, setSelectedTab] = useState(0);

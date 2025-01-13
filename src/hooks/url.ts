@@ -67,3 +67,10 @@ export const ModeratorChangeStatus: string = `${baseUrl}api/transaction/moderato
 export const statistic_dashboard_transactions: string = `${baseUrl}api/transaction/dashboard/statistic`
 export const statistic_dashboard_transactions_diagram: string = `${baseUrl}api/transaction/dashboard/statistic/diagram`
 
+
+
+
+
+export const Generate: string = `${baseUrl}api/partner/generate/`
+
+
