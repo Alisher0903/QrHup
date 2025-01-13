@@ -19,6 +19,7 @@ import Currency from './pages/Currency/Currency';
 import ActionModerator from './pages/MaderatorPage/ActionModerator';
 import Clarify from './pages/MaderatorPage/clarify';
 import AdminTransactions from './pages/Admin-Transactions/admin-transactions';
+import Generated from './pages/Generated';
 
 interface RouteConfig {
   path: string;
@@ -45,7 +46,8 @@ function App() {
     { path: '/partnersDetials/:id', element: <PartnerDetials />, title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template' },
     { path: '/merchantDetials/:id', element: <MerchantDetials />, title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template' },
     { path: '/qrDetial/:id', element: <QrDetial />, title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template' },
-    { path: '/auth/signin', element: <SignIn />, title: 'Signin | TailAdmin - Tailwind CSS Admin Dashboard Template' },
+    { path: '/auth/signin', element: <SignIn />, title: 'Signin ' },
+    { path: '/generated/:ApiKey', element: <Generated />, title: 'Generated' },
 
     // Moderator
     {
@@ -63,15 +65,18 @@ function App() {
   // Check authentication and navigate accordingly
   useEffect(() => {
     const checkAuth = () => {
-      setLoading(true);
       const token = sessionStorage.getItem('token');
-      if (!token) {
+      const isApiKeyRoute = /^\/generated\/[^/]+$/.test(pathname);
+
+      if (!isApiKeyRoute && !token) {
         navigate('/auth/signin');
+      } else {
+        setLoading(false);
       }
-      setLoading(false);
     };
+
     checkAuth();
-  }, [navigate]);
+  }, [navigate, pathname]);
 
   // Scroll to top on route change
   useEffect(() => {
