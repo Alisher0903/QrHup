@@ -252,7 +252,7 @@ export default function AdminTransactions() {
                     <div className="flex flex-col gap-5">
                         <div className="flex justify-between">
                             <p className="text-xl font-bold">Payment Time:</p>
-                            <p className="text-xl">{selectedItem.paymentTime || "---"}</p>
+                            <p className="text-xl">{new Date(selectedItem.paymentTime).toLocaleDateString() || "---"}</p>
                         </div>
                         <div className="flex justify-between">
                             <p className="text-xl font-bold">Payer Bank:</p>

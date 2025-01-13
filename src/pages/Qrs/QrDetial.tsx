@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button } from '@mui/material';
-import { IoChevronBackOutline, IoChevronForwardCircle, IoChevronForwardOutline } from 'react-icons/io5';
+import { Box, Button, CircularProgress, Dialog, Typography } from '@mui/material';
+import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
 import { Pagination, QRCode } from 'antd';
 import { useEffect, useState } from 'react';
 import { useGlobalRequest } from '../../hooks/GlobalHook';
@@ -14,7 +14,15 @@ export default function QrDetial() {
     const qrGetOne = useGlobalRequest(`${qrGetone}/${id}`, 'GET');
     const qrGetTransactions = useGlobalRequest(`${getTransactionsByQrId}/${id}?page=${page}&size=${size}`, 'GET');
     const [isOpen, setIsopen] = useState(false);
-
+    const [selectedItem, setSelectedItem] = useState({
+        paymentTime: "",
+        payerBank: "",
+        senderName: "",
+        rate: 0,
+        currency: "",
+        amount: 0,
+        fee: ""
+    });
     useEffect(() => {
         if (id) {
             qrGetOne.globalDataFunc();
@@ -26,6 +34,19 @@ export default function QrDetial() {
             qrGetTransactions.globalDataFunc();
         }
     }, [size, page])
+
+    const toggleModal = () => {
+        setIsopen(!isOpen)
+        setSelectedItem({
+            amount: 0,
+            currency: "",
+            fee: "",
+            payerBank: "",
+            paymentTime: "",
+            rate: 0,
+            senderName: "",
+        })
+    }
 
     return (
         <>
@@ -127,10 +148,34 @@ export default function QrDetial() {
             </div>
             <div className='bg-white shadow-xl rounded-xl p-3 mt-5'>
                 <p className='text-xl py-3'>Transactions</p>
-                {qrGetTransactions.response && qrGetTransactions.response?.object && qrGetTransactions.response.object.length !== 0 ?
+                {qrGetTransactions.loading ? <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        height: "200px",
+                    }}
+                >
+                    <CircularProgress />
+                </Box> : qrGetTransactions.response && qrGetTransactions.response?.object && qrGetTransactions.response.object.length !== 0 ?
                     qrGetTransactions.response.object.map((item: any, index: number) => (
-                        <div key={index} className='p-5 rounded-xl flex justify-between gap-3 items-center border-[1px] border-black cursor-pointer'>
-                            <div className='grid grid-cols-1 lg:grid-cols-2 text-sm gap-3'>
+                        <div
+                            key={index}
+                            onClick={() => {
+                                toggleModal()
+                                setSelectedItem({
+                                    amount: item.amount,
+                                    currency: item.currency,
+                                    fee: item.serviceFee,
+                                    payerBank: item.bank,
+                                    paymentTime: item.createdAt,
+                                    rate: item.rate,
+                                    senderName: item.sender,
+                                })
+                            }}
+                            className='p-5 rounded-xl flex justify-between gap-3 items-center border-[1px] border-black cursor-pointer'
+                        >
+                            <div className='grid grid-cols-1 lg:grid-cols-3 text-sm gap-7'>
                                 <div className=''>
                                     <div className='flex justify-between  border-gray-400 gap-1'>
                                         <p className='text-md font-bold'>Amount:</p>
@@ -154,7 +199,7 @@ export default function QrDetial() {
                                 <div>
                                     <div className='flex justify-between  border-gray-400 gap-1'>
                                         <p className='text-md font-bold'>External id:</p>
-                                        <p>{item.createdAt || "--"}</p>
+                                        <p>{item.id || "--"}</p>
                                     </div>
                                     <div className='flex justify-between  border-gray-400 gap-1'>
                                         <p className='text-md font-bold'>Fee:</p>
@@ -167,9 +212,11 @@ export default function QrDetial() {
                     ))
 
                     : (
-                        <div></div>
+                        <Typography color="error" textAlign="center">
+                            Failed to load data
+                        </Typography>
                     )}
-                <div className='mt-5'>
+                {qrGetTransactions.response && qrGetTransactions.response?.object && qrGetTransactions.response.object.length !== 0 && <div className='mt-5'>
                     <Pagination
                         defaultCurrent={1}
                         current={page + 1}
@@ -181,8 +228,43 @@ export default function QrDetial() {
                         }}
                         showSizeChanger={true}
                     />
-                </div>
+                </div>}
             </div>
+            <Dialog open={isOpen} onClose={toggleModal}>
+                <div style={{ padding: '20px', width: '600px', textAlign: 'left' }}>
+                    <div className="flex flex-col gap-5">
+                        <div className="flex justify-between">
+                            <p className="text-xl font-bold">Payment Time:</p>
+                            <p className="text-xl">{selectedItem.paymentTime || "---"}</p>
+                        </div>
+                        <div className="flex justify-between">
+                            <p className="text-xl font-bold">Payer Bank:</p>
+                            <p className="text-xl">{selectedItem.payerBank || "---"}</p>
+                        </div>
+                        <div className="flex justify-between">
+                            <p className="text-xl font-bold">Sender Name:</p>
+                            <p className="text-xl">{selectedItem.senderName || "---"}</p>
+                        </div>
+                        <div className="flex justify-between">
+                            <p className="text-xl font-bold">Rate:</p>
+                            <p className="text-xl">{selectedItem.rate || "---"}</p>
+                        </div>
+                        <div className="flex justify-between">
+                            <p className="text-xl font-bold">Currency:</p>
+                            <p className="text-xl">{selectedItem.currency || "---"}</p>
+                        </div>
+                        <div className="flex justify-between">
+                            <p className="text-xl font-bold">Amount:</p>
+                            <p className="text-xl">{selectedItem.amount.toLocaleString() || "---"}</p>
+                        </div>
+                        <div className="flex justify-between">
+                            <p className="text-xl font-bold">Fee:</p>
+                            <p className="text-xl">{selectedItem.fee || "---"}</p>
+                        </div>
+                    </div>
+                    <Button className="bg-gray-500" onClick={toggleModal} style={{ marginTop: '10px', backgroundColor: "#F4F4F4", color: '#000' }}>Close</Button>
+                </div>
+            </Dialog>
         </>
     );
 }
