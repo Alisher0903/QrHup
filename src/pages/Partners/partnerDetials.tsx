@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGlobalRequest } from '../../hooks/GlobalHook';
-import { MerchantPartner, PartnerStatistic, QrsPartner, TerminalsPartner, TransactionPartner, } from '../../hooks/url';
+import { MerchantPartner, partner_get_one, PartnerStatistic, QrsPartner, TerminalsPartner, TransactionPartner, } from '../../hooks/url';
 import { Box, Button, Tab, Table, TableBody, TableCell, TableHead, TableRow, Tabs, Typography, } from '@mui/material';
 import { IoChevronBackOutline } from 'react-icons/io5';
 import { Pagination } from 'antd';
-import { PartnersStore } from '../../hooks/Store/Partners/partnerStore';
 
 export default function PartnerDetials() {
   // States
@@ -15,7 +14,8 @@ export default function PartnerDetials() {
   const [pageTerminal, setPageTerminal] = useState(0);
   const [pageTransaction, setPageTransaction] = useState(0);
   const [selectedTab, setSelectedTab] = useState(0);
-  const { partners } = PartnersStore();
+  // const { partners } = PartnersStore();
+  const partners = useGlobalRequest(`${partner_get_one}?id=${id}`, 'GET')
 
   const handleChange = (_: any | null, newValue: number) => {
     setSelectedTab(newValue);
@@ -45,12 +45,14 @@ export default function PartnerDetials() {
     );
 
   const navigator = useNavigate();
+
   useEffect(() => {
     GetSattistics();
     GetqrCall();
     MerchantEffect();
     TerminalEffect();
     TransactionEffect();
+    partners.globalDataFunc();
   }, [id]);
 
   return (
@@ -72,67 +74,67 @@ export default function PartnerDetials() {
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
                 <p className="text-md font-semibold">Name</p>
                 <p className="text-md font-semibold">
-                  {partners?.name || '-'}
+                  {partners?.response?.name || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
                 <p className="text-md font-semibold">Push url</p>
                 <p className="text-md font-semibold">
-                  {partners?.url || '-'}
+                  {partners?.response?.url || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
                 <p className="text-md font-semibold">Phone number</p>
                 <p className="text-md font-semibold">
-                  +{partners?.phone || '-'}
+                  +{partners?.response?.phone || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
                 <p className="text-md font-semibold">E-Mail</p>
                 <p className="text-md font-semibold">
-                  {partners?.email || '-'}
+                  {partners?.response?.email || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
                 <p className="text-md font-semibold">Status</p>
-                <Typography className={!partners?.active ? "bg-yellow-500 text-center text-white p-3 rounded-lg" : "bg-green-500 text-white text-center p-3 rounded-lg"}>
-                  {partners?.active ? "ACTIVE" : "INACTIVE"}
+                <Typography className={!partners?.response?.active ? "bg-yellow-500 text-center text-white p-3 rounded-lg" : "bg-green-500 text-white text-center p-3 rounded-lg"}>
+                  {partners?.response?.active === true ? "ACTIVE" : !partners?.response?.active === false ? "INACTIVE" : "-"}
                 </Typography>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
                 <p className="text-md font-semibold">Address</p>
                 <p className="text-md font-semibold">
-                  {partners?.address || '-'}
+                  {partners?.response?.address || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
                 <p className="text-md font-semibold">INN</p>
                 <p className="text-md font-semibold">
-                  {partners?.inn || '-'}
+                  {partners?.response?.inn || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
                 <p className="text-md font-semibold">Api-key</p>
                 <p className="text-[15px] font-semibold">
-                  {partners?.apiKey || '-'}
+                  {partners?.response?.apiKey || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
                 <p className="text-md font-semibold">Account</p>
                 <p className="text-md font-semibold">
-                  {partners?.account || '-'}
+                  {partners?.response?.account || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
                 <p className="text-md font-semibold">MFO</p>
                 <p className="text-md font-semibold">
-                  {partners?.mfo || '-'}
+                  {partners?.response?.mfo || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
                 <p className="text-md font-semibold">Service fee</p>
                 <p className="text-md font-semibold">
-                  {partners?.serviceFee || '0'} %
+                  {partners?.response?.serviceFee || '0'} %
                 </p>
               </div>
             </div>

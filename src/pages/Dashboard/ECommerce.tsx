@@ -3,19 +3,20 @@ import ChartThree from '../../components/Charts/ChartThree';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import { Table, TableHead, TableBody, TableRow, TableCell, TableContainer, Box, CircularProgress, Typography } from '@mui/material';
 import { useGlobalRequest } from '../../hooks/GlobalHook';
-import { ActionGet, statistic_dashboard_transactions, statistic_dashboard_transactions_diagram } from '../../hooks/url';
+import { ActionGet, statistic_dashboard_merchants, statistic_dashboard_transactions, statistic_dashboard_transactions_diagram } from '../../hooks/url';
 import { useTranslation } from 'react-i18next';
 
 const ECommerce: React.FC = () => {
   const { t } = useTranslation()
   const currentDate = new Date();
   const currentYear = String(currentDate.getFullYear());
-  const currentMonth = String(currentDate.getMonth() + 1).padStart(2, "0"); // Oyni 01 formatida olish
+  const currentMonth = String(currentDate.getMonth() + 1).padStart(2, "0");
 
-  const [year, setYear] = useState("");
-  const [month, setMonth] = useState("");
+  const [year, setYear] = useState<string | null>(null);
+  const [month, setMonth] = useState<string | null>(null);
 
   const getTransactionStatistic = useGlobalRequest(statistic_dashboard_transactions, "GET");
+  const getMerchantsStatistic = useGlobalRequest(statistic_dashboard_merchants, "GET");
   const getTransactionStatisticDiagram = useGlobalRequest(`${statistic_dashboard_transactions_diagram}?year=${year ? year : currentYear}&month=${month ? month : currentMonth}`, "GET");
   const actionGet = useGlobalRequest(
     `${ActionGet}?page=0&size=10`,
@@ -24,29 +25,32 @@ const ECommerce: React.FC = () => {
   useEffect(() => {
     getTransactionStatistic.globalDataFunc();
     actionGet.globalDataFunc();
+    getMerchantsStatistic.globalDataFunc();
   }, []);
 
   useEffect(() => {
     getTransactionStatisticDiagram.globalDataFunc();
-    
   }, [year, month]);
-  console.log(year, month);
 
   return (
     <>
       <Breadcrumb pageName={t("statistics")} />
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 ">
-        <div className="flex flex-col border rounded-xl bg-white shadow-2 p-6 gap-6 ">
-          <h3 className="font-medium text-black ">E-commerce Overview</h3>
-          <p className="text-3xl text-blue-600">0</p>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 ">
+        <div className="flex flex-col border rounded-xl bg-white shadow-2 p-6 gap-4 ">
+          <h3 className="font-medium text-black ">Active merchants</h3>
+          <p className="text-2xl text-blue-600">{getMerchantsStatistic.response?.activeMerchantCount || "0"}</p>
         </div>
-        <div className="flex flex-col border rounded-xl bg-white shadow-2 p-6 gap-6 ">
-          <h3 className="font-medium text-black ">E-commerce Overview</h3>
-          <p className="text-3xl text-blue-600">0</p>
+        <div className="flex flex-col border rounded-xl bg-white shadow-2 p-6 gap-4 ">
+          <h3 className="font-medium text-black ">Inactive merchants</h3>
+          <p className="text-2xl text-blue-600">{getMerchantsStatistic.response?.noActiveMerchantCount || "0"}</p>
         </div>
-        <div className="flex flex-col border rounded-xl bg-white shadow-2 p-6 gap-6 ">
-          <h3 className="font-medium text-black">E-commerce Overview</h3>
-          <p className="text-3xl text-blue-600">0</p>
+        <div className="flex flex-col border rounded-xl bg-white shadow-2 p-6 gap-4 ">
+          <h3 className="font-medium text-black">Active terminals</h3>
+          <p className="text-2xl text-blue-600">{getMerchantsStatistic.response?.activeTerminalCount || "0"}</p>
+        </div>
+        <div className="flex flex-col border rounded-xl bg-white shadow-2 p-6 gap-4 ">
+          <h3 className="font-medium text-black">Inactive terminals</h3>
+          <p className="text-2xl text-blue-600">{getMerchantsStatistic.response?.noActiveTerminalCount || "0"}</p>
         </div>
       </div>
 
@@ -80,6 +84,9 @@ const ECommerce: React.FC = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className='py-2'>
+        <p className='text-2xl font-semibold text-black'>Last Actions on system</p>
       </div>
       <TableContainer>
 
