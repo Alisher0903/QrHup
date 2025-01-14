@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
     Box,
     Container,
@@ -25,6 +26,7 @@ import { datePicker } from '../../common/global-functions/date-sort';
 import toast from 'react-hot-toast';
 
 export default function Clarify() {
+    const { t } = useTranslation()
     const [merchantNameFilter, setMerchantNameFilter] = useState('');
     const [amountFilter, setAmountFilter] = useState('');
     const [statusFilter, setStatusFilter] = useState('');
@@ -98,7 +100,7 @@ export default function Clarify() {
 
     return (
         <Container>
-            <Breadcrumb pageName="Action" />
+            <Breadcrumb pageName={t("Action")} />
             <Box sx={{ bgcolor: 'white', padding: 5 }}>
                 <Box sx={{ display: 'grid', flexDirection: 'column' }} gap={2}>
                     {/* Filters */}
@@ -108,7 +110,7 @@ export default function Clarify() {
                             type='text'
                             size='large'
                             width={30}
-                            placeholder="Search with merchant's Name"
+                            placeholder={t("SearchName")}
                             value={merchantNameFilter}
                             onChange={(e) => {
                                 setMerchantNameFilter(e.target.value);
@@ -116,7 +118,7 @@ export default function Clarify() {
                         />
                         <Input
                             type='text'
-                            placeholder="Search with Amount"
+                            placeholder={t("SearchAmount")}
                             value={amountFilter}
                             onChange={(e) => {
                                 setAmountFilter(e.target.value);
@@ -129,16 +131,16 @@ export default function Clarify() {
                         <Select
                             size="large"
                             allowClear
-                            placeholder="Status"
+                            placeholder={t("Status")}
                             onChange={(e) => setStatusFilter(e)}
                             options={[
                                 {
-                                    value: 'PARTIAL',
-                                    label: 'PARTIAL',
+                                    value: t("partial"),
+                                    label: t("partial"),
                                 },
                                 {
-                                    value: 'CLARIFICATION',
-                                    label: 'CLARIFICATION',
+                                    value: t("Clarification"),
+                                    label: t("Clarification"),
                                 }
                             ]}
                         />
@@ -158,7 +160,7 @@ export default function Clarify() {
                     </Box>
                 ) : error ? (
                     <Typography color="error" textAlign="center">
-                        Failed to load data
+                        {t("LoadData")}
                     </Typography>
                 ) : (
                     <TableContainer>
@@ -169,21 +171,21 @@ export default function Clarify() {
                         >
                             <TableHead>
                                 <TableRow className="bg-gray-300">
-                                    <TableCell className="min-w-[100px] ">No</TableCell>
+                                    <TableCell className="min-w-[100px] ">{t("No")}</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">
-                                        Merchant's Name
+                                        {t("Name")}
                                     </TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">
-                                        Amount
+                                        {t("Amount")}
                                     </TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">
-                                        Created time
+                                        {t("CreatedTime")}
                                     </TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">
-                                        Status
+                                        {t("Status")}
                                     </TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="center">
-                                        Action
+                                        {t("Action")}
                                     </TableCell>
                                 </TableRow>
                             </TableHead>

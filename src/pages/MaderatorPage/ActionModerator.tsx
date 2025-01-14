@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
     Box,
     Container,
@@ -25,6 +26,7 @@ import { Input, Pagination } from 'antd';
 import { FaEye } from 'react-icons/fa';
 
 export default function ActionModerator() {
+    const { t } = useTranslation()
     const [nameFilter, setNameFilter] = useState('');
     const [table, setTable] = useState('');
     const [tableName, setTableName] = useState('');
@@ -78,7 +80,7 @@ export default function ActionModerator() {
 
     return (
         <Container>
-            <Breadcrumb pageName="Action" />
+            <Breadcrumb pageName={t("Action")} />
             <Box sx={{ bgcolor: 'white', padding: 5 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }} gap={2}>
                     {/* Filters */}
@@ -93,19 +95,19 @@ export default function ActionModerator() {
                         <Input
                             type="text"
                             size='large'
-                            placeholder="Search with name"
+                            placeholder={t("NameSearch")}
                             onChange={(e) => setNameFilter(e.target.value)}
                         />
                         <Input
                             type="text"
                             size='large'
-                            placeholder="Search with tabled-ID..."
+                            placeholder={t("SearchID")}
                             onChange={(e) => setTable(e.target.value)}
                         />
                         <Input
                             type="text"
                             size='large'
-                            placeholder="Search with Table's Name..."
+                            placeholder={t("SearchTable")}
                             onChange={(e: any) => setTableName(e.target.value)}
                         />
                     </Box>
@@ -124,7 +126,7 @@ export default function ActionModerator() {
                     </Box>
                 ) : error ? (
                     <Typography color="error" textAlign="center">
-                        Failed to load data
+                        {t("LoadData")}
                     </Typography>
                 ) : (
                     <TableContainer>
@@ -135,24 +137,24 @@ export default function ActionModerator() {
                         >
                             <TableHead>
                                 <TableRow className="bg-gray-300">
-                                    <TableCell>No</TableCell>
+                                    <TableCell>{t("No")}</TableCell>
                                     <TableCell className="min-w-[200px]" align="left">
-                                        User name
+                                        {t("UserName")}
                                     </TableCell>
                                     <TableCell className="min-w-[200px]" align="left">
-                                        Action
+                                       {t("Action")}
                                     </TableCell>
                                     <TableCell className="min-w-[200px]" align="left">
-                                        Create time
+                                        {t("Createtime")}
                                     </TableCell>
                                     <TableCell className="min-w-[200px]" align="left">
-                                        Table
+                                        {t("Table")}
                                     </TableCell>
                                     <TableCell className="min-w-[200px]" align="left">
-                                        Object id
+                                        {t("ObjectID")}
                                     </TableCell>
                                     <TableCell className="min-w-[150px]" align="left">
-                                        See more
+                                        {t("SeeMore")}
                                     </TableCell>
                                 </TableRow>
                             </TableHead>
