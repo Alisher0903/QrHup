@@ -456,7 +456,7 @@ export default function ActionModerator() {
                                 </TableRow>
                                 <TableRow>
                                     <TableCell>Confirmed Date</TableCell>
-                                    <TableCell>{getOneRes?.terminal || '-'}</TableCell>
+                                    <TableCell>{getOneRes?.createAt ? new Date(getOneRes.createAt).toLocaleDateString() : '-'}</TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell>Action</TableCell>
