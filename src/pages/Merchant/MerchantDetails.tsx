@@ -252,7 +252,7 @@ export default function MerchantDetials() {
                                             </TableCell>
                                             <TableCell align="left">{partner.type || '-'}</TableCell>
                                             <TableCell align="left">
-                                                {partner.createdAt || '-'}
+                                                {partner.createdAt ? new Date(partner.createdAt).toLocaleDateString() : '-'}
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.expire || '-'}
