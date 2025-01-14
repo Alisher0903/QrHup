@@ -23,7 +23,7 @@ import { MdEdit } from "react-icons/md";
 import { DeleteUser, PartnerGet, PartnerCreate, PartnerEdit } from "../../hooks/url";
 import { toast } from "react-hot-toast";
 import { Input, Pagination } from "antd";
-import { FaEye } from "react-icons/fa";
+import { FaEye, FaKey } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { DatePicker, Select } from "antd";
 import { datePicker } from "../../common/global-functions/date-sort";
@@ -333,7 +333,7 @@ export default function Partners() {
                                     <TableCell className="min-w-[200px] border-l" align="left">Email</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">INN</TableCell>
                                     <TableCell className="min-w-[160px] border-l" align="left">Status</TableCell>
-                                    <TableCell className="min-w-[200px]" align="center">Action</TableCell>
+                                    <TableCell className="min-w-[250px]" align="center">Action</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -372,6 +372,15 @@ export default function Partners() {
                                                     }}
                                                 >
                                                     <FaEye size={25} color="black" />
+                                                </Button>
+                                                <Button
+                                                    onClick={() => {
+                                                        navigator(`/partnersDetials/${partner.id}`);
+                                                        setPartners(partner);
+                                                    }}
+                                                >
+                                                    
+                                                    <FaKey size={25} color="black" />
                                                 </Button>
                                                 <Button
                                                     onClick={() => {

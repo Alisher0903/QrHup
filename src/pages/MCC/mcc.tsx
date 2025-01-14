@@ -217,7 +217,7 @@ export default function Mcc() {
                                                 {user.code || "-"}
                                             </TableCell>
                                             <TableCell align="left">
-                                                {user.createdAt || "-"}
+                                                {new Date(user.createdAt).toLocaleDateString() || "-"}
                                             </TableCell>
                                             <TableCell align="center">
                                                 <Button

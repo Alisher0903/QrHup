@@ -8,6 +8,7 @@ import './css/satoshi.css';
 import 'jsvectormap/dist/css/jsvectormap.css';
 import 'flatpickr/dist/flatpickr.min.css';
 import { Toaster } from 'react-hot-toast';
+import "./i18n";
 
 const queryClient = new QueryClient();
 

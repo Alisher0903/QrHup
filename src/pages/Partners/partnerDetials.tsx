@@ -112,6 +112,12 @@ export default function PartnerDetials() {
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
+                <p className="text-md font-semibold">Api-key</p>
+                <p className="text-[15px] font-semibold">
+                  {partners?.apiKey || '-'}
+                </p>
+              </div>
+              <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
                 <p className="text-md font-semibold">Account</p>
                 <p className="text-md font-semibold">
                   {partners?.account || '-'}
@@ -150,6 +156,12 @@ export default function PartnerDetials() {
                 {statisticsGet?.qrCount || '-'}
               </p>
             </div>
+            {/* <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
+              <p className="text-md font-semibold">Api-Key</p>
+              <p className="text-md font-semibold">
+                {statisticsGet?.apiKey || '-'}
+              </p>
+            </div> */}
             <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
               <p className="text-md font-semibold">Transactions:</p>
               <div className="text-md font-semibold flex flex-col items-start justify-start">
