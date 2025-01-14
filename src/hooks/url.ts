@@ -66,6 +66,7 @@ export const ModeratorChangeStatus: string = `${baseUrl}api/transaction/moderato
 
 // statistic 
 export const statistic_dashboard_transactions: string = `${baseUrl}api/transaction/dashboard/statistic`
+export const statistic_dashboard_merchants: string = `${baseUrl}api/merchant/is-active/merchant-or-terminal`
 export const statistic_dashboard_transactions_diagram: string = `${baseUrl}api/transaction/dashboard/statistic/diagram`
 
 
