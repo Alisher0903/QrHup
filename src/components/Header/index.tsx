@@ -4,17 +4,23 @@ import LogoIcon from '../../../public/Logo.png';
 import { useGlobalRequest } from '../../hooks/GlobalHook';
 import { getMe } from '../../hooks/url';
 import { useEffect } from 'react';
+import { Select } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
-  const role = sessionStorage.getItem('role');
+  const role = sessionStorage.getItem('role'); 
+   const { t, i18n } = useTranslation();
+
   if (!role) {
-    return null; // Redirect to login or show a message if no role is found
+    return null; 
   }
   const userMe = useGlobalRequest(getMe, 'GET');
-
+  const changeLanguage = (lng: any) => {
+    i18n.changeLanguage(lng);
+  };
   useEffect(() => {
     userMe.globalDataFunc();
   }, [])
@@ -68,7 +74,26 @@ const Header = (props: {
         </div>
 
         <div className="flex items-center gap-3 2xsm:gap-7">
-          <DropdownUser data={userMe.response}/>
+          <Select defaultValue={'uz'}
+          className='w-24'
+            onChange={(value) => {
+              changeLanguage(value);
+            }} options={[
+              {
+                // icon: <Uzb>,
+                value: 'uz',
+                label: 'UZBEK',
+              },
+              {
+                value: 'en',
+                label: 'ENGLISH',
+              },
+              {
+                value: 'ru',
+                label: 'RUSSIAN',
+              }
+            ]} />
+          <DropdownUser data={userMe.response} />
         </div>
       </div>
     </header>

@@ -1,4 +1,6 @@
 {
     "welcome": "Assalomu alaykum!",
-    "description": "Bu Vite va React yordamida yaratilgan ko'p tilli loyiha."
+    "description": "Bu Vite va React yordamida yaratilgan ko'p tilli loyiha.",
+    "statistics":  "Statistika"
+
 }
