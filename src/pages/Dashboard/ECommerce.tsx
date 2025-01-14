@@ -10,11 +10,11 @@ const ECommerce: React.FC = () => {
   const currentYear = String(currentDate.getFullYear());
   const currentMonth = String(currentDate.getMonth() + 1).padStart(2, "0"); // Oyni 01 formatida olish
 
-  const [year, setYear] = useState(currentYear);
-  const [month, setMonth] = useState(currentMonth);
+  const [year, setYear] = useState("");
+  const [month, setMonth] = useState("");
 
   const getTransactionStatistic = useGlobalRequest(statistic_dashboard_transactions, "GET");
-  const getTransactionStatisticDiagram = useGlobalRequest(`${statistic_dashboard_transactions_diagram}?year=${year}&month=${month}`, "GET");
+  const getTransactionStatisticDiagram = useGlobalRequest(`${statistic_dashboard_transactions_diagram}?year=${year ? year : currentYear}&month=${month ? month : currentMonth}`, "GET");
   const actionGet = useGlobalRequest(
     `${ActionGet}?page=0&size=10`,
     "GET"
@@ -26,16 +26,9 @@ const ECommerce: React.FC = () => {
 
   useEffect(() => {
     getTransactionStatisticDiagram.globalDataFunc();
+    
   }, [year, month]);
-
-  const rows = [
-    { name: 'Jeremy Neigh', punchIn: '9/23/16', punchOut: '5:00 PM', type: 'Admin', totalHours: 8, status: 'Active', action: 'Edit' },
-    { name: 'Annette Black', punchIn: '7/27/13', punchOut: '4:00 PM', type: 'User', totalHours: 7, status: 'Inactive', action: 'Edit' },
-    { name: 'Theresa Webb', punchIn: '11/7/16', punchOut: '6:00 PM', type: 'Manager', totalHours: 9, status: 'Active', action: 'Edit' },
-    { name: 'Kathryn Murphy', punchIn: '11/7/16', punchOut: '3:00 PM', type: 'User', totalHours: 6, status: 'Active', action: 'Edit' },
-    { name: 'Courtney Henry', punchIn: '11/7/16', punchOut: '5:00 PM', type: 'Admin', totalHours: 8, status: 'Inactive', action: 'Edit' },
-    { name: 'Jane Cooper', punchIn: '11/7/16', punchOut: '4:30 PM', type: 'Manager', totalHours: 8, status: 'Active', action: 'Edit' },
-  ];
+  console.log(year, month);
 
   return (
     <>
