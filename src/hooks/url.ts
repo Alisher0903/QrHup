@@ -15,6 +15,7 @@ export const LeaveGet: string = `${baseUrl}`;
 // Partners Api
 
 export const PartnerGet: string = `${baseUrl}api/partner/page`;
+export const PartnerSendKey: string = `${baseUrl}api/partner/generated`;
 export const PartnerCreate: string = `${baseUrl}api/partner/create`;
 export const PartnerDetialsUlr: string = `${baseUrl}api/qrcode/partner?`;
 export const PartnerEdit: string = `${baseUrl}api/partner/update?`;

@@ -87,7 +87,7 @@ export default function Merchant() {
                             }
                         />
                     </div>
-                    <div className="w-[25%]">
+                    {/* <div className="w-[25%]">
                         <Input
                             allowClear
                             size="large"
@@ -96,7 +96,8 @@ export default function Merchant() {
                                 (e) => setEmailFilter(e.target.value)
                             }
                         />
-                    </div>
+                    </div> */}
+
                     <div className="w-[25%]">
                         <Input
                             allowClear
@@ -107,8 +108,6 @@ export default function Merchant() {
                             }
                         />
                     </div>
-                </div>
-                <div className="flex flex-row gap-5 mb-5">
                     <div className="w-[25%]">
                         <RangePicker
                             size="large"
@@ -116,6 +115,9 @@ export default function Merchant() {
                             onChange={(dates) => setDate(dates)}
                         />
                     </div>
+                </div>
+                <div className="flex flex-row gap-5 mb-5">
+
                     <div className="w-[25%]">
                         <Input
                             allowClear

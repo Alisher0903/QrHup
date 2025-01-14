@@ -126,7 +126,7 @@ export default function QrDetial() {
                                 <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
                                     <p className="text-md font-semibold">Created time</p>
                                     <p className="text-md font-semibold">
-                                        {qrGetOne.response?.createDate || '-'}
+                                        {qrGetOne.response?.createdAt || '-'}
                                     </p>
                                 </div>
 

@@ -232,7 +232,7 @@ export default function PartnerDetials() {
                       </TableCell>
                       <TableCell align="left">{partner.type || '-'}</TableCell>
                       <TableCell align="left">
-                        {partner.createDate || '-'}
+                        {partner.createdAt || '-'}
                       </TableCell>
                       <TableCell align="left">
                         {partner.expire || '-'}

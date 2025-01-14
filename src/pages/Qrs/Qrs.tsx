@@ -59,7 +59,7 @@ export default function Partners() {
 
     useEffect(() => {
         globalDataFunc();
-    }, [page, size, nameFilter, numFilter, emailFilter, date, inn, type, amount,secondDate]);
+    }, [page, size, nameFilter, numFilter, emailFilter, date, inn, type, amount, secondDate]);
 
     return (
         <Container>
@@ -75,7 +75,7 @@ export default function Partners() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Search with username"
+                            placeholder="Search with Merchant's name"
                             onChange={
                                 (e) => setNameFilter(e.target.value)
                             }
@@ -92,37 +92,19 @@ export default function Partners() {
                         />
                     </div>
                     <div className="w-[25%] ">
-                        <Input
-                            allowClear
-                            size="large"
-                            placeholder="Search with email"
-                            onChange={
-                                (e) => setEmailFilter(e.target.value)
-                            }
-                        />
-                    </div>
-                    <div className="w-[25%] ">
-                        <Input
-                            allowClear
-                            size="large"
-                            placeholder="Search with INN"
-                            onChange={
-                                (e) => setInn(e.target.value)
-                            }
-                        />
-                    </div>
-                </div>
-                <div className="flex flex-row gap-5 mb-5">
-                    <div className="w-[25%] ">
                         <RangePicker
                             size="large"
                             allowClear
                             onChange={(dates) => setDate(dates)}
                         />
                     </div>
+                </div>
+                <div className="flex flex-row gap-5 mb-5">
+
                     <div className="w-[25%]">
                         <DatePicker
                             size="large"
+                            placeholder="Select Expire-date"
                             className="w-full"
                             allowClear
                             onChange={(dates) => {
@@ -202,12 +184,12 @@ export default function Partners() {
                     </div>
                     <div className="w-[25%] ">
                         <Select
-                             size="large"
-                             allowClear
-                             className="w-full"
-                             placeholder="Type"
-                             onChange={(value) => setType(value)}
-                             options={[
+                            size="large"
+                            allowClear
+                            className="w-full"
+                            placeholder="Type"
+                            onChange={(value) => setType(value)}
+                            options={[
                                 {
                                     value: 'STATIC',
                                     label: 'STATIC',
@@ -216,7 +198,7 @@ export default function Partners() {
                                     value: 'DYNAMIC',
                                     label: 'DYNAMIC',
                                 },
-                             ]}
+                            ]}
                         />
                     </div>
                 </div>
@@ -271,7 +253,7 @@ export default function Partners() {
                                                 {partner.type || "-"}
                                             </TableCell>
                                             <TableCell align="left">
-                                                {partner.createDate || "-"}
+                                                {new Date(partner?.createdAt).toLocaleDateString() || '-'}
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.expire || "-"}

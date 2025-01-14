@@ -93,15 +93,27 @@ export default function MerchantDetials() {
                     <div className="w-full bg-white shadow-xl rounded-xl p-6">
                         <div className="flex flex-col gap-4">
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                                <p className="text-sm font-semibold">Name</p>
+                                <p className="text-sm font-semibold">Merchant's name</p>
                                 <p className="text-sm font-semibold">
                                     {GettingDatass?.name || '-'}
+                                </p>
+                            </div>
+                            <div className="flex justify-between pb-2 border-b-2 border-gray-500">
+                                <p className="text-sm font-semibold">Partner's name</p>
+                                <p className="text-sm font-semibold">
+                                    {GettingDatass?.partnerName || '-'}
                                 </p>
                             </div>
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
                                 <p className="text-sm font-semibold">Ext-ID</p>
                                 <p className="text-sm font-semibold">
                                     {GettingDatass?.extId || '-'}
+                                </p>
+                            </div>
+                            <div className="flex justify-between pb-2 border-b-2 border-gray-500">
+                                <p className="text-sm font-semibold">INN</p>
+                                <p className="text-sm font-semibold">
+                                    {GettingDatass?.inn || '-'}
                                 </p>
                             </div>
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
@@ -119,13 +131,19 @@ export default function MerchantDetials() {
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
                                 <p className="text-sm font-semibold">Account</p>
                                 <p className="text-sm font-semibold">
-                                    {GettingDatass?.account|| '-'}
+                                    {GettingDatass?.account || '-'}
                                 </p>
                             </div>
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                                <p className="text-sm font-semibold">Active</p>
+                                <p className="text-sm font-semibold">STATUS</p>
                                 <p className="text-sm font-semibold uppercase">
-                                    {GettingDatass?.active ? 'inactive' : 'active'}
+                                    {GettingDatass?.active ? 'NOT ACTIVE' : 'active'}
+                                </p>
+                            </div>
+                            <div className="flex justify-between pb-2 border-b-2 border-gray-500">
+                                <p className="text-sm font-semibold">STATUS</p>
+                                <p className="text-sm font-semibold uppercase">
+                                    {new Date(GettingDatass?.createdAt).toLocaleDateString() || '-'}
                                 </p>
                             </div>
                             {/* <div className="flex justify-between pb-2 border-b-2 border-gray-500">
@@ -234,7 +252,7 @@ export default function MerchantDetials() {
                                             </TableCell>
                                             <TableCell align="left">{partner.type || '-'}</TableCell>
                                             <TableCell align="left">
-                                                {partner.createDate || '-'}
+                                                {partner.createdAt || '-'}
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.expire || '-'}

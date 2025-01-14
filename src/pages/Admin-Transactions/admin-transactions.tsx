@@ -43,7 +43,8 @@ export default function AdminTransactions() {
         merchantName: "",
         amount: 0,
         partnerName: "",
-        status: ""
+        status: "",
+        transId: '',
     })
     const [date, setDate] = useState<any>([])
 
@@ -53,6 +54,7 @@ export default function AdminTransactions() {
             filters.partnerName ? `partnerName=${filters.partnerName}` : '',
             filters.status ? `status=${filters.status}` : '',
             filters.amount ? `amount=${filters.amount}` : '',
+            filters.transId ? `transId=${filters.transId}` : '',
             datePicker(0, date) ? `from=${datePicker(0, date)}` : '',
             datePicker(1, date) ? `to=${datePicker(1, date)}` : '',
         ].filter(Boolean).join('&');
@@ -67,7 +69,7 @@ export default function AdminTransactions() {
 
     useEffect(() => {
         globalDataFunc();
-    }, [page, size, filters.merchantName, filters.partnerName, filters.status, filters.amount, date]);
+    }, [page, size, filters.merchantName, filters.partnerName, filters.status, filters.amount, date, filters.transId,]);
 
     const toggleModal = () => {
         setIsOpen(!isOpen);
@@ -84,6 +86,14 @@ export default function AdminTransactions() {
                 </Typography>
                 <div>
                     <div className="flex gap-4 mb-5">
+                        <div className="w-[25%]">
+                            <Input
+                                allowClear
+                                size="large"
+                                placeholder="Transaction's Id"
+                                onChange={(e) => setFilters({ ...filters, transId: e.target.value })}
+                            />
+                        </div>
                         <div className="w-[25%]">
                             <Input
                                 allowClear

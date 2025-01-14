@@ -20,7 +20,7 @@ import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
 import { useGlobalRequest } from "../../hooks/GlobalHook";
 import { useState, useEffect } from "react";
 import { MdEdit } from "react-icons/md";
-import { DeleteUser, PartnerGet, PartnerCreate, PartnerEdit } from "../../hooks/url";
+import { DeleteUser, PartnerGet, PartnerCreate, PartnerEdit, PartnerSendKey } from "../../hooks/url";
 import { toast } from "react-hot-toast";
 import { Input, Pagination } from "antd";
 import { FaEye, FaKey } from "react-icons/fa";
@@ -35,6 +35,7 @@ export default function Partners() {
     const [openAddModal, setOpenAddModal] = useState(false);
     const [openEditModal, setOpenEditModal] = useState(false);
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
+    const [openSendKeyMOdal, setOpenSendKeyMOdal] = useState(false);
 
     // Filter states
     const [nameFilter, setNameFilter] = useState('');
@@ -117,11 +118,27 @@ export default function Partners() {
         `${DeleteUser}id=${getId}`,
         "DELETE",
     );
+    const { globalDataFunc: SendCodeData, response: SendCodeRes, error: ErrorSendCode  } = useGlobalRequest(
+        `${PartnerSendKey}/${getId}`,
+        "GET",
+    );
 
     useEffect(() => {
         globalDataFunc();
     }, [page, size, nameFilter, numFilter, emailFilter, status, date, inn, mFO, account]);
 
+    const HandleSendCode = () => {
+        SendCodeData();
+    }
+    useEffect(() => {
+        if (SendCodeRes) {
+            toast.success(SendCodeRes)
+            handleSendClose();
+            
+        } else if (ErrorSendCode) {
+            toast.error(ErrorSendCode)
+        }
+    }, [SendCodeRes, ErrorSendCode]);
     // Modal Handlers
     const handleAddOpen = () => {
         setData({
@@ -144,6 +161,7 @@ export default function Partners() {
     const handleEditClose = () => setOpenEditModal(false);
 
     const handleDeleteClose = () => setOpenDeleteModal(false);
+    const handleSendClose = () => setOpenSendKeyMOdal(false);
 
     const handleAddSubmit = async () => {
         await postData();
@@ -158,6 +176,7 @@ export default function Partners() {
             toast.error(postError);
         }
     }, [postRes, postError]);
+    console.log('partnerId', getId);
 
 
 
@@ -375,11 +394,11 @@ export default function Partners() {
                                                 </Button>
                                                 <Button
                                                     onClick={() => {
-                                                        navigator(`/partnersDetials/${partner.id}`);
-                                                        setPartners(partner);
+                                                        setOpenSendKeyMOdal(true);
+                                                        setGetId(partner.id)
                                                     }}
                                                 >
-                                                    
+
                                                     <FaKey size={25} color="black" />
                                                 </Button>
                                                 <Button
@@ -482,7 +501,7 @@ export default function Partners() {
                         onChange={(e) => setData({ ...data, inn: e.target.value })}
                     />
                     <Input
-                    type="number"
+                        type="number"
                         allowClear
                         placeholder="Service Fee"
                         size="large"
@@ -514,7 +533,7 @@ export default function Partners() {
                             !data.phone ||
                             data.phone.length < 13 ||
                             !data.email ||
-                            !data.serviceFee  ||
+                            !data.serviceFee ||
                             !data.inn ||
                             !data.mfo ||
                             !data.account
@@ -589,7 +608,7 @@ export default function Partners() {
                         fullWidth
                         type="number"
                         value={data.serviceFee}
-                        onChange={(e) => setData({ ...data, serviceFee: e.target.value})}
+                        onChange={(e) => setData({ ...data, serviceFee: e.target.value })}
                     />
                     <TextField
                         margin="dense"
@@ -640,6 +659,24 @@ export default function Partners() {
                     <Button onClick={handleDeleteClose}>Cancel</Button>
                     <Button onClick={handleDeleteSubmit} color="error">
                         Delete
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+            {/* Key Modal */}
+            <Dialog open={openSendKeyMOdal} onClose={handleSendClose}>
+                <DialogTitle>Send Key</DialogTitle>
+                <DialogContent>
+                    <Typography >
+                        Are you sure you want to create new API-Key for this partner? (The previous API-Key will not be usable anymore.)
+                    </Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleSendClose} color="inherit">Cancel</Button>
+                    <Button onClick={() => {
+                        HandleSendCode();
+                    }} color="info">
+                        Send
                     </Button>
                 </DialogActions>
             </Dialog>
