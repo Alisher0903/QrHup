@@ -24,6 +24,7 @@ export const QrsPartner: string = `${baseUrl}api/qrcode/partner?`;
 export const MerchantPartner: string = `${baseUrl}api/merchant/partner/merchant?`;
 export const TerminalsPartner: string = `${baseUrl}api/terminal/partner?`;
 export const TransactionPartner: string = `${baseUrl}api/transaction/partner?`;
+export const partner_get_one: string = `${baseUrl}api/partner/one`;
 
 // Merchant Api
 export const MerchantGet: string = `${baseUrl}api/merchant/admin/page`;

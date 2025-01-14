@@ -111,13 +111,7 @@ export default function AdminTransactions() {
                                 onChange={(e) => setFilters({ ...filters, amount: +e.target.value })}
                             />
                         </div>
-                        <div className="w-[25%]">
-                            <RangePicker
-                                size="large"
-                                allowClear
-                                onChange={(dates) => setDate(dates)}
-                            />
-                        </div>
+
                         <div className="w-[25%]">
                             <Input
                                 allowClear
@@ -127,24 +121,35 @@ export default function AdminTransactions() {
                             />
                         </div>
                     </div>
-                    <div className="w-[23.7%] mb-5">
-                        <Select
-                            size="large"
-                            allowClear
-                            className="w-full"
-                            placeholder="Status"
-                            onChange={(value) => setFilters({ ...filters, status: value })}
-                            options={[
-                                {
-                                    value: 'CANCELED',
-                                    label: 'Canceled',
-                                },
-                                {
-                                    value: 'COMPLETED',
-                                    label: 'Completed',
-                                }
-                            ]}
-                        />
+                    <div className="flex gap-4 mb-5">
+                        <div className="w-[25%]">
+                            <RangePicker
+                                size="large"
+                                allowClear
+                                onChange={(dates) => setDate(dates)}
+                            />
+                        </div>
+                        <div className="w-[25%] mb-5">
+                            <Select
+                                size="large"
+                                allowClear
+                                className="w-full"
+                                placeholder="Status"
+                                onChange={(value) => setFilters({ ...filters, status: value })}
+                                options={[
+                                    {
+                                        value: 'CANCELED',
+                                        label: 'Canceled',
+                                    },
+                                    {
+                                        value: 'COMPLETED',
+                                        label: 'Completed',
+                                    }
+                                ]}
+                            />
+                        </div>
+                        <div className="w-[25%]"></div>
+                        <div className="w-[25%]"></div>
                     </div>
                 </div>
                 {loading ? (
