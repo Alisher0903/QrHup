@@ -1,5 +1,28 @@
 {
     "welcome": "Welcome!",
     "description": "This is a multilingual project created using Vite and React.",
-    "statistics":  "Statistics"
+    "statistics":  "Statistics",
+    "SearchName":"Search with merchant's Name",
+    "SearchAmount":"Search with Amount",
+    "Status":"Status",
+    "partial":"PARTIAL",
+    "Clarification":"CLARIFICATION",
+    "LoadData":"Failed to load data",
+    "No":"No",
+    "Name":"Merchant's Name",
+    "Amount":"Amount",
+    "CreatedTime":"Created time",
+    "Action":"Action",
+    "NameSearch":"Search with name",
+    "SearchID":"Search with tabled-ID...",
+    "SearchTable":"Search with Table's Name...",
+    "UserName":"UserName",
+    "Createtime":"Create time",
+    "Table":"Table",
+    "ObjectID":"Object id",
+    "SeeMore":"See more",
+    "":"",
+    "":"",
+    "":""
+    
 }

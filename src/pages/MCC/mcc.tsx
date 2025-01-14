@@ -210,16 +210,16 @@ export default function Mcc() {
                                     (user: any, index: number) => (
                                         <TableRow key={user.id || index}>
                                             <TableCell>{(page * 10 + index + 1)}</TableCell>
-                                            <TableCell align="left">
+                                            <TableCell className="min-w-[200px]" align="left">
                                                 {user.name || "-"}
                                             </TableCell>
-                                            <TableCell align="left">
+                                            <TableCell className="min-w-[200px]" align="left">
                                                 {user.code || "-"}
                                             </TableCell>
-                                            <TableCell align="left">
+                                            <TableCell className="min-w-[200px]" align="left">
                                                 {new Date(user.createdAt).toLocaleDateString() || "-"}
                                             </TableCell>
-                                            <TableCell align="center">
+                                            <TableCell className="min-w-[200px]" align="center">
                                                 <Button
                                                     onClick={() => {
                                                         setGetId(user.id);

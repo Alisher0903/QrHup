@@ -1,6 +1,29 @@
 {
     "welcome": "Assalomu alaykum!",
     "description": "Bu Vite va React yordamida yaratilgan ko'p tilli loyiha.",
-    "statistics":  "Statistika"
+    "statistics":  "Statistika",
+    "SearchName":"Savdogar nomi bilan qidiring",
+    "SearchAmount":"Miqdor bilan qidirish",
+    "Status":"Status",
+    "partial":"QISMAN",
+    "Clarification":"TANGILASH",
+    "LoadData":"Maʼlumotlarni yuklab boʻlmadi",
+    "No":"Yo'q",
+    "Name":"Savdogarning ismi",
+    "Amount":"Miqdori",
+    "CreatedTime":"Created time",
+    "Action":"Harakat",
+    "NameSearch":"Ism bilan qidirish",
+    "SearchID":"Jadvalli ID bilan qidirish...",
+    "SearchTable":"Jadval nomi bilan qidirish...",
+    "UserName":"Foydalanuvchi nomi",
+    "Createtime":"Vaqt yarating",
+    "Table":"Jadval",
+    "ObjectID":"Ob'ekt identifikatori",
+    "SeeMore":"Batafsil",
+    "":"",
+    "":"",
+    "":""
+    
 
 }

@@ -173,6 +173,7 @@ export default function AdminTransactions() {
                                 <TableRow className="bg-gray-300">
                                     <TableCell>No</TableCell>
                                     <TableCell className="min-w-[250px] border-l" align="left">Partner</TableCell>
+                                    <TableCell className="min-w-[250px] border-l" align="left">Transaction's Id</TableCell>
                                     <TableCell className="min-w-[250px] border-l" align="left">Merchant</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">Amount</TableCell>
                                     <TableCell className="min-w-[150px] border-l" align="left">Currency</TableCell>
@@ -191,6 +192,9 @@ export default function AdminTransactions() {
                                             <TableCell>{(page * 10 + index + 1)}</TableCell>
                                             <TableCell align="left">
                                                 {partner.partnerName || "-"}
+                                            </TableCell>
+                                            <TableCell align="left">
+                                                {partner.id || "-"}
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.merchantName || "-"}
