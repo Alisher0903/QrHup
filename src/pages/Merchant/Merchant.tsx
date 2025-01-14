@@ -157,6 +157,7 @@ export default function Merchant() {
                             ]}
                         />
                     </div>
+                    <div className="w-[25%]"></div>
                 </div>
                 {loading ? (
                     <Box
