@@ -280,6 +280,7 @@ export default function Partners() {
                         <RangePicker
                             size="large"
                             allowClear
+                            placeholder={[t("StartDate"), t("EndDate")]}
                             onChange={(dates) => setDate(dates)}
                         />
                     </div>

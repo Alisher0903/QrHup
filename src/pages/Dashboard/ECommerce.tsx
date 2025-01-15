@@ -37,19 +37,19 @@ const ECommerce: React.FC = () => {
       <Breadcrumb pageName={t("statistics")} />
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 ">
         <div className="flex flex-col border rounded-xl bg-white shadow-2 p-6 gap-4 ">
-          <h3 className="font-medium text-black ">Active merchants</h3>
+          <h3 className="font-medium text-black ">{t("ActiveNerchants")}</h3>
           <p className="text-2xl text-blue-600">{getMerchantsStatistic.response?.activeMerchantCount || "0"}</p>
         </div>
         <div className="flex flex-col border rounded-xl bg-white shadow-2 p-6 gap-4 ">
-          <h3 className="font-medium text-black ">Inactive merchants</h3>
+          <h3 className="font-medium text-black ">{t("InactiveMerchants")}</h3>
           <p className="text-2xl text-blue-600">{getMerchantsStatistic.response?.noActiveMerchantCount || "0"}</p>
         </div>
         <div className="flex flex-col border rounded-xl bg-white shadow-2 p-6 gap-4 ">
-          <h3 className="font-medium text-black">Active terminals</h3>
+          <h3 className="font-medium text-black">{t("Active terminals")}</h3>
           <p className="text-2xl text-blue-600">{getMerchantsStatistic.response?.activeTerminalCount || "0"}</p>
         </div>
         <div className="flex flex-col border rounded-xl bg-white shadow-2 p-6 gap-4 ">
-          <h3 className="font-medium text-black">Inactive terminals</h3>
+          <h3 className="font-medium text-black"> {t("InactiveTerminals")}</h3>
           <p className="text-2xl text-blue-600">{getMerchantsStatistic.response?.noActiveTerminalCount || "0"}</p>
         </div>
       </div>

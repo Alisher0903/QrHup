@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { LogIn } from '../../hooks/url';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 const SignIn: React.FC = () => {
+  const { t } = useTranslation()
   const [phoneNumber, setPhoneNumber] = useState<string | undefined>();
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -54,11 +56,11 @@ const SignIn: React.FC = () => {
   return (
     <div className='flex justify-center items-center h-screen'>
       <div className="rounded-sm border border-stroke bg-white shadow-default p-8 w-132.5">
-        <h2 className="text-2xl text-center font-bold mb-4">Sign In</h2>
+        <h2 className="text-2xl text-center font-bold mb-4">{t("SignIn")}</h2>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label htmlFor="phone" className="block font-medium mb-2">
-              Telefon raqami
+              {t("PhoneNumber")}
             </label>
             <input
               id="phone"
@@ -81,7 +83,7 @@ const SignIn: React.FC = () => {
           </div>
           <div className="mb-6">
             <label htmlFor="password" className="block font-medium mb-2">
-              Parol
+              {t("Password")}
             </label>
             <input
               id="password"
