@@ -24,9 +24,11 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import { MccGet, MccCreate, MccEdit, MccDelete } from "../../hooks/url";
 import { toast } from "react-hot-toast";
 import { Input, Pagination } from "antd";
+import { useTranslation } from "react-i18next";
 
 
 export default function Mcc() {
+    const { t } = useTranslation()
     const [openAddModal, setOpenAddModal] = useState(false);
     const [openEditModal, setOpenEditModal] = useState(false);
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -133,7 +135,7 @@ export default function Mcc() {
     return (
         <Container>
             <Breadcrumb
-                pageName="MCC"
+                pageName={t("mcc")}
                 child={
                     <Button
                         className="bg-gray-900 rounded-xl text-white"
@@ -145,7 +147,7 @@ export default function Mcc() {
                         }}
                         onClick={handleAddOpen}
                     >
-                        + Add MCC
+                        + {t("Add")} {t("mcc")}
                     </Button>
                 }
             />
@@ -155,7 +157,7 @@ export default function Mcc() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Search with name"
+                            placeholder={t("NameSearch")}
                             onChange={
                                 (e) => setNameFilter(e.target.value)
                             }
@@ -165,7 +167,7 @@ export default function Mcc() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Search with code"
+                            placeholder={t("SearchWithCode")}
                             onChange={
                                 (e) => setCode(e.target.value)
                             }
@@ -187,7 +189,7 @@ export default function Mcc() {
                     </Box>
                 ) : error ? (
                     <Typography color="error" textAlign="center">
-                        Failed to load data
+                        {t("LoadData")}
                     </Typography>
                 ) : (
                     <TableContainer>
@@ -199,10 +201,10 @@ export default function Mcc() {
                             <TableHead>
                                 <TableRow className="bg-gray-300">
                                     <TableCell className="border-l">No</TableCell>
-                                    <TableCell className="border-l" align="left">MCC name</TableCell>
-                                    <TableCell className="border-l" align="left">MCC code</TableCell>
-                                    <TableCell className="border-l" align="left">Create Time</TableCell>
-                                    <TableCell className="border-l" align="center">Action</TableCell>
+                                    <TableCell className="border-l" align="left">{t("mcc")}  {t("Namee")}</TableCell>
+                                    <TableCell className="border-l" align="left"> {t("mcc")}  {t("Code")}</TableCell>
+                                    <TableCell className="border-l" align="left"> {t("CreatedTime")}  </TableCell>
+                                    <TableCell className="border-l" align="center">{t("Action")}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -266,13 +268,13 @@ export default function Mcc() {
 
             {/* Add User Modal */}
             <Dialog open={openAddModal} onClose={handleAddClose}>
-                <DialogTitle>Add User</DialogTitle>
+                <DialogTitle>{t("AddUser")}</DialogTitle>
                 <DialogContent style={{ width: '600px' }}>
                     <div className="mb-3">
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Name"
+                            placeholder={t("Namee")}
                             onChange={
                                 (e) => setData({ ...data, name: e.target.value })
                             }
@@ -282,7 +284,7 @@ export default function Mcc() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Code"
+                            placeholder={t("Code")}
                             onChange={(e) => {
                                 const value = e.target.value;
                                 if (/^\d*$/.test(value) && value.length <= 4) {
@@ -293,25 +295,25 @@ export default function Mcc() {
                     </div>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleAddClose}>Cancel</Button>
+                    <Button onClick={handleAddClose}>{t("Cancel")}</Button>
                     <Button
                         disabled={!data.name || !data.code}
                         onClick={handleAddSubmit}
                     >
-                        Add
+                        {t("Add")}
                     </Button>
                 </DialogActions>
             </Dialog>
             {/* Edit User Modal */}
             <Dialog open={openEditModal} onClose={handleEditClose}>
-                <DialogTitle>Edit User</DialogTitle>
+                <DialogTitle>{t("EditUser")}</DialogTitle>
                 <DialogContent style={{ width: '600px' }}>
 
                     <div className="mb-3">
                         <Input
                             size="large"
                             value={data.name}
-                            placeholder="Name"
+                            placeholder={t("Namee")}
                             onChange={
                                 (e) => setData({ ...data, name: e.target.value })
                             }
@@ -321,7 +323,7 @@ export default function Mcc() {
                         <Input
                             size="large"
                             value={data.code}
-                            placeholder="Code"
+                            placeholder={"Code"}
                             onChange={(e) => {
                                 const value = e.target.value;
                                 if (/^\d*$/.test(value) && value.length <= 4) {
@@ -332,30 +334,30 @@ export default function Mcc() {
                     </div>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleEditClose}>Cancel</Button>
+                    <Button onClick={handleEditClose}>{t("Cancel")}</Button>
                     <Button
                         disabled={!data.name || !data.code}
                         onClick={() => {
                             HandleEdit();
                         }}
                     >
-                        Save
+                        {t("Save")}
                     </Button>
                 </DialogActions>
             </Dialog>
 
             {/* Delete User Modal */}
             <Dialog open={openDeleteModal} onClose={handleDeleteClose}>
-                <DialogTitle>Delete User</DialogTitle>
+                <DialogTitle>{t("DeleteUser")}</DialogTitle>
                 <DialogContent>
                     <Typography variant="h6">
-                        Are you sure you want to delete this user?
+                        {t("delete")}
                     </Typography>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleDeleteClose}>Cancel</Button>
+                    <Button onClick={handleDeleteClose}>{t("Cancel")}</Button>
                     <Button onClick={handleDeleteSubmit} color="error">
-                        Delete
+                        {t("Del")}
                     </Button>
                 </DialogActions>
             </Dialog>

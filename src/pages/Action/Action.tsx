@@ -15,8 +15,10 @@ import { useGlobalRequest } from "../../hooks/GlobalHook";
 import { useState, useEffect } from "react";
 import { ActionGet } from "../../hooks/url";
 import { Input, Pagination, Select } from "antd";
+import { useTranslation } from "react-i18next";
 
 export default function Action() {
+    const { t } = useTranslation()
     const [nameFilter, setNameFilter] = useState('');
     const [table, setTable] = useState('');
     const [tableName, setTableName] = useState('');
@@ -44,7 +46,7 @@ export default function Action() {
     return (
         <Container>
             <Breadcrumb
-                pageName="Action"
+                pageName={t("Action")}
             />
             <Box sx={{ bgcolor: "white", padding: 5 }}>
                 <Box sx={{ display: "flex", flexDirection: "column" }} gap={2}>
@@ -53,7 +55,7 @@ export default function Action() {
                             <Input
                                 allowClear
                                 size="large"
-                                placeholder="Search with name"
+                                placeholder={t("NameSearch")}
                                 onChange={
                                     (e) => setNameFilter(e.target.value)
                                 }
@@ -63,7 +65,7 @@ export default function Action() {
                             <Input
                                 allowClear
                                 size="large"
-                                placeholder="Search with tabled-ID.."
+                                placeholder={t("SearchID")}
                                 onChange={(e) => setTable(e.target.value)}
                             />
                         </div>
@@ -71,7 +73,7 @@ export default function Action() {
                             <Input
                                 allowClear
                                 size="large"
-                                placeholder="Search with Table's Name..."
+                                placeholder={t("SearchTable")}
                                 onChange={(e) => setTableName(e.target.value)}
                             />
                         </div>
@@ -80,16 +82,16 @@ export default function Action() {
                                 size="large"
                                 allowClear
                                 className="w-full"
-                                placeholder="Status"
+                                placeholder={t("Status")}
                                 onChange={(value) => setStatus(value)}
                                 options={[
                                     {
                                         value: 'PATRIAL',
-                                        label: 'Patrial',
+                                        label: t("Patrial"),
                                     },
                                     {
                                         value: 'CLARIFICATION',
-                                        label: 'Clarification',
+                                        label: t("Clarification"),
                                     }
                                 ]}
                             />
@@ -109,7 +111,7 @@ export default function Action() {
                     </Box>
                 ) : error ? (
                     <Typography color="error" textAlign="center">
-                        Failed to load data
+                        {t("LoadData")}
                     </Typography>
                 ) : (
                     <TableContainer>
@@ -121,11 +123,11 @@ export default function Action() {
                             <TableHead>
                                 <TableRow className="bg-gray-300">
                                     <TableCell className="border-l">No</TableCell>
-                                    <TableCell className="border-l min-w-[200px]" align="left">User name</TableCell>
-                                    <TableCell className="border-l min-w-[200px]" align="left">Action</TableCell>
-                                    <TableCell className="border-l min-w-[200px]" align="left">Create time</TableCell>
-                                    <TableCell className="border-l min-w-[200px]" align="left">Table</TableCell>
-                                    <TableCell className="border-l min-w-[200px]" align="left">Object id</TableCell>
+                                    <TableCell className="border-l min-w-[200px]" align="left">{t("UserName")}</TableCell>
+                                    <TableCell className="border-l min-w-[200px]" align="left">{t("Action")}</TableCell>
+                                    <TableCell className="border-l min-w-[200px]" align="left"> {t("CreatedTime")}</TableCell>
+                                    <TableCell className="border-l min-w-[200px]" align="left">{t("Table")}</TableCell>
+                                    <TableCell className="border-l min-w-[200px]" align="left">{t("ObjectID")}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>

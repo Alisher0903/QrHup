@@ -6,12 +6,12 @@
     "SearchAmount":"Miqdor bilan qidirish",
     "Status":"Status",
     "partial":"QISMAN",
-    "Clarification":"TANGILASH",
+    "Clarification":"Aniqlash",
     "LoadData":"Maʼlumotlarni yuklab boʻlmadi",
     "No":"Yo'q",
     "Name":"Savdogarning ismi",
     "Amount":"Miqdori",
-    "CreatedTime":"Created time",
+    "CreatedTime":"Yaratilgan vaqt",
     "Action":"Harakat",
     "NameSearch":"Ism bilan qidirish",
     "SearchID":"Jadvalli ID bilan qidirish...",
@@ -86,7 +86,7 @@
     "CancelPayment":"To'lovni bekor qilish",
     "ConfirmPayment":"Confirm payment",
     "AllUser":"Barcha foydalanuvchi",
-    "AddUser":"AddUser",
+    "AddUser":"Foydalanuvchi qo'shish",
     "Password":"Parol",
     "Add":"Qo'shish",
     "AllTransactions":"Hisob bo'yicha barcha jarayonlar",
@@ -123,5 +123,6 @@
     "Count":"Hisoblash",
     "SearchWithCode":"Kod bilan qidirish",
     "Code":"Kod",
-    "Symbol":"Belgi"
+    "Symbol":"Belgi",
+    "Purpose":"Maqsad"
 }
