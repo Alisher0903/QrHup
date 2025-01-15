@@ -20,10 +20,12 @@ import { useGlobalRequest } from "../../hooks/GlobalHook";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
 import { DatePicker, Select } from "antd";
 import { datePicker } from "../../common/global-functions/date-sort";
+import { useTranslation } from "react-i18next";
 const { RangePicker } = DatePicker;
 
 
 export default function Merchant() {
+    const { t } = useTranslation()
     const [nameFilter, setNameFilter] = useState('');
     const [numFilter, setNumFilter] = useState('');
     const [emailFilter, setEmailFilter] = useState('');
@@ -63,7 +65,7 @@ export default function Merchant() {
     return (
         <Container>
             <Breadcrumb
-                pageName="All Merchants"
+                pageName={t("AllMerchants")}
             />
             <Box sx={{ bgcolor: "white", padding: 5 }}>
                 <div className="flex flex-row gap-5 mb-5">
@@ -71,7 +73,7 @@ export default function Merchant() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Search with Mechants name..."
+                            placeholder={t("SearchWithMechants")}
                             onChange={
                                 (e) => setNameFilter(e.target.value)
                             }
@@ -81,7 +83,7 @@ export default function Merchant() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Search with Ext-ID"
+                            placeholder={t("SearchwithExtID")}
                             onChange={
                                 (e) => setNumFilter(e.target.value)
                             }
@@ -102,7 +104,7 @@ export default function Merchant() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Search with INN"
+                            placeholder={t("inn")}
                             onChange={
                                 (e) => setInn(e.target.value)
                             }
@@ -122,7 +124,7 @@ export default function Merchant() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Account"
+                            placeholder={t("Account")}
                             onChange={
                                 (e) => setAccount(+e.target.value)
                             }
@@ -132,7 +134,7 @@ export default function Merchant() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Mfo"
+                            placeholder={t("mfo")}
                             onChange={
                                 (e) => setMfo(+e.target.value)
                             }
@@ -143,16 +145,16 @@ export default function Merchant() {
                             size="large"
                             allowClear
                             className="w-full"
-                            placeholder="Status"
+                            placeholder={t("Status")}
                             onChange={(value) => setStatus(value)}
                             options={[
                                 {
                                     value: 'ACTIVE',
-                                    label: 'Active',
+                                    label: t("Active"),
                                 },
                                 {
                                     value: 'INACTIVE',
-                                    label: 'InActive',
+                                    label: t("InActive"),
                                 }
                             ]}
                         />
@@ -171,7 +173,7 @@ export default function Merchant() {
                     </Box>
                 ) : error ? (
                     <Typography color="error" textAlign="center">
-                        Failed to load data
+                        {t("LoadData")}
                     </Typography>
                 ) : (
                     <TableContainer>
@@ -183,14 +185,14 @@ export default function Merchant() {
                             <TableHead>
                                 <TableRow className="bg-gray-300">
                                     <TableCell>No</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">Merchants name</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">Account</TableCell>
-                                    <TableCell className="min-w-[150px] border-l" align="left">MFO</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">Created Time</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">INN</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("MerchantsName")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("Account")}</TableCell>
+                                    <TableCell className="min-w-[150px] border-l" align="left">{t("mfo")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("CreatedTime")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("inn")}</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">Ext-ID</TableCell>
-                                    <TableCell className="min-w-[160px] border-l" align="left">Status</TableCell>
-                                    <TableCell className="min-w-[200px]" align="center">Action</TableCell>
+                                    <TableCell className="min-w-[160px] border-l" align="left">{t("Status")}</TableCell>
+                                    <TableCell className="min-w-[200px]" align="center">{t("Action")}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -218,7 +220,7 @@ export default function Merchant() {
                                             </TableCell>
                                             <TableCell align="left">
                                                 <Typography className="bg-[#F0B732] uppercase text-center p-3 rounded-full ">
-                                                    {partner.active ? "inactive" : "active"}
+                                                    {partner.active ? t("inactive") : t("active")}
                                                 </Typography>
                                             </TableCell>
                                             <TableCell align="center">

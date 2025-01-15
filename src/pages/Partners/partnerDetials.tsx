@@ -6,7 +6,7 @@ import { Box, Button, Tab, Table, TableBody, TableCell, TableHead, TableRow, Tab
 import { IoChevronBackOutline } from 'react-icons/io5';
 import { Pagination } from 'antd';
 import { PartnersStore } from '../../hooks/Store/Partners/partnerStore';
-
+import { useTranslation } from 'react-i18next';
 export default function PartnerDetials() {
   // States
   const { id } = useParams<string>();
@@ -52,6 +52,7 @@ export default function PartnerDetials() {
     TerminalEffect();
     TransactionEffect();
   }, [id]);
+  const { t } = useTranslation()
 
   return (
     <div className="bg-gray-100  flex flex-col items-center">
@@ -70,67 +71,67 @@ export default function PartnerDetials() {
           <div className="w-full bg-white shadow-xl rounded-xl p-6">
             <div className="flex flex-col gap-4">
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                <p className="text-md font-semibold">Name</p>
+                <p className="text-md font-semibold">{t("Namee")}</p>
                 <p className="text-md font-semibold">
                   {partners?.name || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                <p className="text-md font-semibold">Push url</p>
+                <p className="text-md font-semibold">{t("PushUrl")}</p>
                 <p className="text-md font-semibold">
                   {partners?.url || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                <p className="text-md font-semibold">Phone number</p>
+                <p className="text-md font-semibold">{t("PhoneNumber")}</p>
                 <p className="text-md font-semibold">
                   +{partners?.phone || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                <p className="text-md font-semibold">E-Mail</p>
+                <p className="text-md font-semibold">{t("Email")}</p>
                 <p className="text-md font-semibold">
                   {partners?.email || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                <p className="text-md font-semibold">Status</p>
+                <p className="text-md font-semibold">{t("Status")}</p>
                 <Typography className={!partners?.active ? "bg-yellow-500 text-center text-white p-3 rounded-lg" : "bg-green-500 text-white text-center p-3 rounded-lg"}>
-                  {partners?.active ? "ACTIVE" : "INACTIVE"}
+                  {partners?.active ? t("katta") : t("inactive")}
                 </Typography>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                <p className="text-md font-semibold">Address</p>
+                <p className="text-md font-semibold">{t("Address")}</p>
                 <p className="text-md font-semibold">
                   {partners?.address || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                <p className="text-md font-semibold">INN</p>
+                <p className="text-md font-semibold">{t("innn")}</p>
                 <p className="text-md font-semibold">
                   {partners?.inn || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                <p className="text-md font-semibold">Api-key</p>
+                <p className="text-md font-semibold">{t("ApiKey")}</p>
                 <p className="text-[15px] font-semibold">
                   {partners?.apiKey || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                <p className="text-md font-semibold">Account</p>
+                <p className="text-md font-semibold">{t("Account")}</p>
                 <p className="text-md font-semibold">
                   {partners?.account || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                <p className="text-md font-semibold">MFO</p>
+                <p className="text-md font-semibold">{t("mfo")}</p>
                 <p className="text-md font-semibold">
                   {partners?.mfo || '-'}
                 </p>
               </div>
               <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                <p className="text-md font-semibold">Service fee</p>
+                <p className="text-md font-semibold">{t("ServiceFee")}</p>
                 <p className="text-md font-semibold">
                   {partners?.serviceFee || '0'} %
                 </p>
@@ -139,13 +140,13 @@ export default function PartnerDetials() {
           </div>
           <div className="w-[40%] bg-white shadow-md rounded-xl border-l-2 flex flex-col p-6 gap-5">
             <div className="flex justify-between pb-2  border-b-[1px] border-gray-500">
-              <p className="text-md font-semibold">Merchants:</p>
+              <p className="text-md font-semibold">{t("Merchants")}:</p>
               <p className="text-md font-semibold">
                 {statisticsGet?.merchantCount || '0'}
               </p>
             </div>
             <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-              <p className="text-md font-semibold">Terminals:</p>
+              <p className="text-md font-semibold">{t("Terminals")}:</p>
               <p className="text-md font-semibold">
                 {statisticsGet?.terminalCount || '0'}
               </p>
@@ -163,9 +164,9 @@ export default function PartnerDetials() {
               </p>
             </div> */}
             <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-              <p className="text-md font-semibold">Transactions:</p>
+              <p className="text-md font-semibold">{t("Transactions")}:</p>
               <div className="text-md font-semibold flex flex-col items-start justify-start">
-                <span>{statisticsGet?.transactionCount || '0'} (Success)</span>
+                <span>{statisticsGet?.transactionCount || '0'} ({t("Success")})</span>
                 <span>{statisticsGet?.transactionAmount || '0'} UZS</span>
               </div>
             </div>
@@ -200,22 +201,22 @@ export default function PartnerDetials() {
                   <TableRow className="bg-gray-300">
                     <TableCell>No</TableCell>
                     <TableCell className="min-w-[250px] border-l" align="left">
-                      Partner
+                      {t("Partner")}
                     </TableCell>
                     <TableCell className="min-w-[200px] border-l" align="left">
-                      Account
+                     {t("Account")}
                     </TableCell>
                     <TableCell className="min-w-[150px] border-l" align="left">
-                      Type
+                      {t("Type")}
                     </TableCell>
                     <TableCell className="min-w-[200px] border-l" align="left">
-                      Created time
+                     {t("CreatedTime")}
                     </TableCell>
                     <TableCell className="min-w-[200px] border-l" align="left">
-                      Expire time
+                      {t("ExpireTime")}
                     </TableCell>
                     <TableCell className="min-w-[160px] border-l" align="left">
-                      Status
+                     { t("Status")}
                     </TableCell>
                     {/* <TableCell className="min-w-[200px]" align="center">Action</TableCell> */}
                   </TableRow>
@@ -249,7 +250,7 @@ export default function PartnerDetials() {
                   )) : (
                     <TableCell colSpan={10}>
                       <Typography color="error" textAlign="center">
-                        Failed to load data
+                        {t("LoadData")}
                       </Typography>
                     </TableCell>
                   )}
@@ -279,16 +280,16 @@ export default function PartnerDetials() {
                   <TableRow className="bg-gray-300">
                     <TableCell>No</TableCell>
                     <TableCell className="min-w-[250px] border-l" align="left">
-                      Merchant
+                      {t("Merchant")}
                     </TableCell>
                     <TableCell className="min-w-[200px] border-l" align="left">
-                      Addres
+                      {t("Addres")}
                     </TableCell>
                     <TableCell className="min-w-[200px] border-l" align="left">
-                      Mfo
+                      {t("mfo")}
                     </TableCell>
                     <TableCell className="min-w-[200px] border-l" align="left">
-                      Account
+                      {t("Account")}
                     </TableCell>
                   </TableRow>
                 </TableHead>
@@ -308,7 +309,7 @@ export default function PartnerDetials() {
                   )) : (
                     <TableCell colSpan={10}>
                       <Typography color="error" textAlign="center">
-                        Failed to load data
+                        {t("LoadData")}
                       </Typography>
                     </TableCell>
                   )}
@@ -341,25 +342,25 @@ export default function PartnerDetials() {
                         className="min-w-[250px] border-l"
                         align="left"
                       >
-                        Terminal's name
+                        {t("TerminalName")}
                       </TableCell>
                       <TableCell
                         className="min-w-[200px] border-l"
                         align="left"
                       >
-                        Merchant's name
+                        {t("Name")}
                       </TableCell>
                       <TableCell
                         className="min-w-[150px] border-l"
                         align="left"
                       >
-                        MCC
+                        {t("mcc")}
                       </TableCell>
                       <TableCell
                         className="min-w-[160px] border-l"
                         align="left"
                       >
-                        Status
+                        {t("Status")}
                       </TableCell>
                     </TableRow>
                   </TableHead>
@@ -388,7 +389,7 @@ export default function PartnerDetials() {
                     )) : (
                       <TableCell colSpan={10}>
                         <Typography color="error" textAlign="center">
-                          Failed to load data
+                          {t("LoadData")}
                         </Typography>
                       </TableCell>
                     )}
@@ -423,37 +424,37 @@ export default function PartnerDetials() {
                         className="min-w-[250px] border-l"
                         align="left"
                       >
-                        Bank
+                        {t("Bank")}
                       </TableCell>
                       <TableCell
                         className="min-w-[200px] border-l"
                         align="left"
                       >
-                        Sender
+                        {t("Sender")}
                       </TableCell>
                       <TableCell
                         className="min-w-[150px] border-l"
                         align="left"
                       >
-                        Rate
+                        {t("Rate")}
                       </TableCell>
                       <TableCell
                         className="min-w-[160px] border-l"
                         align="left"
                       >
-                        Currency
+                        {t("Currency")}
                       </TableCell>
                       <TableCell
                         className="min-w-[160px] border-l"
                         align="left"
                       >
-                        Amount
+                        {t("Amount")}
                       </TableCell>
                       <TableCell
                         className="min-w-[160px] border-l"
                         align="left"
                       >
-                        Service-Fee
+                        {t("ServiceFee")}
                       </TableCell>
                     </TableRow>
                   </TableHead>
@@ -483,7 +484,7 @@ export default function PartnerDetials() {
                     )) : (
                       <TableCell colSpan={10}>
                         <Typography color="error" textAlign="center">
-                          Failed to load data
+                          {t("LoadData")}
                         </Typography>
                       </TableCell>
                     )}

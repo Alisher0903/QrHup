@@ -16,9 +16,11 @@ import { useState, useEffect } from "react";
 import { CurrencyEditActive, CurrencyGet } from "../../hooks/url";
 import { Input, Pagination, Checkbox } from "antd";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 
 export default function Currency() {
+    const { t } = useTranslation()
     const [nameFilter, setNameFilter] = useState('');
     const [table, setTable] = useState('');
     const [page, setPage] = useState(0);
@@ -59,7 +61,7 @@ export default function Currency() {
     return (
         <Container>
             <Breadcrumb
-                pageName="Currency"
+                pageName={t("Currency")}
             />
             <Box sx={{ bgcolor: "white", padding: 5 }}>
                 <Box sx={{ display: "flex", flexDirection: "column" }} gap={2}>
@@ -68,7 +70,7 @@ export default function Currency() {
                             <Input
                                 allowClear
                                 size="large"
-                                placeholder="Search with name"
+                                placeholder={t("NameSearch")}
                                 onChange={
                                     (e) => setNameFilter(e.target.value)
                                 }
@@ -78,7 +80,7 @@ export default function Currency() {
                             <Input
                                 allowClear
                                 size="large"
-                                placeholder="Search with Code"
+                                placeholder={t("SearchWithCode")}
                                 onChange={
                                     (e) => setTable(e.target.value)
                                 }
@@ -104,7 +106,7 @@ export default function Currency() {
                     </Box>
                 ) : error ? (
                     <Typography color="error" textAlign="center">
-                        Failed to load data
+                        {t("LoadData")}
                     </Typography>
                 ) : (
                     <TableContainer>
@@ -116,10 +118,10 @@ export default function Currency() {
                             <TableHead>
                                 <TableRow className="bg-gray-300">
                                     <TableCell className="border-l">No</TableCell>
-                                    <TableCell className="border-l min-w-[200px]" align="left">Name</TableCell>
-                                    <TableCell className="border-l min-w-[200px]" align="left">Code</TableCell>
-                                    <TableCell className="border-l min-w-[200px]" align="left">Symbol</TableCell>
-                                    <TableCell className="border-l min-w-[200px]" align="left">Action</TableCell>
+                                    <TableCell className="border-l min-w-[200px]" align="left">{t("Namee")}</TableCell>
+                                    <TableCell className="border-l min-w-[200px]" align="left">{t("Code")}</TableCell>
+                                    <TableCell className="border-l min-w-[200px]" align="left">{t("Symbol")}</TableCell>
+                                    <TableCell className="border-l min-w-[200px]" align="left">{t("Action")}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>

@@ -5,8 +5,10 @@ import { Pagination, QRCode } from 'antd';
 import { useEffect, useState } from 'react';
 import { useGlobalRequest } from '../../hooks/GlobalHook';
 import { getTransactionsByQrId, qrGetone } from '../../hooks/url';
+import { useTranslation } from "react-i18next";
 
 export default function QrDetial() {
+    const { t } = useTranslation()
     const { id } = useParams<string>();
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(10);
@@ -76,74 +78,74 @@ export default function QrDetial() {
                         <div className="w-full bg-white shadow-xl rounded-xl p-6">
                             <div className="flex flex-col gap-4">
                                 <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                                    <p className="text-md font-semibold">External ID:</p>
+                                    <p className="text-md font-semibold">{t("ExternalID")}:</p>
                                     <p className="text-md font-semibold">
                                         {id || '-'}
                                     </p>
                                 </div>
                                 <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                                    <p className="text-md font-semibold">Partner</p>
+                                    <p className="text-md font-semibold">{t("Partner")}</p>
                                     <p className="text-md font-semibold">
                                         {qrGetOne.response?.partner || '-'}
                                     </p>
                                 </div>
                                 <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                                    <p className="text-md font-semibold">Merchant</p>
+                                    <p className="text-md font-semibold">{t("Merchant")}</p>
                                     <p className="text-md font-semibold">
                                         {qrGetOne.response?.merchant || '-'}
                                     </p>
                                 </div>
                                 <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                                    <p className="text-md font-semibold">Type</p>
+                                    <p className="text-md font-semibold">{t("Type")}</p>
                                     <p className="text-md font-semibold">
                                         {qrGetOne.response?.type || '-'}
                                     </p>
                                 </div>
                                 <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                                    <p className="text-md font-semibold">Minimum amount</p>
+                                    <p className="text-md font-semibold">{t("MinimumAmount")}</p>
                                     <p className="text-md font-semibold">
                                         {qrGetOne.response?.minAmount || '0'}
                                     </p>
                                 </div>
                                 <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                                    <p className="text-md font-semibold">Maximum amount</p>
+                                    <p className="text-md font-semibold">{t("MinimumAmount")}</p>
                                     <p className="text-md font-semibold">
                                         {qrGetOne.response?.maxAmount || '0'}
                                     </p>
                                 </div>
                                 <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                                    <p className="text-md font-semibold">Currency</p>
+                                    <p className="text-md font-semibold">{t("Currency")}</p>
                                     <p className="text-md font-semibold">
                                         {qrGetOne.response?.currency || '-'}
                                     </p>
                                 </div>
                                 <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                                    <p className="text-md font-semibold">Expire Time</p>
+                                    <p className="text-md font-semibold">{t("ExpireTime")}</p>
                                     <p className="text-md font-semibold">
                                         {qrGetOne.response?.expire || '-'}
                                     </p>
                                 </div>
                                 <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                                    <p className="text-md font-semibold">Created time</p>
+                                    <p className="text-md font-semibold">{t("CreatedTime")}</p>
                                     <p className="text-md font-semibold">
                                         {qrGetOne.response?.createdAt || '-'}
                                     </p>
                                 </div>
 
                                 <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                                    <p className="text-md font-semibold">Status</p>
+                                    <p className="text-md font-semibold">{t("Status")}</p>
                                     <p className="text-md font-semibold">
                                         {qrGetOne.response?.status || '-'}
                                     </p>
                                 </div>
                                 <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                                    <p className="text-md font-semibold">Redirect url</p>
+                                    <p className="text-md font-semibold">{t("RedirectUrl")}</p>
                                     <p className="text-md font-semibold">
                                         {qrGetOne.response?.url || '-'}
                                     </p>
                                 </div>
                                 <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                                    <p className="text-md font-semibold">Purpose</p>
+                                    <p className="text-md font-semibold">{t("Purpose")}</p>
                                     <p className="text-md font-semibold">
                                         {qrGetOne.response?.purpose || '-'}
                                     </p>
@@ -163,7 +165,7 @@ export default function QrDetial() {
                 </div>
             </div>
             <div className='bg-white shadow-xl rounded-xl p-3 mt-5'>
-                <p className='text-xl py-3'>Transactions</p>
+                <p className='text-xl py-3'>{t("Transactions")}</p>
                 {qrGetTransactions.loading ? <Box
                     sx={{
                         display: "flex",
@@ -194,31 +196,31 @@ export default function QrDetial() {
                             <div className='grid grid-cols-1 lg:grid-cols-3 text-md gap-7'>
                                 <div className=''>
                                     <div className='flex justify-between  border-gray-400 gap-1'>
-                                        <p className='text-sm font-bold'>Amount:</p>
+                                        <p className='text-sm font-bold'>{t("Amount")}:</p>
                                         <p>{item.amount || "--"}</p>
                                     </div>
                                     <div className='flex justify-between  border-gray-400 gap-1'>
-                                        <p className='text-sm font-bold'>Currency:</p>
+                                        <p className='text-sm font-bold'>{t("Currency")}:</p>
                                         <p>{item.currency || "--"}</p>
                                     </div>
                                 </div>
                                 <div>
                                     <div className='flex justify-between  border-gray-400 gap-1'>
-                                        <p className='text-sm font-bold'>Payment date:</p>
+                                        <p className='text-sm font-bold'>{t("PaymentDate")}:</p>
                                         <p>{item?.createdAt ? formatDateTime(item.createdAt) : "--"}</p>
                                     </div>
                                     <div className='flex justify-between  border-gray-400 gap-1'>
-                                        <p className='text-sm font-bold'>Payer bank:</p>
+                                        <p className='text-sm font-bold'>{t("PayerBank")}:</p>
                                         <p>{item.bank || "--"}</p>
                                     </div>
                                 </div>
                                 <div>
                                     <div className='flex justify-between  border-gray-400 gap-1'>
-                                        <p className='text-sm font-bold'>External id:</p>
+                                        <p className='text-sm font-bold'>{t("ExternalID")}:</p>
                                         <p>{item.id || "--"}</p>
                                     </div>
                                     <div className='flex justify-between  border-gray-400 gap-1'>
-                                        <p className='text-sm font-bold'>Fee:</p>
+                                        <p className='text-sm font-bold'>{t("Fee")}:</p>
                                         <p>{`${item.serviceFee}%` || "--"}</p>
                                     </div>
                                 </div>
@@ -229,7 +231,7 @@ export default function QrDetial() {
 
                     : (
                         <Typography color="error" textAlign="center">
-                            Failed to load data
+                            {t("LoadData")}
                         </Typography>
                     )}
                 {qrGetTransactions.response && qrGetTransactions.response?.object && qrGetTransactions.response.object.length !== 0 && <div className='mt-5'>
@@ -250,35 +252,35 @@ export default function QrDetial() {
                 <div style={{ padding: '20px', width: '600px', textAlign: 'left' }}>
                     <div className="flex flex-col gap-5">
                         <div className="flex justify-between">
-                            <p className="text-xl font-bold">Payment Time:</p>
+                            <p className="text-xl font-bold">{t("PaymentTime")}:</p>
                             <p className="text-xl">{selectedItem?.paymentTime ? formatDateTime(selectedItem.paymentTime) : "---"}</p>
                         </div>
                         <div className="flex justify-between">
-                            <p className="text-xl font-bold">Payer Bank:</p>
+                            <p className="text-xl font-bold">{t("PayerBank")}:</p>
                             <p className="text-xl">{selectedItem.payerBank || "---"}</p>
                         </div>
                         <div className="flex justify-between">
-                            <p className="text-xl font-bold">Sender Name:</p>
+                            <p className="text-xl font-bold">{t("SenderName")}:</p>
                             <p className="text-xl">{selectedItem.senderName || "---"}</p>
                         </div>
                         <div className="flex justify-between">
-                            <p className="text-xl font-bold">Rate:</p>
+                            <p className="text-xl font-bold">{t("Rate")}:</p>
                             <p className="text-xl">{selectedItem.rate || "---"}</p>
                         </div>
                         <div className="flex justify-between">
-                            <p className="text-xl font-bold">Currency:</p>
+                            <p className="text-xl font-bold">{t("Currency")}:</p>
                             <p className="text-xl">{selectedItem.currency || "---"}</p>
                         </div>
                         <div className="flex justify-between">
-                            <p className="text-xl font-bold">Amount:</p>
+                            <p className="text-xl font-bold">{t("Amount")}:</p>
                             <p className="text-xl">{selectedItem.amount.toLocaleString() || "---"}</p>
                         </div>
                         <div className="flex justify-between">
-                            <p className="text-xl font-bold">Fee:</p>
+                            <p className="text-xl font-bold">{t("Fee")}:</p>
                             <p className="text-xl">{selectedItem.fee || "---"}</p>
                         </div>
                     </div>
-                    <Button className="bg-gray-500" onClick={toggleModal} style={{ marginTop: '10px', backgroundColor: "#F4F4F4", color: '#000' }}>Close</Button>
+                    <Button className="bg-gray-500" onClick={toggleModal} style={{ marginTop: '10px', backgroundColor: "#F4F4F4", color: '#000' }}>{t("Close")}</Button>
                 </div>
             </Dialog>
         </>

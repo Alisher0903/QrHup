@@ -135,11 +135,11 @@ export default function Clarify() {
                             onChange={(e) => setStatusFilter(e)}
                             options={[
                                 {
-                                    value: t("partial"),
+                                    value: "PARTIAL",
                                     label: t("partial"),
                                 },
                                 {
-                                    value: t("Clarification"),
+                                    value: "CLARIFICATION",
                                     label: t("Clarification"),
                                 }
                             ]}
@@ -171,7 +171,7 @@ export default function Clarify() {
                         >
                             <TableHead>
                                 <TableRow className="bg-gray-300">
-                                    <TableCell className="min-w-[100px] ">{t("No")}</TableCell>
+                                    <TableCell className="min-w-[100px] ">No</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">
                                         {t("Name")}
                                     </TableCell>
@@ -263,7 +263,7 @@ export default function Clarify() {
             <Dialog open={isModalOpen} onClose={handleModalClose}>
                 <DialogTitle>
                     <Typography align="center" fontSize="24px" fontWeight="bold">
-                        Details
+                        {t("Details")}
                     </Typography>
                 </DialogTitle>
                 <DialogContent>
@@ -287,7 +287,7 @@ export default function Clarify() {
                                 fontSize="18px"
                                 sx={{ marginBottom: '8px' }}
                             >
-                                QR Details
+                               {t("QRDetails")}
                             </Typography>
                             <Table size="small">
                                 <TableBody className="gap-4">
@@ -303,7 +303,8 @@ export default function Clarify() {
                                                 }
                                             >
                                                 {' '}
-                                                Amount{' '}
+
+                                                {t("Amount")}{' '}
                                             </span>
                                         </TableCell>
                                         <TableCell>
@@ -327,7 +328,7 @@ export default function Clarify() {
                                                     getOneRes?.currency ? 'bg-[#FD314D] text-white' : ''
                                                 }
                                             >
-                                                Currency
+                                                {t("Currency")}
                                             </span>
                                         </TableCell>
                                         <TableCell>
@@ -353,7 +354,7 @@ export default function Clarify() {
                                                     getOneRes?.date ? 'bg-[#FD314D] text-white' : ''
                                                 }
                                             >
-                                                Date
+                                                {t("Date")}
                                             </span>
                                         </TableCell>
                                         <TableCell
@@ -366,7 +367,7 @@ export default function Clarify() {
                                                     getOneRes?.date ? 'bg-[#FD314D] text-white' : ''
                                                 }
                                             >
-                                                Expire Date:{' '}
+                                                {t("ExpireDate")}:{' '}
                                                 {getOneRes?.qrDate
                                                     ? new Date(getOneRes.qrDate)
                                                         .toISOString()
@@ -387,7 +388,7 @@ export default function Clarify() {
                                 fontSize="18px"
                                 sx={{ marginBottom: '8px' }}
                             >
-                                Transaction Details
+                                {t("TransactionDetails")}
                             </Typography>
                             <Table size="small">
                                 <TableBody>
@@ -439,7 +440,7 @@ export default function Clarify() {
                                                     getOneRes?.date ? 'bg-[#FD314D] text-white' : ''
                                                 }
                                             >
-                                                Payment date:{' '}
+                                               {t("PaymentDate")}:{' '}
                                                 {getOneRes?.transDate
                                                     ? new Date(getOneRes.transDate)
                                                         .toISOString()
@@ -468,20 +469,20 @@ export default function Clarify() {
                             fontSize="18px"
                             sx={{ marginBottom: '16px' }}
                         >
-                            More Details
+                            {t("MoreDetails")}
                         </Typography>
                         <Table size="small">
                             <TableBody className=" gap-4">
                                 <TableRow>
-                                    <TableCell>Partner</TableCell>
+                                    <TableCell>{t("Partner")}</TableCell>
                                     <TableCell>{getOneRes?.partner || '-'}</TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <TableCell>Merchant</TableCell>
+                                    <TableCell>{t("Merchant")}</TableCell>
                                     <TableCell>{getOneRes?.merchant || '-'}</TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <TableCell>Terminal</TableCell>
+                                    <TableCell>{t("Terminal")}</TableCell>
                                     <TableCell>{getOneRes?.terminal || '-'}</TableCell>
                                 </TableRow>
                                 {/* <TableRow>
@@ -506,7 +507,7 @@ export default function Clarify() {
                         }}
                         className='bg-transparent text-black border'
                     >
-                        Cancel payment
+                        {t("CancelPayment")}
                     </Button>
                     <Button
                         onClick={async () => {
@@ -516,7 +517,7 @@ export default function Clarify() {
                         variant="contained"
                         color="primary"
                     >
-                        Confirm payment
+                        {t("ConfirmPayment")}
                     </Button>
                 </DialogActions>
             </Dialog>

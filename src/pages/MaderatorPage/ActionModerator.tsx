@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
     Box,
@@ -137,7 +137,7 @@ export default function ActionModerator() {
                         >
                             <TableHead>
                                 <TableRow className="bg-gray-300">
-                                    <TableCell>{t("No")}</TableCell>
+                                    <TableCell>No</TableCell>
                                     <TableCell className="min-w-[200px]" align="left">
                                         {t("UserName")}
                                     </TableCell>
@@ -233,7 +233,7 @@ export default function ActionModerator() {
             <Dialog open={isModalOpen} onClose={handleModalClose}>
                 <DialogTitle>
                     <Typography align="center" fontSize="24px" fontWeight="bold">
-                        Details
+                        {t("Details")}
                     </Typography>
                 </DialogTitle>
                 <DialogContent>
@@ -257,7 +257,7 @@ export default function ActionModerator() {
                                 fontSize="18px"
                                 sx={{ marginBottom: '8px' }}
                             >
-                                QR Details
+                                {t("QRDetails")}
                             </Typography>
                             <Table size="small">
                                 <TableBody className="gap-4">
@@ -273,7 +273,7 @@ export default function ActionModerator() {
                                                 }
                                             >
                                                 {' '}
-                                                Amount{' '}
+                                                {t("Amount")}{' '}
                                             </span>
                                         </TableCell>
                                         <TableCell>
@@ -297,7 +297,7 @@ export default function ActionModerator() {
                                                     getOneRes?.currency ? 'bg-[#FD314D] text-white' : ''
                                                 }
                                             >
-                                                Currency
+                                                {t("Currency")}
                                             </span>
                                         </TableCell>
                                         <TableCell>
@@ -323,7 +323,7 @@ export default function ActionModerator() {
                                                     getOneRes?.date ? 'bg-[#FD314D] text-white' : ''
                                                 }
                                             >
-                                                Date
+                                                {t("Date")}
                                             </span>
                                         </TableCell>
                                         <TableCell
@@ -336,7 +336,7 @@ export default function ActionModerator() {
                                                     getOneRes?.date ? 'bg-[#FD314D] text-white' : ''
                                                 }
                                             >
-                                                Expire Date:{' '}
+                                                {t("ExpireDate")}:{' '}
                                                 {getOneRes?.qrDate
                                                     ? new Date(getOneRes.qrDate)
                                                         .toISOString()
@@ -357,7 +357,7 @@ export default function ActionModerator() {
                                 fontSize="18px"
                                 sx={{ marginBottom: '8px' }}
                             >
-                                Transaction Details
+                                {t("TransactionDetails")}
                             </Typography>
                             <Table size="small">
                                 <TableBody>
@@ -409,7 +409,7 @@ export default function ActionModerator() {
                                                     getOneRes?.date ? 'bg-[#FD314D] text-white' : ''
                                                 }
                                             >
-                                                Payment date:{' '}
+                                                {t("PaymentDate")}:{' '}
                                                 {getOneRes?.transDate
                                                     ? new Date(getOneRes.transDate)
                                                         .toISOString()
@@ -438,30 +438,30 @@ export default function ActionModerator() {
                             fontSize="18px"
                             sx={{ marginBottom: '16px' }}
                         >
-                            More Details
+                            {t("MoreDetails")}
                         </Typography>
                         <Table size="small">
                             <TableBody className=" gap-4">
                                 <TableRow>
-                                    <TableCell>Partner</TableCell>
+                                    <TableCell>{t("Partner")}</TableCell>
                                     <TableCell>{getOneRes?.partner || '-'}</TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <TableCell>Merchant</TableCell>
+                                    <TableCell>{t("Merchant")}</TableCell>
                                     <TableCell>{getOneRes?.merchant || '-'}</TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <TableCell>Terminal</TableCell>
+                                    <TableCell>{t("Terminal")}</TableCell>
                                     <TableCell>{getOneRes?.terminal || '-'}</TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <TableCell>Confirmed Date</TableCell>
+                                    <TableCell>{t("ConfirmedDate")}</TableCell>
                                     <TableCell>{getOneRes?.terminal || '-'}</TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <TableCell>Action</TableCell>
+                                    <TableCell>{t("Action")}</TableCell>
                                     <TableCell>
-                                        {getOneRes?.action ? 'Confirm' : 'Canceled'}
+                                        {getOneRes?.action ? t("Confirm") : t("Canceled")}
                                     </TableCell>
                                 </TableRow>
                             </TableBody>
@@ -474,7 +474,7 @@ export default function ActionModerator() {
                         variant="contained"
                         color="primary"
                     >
-                        Close
+                        {t("Close")}
                     </Button>
                 </DialogActions>
             </Dialog>

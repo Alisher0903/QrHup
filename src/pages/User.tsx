@@ -22,8 +22,10 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import { AddUser, UserGet, DeleteUser, EditUser } from "../hooks/url";
 import { toast } from "react-hot-toast";
 import { Input, Pagination } from "antd";
+import { useTranslation } from "react-i18next";
 
 export default function User() {
+    const { t } = useTranslation()
     const [openAddModal, setOpenAddModal] = useState(false);
     const [openEditModal, setOpenEditModal] = useState(false);
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -128,7 +130,7 @@ export default function User() {
     return (
         <Container>
             <Breadcrumb
-                pageName="All User"
+                pageName={t("AllUser")}
                 child={
                     <Button
                         className="bg-gray-900 rounded-xl text-white"
@@ -140,7 +142,7 @@ export default function User() {
                         }}
                         onClick={handleAddOpen}
                     >
-                        + Add User
+                        + {t("AddUser")}
                     </Button>
                 }
             />
@@ -149,7 +151,7 @@ export default function User() {
                     <div className="w-[25%]">
                         <Input
                             size="large"
-                            placeholder="Search with username"
+                            placeholder={t("UserNameSearch")}
                             onChange={
                                 (e) => setNameFilter(e.target.value)
                             }
@@ -158,7 +160,7 @@ export default function User() {
                     <div className="w-[25%]">
                         <Input
                             size="large"
-                            placeholder="Search with phone"
+                            placeholder={t("SearchPeople")}
                             onChange={
                                 (e) => setNumFilter(e.target.value)
                             }
@@ -178,7 +180,7 @@ export default function User() {
                     </Box>
                 ) : error ? (
                     <Typography color="error" textAlign="center">
-                        Failed to load data
+                        {t("LoadData")}
                     </Typography>
                 ) : (
                     <TableContainer>
@@ -190,9 +192,9 @@ export default function User() {
                             <TableHead>
                                 <TableRow className="bg-gray-300">
                                     <TableCell >No</TableCell>
-                                    <TableCell className="border-l" align="left">Name</TableCell>
-                                    <TableCell className="border-l" align="left">Phone</TableCell>
-                                    <TableCell className="border-l" align="center">Action</TableCell>
+                                    <TableCell className="border-l" align="left">{t("Namee")}</TableCell>
+                                    <TableCell className="border-l" align="left">{t("Phone")}</TableCell>
+                                    <TableCell className="border-l" align="center">{t("Action")}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -254,11 +256,11 @@ export default function User() {
 
             {/* Add User Modal */}
             <Dialog open={openAddModal} onClose={handleAddClose}>
-                <DialogTitle>Add User</DialogTitle>
+                <DialogTitle>{t("AddUser")}</DialogTitle>
                 <DialogContent>
                     <Input
                         size="large"
-                        placeholder="Name"
+                        placeholder={t("Namee")}
                         className="mb-3"
                         value={data.name}
                         onChange={(e) =>
@@ -268,7 +270,7 @@ export default function User() {
                     <Input
                         size="large"
                         // margin="dense"
-                        placeholder="Phone"
+                        placeholder={t("Phone")}
                         className="mb-3"
                         value={data.phone}
                         onChange={(e) => {
@@ -285,7 +287,7 @@ export default function User() {
                     />
                     <Input
                         size="large"
-                        placeholder="Password"
+                        placeholder={t("Password")}
                         type="password"
                         onChange={(e) =>
                             setData({ ...data, password: e.target.value })
@@ -293,23 +295,23 @@ export default function User() {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleAddClose}>Cancel</Button>
+                    <Button onClick={handleAddClose}>{t("Cancel")}</Button>
                     <Button
                         disabled={!data.name || !data.phone || data?.password?.length < 3}
                         onClick={handleAddSubmit}
                     >
-                        Add
+                        {t("Add")}
                     </Button>
                 </DialogActions>
             </Dialog>
             {/* Edit User Modal */}
             <Dialog open={openEditModal} onClose={handleEditClose}>
-                <DialogTitle>Edit User</DialogTitle>
+                <DialogTitle>{t("EditUser")}</DialogTitle>
                 <DialogContent className="">
                     <Input
                         size="large"
                         className="mb-3"
-                        placeholder="Name"
+                        placeholder={t("Namee")}
                         value={data.name}
                         onChange={(e) =>
                             setData({ ...data, name: e.target.value })
@@ -318,7 +320,7 @@ export default function User() {
                     <Input
                         className="mb-3"
                         size="large"
-                        placeholder="Phone"
+                        placeholder={t("Phone")}
                         value={data.phone}
                         onChange={(e) => {
                             let newValue = e.target.value;
@@ -332,7 +334,7 @@ export default function User() {
                     <Input
                         size="large"
                         // margin="dense"
-                        placeholder="Password"
+                        placeholder={t("Password")}
                         // className="mb-3"
                         type="password"
                         value={data.password}
@@ -342,30 +344,30 @@ export default function User() {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleEditClose}>Cancel</Button>
+                    <Button onClick={handleEditClose}>{t("Cancel")}</Button>
                     <Button
                         disabled={!data.name || !data.phone || data?.password?.length < 3}
                         onClick={() => {
                             HandleEdit();
                         }}
                     >
-                        Save
+                        {t("Save")}
                     </Button>
                 </DialogActions>
             </Dialog>
 
             {/* Delete User Modal */}
             <Dialog open={openDeleteModal} onClose={handleDeleteClose}>
-                <DialogTitle>Delete User</DialogTitle>
+                <DialogTitle>{t("DeleteUser")}</DialogTitle>
                 <DialogContent>
                     <Typography variant="h6">
-                        Are you sure you want to delete this user?
+                        {t("delete")}
                     </Typography>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleDeleteClose}>Cancel</Button>
+                    <Button onClick={handleDeleteClose}>{t("Cancel")}</Button>
                     <Button onClick={handleDeleteSubmit} color="error">
-                        Delete
+                        {t("Del")}
                     </Button>
                 </DialogActions>
             </Dialog>

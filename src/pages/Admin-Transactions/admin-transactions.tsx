@@ -22,9 +22,11 @@ import Dialog from '@mui/material/Dialog';
 import { datePicker } from "../../common/global-functions/date-sort";
 import { DatePicker, Select } from "antd";
 import { QrStore } from "../../hooks/Store/Qr/qrStore";
+import { useTranslation } from "react-i18next";
 const { RangePicker } = DatePicker;
 
 export default function AdminTransactions() {
+    const { t } = useTranslation()
     const navigator = useNavigate();
     const { setQrData } = QrStore()
     const [isOpen, setIsOpen] = useState(false);
@@ -78,11 +80,11 @@ export default function AdminTransactions() {
     return (
         <Container>
             <Breadcrumb
-                pageName="All Transactions"
+                pageName={t("AllTransactions")}
             />
             <div className="bg-white p-5">
                 <Typography className="mb-2" color="textPrimary" fontSize={30}>
-                    Filters
+                    {t("Filters")}
                 </Typography>
                 <div>
                     <div className="flex gap-4 mb-5">
@@ -90,7 +92,7 @@ export default function AdminTransactions() {
                             <Input
                                 allowClear
                                 size="large"
-                                placeholder="Transaction's Id"
+                                placeholder={t("TransactionsId")}
                                 onChange={(e) => setFilters({ ...filters, transId: e.target.value })}
                             />
                         </div>
@@ -98,7 +100,7 @@ export default function AdminTransactions() {
                             <Input
                                 allowClear
                                 size="large"
-                                placeholder="Merchant name..."
+                                placeholder={t("Merchantname")}
                                 onChange={(e) => setFilters({ ...filters, merchantName: e.target.value })}
                             />
                         </div>
@@ -107,7 +109,7 @@ export default function AdminTransactions() {
                                 allowClear
                                 size="large"
                                 type="number"
-                                placeholder="Amount..."
+                                placeholder={t("Amount")}
                                 onChange={(e) => setFilters({ ...filters, amount: +e.target.value })}
                             />
                         </div>
@@ -122,7 +124,7 @@ export default function AdminTransactions() {
                             <Input
                                 allowClear
                                 size="large"
-                                placeholder="Partner name..."
+                                placeholder={t("PartnerName")}
                                 onChange={(e) => setFilters({ ...filters, partnerName: e.target.value })}
                             />
                         </div>
@@ -132,16 +134,16 @@ export default function AdminTransactions() {
                             size="large"
                             allowClear
                             className="w-full"
-                            placeholder="Status"
+                            placeholder={t("Status")}
                             onChange={(value) => setFilters({ ...filters, status: value })}
                             options={[
                                 {
                                     value: 'CANCELED',
-                                    label: 'Canceled',
+                                    label: t("Canceled"),
                                 },
                                 {
                                     value: 'COMPLETED',
-                                    label: 'Completed',
+                                    label: t("Completed"),
                                 }
                             ]}
                         />
@@ -160,7 +162,7 @@ export default function AdminTransactions() {
                     </Box>
                 ) : error ? (
                     <Typography color="error" textAlign="center">
-                        Failed to load data
+                        {t("LoadData")}
                     </Typography>
                 ) : (
                     <TableContainer>
@@ -172,14 +174,14 @@ export default function AdminTransactions() {
                             <TableHead>
                                 <TableRow className="bg-gray-300">
                                     <TableCell>No</TableCell>
-                                    <TableCell className="min-w-[250px] border-l" align="left">Partner</TableCell>
-                                    <TableCell className="min-w-[250px] border-l" align="left">Merchant</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">Amount</TableCell>
-                                    <TableCell className="min-w-[150px] border-l" align="left">Currency</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">Transaction Time</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">Go To QR</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">Status</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">Action</TableCell>
+                                    <TableCell className="min-w-[250px] border-l" align="left">{t("Partner")}</TableCell>
+                                    <TableCell className="min-w-[250px] border-l" align="left">{t("Merchant")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("Amount")}</TableCell>
+                                    <TableCell className="min-w-[150px] border-l" align="left">{t("Currency")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("TransactionTime")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("GoToQR")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("Status")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("Action")}</TableCell>
                                     {/*  <TableCell className="min-w-[160px] border-l" align="left">Status</TableCell> */}
                                     {/* <TableCell className="min-w-[200px]" align="center">Action</TableCell> */}
                                 </TableRow>
@@ -215,7 +217,7 @@ export default function AdminTransactions() {
                                             </TableCell>
                                             <TableCell align="left">
                                                 {/* {partner.status || "-"} */}
-                                                <div className={partner.status === "COMPLETED" ? "bg-green-500 py-1 rounded-lg text-center text-lg text-white" : "bg-red-500 py-1 rounded-lg text-center text-lg text-white"}>{partner.status === "COMPLETED" ? "Canceled" : "Canceled"}</div>
+                                                <div className={partner.status === "COMPLETED" ? "bg-green-500 py-1 rounded-lg text-center text-lg text-white" : "bg-red-500 py-1 rounded-lg text-center text-lg text-white"}>{partner.status === "COMPLETED" ? t("Canceled") : t("Completed")}</div>
                                             </TableCell>
                                             <TableCell align="center">
                                                 <Button
@@ -261,35 +263,35 @@ export default function AdminTransactions() {
                 <div style={{ padding: '20px', width: '600px', textAlign: 'left' }}>
                     <div className="flex flex-col gap-5">
                         <div className="flex justify-between">
-                            <p className="text-xl font-bold">Payment Time:</p>
+                            <p className="text-xl font-bold">{t("PaymentTime")}:</p>
                             <p className="text-xl">{new Date(selectedItem.paymentTime).toLocaleDateString() || "---"}</p>
                         </div>
                         <div className="flex justify-between">
-                            <p className="text-xl font-bold">Payer Bank:</p>
+                            <p className="text-xl font-bold">{t("PayerBank")}:</p>
                             <p className="text-xl">{selectedItem.payerBank || "---"}</p>
                         </div>
                         <div className="flex justify-between">
-                            <p className="text-xl font-bold">Sender Name:</p>
+                            <p className="text-xl font-bold">{t("SenderName")}:</p>
                             <p className="text-xl">{selectedItem.senderName || "---"}</p>
                         </div>
                         <div className="flex justify-between">
-                            <p className="text-xl font-bold">Rate:</p>
+                            <p className="text-xl font-bold">{t("Rate")}:</p>
                             <p className="text-xl">{selectedItem.rate || "---"}</p>
                         </div>
                         <div className="flex justify-between">
-                            <p className="text-xl font-bold">Currency:</p>
+                            <p className="text-xl font-bold">{t("Currency")}:</p>
                             <p className="text-xl">{selectedItem.currency || "---"}</p>
                         </div>
                         <div className="flex justify-between">
-                            <p className="text-xl font-bold">Amount:</p>
+                            <p className="text-xl font-bold">{t("Amount")}:</p>
                             <p className="text-xl">{selectedItem.amount.toLocaleString() || "---"}</p>
                         </div>
                         <div className="flex justify-between">
-                            <p className="text-xl font-bold">Fee:</p>
+                            <p className="text-xl font-bold">{t("Fee")}:</p>
                             <p className="text-xl">{selectedItem.fee || "---"}</p>
                         </div>
                     </div>
-                    <Button className="bg-gray-500" onClick={toggleModal} style={{ marginTop: '10px', backgroundColor: "#F4F4F4", color: '#000' }}>Close</Button>
+                    <Button className="bg-gray-500" onClick={toggleModal} style={{ marginTop: '10px', backgroundColor: "#F4F4F4", color: '#000' }}>{t("Close")}</Button>
                 </div>
             </Dialog>
         </Container>

@@ -23,6 +23,7 @@ import {
 } from '@mui/material';
 import { IoChevronBackOutline } from 'react-icons/io5';
 import { Pagination } from 'antd';
+import { useTranslation } from "react-i18next";
 
 export default function MerchantDetials() {
     // States
@@ -75,6 +76,7 @@ export default function MerchantDetials() {
     console.log('Statistic Merchant', statisticsGet);
     const GettingDatass = resGet;
     console.log('qr GEtting', resGet);
+    const { t } = useTranslation()
     // console.log(id);
     return (
         <div className="bg-gray-100  flex flex-col items-center">
@@ -93,13 +95,13 @@ export default function MerchantDetials() {
                     <div className="w-full bg-white shadow-xl rounded-xl p-6">
                         <div className="flex flex-col gap-4">
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                                <p className="text-sm font-semibold">Merchant's name</p>
+                                <p className="text-sm font-semibold">{t("Name")}</p>
                                 <p className="text-sm font-semibold">
                                     {GettingDatass?.name || '-'}
                                 </p>
                             </div>
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                                <p className="text-sm font-semibold">Partner's name</p>
+                                <p className="text-sm font-semibold">{t("PartnerName")}</p>
                                 <p className="text-sm font-semibold">
                                     {GettingDatass?.partnerName || '-'}
                                 </p>
@@ -111,37 +113,37 @@ export default function MerchantDetials() {
                                 </p>
                             </div>
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                                <p className="text-sm font-semibold">INN</p>
+                                <p className="text-sm font-semibold">{t("inn")}</p>
                                 <p className="text-sm font-semibold">
                                     {GettingDatass?.inn || '-'}
                                 </p>
                             </div>
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                                <p className="text-sm font-semibold">Adrres</p>
+                                <p className="text-sm font-semibold">{t("Adrres")}</p>
                                 <p className="text-sm font-semibold">
                                     {GettingDatass?.address || '-'}
                                 </p>
                             </div>
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                                <p className="text-sm font-semibold">MFO</p>
+                                <p className="text-sm font-semibold">{t("mfo")}</p>
                                 <p className="text-sm font-semibold">
                                     {GettingDatass?.mfo || '-'}
                                 </p>
                             </div>
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                                <p className="text-sm font-semibold">Account</p>
+                                <p className="text-sm font-semibold">{t("Account")}</p>
                                 <p className="text-sm font-semibold">
                                     {GettingDatass?.account || '-'}
                                 </p>
                             </div>
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                                <p className="text-sm font-semibold">STATUS</p>
+                                <p className="text-sm font-semibold">{t("STATUS")}</p>
                                 <p className="text-sm font-semibold uppercase">
                                     {GettingDatass?.active ? 'NOT ACTIVE' : 'active'}
                                 </p>
                             </div>
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                                <p className="text-sm font-semibold">STATUS</p>
+                                <p className="text-sm font-semibold">{t("STATUS")}</p>
                                 <p className="text-sm font-semibold uppercase">
                                     {new Date(GettingDatass?.createdAt).toLocaleDateString() || '-'}
                                 </p>
@@ -162,31 +164,31 @@ export default function MerchantDetials() {
                     </div>
                     <div className="w-[40%] bg-white shadow-md rounded-xl border-l-2 flex flex-col p-6 gap-5">
                         <div className="flex justify-between pb-2  border-b-2 border-gray-500">
-                            <p className="text-sm font-semibold">Merchants:</p>
+                            <p className="text-sm font-semibold">{t("Merchants")}:</p>
                             <p className="text-sm font-semibold">
                                 {statisticsGet?.merchantCount || '0'}
                             </p>
                         </div>
                         <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                            <p className="text-sm font-semibold">Terminals:</p>
+                            <p className="text-sm font-semibold">{t("Terminals")}:</p>
                             <p className="text-sm font-semibold">
                                 {statisticsGet?.terminalCount || '0'}
                             </p>
                         </div>
                         <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                            <p className="text-sm font-semibold">QRs:</p>
+                            <p className="text-sm font-semibold">{t("QRS")}:</p>
                             <p className="text-sm font-semibold">
                                 {statisticsGet?.qrCount || '-'}
                             </p>
                         </div>
                         <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                            <p className="text-sm font-semibold">Transactions:</p>
+                            <p className="text-sm font-semibold">{t("QRs")}:</p>
                             <p className="text-sm font-semibold flex flex-col items-center justify-center">
                                 <span>
-                                    Count:
+                                    {t("Count")}:
                                     {statisticsGet?.transactionCount || '0'},
                                 </span>
-                                <span>Amount: {statisticsGet?.transactionAmount || '0'}</span>
+                                <span>{t("Amount")}: {statisticsGet?.transactionAmount || '0'}</span>
                             </p>
                         </div>
                     </div>
@@ -205,8 +207,8 @@ export default function MerchantDetials() {
                 <Tabs value={selectedTab} onChange={handleChange}>
                     <Tab label="Qr" />
                     {/* <Tab label="Merchant" /> */}
-                    <Tab label="Terminal" />
-                    <Tab label="Transactions" />
+                    <Tab label={t("Terminal")} />
+                    <Tab label={t("Transactions")} />
                 </Tabs>
                 <Box sx={{ p: 3, overflow: 'auto' }}>
                     {selectedTab === 0 && (
@@ -220,22 +222,22 @@ export default function MerchantDetials() {
                                     <TableRow className="bg-gray-300">
                                         <TableCell>No</TableCell>
                                         <TableCell className="min-w-[250px] border-l" align="left">
-                                            Partner
+                                            {t("Partner")}
                                         </TableCell>
                                         <TableCell className="min-w-[200px] border-l" align="left">
-                                            Account
+                                            {t("Account")}
                                         </TableCell>
                                         <TableCell className="min-w-[150px] border-l" align="left">
-                                            Type
+                                            {t("Account")}
                                         </TableCell>
                                         <TableCell className="min-w-[200px] border-l" align="left">
-                                            Created time
+                                             {t("CreatedTime")}
                                         </TableCell>
                                         <TableCell className="min-w-[200px] border-l" align="left">
-                                            Expire time
+                                            {t("ExpireTime")}
                                         </TableCell>
                                         <TableCell className="min-w-[160px] border-l" align="left">
-                                            Status
+                                            {t("Status")}
                                         </TableCell>
                                         {/* <TableCell className="min-w-[200px]" align="center">Action</TableCell> */}
                                     </TableRow>
@@ -389,25 +391,25 @@ export default function MerchantDetials() {
                                                 className="min-w-[250px] border-l"
                                                 align="left"
                                             >
-                                                Terminal's name
+                                                {t("TerminalName")}
                                             </TableCell>
                                             <TableCell
                                                 className="min-w-[200px] border-l"
                                                 align="left"
                                             >
-                                                Merchant's name
+                                                {t("Name")}
                                             </TableCell>
                                             <TableCell
                                                 className="min-w-[150px] border-l"
                                                 align="left"
                                             >
-                                                MCC
+                                                {t("mcc")}
                                             </TableCell>
                                             <TableCell
                                                 className="min-w-[160px] border-l"
                                                 align="left"
                                             >
-                                                Status
+                                                {t("Status")}
                                             </TableCell>
                                             {/* <TableCell className="min-w-[200px]" align="center">Action</TableCell> */}
                                         </TableRow>
@@ -466,37 +468,37 @@ export default function MerchantDetials() {
                                                 className="min-w-[250px] border-l"
                                                 align="left"
                                             >
-                                                Bank
+                                                {t("Bank")}
                                             </TableCell>
                                             <TableCell
                                                 className="min-w-[200px] border-l"
                                                 align="left"
                                             >
-                                                Sender
+                                                {t("Sender")}
                                             </TableCell>
                                             <TableCell
                                                 className="min-w-[150px] border-l"
                                                 align="left"
                                             >
-                                                Rate
+                                                {t("Rate")}
                                             </TableCell>
                                             <TableCell
                                                 className="min-w-[160px] border-l"
                                                 align="left"
                                             >
-                                                Currency
+                                                {t("Currency")}
                                             </TableCell>
                                             <TableCell
                                                 className="min-w-[160px] border-l"
                                                 align="left"
                                             >
-                                                Amount
+                                                {t("Amount")}
                                             </TableCell>
                                             <TableCell
                                                 className="min-w-[160px] border-l"
                                                 align="left"
                                             >
-                                                Service-Fee
+                                                {t("ServiceFee")}
                                             </TableCell>
                                             {/* <TableCell className="min-w-[200px]" align="center">Action</TableCell> */}
                                         </TableRow>

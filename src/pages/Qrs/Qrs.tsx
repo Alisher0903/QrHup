@@ -19,9 +19,11 @@ import { useGlobalRequest } from "../../hooks/GlobalHook";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
 import { QrGet } from "../../hooks/url";
 import { datePicker } from "../../common/global-functions/date-sort";
+import { useTranslation } from "react-i18next";
 const { RangePicker } = DatePicker;
 
 export default function Partners() {
+    const { t } = useTranslation()
     const [nameFilter, setNameFilter] = useState('');
     const [numFilter, setNumFilter] = useState('');
     const [emailFilter, setEmailFilter] = useState('');
@@ -64,18 +66,18 @@ export default function Partners() {
     return (
         <Container>
             <Breadcrumb
-                pageName="All Qrs"
+                pageName={t("AllQrs")}
             />
             <Box sx={{ bgcolor: "white", padding: 5 }}>
                 <Typography className="mb-2" color="textPrimary" fontSize={30}>
-                    Filters
+                   {t("Filters")}
                 </Typography>
                 <div className="flex flex-row gap-5 mb-5">
                     <div className="w-[25%] ">
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Search with Merchant's name"
+                            placeholder={t("SearchName")}
                             onChange={
                                 (e) => setNameFilter(e.target.value)
                             }
@@ -85,7 +87,7 @@ export default function Partners() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Search with Ext-ID"
+                            placeholder={t("SearchwithExtID")}
                             onChange={
                                 (e) => setNumFilter(e.target.value)
                             }
@@ -104,7 +106,7 @@ export default function Partners() {
                     <div className="w-[25%]">
                         <DatePicker
                             size="large"
-                            placeholder="Select Expire-date"
+                            placeholder={t("SelectExpireDate")}
                             className="w-full"
                             allowClear
                             onChange={(dates) => {
@@ -125,7 +127,7 @@ export default function Partners() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Amount"
+                            placeholder={t("Amount")}
                             onChange={
                                 (e) => setAmount(+e.target.value)
                             }
@@ -136,48 +138,48 @@ export default function Partners() {
                             size="large"
                             allowClear
                             className="w-full"
-                            placeholder="Status"
+                            placeholder={t("Status")}
                             onChange={(value) => setStatus(value)}
                             options={[
                                 {
                                     value: 'ACTIVE',
-                                    label: 'Active',
+                                    label: t("Active"),
                                 },
                                 {
                                     value: 'INACTIVE',
-                                    label: 'InActive',
+                                    label: t("InActive"),
                                 },
                                 {
                                     value: 'NEW',
-                                    label: 'New',
+                                    label: t("New"),
                                 },
                                 {
                                     value: 'PENDING',
-                                    label: 'Pending',
+                                    label: t("Pending"),
                                 },
                                 {
                                     value: 'VALIDATION',
-                                    label: 'Validation',
+                                    label: t("Validation"),
                                 },
                                 {
                                     value: 'PARTIAL',
-                                    label: 'Patrial',
+                                    label: t("Patrial"),
                                 },
                                 {
                                     value: 'CLARIFICATION',
-                                    label: 'Clarification',
+                                    label: t("Clarification"),
                                 },
                                 {
                                     value: 'COMPLETED',
-                                    label: 'Completed',
+                                    label: t("Completed"),
                                 },
                                 {
                                     value: 'CANCELED',
-                                    label: 'Canceled',
+                                    label: t("Canceled"),
                                 },
                                 {
                                     value: 'EXPIRED',
-                                    label: 'Expired',
+                                    label: t("Expired"),
                                 },
                             ]}
                         />
@@ -187,16 +189,16 @@ export default function Partners() {
                             size="large"
                             allowClear
                             className="w-full"
-                            placeholder="Type"
+                            placeholder={t("Type")}
                             onChange={(value) => setType(value)}
                             options={[
                                 {
                                     value: 'STATIC',
-                                    label: 'STATIC',
+                                    label: t("STATIC"),
                                 },
                                 {
                                     value: 'DYNAMIC',
-                                    label: 'DYNAMIC',
+                                    label: t("DYNAMIC"),
                                 },
                             ]}
                         />
@@ -215,7 +217,7 @@ export default function Partners() {
                     </Box>
                 ) : error ? (
                     <Typography color="error" textAlign="center">
-                        Failed to load data
+                        {t("LoadData")}
                     </Typography>
                 ) : (
                     <TableContainer>
@@ -227,15 +229,15 @@ export default function Partners() {
                             <TableHead>
                                 <TableRow className="bg-gray-300">
                                     <TableCell>No</TableCell>
-                                    <TableCell className="min-w-[250px] border-l" align="left">Merchants name</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">Amount</TableCell>
-                                    <TableCell className="min-w-[150px] border-l" align="left">Type</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">Created Time</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">Expire Time</TableCell>
+                                    <TableCell className="min-w-[250px] border-l" align="left">{t("Merchantname")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("Amount")}</TableCell>
+                                    <TableCell className="min-w-[150px] border-l" align="left">{t("Type")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("CreatedTime")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("ExpireTime")}</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">Ext-ID</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">Status</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("Status")}</TableCell>
                                     {/*  <TableCell className="min-w-[160px] border-l" align="left">Status</TableCell> */}
-                                    <TableCell className="min-w-[200px]" align="center">Action</TableCell>
+                                    <TableCell className="min-w-[200px]" align="center">{t("Action")}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>

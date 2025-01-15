@@ -16,6 +16,7 @@ import {
     DialogTitle,
     TextField,
 } from "@mui/material";
+import { useTranslation } from 'react-i18next';
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
 import { useGlobalRequest } from "../../hooks/GlobalHook";
 import { useState, useEffect } from "react";
@@ -31,6 +32,7 @@ import { PartnersStore } from "../../hooks/Store/Partners/partnerStore";
 const { RangePicker } = DatePicker;
 
 export default function Partners() {
+    const { t } = useTranslation()
     const { setPartners } = PartnersStore()
     const [openAddModal, setOpenAddModal] = useState(false);
     const [openEditModal, setOpenEditModal] = useState(false);
@@ -213,7 +215,7 @@ export default function Partners() {
     return (
         <Container>
             <Breadcrumb
-                pageName="All Partners"
+                pageName={t("AllPartners")}
                 child={
                     <Button
                         className="bg-gray-900 rounded-xl text-white"
@@ -225,7 +227,7 @@ export default function Partners() {
                         }}
                         onClick={handleAddOpen}
                     >
-                        + Add Partner
+                        + {t("AddPartner")}
                     </Button>
                 }
             />
@@ -235,7 +237,7 @@ export default function Partners() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Search with username"
+                            placeholder={t("UserNameSearch")}
                             onChange={
                                 (e) => setNameFilter(e.target.value)
                             }
@@ -245,7 +247,7 @@ export default function Partners() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Search with phone"
+                            placeholder={t("SearchPeople")}
                             onChange={
                                 (e) => setNumFilter(e.target.value)
                             }
@@ -255,7 +257,7 @@ export default function Partners() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Search with email"
+                            placeholder={t("SearchEmail")}
                             onChange={
                                 (e) => setEmailFilter(e.target.value)
                             }
@@ -265,7 +267,7 @@ export default function Partners() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Search with INN"
+                            placeholder={t("inn")}
                             onChange={
                                 (e) => setInn(e.target.value)
                             }
@@ -285,16 +287,16 @@ export default function Partners() {
                             size="large"
                             allowClear
                             className="w-full"
-                            placeholder="Status"
+                            placeholder={t("Status")}
                             onChange={(value) => setStatus(value)}
                             options={[
                                 {
                                     value: 'ACTIVE',
-                                    label: 'Active',
+                                    label: t("Active"),
                                 },
                                 {
                                     value: 'INACTIVE',
-                                    label: 'InActive',
+                                    label: t("InActive"),
                                 }
                             ]}
                         />
@@ -303,7 +305,7 @@ export default function Partners() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Search with MFO"
+                            placeholder={t("SearchMFO")}
                             onChange={
                                 (e) => setMFO(e.target.value)
                             }
@@ -313,7 +315,7 @@ export default function Partners() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder="Search with Account"
+                            placeholder={t("SearchAccount")}
                             onChange={
                                 (e) => setAccount(e.target.value)
                             }
@@ -333,7 +335,7 @@ export default function Partners() {
                     </Box>
                 ) : error ? (
                     <Typography color="error" textAlign="center">
-                        Failed to load data
+                        {t("LoadData")}
                     </Typography>
                 ) : (
                     <TableContainer>
@@ -345,14 +347,14 @@ export default function Partners() {
                             <TableHead>
                                 <TableRow className="bg-gray-300">
                                     <TableCell>No</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">Partner name</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">Account</TableCell>
-                                    <TableCell className="min-w-[150px] border-l" align="left">MFO</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">Phone</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">Email</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">INN</TableCell>
-                                    <TableCell className="min-w-[160px] border-l" align="left">Status</TableCell>
-                                    <TableCell className="min-w-[250px]" align="center">Action</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("PartnerName")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("Account")}</TableCell>
+                                    <TableCell className="min-w-[150px] border-l" align="left">{t("mfo")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("Phone")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("Email")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("innn")}</TableCell>
+                                    <TableCell className="min-w-[160px] border-l" align="left">{t("Status")}</TableCell>
+                                    <TableCell className="min-w-[250px]" align="center">{t("Action")}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -380,7 +382,7 @@ export default function Partners() {
                                             </TableCell>
                                             <TableCell align="left">
                                                 <Typography className={!partner.active ? "bg-yellow-500 text-center text-white p-3 rounded-lg" : "bg-green-500 text-white text-center p-3 rounded-lg"}>
-                                                    {partner.active ? "ACTIVE" : "INACTIVE"}
+                                                    {partner.active ? t("katta") : t("inactive")}
                                                 </Typography>
                                             </TableCell>
                                             <TableCell align="center">
@@ -446,32 +448,32 @@ export default function Partners() {
 
             {/* Add User Modal */}
             <Dialog open={openAddModal} onClose={handleAddClose}>
-                <DialogTitle>Add Partner</DialogTitle>
+                <DialogTitle>{t("AllPartners")}</DialogTitle>
                 <DialogContent className="flex flex-col gap-3" style={{ width: '600px' }}>
                     <Input
                         allowClear
-                        placeholder="Name"
+                        placeholder={t("Namee")}
                         size="large"
                         value={data.name}
                         onChange={(e) => setData({ ...data, name: e.target.value })}
                     />
                     <Input
                         allowClear
-                        placeholder="URL"
+                        placeholder={t("URL")}
                         size="large"
                         value={data.url}
                         onChange={(e) => setData({ ...data, url: e.target.value })}
                     />
                     <Input
                         allowClear
-                        placeholder="Address"
+                        placeholder={t("Address")}
                         size="large"
                         value={data.address}
                         onChange={(e) => setData({ ...data, address: e.target.value })}
                     />
                     <Input
                         allowClear
-                        placeholder="Phone"
+                        placeholder={t("Phone")}
                         size="large"
                         value={data.phone}
                         onChange={(e) => {
@@ -488,14 +490,14 @@ export default function Partners() {
                     />
                     <Input
                         allowClear
-                        placeholder="Email"
+                        placeholder={t("Email")}
                         size="large"
                         value={data.email}
                         onChange={(e) => setData({ ...data, email: e.target.value })}
                     />
                     <Input
                         allowClear
-                        placeholder="INN"
+                        placeholder={t("innn")}
                         size="large"
                         value={data.inn}
                         onChange={(e) => setData({ ...data, inn: e.target.value })}
@@ -503,14 +505,14 @@ export default function Partners() {
                     <Input
                         type="number"
                         allowClear
-                        placeholder="Service Fee"
+                        placeholder={t("ServiceFee")}
                         size="large"
                         value={data.serviceFee}
                         onChange={(e) => setData({ ...data, serviceFee: e.target.value })}
                     />
                     <Input
                         allowClear
-                        placeholder="MFO"
+                        placeholder={t("mfo")}
                         type="number"
                         size="large"
                         value={data.mfo}
@@ -518,7 +520,7 @@ export default function Partners() {
                     />
                     <Input
                         allowClear
-                        placeholder="Account"
+                        placeholder={t("Account")}
                         type="number"
                         size="large"
                         value={data.account}
@@ -526,7 +528,7 @@ export default function Partners() {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleAddClose}>Cancel</Button>
+                    <Button onClick={handleAddClose}>{t("Cancel")}</Button>
                     <Button
                         disabled={
                             !data.name ||
@@ -542,38 +544,38 @@ export default function Partners() {
                             handleAddSubmit();
                         }}
                     >
-                        Add
+                        {t("add")}
                     </Button>
                 </DialogActions>
             </Dialog>
             {/* Edit User Modal */}
             <Dialog open={openEditModal} onClose={handleEditClose}>
-                <DialogTitle>Edit User</DialogTitle>
+                <DialogTitle>{t("EditUser")}</DialogTitle>
                 <DialogContent>
                     <TextField
                         margin="dense"
-                        label="Name"
+                        label={t("Namee")}
                         fullWidth
                         value={data.name}
                         onChange={(e) => setData({ ...data, name: e.target.value })}
                     />
                     <TextField
                         margin="dense"
-                        label="URL"
+                        label={t("URL")}
                         fullWidth
                         value={data.url}
                         onChange={(e) => setData({ ...data, url: e.target.value })}
                     />
                     <TextField
                         margin="dense"
-                        label="Address"
+                        label={t("Address")}
                         fullWidth
                         value={data.address}
                         onChange={(e) => setData({ ...data, address: e.target.value })}
                     />
                     <TextField
                         margin="dense"
-                        label="Phone"
+                        label={t("Phone")}
                         fullWidth
                         value={data.phone}
                         onChange={(e) => {
@@ -590,21 +592,21 @@ export default function Partners() {
                     />
                     <TextField
                         margin="dense"
-                        label="Email"
+                        label={t("Email")}
                         fullWidth
                         value={data.email}
                         onChange={(e) => setData({ ...data, email: e.target.value })}
                     />
                     <TextField
                         margin="dense"
-                        label="INN"
+                        label={t("innn")}
                         fullWidth
                         value={data.inn}
                         onChange={(e) => setData({ ...data, inn: e.target.value })}
                     />
                     <TextField
                         margin="dense"
-                        label="Service Fee"
+                        label={t("ServiceFee")}
                         fullWidth
                         type="number"
                         value={data.serviceFee}
@@ -612,21 +614,21 @@ export default function Partners() {
                     />
                     <TextField
                         margin="dense"
-                        label="MFO"
+                        label={t("mfo")}
                         fullWidth
                         value={data.mfo}
                         onChange={(e) => setData({ ...data, mfo: e.target.value })}
                     />
                     <TextField
                         margin="dense"
-                        label="Account"
+                        label={t("Account")}
                         fullWidth
                         value={data.account}
                         onChange={(e) => setData({ ...data, account: e.target.value })}
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleEditClose}>Cancel</Button>
+                    <Button onClick={handleEditClose}>{t("Cancel")}</Button>
                     <Button
                         disabled={
                             !data.name ||
@@ -642,41 +644,41 @@ export default function Partners() {
                             HandleEdit();
                         }}
                     >
-                        Save
+                        {t("Save")}
                     </Button>
                 </DialogActions>
             </Dialog>
 
             {/* Delete User Modal */}
             <Dialog open={openDeleteModal} onClose={handleDeleteClose}>
-                <DialogTitle>Delete User</DialogTitle>
+                <DialogTitle>{t("DeleteUser")}</DialogTitle>
                 <DialogContent>
                     <Typography variant="h6">
-                        Are you sure you want to delete this user?
+                       {t("delete")}
                     </Typography>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleDeleteClose}>Cancel</Button>
+                    <Button onClick={handleDeleteClose}>{t("delete")}</Button>
                     <Button onClick={handleDeleteSubmit} color="error">
-                        Delete
+                        {t("Del")}
                     </Button>
                 </DialogActions>
             </Dialog>
 
             {/* Key Modal */}
             <Dialog open={openSendKeyMOdal} onClose={handleSendClose}>
-                <DialogTitle>Send Key</DialogTitle>
+                <DialogTitle>{t("SendKey")}</DialogTitle>
                 <DialogContent>
                     <Typography >
-                        Are you sure you want to create new API-Key for this partner? (The previous API-Key will not be usable anymore.)
+                        {t("APIKeyModal")}
                     </Typography>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleSendClose} color="inherit">Cancel</Button>
+                    <Button onClick={handleSendClose} color="inherit">{t("Cancel")}</Button>
                     <Button onClick={() => {
                         HandleSendCode();
                     }} color="info">
-                        Send
+                        {t("Send")}
                     </Button>
                 </DialogActions>
             </Dialog>
