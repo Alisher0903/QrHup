@@ -11,19 +11,22 @@ const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
-  const role = sessionStorage.getItem('role'); 
-   const { t, i18n } = useTranslation();
+  const role = sessionStorage.getItem('role');
+  const { t, i18n } = useTranslation();
 
-  if (!role) {
-    return null; 
-  }
   const userMe = useGlobalRequest(getMe, 'GET');
+
   const changeLanguage = (lng: any) => {
     i18n.changeLanguage(lng);
   };
+
   useEffect(() => {
     userMe.globalDataFunc();
   }, [])
+
+  if (!role) {
+    return null;
+  }
 
   return (
     <header className="static top-0 z-99 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">

@@ -3,7 +3,7 @@ import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { DatePicker } from "antd";
 
-const ChartThree: React.FC<{ data: any, setYear: (val: string) => void, setMonth: (val: string) => void }> = ({ data, setMonth, setYear }) => {
+const ChartThree: React.FC<{ data: any, setYear: (val: string | null) => void, setMonth: (val: string | null) => void }> = ({ data, setMonth, setYear }) => {
   const hasData = Array.isArray(data) && data.length > 0;
   const series = hasData ? data.map((item: any) => item?.count) : [100];
   const labels = hasData ? data.map((item: any) => item?.name) : ['Not Found'];
@@ -67,10 +67,12 @@ const ChartThree: React.FC<{ data: any, setYear: (val: string) => void, setMonth
 
   const handleYearChange = (date: any) => {
     if (date) setYear(date.year());
+    else setYear(data)
   };
 
   const handleMonthChange = (date: any) => {
     if (date) setMonth(date.month());
+    else setMonth(data)
   };
 
   return (

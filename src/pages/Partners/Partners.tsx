@@ -29,6 +29,7 @@ import { useNavigate } from "react-router-dom";
 import { DatePicker, Select } from "antd";
 import { datePicker } from "../../common/global-functions/date-sort";
 import { PartnersStore } from "../../hooks/Store/Partners/partnerStore";
+// import { PartnersStore } from "../../hooks/Store/Partners/partnerStore";
 const { RangePicker } = DatePicker;
 
 export default function Partners() {
@@ -389,7 +390,7 @@ export default function Partners() {
                                                 <Button
                                                     onClick={() => {
                                                         navigator(`/partnersDetials/${partner.id}`);
-                                                        setPartners(partner);
+                                                        // setPartners(partner);
                                                     }}
                                                 >
                                                     <FaEye size={25} color="black" />

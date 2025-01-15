@@ -94,15 +94,16 @@ export default function Partners() {
                         />
                     </div>
                     <div className="w-[25%] ">
-                        <RangePicker
-                            size="large"
+
+                        <Input
                             allowClear
-                            onChange={(dates) => setDate(dates)}
+                            size="large"
+                            placeholder="Amount"
+                            onChange={
+                                (e) => setAmount(+e.target.value)
+                            }
                         />
                     </div>
-                </div>
-                <div className="flex flex-row gap-5 mb-5">
-
                     <div className="w-[25%]">
                         <DatePicker
                             size="large"
@@ -123,14 +124,14 @@ export default function Partners() {
                             }}
                         />
                     </div>
+                </div>
+                <div className="flex flex-row gap-5 mb-5">
                     <div className="w-[25%] ">
-                        <Input
-                            allowClear
+                        <RangePicker
                             size="large"
-                            placeholder={t("Amount")}
-                            onChange={
-                                (e) => setAmount(+e.target.value)
-                            }
+                            placeholder={[t("StartDate"), t("EndDate")]}
+                            allowClear
+                            onChange={(dates) => setDate(dates)}
                         />
                     </div>
                     <div className="w-[25%] ">
@@ -203,6 +204,7 @@ export default function Partners() {
                             ]}
                         />
                     </div>
+                    <div className="w-[25%]"></div>
                 </div>
                 {loading ? (
                     <Box
