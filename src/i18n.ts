@@ -20,7 +20,7 @@ i18n
     .use(LanguageDetector) // Brauzer tilini aniqlash uchun
     .init({
         resources,
-        fallbackLng: "en", // Til topilmasa, standart til
+        fallbackLng: "uz", // Til topilmasa, standart til
         interpolation: {
             escapeValue: false, // React XSS muammosini oldini olish
         },

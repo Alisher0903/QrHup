@@ -123,54 +123,56 @@ export default function AdminTransactions() {
                             />
                         </div>
                     </div>
-                    <div className="w-[23.7%] mb-5">
-                        <Select
-                            size="large"
-                            allowClear
-                            className="w-full"
-                            placeholder={t("Status")}
-                            onChange={(value) => setFilters({ ...filters, status: value })}
-                            options={[
-                                {
-                                    value: 'CANCELED',
-                                    label: t("Canceled"),
-                                },
-                                {
-                                    value: 'COMPLETED',
-                                    label: t("Completed"),
-                                }
-                            ]}
-                        />
-                        <div className="flex gap-4 mb-5">
-                            <div className="w-[25%]">
-                                <RangePicker
-                                    size="large"
-                                    allowClear
-                                    onChange={(dates) => setDate(dates)}
-                                />
-                            </div>
-                            <div className="w-[25%] mb-5">
-                                <Select
-                                    size="large"
-                                    allowClear
-                                    className="w-full"
-                                    placeholder="Status"
-                                    onChange={(value) => setFilters({ ...filters, status: value })}
-                                    options={[
-                                        {
-                                            value: 'CANCELED',
-                                            label: 'Canceled',
-                                        },
-                                        {
-                                            value: 'COMPLETED',
-                                            label: 'Completed',
-                                        }
-                                    ]}
-                                />
-                            </div>
-                            <div className="w-[25%]"></div>
-                            <div className="w-[25%]"></div>
+                    <div className="mb-5 flex gap-4">
+                        <div className="w-[25%]">
+                            <Select
+                                size="large"
+                                allowClear
+                                className="w-full"
+                                placeholder={t("Status")}
+                                onChange={(value) => setFilters({ ...filters, status: value })}
+                                options={[
+                                    {
+                                        value: 'CANCELED',
+                                        label: t("Canceled"),
+                                    },
+                                    {
+                                        value: 'COMPLETED',
+                                        label: t("Completed"),
+                                    }
+                                ]}
+                            />
                         </div>
+
+                        <div className="w-[25%]">
+                            <RangePicker
+                                size="large"
+                                allowClear
+                                placeholder={[t("StartDate"), t("EndDate")]}
+                                onChange={(dates) => setDate(dates)}
+                            />
+                        </div>
+                        <div className="w-[25%]">
+                            <Select
+                                size="large"
+                                allowClear
+                                className="w-full"
+                                placeholder="Status"
+                                onChange={(value) => setFilters({ ...filters, status: value })}
+                                options={[
+                                    {
+                                        value: 'CANCELED',
+                                        label: 'Canceled',
+                                    },
+                                    {
+                                        value: 'COMPLETED',
+                                        label: 'Completed',
+                                    }
+                                ]}
+                            />
+                        </div>
+                        {/* <div className="w-[25%]"></div>
+                            <div className="w-[25%]"></div> */}
                     </div>
                     {loading ? (
                         <Box
@@ -198,6 +200,7 @@ export default function AdminTransactions() {
                                     <TableRow className="bg-gray-300">
                                         <TableCell>No</TableCell>
                                         <TableCell className="min-w-[250px] border-l" align="left">{t("Partner")}</TableCell>
+                                        <TableCell className="min-w-[250px] border-l" align="left">{t("Id")}</TableCell>
                                         <TableCell className="min-w-[250px] border-l" align="left">{t("Merchant")}</TableCell>
                                         <TableCell className="min-w-[200px] border-l" align="left">{t("Amount")}</TableCell>
                                         <TableCell className="min-w-[150px] border-l" align="left">{t("Currency")}</TableCell>
