@@ -45,7 +45,7 @@ const ECommerce: React.FC = () => {
           <p className="text-2xl text-blue-600">{getMerchantsStatistic.response?.noActiveMerchantCount || "0"}</p>
         </div>
         <div className="flex flex-col border rounded-xl bg-white shadow-2 p-6 gap-4 ">
-          <h3 className="font-medium text-black">{t("Active terminals")}</h3>
+          <h3 className="font-medium text-black">{t("ActiveTerminals")}</h3>
           <p className="text-2xl text-blue-600">{getMerchantsStatistic.response?.activeTerminalCount || "0"}</p>
         </div>
         <div className="flex flex-col border rounded-xl bg-white shadow-2 p-6 gap-4 ">
@@ -55,7 +55,7 @@ const ECommerce: React.FC = () => {
       </div>
 
       <div className="mt-4 mb-10 bg-white grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-2">
-        <div className="">
+        <div className=""> 
           <ChartThree
             data={getTransactionStatisticDiagram?.response}
             setMonth={setMonth}
@@ -66,27 +66,27 @@ const ECommerce: React.FC = () => {
           <div className="flex justify-between border rounded-xl bg-white shadow-1 p-6 gap-6 ">
             <div className="border-r-2 w-full">
               <p className="text-3xl text-black">{getTransactionStatistic.response?.totalTransAmount || "0"}</p>
-              <p className="text-[15px] text-gray-500">Total transaction volume</p>
+              <p className="text-[15px] text-gray-500">{t("TotalTransactionVolume")}</p>
             </div>
             <div className="w-full">
               <p className="text-3xl text-black">{getTransactionStatistic.response?.activePartnerCount || "0"}</p>
-              <p className="text-[15px] text-gray-500">Active users</p>
+              <p className="text-[15px] text-gray-500">{t("ActiveUsers")}</p>
             </div>
           </div>
           <div className="flex justify-between border rounded-xl bg-white shadow-1 p-6 gap-6 ">
             <div className="border-r-2 w-full">
               <p className="text-3xl text-black">{getTransactionStatistic.response?.averageTransAmount || "0"}</p>
-              <p className="text-[15px] text-gray-500">Avarage cheque amount</p>
+              <p className="text-[15px] text-gray-500">{t("AvarageChequeAmount")}</p>
             </div>
             <div className="w-full">
               <p className="text-3xl text-black">{getTransactionStatistic.response?.completedTransCount || "0"}/{getTransactionStatistic.response?.canceledTransCount || "0"}</p>
-              <p className="text-[15px] text-gray-500">Successful/unsuccessful</p>
+              <p className="text-[15px] text-gray-500">{t("Successful/unsuccessful")}</p>
             </div>
           </div>
         </div>
       </div>
       <div className='py-2'>
-        <p className='text-2xl font-semibold text-black'>Last Actions on system</p>
+        <p className='text-2xl mb-2 font-semibold text-black'>{t('ActionsSystem')}</p>
       </div>
       <TableContainer>
 
@@ -115,11 +115,11 @@ const ECommerce: React.FC = () => {
               <TableHead>
                 <TableRow className="bg-gray-300">
                   <TableCell className="border-l">No</TableCell>
-                  <TableCell className="border-l min-w-[200px]" align="left">User name</TableCell>
-                  <TableCell className="border-l min-w-[200px]" align="left">Action</TableCell>
-                  <TableCell className="border-l min-w-[200px]" align="left">Create time</TableCell>
-                  <TableCell className="border-l min-w-[200px]" align="left">Table</TableCell>
-                  <TableCell className="border-l min-w-[200px]" align="left">Object id</TableCell>
+                  <TableCell className="border-l min-w-[200px]" align="left">{t("UserName")}</TableCell>
+                  <TableCell className="border-l min-w-[200px]" align="left">{t("Action")}</TableCell>
+                  <TableCell className="border-l min-w-[200px]" align="left">{t("CreateTime")}</TableCell>
+                  <TableCell className="border-l min-w-[200px]" align="left">{t("Table")}</TableCell>
+                  <TableCell className="border-l min-w-[200px]" align="left">{t("ObjectId")}</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

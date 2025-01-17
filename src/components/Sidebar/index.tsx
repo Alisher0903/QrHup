@@ -9,6 +9,7 @@ import { CiBarcode, CiShop } from "react-icons/ci";
 import { BsQrCode } from 'react-icons/bs';
 import { MdCurrencyBitcoin } from 'react-icons/md';
 import { GrTransaction } from "react-icons/gr";
+import { useTranslation } from 'react-i18next';
 
 
 interface SidebarProps {
@@ -19,6 +20,7 @@ interface SidebarProps {
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const location = useLocation();
   const { pathname } = location;
+  const { t } = useTranslation()
 
   const trigger = useRef<any>(null);
   const sidebar = useRef<any>(null);
@@ -95,7 +97,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     }`}
                 >
                   <RxDashboard />
-                  Dashboard
+                  {t("Dashboard")}
                 </NavLink>
                 <li>
                   <NavLink
@@ -107,24 +109,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       }`}
                   >
                     <FaRegUser />
-                    User
+                    {t("User")}
                   </NavLink>
                 </li>
-
-
-                {/* <li>
-                  <NavLink
-                    to="/transactions"
-                    className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-gray 
-                      ${(pathname === '/transactions' ||
-                        pathname.includes('/transactions')) &&
-                      'bg-gray-100 text-black'
-                      }`}
-                  >
-                    <TfiControlSkipBackward />
-                    Transactions
-                  </NavLink>
-                </li> */}
                 <li>
                   <NavLink
                     to="/partners"
@@ -135,7 +122,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       }`}
                   >
                     <PiUsersThreeBold />
-                    Partners
+                    {t("Partners")}
                   </NavLink>
                 </li>
                 <li>
@@ -148,7 +135,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       }`}
                   >
                     <GrTransaction />
-                    Transactions
+                    {t("Transactions")}
                   </NavLink>
                 </li>
                 <li>
@@ -161,7 +148,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       }`}
                   >
                     <BsQrCode />
-                    Qrs
+                    {t("Qrs")}
                   </NavLink>
                 </li>
                 <li>
@@ -174,7 +161,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       }`}
                   >
                     <CiShop size={22} />
-                    Merchant
+                    {t("Merchant")}
                   </NavLink>
                 </li>
                 <li>
@@ -187,7 +174,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       }`}
                   >
                     <CiBarcode size={22} />
-                    Mcc codes
+                    {t("MccCodes")}
                   </NavLink>
                 </li>
                 <li>
@@ -200,11 +187,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       }`}
                   >
                     <FaPersonChalkboard size={22} />
-                    Action
+                    {t("Action")}
                   </NavLink>
 
                 </li>
-
                 <li>
                   <NavLink
                     to="/currency"
@@ -215,7 +201,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       }`}
                   >
                     <MdCurrencyBitcoin size={22} />
-                    Currency
+                    {t("Currency")}
                   </NavLink>
                 </li>
               </ul>
@@ -256,7 +242,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     }`}
                 >
                   <FaPersonChalkboard size={22} />
-                  QRs To Clarify
+                  {t("QRsToClarify")}
                 </NavLink>
                 <NavLink
                   to="/moderator/Action"
@@ -267,7 +253,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     }`}
                 >
                   <MdCurrencyBitcoin size={22} />
-                  My Action
+                  {t("MyAction")}
                 </NavLink>
               </li>
             </ul>

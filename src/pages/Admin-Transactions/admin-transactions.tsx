@@ -152,25 +152,6 @@ export default function AdminTransactions() {
                                 onChange={(dates) => setDate(dates)}
                             />
                         </div>
-                        <div className="w-[25%]">
-                            <Select
-                                size="large"
-                                allowClear
-                                className="w-full"
-                                placeholder="Status"
-                                onChange={(value) => setFilters({ ...filters, status: value })}
-                                options={[
-                                    {
-                                        value: 'CANCELED',
-                                        label: 'Canceled',
-                                    },
-                                    {
-                                        value: 'COMPLETED',
-                                        label: 'Completed',
-                                    }
-                                ]}
-                            />
-                        </div>
                         {/* <div className="w-[25%]"></div>
                             <div className="w-[25%]"></div> */}
                     </div>

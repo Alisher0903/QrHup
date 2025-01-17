@@ -287,7 +287,7 @@ export default function Clarify() {
                                 fontSize="18px"
                                 sx={{ marginBottom: '8px' }}
                             >
-                               {t("QRDetails")}
+                                {t("QRDetails")}
                             </Typography>
                             <Table size="small">
                                 <TableBody className="gap-4">
@@ -440,7 +440,7 @@ export default function Clarify() {
                                                     getOneRes?.date ? 'bg-[#FD314D] text-white' : ''
                                                 }
                                             >
-                                               {t("PaymentDate")}:{' '}
+                                                {t("PaymentDate")}:{' '}
                                                 {getOneRes?.transDate
                                                     ? new Date(getOneRes.transDate)
                                                         .toISOString()

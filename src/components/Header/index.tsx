@@ -83,7 +83,6 @@ const Header = (props: {
               changeLanguage(value);
             }} options={[
               {
-                // icon: <Uzb>,
                 value: 'uz',
                 label: 'UZBEK',
               },

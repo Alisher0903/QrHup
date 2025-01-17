@@ -2,6 +2,7 @@ import { ApexOptions } from 'apexcharts';
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { DatePicker } from "antd";
+import { t } from 'i18next';
 
 const ChartThree: React.FC<{ data: any, setYear: (val: string | null) => void, setMonth: (val: string | null) => void }> = ({ data, setMonth, setYear }) => {
   const hasData = Array.isArray(data) && data.length > 0;
@@ -79,19 +80,19 @@ const ChartThree: React.FC<{ data: any, setYear: (val: string | null) => void, s
     <div className="sm:px-7.5 col-span-12 rounded-sm bg-white px-5 pb-5 pt-7.5 dark:border-strokedark dark:bg-boxdark xl:col-span-5">
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
-          <h5 className="text-xl font-semibold text-black">Visitors Analytics</h5>
+          <h5 className="text-md font-semibold text-black">{t('VisitorsAnalytics')}</h5>
         </div>
         <div className='flex gap-5'>
           <DatePicker
             allowClear
             onChange={handleYearChange}
-            placeholder='Select year'
+            placeholder={t('SelectYear')}
             picker="year"
           />
           <DatePicker
             allowClear
             onChange={handleMonthChange}
-            placeholder='Select month'
+            placeholder={t('SelectMonth')}
             picker="month"
           />
         </div>

@@ -3,10 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import ClickOutside from '../ClickOutside';
 import UserOne from '../../images/user/user-01.png';
 import { LuLogOut } from "react-icons/lu";
+import { useTranslation } from 'react-i18next';
 
 const DropdownUser = ({ data }: { data: any }) => {
   const navigate = useNavigate()
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { t } = useTranslation()
 
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
@@ -53,7 +55,7 @@ const DropdownUser = ({ data }: { data: any }) => {
             navigate('/auth/signin')
           }} className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
             <LuLogOut />
-            Log Out
+            {t("LogOut")}
           </button>
         </div>
       )}
