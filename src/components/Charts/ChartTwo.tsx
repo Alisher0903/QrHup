@@ -12,7 +12,7 @@ const options: ApexOptions = {
     toolbar: {
       show: false,
     },
-    zoom: {
+    zoom: { 
       enabled: false,
     },
   },
