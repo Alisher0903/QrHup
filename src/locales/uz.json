@@ -57,7 +57,7 @@
     "ApiKey":"Api-kalit",
     "Merchants":"Savdogarlar",
     "Terminals":"Terminallar",
-    "Transactions":"Bitimlar",
+    "Transactions":"O`tkazmalar",
     "Success":"Muvaffaqiyatli",
     "Partner":"Hamkor",
     "Type":"Turi",
@@ -150,5 +150,6 @@
     "QRsToClarify": "Aniqlashtirish uchun QR",
     "MyAction": "Mening harakatim",
     "LogOut": "Chiqish",
-    "MccCodes": "Mcc kodlari"
+    "MccCodes": "Mcc kodlari",
+    "transactin":"bitimlar"
 }
