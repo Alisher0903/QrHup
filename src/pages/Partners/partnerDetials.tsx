@@ -45,6 +45,7 @@ export default function PartnerDetials() {
       `${TransactionPartner}partnerId=${id}&page=${pageTransaction}&size=10`,
       'GET',
     );
+console.log(TransactionGet);
 
   const navigator = useNavigate();
 
@@ -156,7 +157,7 @@ export default function PartnerDetials() {
               </p>
             </div>
             <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-              <p className="text-md font-semibold">QRs:</p>
+              <p className="text-md font-semibold">{t("Qrs")}:</p>
               <p className="text-md font-semibold">
                 {statisticsGet?.qrCount || '-'}
               </p>
@@ -237,7 +238,7 @@ export default function PartnerDetials() {
                       </TableCell>
                       <TableCell align="left">{partner.type || '-'}</TableCell>
                       <TableCell align="left">
-                        {partner.createdAt || '-'}
+                      {partner.createdAt ? new Date(partner.createdAt).toLocaleDateString() : '-'}
                       </TableCell>
                       <TableCell align="left">
                         {partner.expire || '-'}
@@ -463,7 +464,7 @@ export default function PartnerDetials() {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {TransactionGet?.object && TransactionGet?.object.length ? TransactionGet?.object?.map((transaction: any, index: number) => (
+                    {TransactionGet?.object && TransactionGet?.object.length ? TransactionGet?.object?.map((transaction: any, index: number) =>  (
                       <TableRow key={transaction.id || index}>
                         <TableCell>{pageQr * 10 + index + 1}</TableCell>
                         <TableCell align="left">
@@ -485,6 +486,7 @@ export default function PartnerDetials() {
                           {transaction.serviceFee || '-'}
                         </TableCell>
                       </TableRow>
+                      
                     )) : (
                       <TableCell colSpan={10}>
                         <Typography color="error" textAlign="center">
