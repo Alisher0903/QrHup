@@ -65,8 +65,8 @@ export default function Currency() {
             />
             <Box sx={{ bgcolor: "white", padding: 5 }}>
                 <Box sx={{ display: "flex", flexDirection: "column" }} gap={2}>
-                    < div className="flex flex-row gap-5">
-                        <div className="w-[25%]">
+                    < div className="flex flex-col lg:flex-row gap-5 mb-5">
+                        <div className="lg:w-[25%]">
                             <Input
                                 allowClear
                                 size="large"
@@ -76,7 +76,7 @@ export default function Currency() {
                                 }
                             />
                         </div>
-                        <div className="w-[25%]">
+                        <div className="lg:w-[25%]">
                             <Input
                                 allowClear
                                 size="large"

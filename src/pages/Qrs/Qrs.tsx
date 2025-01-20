@@ -72,8 +72,8 @@ export default function Partners() {
                 <Typography className="mb-2" color="textPrimary" fontSize={30}>
                    {t("Filters")}
                 </Typography>
-                <div className="flex flex-row gap-5 mb-5">
-                    <div className="w-[25%] ">
+                <div className="flex flex-col lg:flex-row gap-5 mb-5">
+                    <div className="lg:w-[25%] ">
                         <Input
                             allowClear
                             size="large"
@@ -83,7 +83,7 @@ export default function Partners() {
                             }
                         />
                     </div>
-                    <div className="w-[25%] ">
+                    <div className="lg:w-[25%] ">
                         <Input
                             allowClear
                             size="large"
@@ -93,7 +93,7 @@ export default function Partners() {
                             }
                         />
                     </div>
-                    <div className="w-[25%] ">
+                    <div className="lg:w-[25%] ">
 
                         <Input
                             allowClear
@@ -104,7 +104,7 @@ export default function Partners() {
                             }
                         />
                     </div>
-                    <div className="w-[25%]">
+                    <div className="lg:w-[25%]">
                         <DatePicker
                             size="large"
                             placeholder={t("SelectExpireDate")}
@@ -125,8 +125,8 @@ export default function Partners() {
                         />
                     </div>
                 </div>
-                <div className="flex flex-row gap-5 mb-5">
-                    <div className="w-[25%] ">
+                <div className="flex flex-col lg:flex-row gap-5 mb-5">
+                    <div className="lg:w-[25%] ">
                         <RangePicker
                             size="large"
                             placeholder={[t("StartDate"), t("EndDate")]}
@@ -134,7 +134,7 @@ export default function Partners() {
                             onChange={(dates) => setDate(dates)}
                         />
                     </div>
-                    <div className="w-[25%] ">
+                    <div className="lg:w-[25%] ">
                         <Select
                             size="large"
                             allowClear
@@ -185,7 +185,7 @@ export default function Partners() {
                             ]}
                         />
                     </div>
-                    <div className="w-[25%] ">
+                    <div className="lg:w-[25%] ">
                         <Select
                             size="large"
                             allowClear
@@ -204,7 +204,7 @@ export default function Partners() {
                             ]}
                         />
                     </div>
-                    <div className="w-[25%]"></div>
+                    <div className="lg:w-[25%]"></div>
                 </div>
                 {loading ? (
                     <Box

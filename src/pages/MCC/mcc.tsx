@@ -150,8 +150,8 @@ export default function Mcc() {
                 }
             />
             <Box sx={{ bgcolor: "white", padding: 5 }}>
-                <div className="flex flex-row gap-5 mb-5">
-                    <div className="w-[25%] ">
+                <div className="flex flex-col lg:flex-row gap-5 mb-5">
+                    <div className="lg:w-[25%] ">
                         <Input
                             allowClear
                             size="large"
@@ -161,7 +161,7 @@ export default function Mcc() {
                             }
                         />
                     </div>
-                    <div className="w-[25%] ">
+                    <div className="lg:w-[25%] ">
                         <Input
                             allowClear
                             size="large"

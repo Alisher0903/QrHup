@@ -68,8 +68,8 @@ export default function Merchant() {
                 pageName={t("AllMerchants")}
             />
             <Box sx={{ bgcolor: "white", padding: 5 }}>
-                <div className="flex flex-row gap-5 mb-5">
-                    <div className="w-[25%]">
+                <div className="flex flex-col lg:flex-row gap-5 mb-5">
+                    <div className="lg:w-[25%]">
                         <Input
                             allowClear
                             size="large"
@@ -79,7 +79,7 @@ export default function Merchant() {
                             }
                         />
                     </div>
-                    <div className="w-[25%]">
+                    <div className="lg:w-[25%]">
                         <Input
                             allowClear
                             size="large"
@@ -100,7 +100,7 @@ export default function Merchant() {
                         />
                     </div> */}
 
-                    <div className="w-[25%]">
+                    <div className="lg:w-[25%]">
                         <Input
                             allowClear
                             size="large"
@@ -110,7 +110,7 @@ export default function Merchant() {
                             }
                         />
                     </div>
-                    <div className="w-[25%]">
+                    <div className="lg:w-[25%]">
                         <RangePicker
                             size="large"
                             allowClear
@@ -118,9 +118,9 @@ export default function Merchant() {
                         />
                     </div>
                 </div>
-                <div className="flex flex-row gap-5 mb-5">
+                <div className="flex flex-col lg:flex-row gap-5 mb-5">
 
-                    <div className="w-[25%]">
+                    <div className="lg:w-[25%]">
                         <Input
                             allowClear
                             size="large"
@@ -130,7 +130,7 @@ export default function Merchant() {
                             }
                         />
                     </div>
-                    <div className="w-[25%]">
+                    <div className="lg:w-[25%]">
                         <Input
                             allowClear
                             size="large"
@@ -140,7 +140,7 @@ export default function Merchant() {
                             }
                         />
                     </div>
-                    <div className="w-[25%]">
+                    <div className="lg:w-[25%]">
                         <Select
                             size="large"
                             allowClear
@@ -159,7 +159,7 @@ export default function Merchant() {
                             ]}
                         />
                     </div>
-                    <div className="w-[25%]"></div>
+                    <div className="lg:w-[25%]"></div>
                 </div>
                 {loading ? (
                     <Box

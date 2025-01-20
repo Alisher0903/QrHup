@@ -233,8 +233,8 @@ export default function Partners() {
                 }
             />
             <Box sx={{ bgcolor: "white", padding: 5 }}>
-                <div className="flex flex-row gap-5 mb-5">
-                    <div className="w-[25%]">
+                <div className="flex flex-col lg:flex-row gap-5 mb-5">
+                    <div className="lg:w-[25%]">
                         <Input
                             allowClear
                             size="large"
@@ -244,7 +244,7 @@ export default function Partners() {
                             }
                         />
                     </div>
-                    <div className="w-[25%]">
+                    <div className="lg:w-[25%]">
                         <Input
                             allowClear
                             size="large"
@@ -254,7 +254,7 @@ export default function Partners() {
                             }
                         />
                     </div>
-                    <div className="w-[25%]">
+                    <div className="lg:w-[25%]">
                         <Input
                             allowClear
                             size="large"
@@ -264,7 +264,7 @@ export default function Partners() {
                             }
                         />
                     </div>
-                    <div className="w-[25%]">
+                    <div className="lg:w-[25%]">
                         <Input
                             allowClear
                             size="large"
@@ -275,8 +275,8 @@ export default function Partners() {
                         />
                     </div>
                 </div>
-                <div className="flex flex-row gap-5 mb-5">
-                    <div className="w-[25%]">
+                <div className="flex flex-col lg:flex-row gap-5 mb-5">
+                    <div className="lg:w-[25%]">
                         <RangePicker
                             size="large"
                             allowClear
@@ -284,7 +284,7 @@ export default function Partners() {
                             onChange={(dates) => setDate(dates)}
                         />
                     </div>
-                    <div className="w-[25%]">
+                    <div className="lg:w-[25%]">
                         <Select
                             size="large"
                             allowClear
@@ -303,7 +303,7 @@ export default function Partners() {
                             ]}
                         />
                     </div>
-                    <div className="w-[25%]">
+                    <div className="lg:w-[25%]">
                         <Input
                             allowClear
                             size="large"
@@ -313,7 +313,7 @@ export default function Partners() {
                             }
                         />
                     </div>
-                    <div className="w-[25%]">
+                    <div className="lg:w-[25%]">
                         <Input
                             allowClear
                             size="large"

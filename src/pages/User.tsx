@@ -147,8 +147,8 @@ export default function User() {
                 }
             />
             <Box sx={{ bgcolor: "white", padding: 5 }}>
-                <div className="flex flex-row gap-5 mb-5">
-                    <div className="w-[25%]">
+                <div className="flex flex-col lg:flex-row gap-5 mb-5">
+                    <div className="lg:w-[25%]">
                         <Input
                             size="large"
                             placeholder={t("UserNameSearch")}
@@ -157,7 +157,7 @@ export default function User() {
                             }
                         />
                     </div>
-                    <div className="w-[25%]">
+                    <div className="lg:w-[25%]">
                         <Input
                             size="large"
                             placeholder={t("SearchPeople")}
