@@ -21,14 +21,14 @@ import { adminTransactionsGet } from "../../hooks/url";
 import Dialog from '@mui/material/Dialog';
 import { datePicker } from "../../common/global-functions/date-sort";
 import { DatePicker, Select } from "antd";
-import { QrStore } from "../../hooks/Store/Qr/qrStore";
+// import { QrStore } from "../../hooks/Store/Qr/qrStore";
 import { useTranslation } from "react-i18next";
 const { RangePicker } = DatePicker;
 
 export default function AdminTransactions() {
     const { t } = useTranslation()
     const navigator = useNavigate();
-    const { setQrData } = QrStore()
+    // const { setQrData } = QrStore()
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState({
         paymentTime: "",
@@ -87,8 +87,8 @@ export default function AdminTransactions() {
                     {t("Filters")}
                 </Typography>
                 <div>
-                    <div className="flex gap-4 mb-5">
-                        <div className="w-[25%]">
+                    <div className="flex lg:flex-row flex-col gap-4 mb-5">
+                        <div className="lg:w-[25%]">
                             <Input
                                 allowClear
                                 size="large"
@@ -96,7 +96,7 @@ export default function AdminTransactions() {
                                 onChange={(e) => setFilters({ ...filters, transId: e.target.value })}
                             />
                         </div>
-                        <div className="w-[25%]">
+                        <div className="lg:w-[25%]">
                             <Input
                                 allowClear
                                 size="large"
@@ -104,7 +104,7 @@ export default function AdminTransactions() {
                                 onChange={(e) => setFilters({ ...filters, merchantName: e.target.value })}
                             />
                         </div>
-                        <div className="w-[25%]">
+                        <div className="lg:w-[25%]">
                             <Input
                                 allowClear
                                 size="large"
@@ -114,7 +114,7 @@ export default function AdminTransactions() {
                             />
                         </div>
 
-                        <div className="w-[25%]">
+                        <div className="lg:w-[25%]">
                             <Input
                                 allowClear
                                 size="large"
@@ -123,8 +123,8 @@ export default function AdminTransactions() {
                             />
                         </div>
                     </div>
-                    <div className="mb-5 flex gap-4">
-                        <div className="w-[25%]">
+                    <div className="mb-5 flex flex-col lg:flex-row gap-4">
+                        <div className="lg:w-[25%]">
                             <Select
                                 size="large"
                                 allowClear
@@ -144,7 +144,7 @@ export default function AdminTransactions() {
                             />
                         </div>
 
-                        <div className="w-[25%]">
+                        <div className="lg:w-[25%]">
                             <RangePicker
                                 size="large"
                                 allowClear

@@ -5,7 +5,7 @@ import { MerchantPartner, partner_get_one, PartnerStatistic, QrsPartner, Termina
 import { Box, Button, Tab, Table, TableBody, TableCell, TableHead, TableRow, Tabs, Typography, } from '@mui/material';
 import { IoChevronBackOutline } from 'react-icons/io5';
 import { Pagination } from 'antd';
-import { PartnersStore } from '../../hooks/Store/Partners/partnerStore';
+// import { PartnersStore } from '../../hooks/Store/Partners/partnerStore';
 import { useTranslation } from 'react-i18next';
 
 export default function PartnerDetials() {

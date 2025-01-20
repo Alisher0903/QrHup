@@ -102,12 +102,7 @@ const SignIn: React.FC = () => {
           >
             {loading ? 'Kirish...' : 'Kirish'}
           </button>
-          {/* <p className="mt-4 text-center">
-            Akkauntingiz yo'qmi?{' '}
-            <Link to="/auth/signup" className="text-primary">
-              Ro'yxatdan o'tish
-            </Link>
-          </p> */}
+          
         </form>
       </div>
     </div>

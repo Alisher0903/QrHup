@@ -6,10 +6,9 @@ interface BreadcrumbProps {
 const Breadcrumb = ({ pageName , child }: BreadcrumbProps) => {
   return (
     <div className="">
-
       <nav>
         <ol className="flex items-center gap-2 mb-3">
-          <li>
+          <li className='text-[15px] md:text-title-md'>
             <Link className="font-medium" to="/">
               Dashboard /
             </Link>

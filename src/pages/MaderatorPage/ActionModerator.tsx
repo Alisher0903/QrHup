@@ -11,9 +11,9 @@ import {
     TableRow,
     Typography,
     CircularProgress,
-    TextField,
+    // TextField,
     Button,
-    Modal,
+    // Modal,
     Dialog,
     DialogTitle,
     DialogContent,
@@ -55,7 +55,7 @@ export default function ActionModerator() {
         'GET',
     );
     const {
-        error: GetoneError,
+        // error: GetoneError,
         globalDataFunc: EffectGetOne,
         response: getOneRes,
     } = useGlobalRequest(`${ActionModeratorGetOne}${id}`, 'GET');

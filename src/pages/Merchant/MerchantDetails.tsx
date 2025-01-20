@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useGlobalRequest } from '../../hooks/GlobalHook';
 import {
     MerchantGetOne,
-    MerchantPartner,
     MerchantQrs,
     MerchantStatistic,
     MerchantTerminal,

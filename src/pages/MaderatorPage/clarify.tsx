@@ -57,7 +57,7 @@ export default function Clarify() {
         getMccUrl(),
         'GET',
     );
-    const { error: errorPost, globalDataFunc: EffectPost, response: rePost, loading: loadPost } = useGlobalRequest(
+    const { error: errorPost, globalDataFunc: EffectPost, response: rePost } = useGlobalRequest(
         `${ModeratorChangeStatus}transId=${id}&status=${status}`,
         'POST',
         {}

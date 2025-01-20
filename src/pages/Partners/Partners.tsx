@@ -28,13 +28,13 @@ import { FaEye, FaKey } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { DatePicker, Select } from "antd";
 import { datePicker } from "../../common/global-functions/date-sort";
-import { PartnersStore } from "../../hooks/Store/Partners/partnerStore";
+// import { PartnersStore } from "../../hooks/Store/Partners/partnerStore";
 // import { PartnersStore } from "../../hooks/Store/Partners/partnerStore";
 const { RangePicker } = DatePicker;
 
 export default function Partners() {
     const { t } = useTranslation()
-    const { setPartners } = PartnersStore()
+    // const { setPartners } = PartnersStore()
     const [openAddModal, setOpenAddModal] = useState(false);
     const [openEditModal, setOpenEditModal] = useState(false);
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
