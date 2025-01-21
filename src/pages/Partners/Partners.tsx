@@ -244,7 +244,7 @@ export default function Partners() {
                             }
                         />
                     </div>
-                    <div className="lg:w-[25%]">
+                    <div className="lg:w-[25%] ">
                         <Input
                             allowClear
                             size="large"
@@ -276,9 +276,10 @@ export default function Partners() {
                     </div>
                 </div>
                 <div className="flex flex-col lg:flex-row gap-5 mb-5">
-                    <div className="lg:w-[25%]">
+                    <div className="lg:w-[25%] w-full">
                         <RangePicker
                             size="large"
+                            className="w-full"
                             allowClear
                             placeholder={[t("StartDate"), t("EndDate")]}
                             onChange={(dates) => setDate(dates)}
