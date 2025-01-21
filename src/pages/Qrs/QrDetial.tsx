@@ -14,6 +14,8 @@ export default function QrDetial() {
     const [size, setSize] = useState(10);
     const navigator = useNavigate();
     const qrGetOne = useGlobalRequest(`${qrGetone}/${id}`, 'GET');
+    console.log(qrGetOne);
+    
     const qrGetTransactions = useGlobalRequest(`${getTransactionsByQrId}/${id}?page=${page}&size=${size}`, 'GET');
     const [isOpen, setIsopen] = useState(false);
     const [selectedItem, setSelectedItem] = useState({
@@ -128,7 +130,7 @@ export default function QrDetial() {
                                 <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
                                     <p className="text-md font-semibold">{t("CreatedTime")}</p>
                                     <p className="text-md font-semibold">
-                                        {qrGetOne.response?.createdAt || '-'}
+                                    {qrGetOne.response?.createdAt ? formatDateTime(qrGetOne.response.createdAt) : '-'}
                                     </p>
                                 </div>
 
@@ -141,7 +143,7 @@ export default function QrDetial() {
                                 <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
                                     <p className="text-md font-semibold">{t("RedirectUrl")}</p>
                                     <p className="text-md font-semibold">
-                                        {qrGetOne.response?.url || '-'}
+                                        {qrGetOne.response?.redirectUrl || '-'}
                                     </p>
                                 </div>
                                 <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
