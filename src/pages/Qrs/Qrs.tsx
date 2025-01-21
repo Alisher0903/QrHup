@@ -129,6 +129,7 @@ export default function Partners() {
                     <div className="lg:w-[25%] ">
                         <RangePicker
                             size="large"
+                            className="w-full"
                             placeholder={[t("StartDate"), t("EndDate")]}
                             allowClear
                             onChange={(dates) => setDate(dates)}

@@ -147,6 +147,7 @@ export default function AdminTransactions() {
                         <div className="lg:w-[25%]">
                             <RangePicker
                                 size="large"
+                                className="w-full"
                                 allowClear
                                 placeholder={[t("StartDate"), t("EndDate")]}
                                 onChange={(dates) => setDate(dates)}

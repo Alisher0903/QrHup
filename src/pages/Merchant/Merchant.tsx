@@ -113,6 +113,7 @@ export default function Merchant() {
                     <div className="lg:w-[25%]">
                         <RangePicker
                             size="large"
+                            className="w-full"
                             allowClear
                             onChange={(dates) => setDate(dates)}
                         />

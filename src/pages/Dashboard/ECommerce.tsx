@@ -55,32 +55,51 @@ const ECommerce: React.FC = () => {
       </div>
 
       <div className="mt-4 mb-10 bg-white grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-2">
-        <div className=""> 
-          <ChartThree
-            data={getTransactionStatisticDiagram?.response}
-            setMonth={setMonth}
-            setYear={setYear}
-          />
-        </div>
-        <div className="bg-white grid grid-cols-1 px-5 py-10 md:grid-cols-2 md:gap-6 xl:grid-cols-1">
-          <div className="flex justify-between border rounded-xl bg-white shadow-1 p-6 gap-6 ">
-            <div className="border-r-2 w-full">
-              <p className="text-3xl text-black">{getTransactionStatistic.response?.totalTransAmount || "0"}</p>
-              <p className="text-[15px] text-gray-500">{t("TotalTransactionVolume")}</p>
+      <div className="relative w-full h-64 md:h-80 xl:h-96">
+  <ChartThree
+    data={getTransactionStatisticDiagram?.response}
+    setMonth={setMonth}
+    setYear={setYear}
+  />
+</div>
+
+        <div className="bg-white grid grid-cols-1 gap-4 p-4">
+          <div className="flex flex-col sm:flex-row border rounded-xl bg-white shadow-1 p-4 sm:p-6">
+            <div className="flex-1 border-b-2 sm:border-b-0 sm:border-r-2 pb-4 sm:pb-0 sm:pr-6">
+              <p className="text-xl sm:text-2xl md:text-3xl text-black text-center sm:text-left">
+                {getTransactionStatistic.response?.totalTransAmount || "0"}
+              </p>
+              <p className="text-[13px] sm:text-[15px] text-gray-500 text-center sm:text-left mt-2">
+                {t("TotalTransactionVolume")}
+              </p>
             </div>
-            <div className="w-full">
-              <p className="text-3xl text-black">{getTransactionStatistic.response?.activePartnerCount || "0"}</p>
-              <p className="text-[15px] text-gray-500">{t("ActiveUsers")}</p>
+            <div className="flex-1 pt-4 sm:pt-0 sm:pl-6">
+              <p className="text-xl sm:text-2xl md:text-3xl text-black text-center sm:text-left">
+                {getTransactionStatistic.response?.activePartnerCount || "0"}
+              </p>
+              <p className="text-[13px] sm:text-[15px] text-gray-500 text-center sm:text-left mt-2">
+                {t("ActiveUsers")}
+              </p>
             </div>
           </div>
-          <div className="flex justify-between border rounded-xl bg-white shadow-1 p-6 gap-6 ">
-            <div className="border-r-2 w-full">
-              <p className="text-3xl text-black">{getTransactionStatistic.response?.averageTransAmount || "0"}</p>
-              <p className="text-[15px] text-gray-500">{t("AvarageChequeAmount")}</p>
+
+          <div className="flex flex-col sm:flex-row border rounded-xl bg-white shadow-1 p-4 sm:p-6">
+            <div className="flex-1 border-b-2 sm:border-b-0 sm:border-r-2 pb-4 sm:pb-0 sm:pr-6">
+              <p className="text-xl sm:text-2xl md:text-3xl text-black text-center sm:text-left">
+                {getTransactionStatistic.response?.averageTransAmount || "0"}
+              </p>
+              <p className="text-[13px] sm:text-[15px] text-gray-500 text-center sm:text-left mt-2">
+                {t("AvarageChequeAmount")}
+              </p>
             </div>
-            <div className="w-full">
-              <p className="text-3xl text-black">{getTransactionStatistic.response?.completedTransCount || "0"}/{getTransactionStatistic.response?.canceledTransCount || "0"}</p>
-              <p className="text-[15px] text-gray-500">{t("Successful/unsuccessful")}</p>
+            <div className="flex-1 pt-4 sm:pt-0 sm:pl-6">
+              <p className="text-xl sm:text-2xl md:text-3xl text-black text-center sm:text-left">
+                {getTransactionStatistic.response?.completedTransCount || "0"}/
+                {getTransactionStatistic.response?.canceledTransCount || "0"}
+              </p>
+              <p className="text-[13px] sm:text-[15px] text-gray-500 text-center sm:text-left mt-2">
+                {t("Successful/unsuccessful")}
+              </p>
             </div>
           </div>
         </div>
