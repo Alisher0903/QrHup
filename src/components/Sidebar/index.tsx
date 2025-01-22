@@ -251,7 +251,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     }`}
                 >
                   <MdCurrencyBitcoin size={22} />
-                  {t("MyAction")}
+                  {t("MyAction")} 
                 </NavLink>
               </li>
             </ul>
