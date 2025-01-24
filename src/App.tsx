@@ -78,11 +78,13 @@ function App() {
     };
 
     checkAuth();
+    
   }, [navigate, pathname]);
 
   // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
+    console.clear
   }, [pathname]);
 
   return loading ? (

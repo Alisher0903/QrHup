@@ -9,6 +9,7 @@ const DropdownUser = ({ data }: { data: any }) => {
   const navigate = useNavigate()
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { t } = useTranslation()
+// console.log(data?.name);
 
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
@@ -19,14 +20,14 @@ const DropdownUser = ({ data }: { data: any }) => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            {data ? data.name : ""}
+            {data ? data.name : " "}
           </span>
-          <span className="block text-xs">{data ? `+${data.phone}` : ""}</span>
+          <span className="block text-xs">{data ? `+${data.phone}` : " "}</span>
         </span>
 
-        <span className="h-12 w-12 rounded-full">
+        {/* <span className="h-12 w-12 rounded-full">
           <img src={UserOne} alt="User" />
-        </span>
+        </span> */}
 
         <svg
           className="hidden fill-current sm:block"

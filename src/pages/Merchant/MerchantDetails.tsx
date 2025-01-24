@@ -72,11 +72,11 @@ export default function MerchantDetials() {
         TerminalEffect();
         TransactionEffect();
     }, [id]);
-    console.log('Statistic Merchant', statisticsGet);
+    // console.log('Statistic Merchant', statisticsGet);
     const GettingDatass = resGet;
-    console.log('qr GEtting', resGet);
+    // console.log('qr GEtting', resGet);
     const { t } = useTranslation()
-    // console.log(id);
+    // // console.log(id);
     return (
         <div className="bg-gray-100  flex flex-col items-center">
             <div className="flex justify-between mb-3 w-full">

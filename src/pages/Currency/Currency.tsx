@@ -145,7 +145,7 @@ export default function Currency() {
                                                     onChange={async (e: any) => {
                                                         await setId(user.id); 
                                                         await setActive(e.target.checked);
-                                                        console.log(e.target.checked);
+                                                        // console.log(e.target.checked);
                                                         handleChangeActive();
                                                     }}
                                                 />

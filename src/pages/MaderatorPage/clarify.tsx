@@ -87,7 +87,7 @@ export default function Clarify() {
         EffectGetOne();
     }, [page, size, merchantNameFilter, amountFilter, statusFilter, id, statusFilter, date]);
 
-    console.log('getOne res', getOneRes);
+    // console.log('getOne res', getOneRes);
 
     const handleModalOpen = () => {
         setIsModalOpen(true);
