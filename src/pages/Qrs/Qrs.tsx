@@ -233,6 +233,7 @@ export default function Partners() {
                                 <TableRow className="bg-gray-300">
                                     <TableCell>No</TableCell>
                                     <TableCell className="min-w-[250px] border-l" align="left">{t("Merchantname")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("PartnerName")}</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">{t("Amount")}</TableCell>
                                     <TableCell className="min-w-[150px] border-l" align="left">{t("Type")}</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">{t("CreatedTime")}</TableCell>
@@ -252,13 +253,17 @@ export default function Partners() {
                                                 {partner.merchant || "-"}
                                             </TableCell>
                                             <TableCell align="left">
+                                                {partner.partner || "-"}
+                                            </TableCell>
+                                            <TableCell align="left">
                                                 {partner.amount || "-"} {partner.amouunt ? partner.currency : ''}
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.type || "-"}
                                             </TableCell>
                                             <TableCell align="left">
-                                                {new Date(partner?.createdAt).toLocaleDateString() || '-'}
+                                                {partner?.createdAt ? partner.createdAt.slice(0,10) : '-'}  {' '}
+                                                {partner?.createdAt ? partner.createdAt.slice(11,16) : '-'}
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.expire || "-"}

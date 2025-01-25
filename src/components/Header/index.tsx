@@ -71,25 +71,26 @@ const Header = (props: {
           <Link className="block flex-shrink-0 lg:hidden" to="/">
             <img src={LogoIcon} alt="Logo" />
           </Link>
-        </div> 
+        </div>
 
         <div className="hidden sm:block">
         </div>
 
         <div className="flex items-center gap-3 2xsm:gap-7">
-          <Select defaultValue={'uz'}
-          className='w-24'
+          <Select defaultValue={'en'}
+            className='w-24'
             onChange={(value) => {
               changeLanguage(value);
             }} options={[
               {
-                value: 'uz',
-                label: 'UZBEK',
-              },
-              {
                 value: 'en',
                 label: 'ENGLISH',
               },
+              {
+                value: 'uz',
+                label: 'UZBEK',
+              },
+
               {
                 value: 'ru',
                 label: 'RUSSIAN',
