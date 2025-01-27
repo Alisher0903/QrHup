@@ -228,7 +228,7 @@ export default function AdminTransactions() {
                                                 </TableCell>
                                                 <TableCell align="left">
                                                     {/* {partner.status || "-"} */}
-                                                    <div className={partner.status === "COMPLETED" ? "bg-green-500 py-1 rounded-lg text-center text-lg text-white" : "bg-red-500 py-1 rounded-lg text-center text-lg text-white"}>{partner.status === "COMPLETED" ? t("Canceled") : t("Completed")}</div>
+                                                    <div className={`p-3 text-center rounded-full ${partner.status === 'CREATED' ? 'bg-[#F0B732]' : partner.status === 'FAILED' ? 'bg-[#298bd5]' : partner.status === 'SUCCESS' ? 'bg-[#0c9031cc]' : partner.status === 'CANCELED' ? 'bg-[#e82121]' : 'bg-[#ccc]'}`} >{partner.status || '-'}</div>
                                                 </TableCell>
                                                 <TableCell align="center">
                                                     <Button
@@ -270,42 +270,42 @@ export default function AdminTransactions() {
                         />
                     </div>}
                 </div>
-                <Dialog open={isOpen} onClose={toggleModal}>
-                    <div style={{ padding: '20px', width: '600px', textAlign: 'left' }}>
-                        <div className="flex flex-col gap-5">
-                            <div className="flex justify-between">
-                                <p className="text-xl font-bold">{t("PaymentTime")}:</p>
-                                <p className="text-xl">{new Date(selectedItem.paymentTime).toLocaleDateString() || "---"}</p>
-                            </div>
-                            <div className="flex justify-between">
-                                <p className="text-xl font-bold">{t("PayerBank")}:</p>
-                                <p className="text-xl">{selectedItem.payerBank || "---"}</p>
-                            </div>
-                            <div className="flex justify-between">
-                                <p className="text-xl font-bold">{t("SenderName")}:</p>
-                                <p className="text-xl">{selectedItem.senderName || "---"}</p>
-                            </div>
-                            <div className="flex justify-between">
-                                <p className="text-xl font-bold">{t("Rate")}:</p>
-                                <p className="text-xl">{selectedItem.rate || "---"}</p>
-                            </div>
-                            <div className="flex justify-between">
-                                <p className="text-xl font-bold">{t("Currency")}:</p>
-                                <p className="text-xl">{selectedItem.currency || "---"}</p>
-                            </div>
-                            <div className="flex justify-between">
-                                <p className="text-xl font-bold">{t("Amount")}:</p>
-                                <p className="text-xl">{selectedItem.amount.toLocaleString() || "---"}</p>
-                            </div>
-                            <div className="flex justify-between">
-                                <p className="text-xl font-bold">{t("Fee")}:</p>
-                                <p className="text-xl">{selectedItem.fee || "---"}</p>
-                            </div>
+
+            </div><Dialog open={isOpen} onClose={toggleModal}>
+                <div style={{ padding: '20px', width: '600px', textAlign: 'left' }}>
+                    <div className="flex flex-col gap-5">
+                        <div className="flex justify-between">
+                            <p className="text-xl font-bold">{t("PaymentTime")}:</p>
+                            <p className="text-xl">{new Date(selectedItem.paymentTime).toLocaleDateString() || "---"}</p>
                         </div>
-                        <Button className="bg-gray-500" onClick={toggleModal} style={{ marginTop: '10px', backgroundColor: "#F4F4F4", color: '#000' }}>{t("Close")}</Button>
+                        <div className="flex justify-between">
+                            <p className="text-xl font-bold">{t("PayerBank")}:</p>
+                            <p className="text-xl">{selectedItem.payerBank || "---"}</p>
+                        </div>
+                        <div className="flex justify-between">
+                            <p className="text-xl font-bold">{t("SenderName")}:</p>
+                            <p className="text-xl">{selectedItem.senderName || "---"}</p>
+                        </div>
+                        <div className="flex justify-between">
+                            <p className="text-xl font-bold">{t("Rate")}:</p>
+                            <p className="text-xl">{selectedItem.rate || "---"}</p>
+                        </div>
+                        <div className="flex justify-between">
+                            <p className="text-xl font-bold">{t("Currency")}:</p>
+                            <p className="text-xl">{selectedItem.currency || "---"}</p>
+                        </div>
+                        <div className="flex justify-between">
+                            <p className="text-xl font-bold">{t("Amount")}:</p>
+                            <p className="text-xl">{selectedItem.amount.toLocaleString() || "---"}</p>
+                        </div>
+                        <div className="flex justify-between">
+                            <p className="text-xl font-bold">{t("Fee")}:</p>
+                            <p className="text-xl">{selectedItem.fee || "---"}</p>
+                        </div>
                     </div>
-                </Dialog>
-            </div>
+                    <Button className="bg-gray-500" onClick={toggleModal} style={{ marginTop: '10px', backgroundColor: "#F4F4F4", color: '#000' }}>{t("Close")}</Button>
+                </div>
+            </Dialog>
         </Container>
     );
 }

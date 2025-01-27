@@ -272,7 +272,7 @@ export default function Partners() {
                                                 {partner.extId || "-"}
                                             </TableCell>
                                             <TableCell align="left">
-                                                <Typography className="bg-[#F0B732] uppercase text-center p-3 rounded-full ">
+                                                <Typography className={` ${partner.status === 'WAITING' ? 'bg-[#F0B732]' : partner.status === 'VALIDATION' ? 'bg-[#2272af]': partner.status === 'COMPLETED' ? 'bg-[#0c9031cc]' : partner.status === 'CANCELED' ? 'bg-[#e82121]' : 'bg-[#ccc]' } uppercase text-center p-3 rounded-full `}>
                                                     {partner.status || '-'}
                                                 </Typography>
                                             </TableCell>
@@ -292,7 +292,7 @@ export default function Partners() {
                         </Table>
                     </TableContainer>
                 )}
-                <div className="flex justify-end mt-5">
+                <div className="flex justify-end mt-5 ">
                     <Pagination
                         defaultCurrent={1}
                         current={page + 1}
