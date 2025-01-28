@@ -131,7 +131,7 @@ export default function Mcc() {
         await EditData();
     };
     return (
-        <Container>
+        <div className="w-full">
             <Breadcrumb
                 pageName={t("mcc")}
                 child={
@@ -217,7 +217,9 @@ export default function Mcc() {
                                                 {user.code || "-"}
                                             </TableCell>
                                             <TableCell className="min-w-[200px]" align="left">
-                                                {new Date(user.createdAt).toLocaleDateString() || "-"}
+                                                {user.createdAt ? user.createdAt.slice(0, 10) : "-"}
+                                                {" "}
+                                                {user.createdAt ? user.createdAt.slice(11, 16) : "-"}
                                             </TableCell>
                                             <TableCell className="min-w-[200px]" align="center">
                                                 <Button
@@ -359,6 +361,6 @@ export default function Mcc() {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </Container>
+        </div>
     );
 }

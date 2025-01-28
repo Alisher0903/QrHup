@@ -59,7 +59,7 @@ export default function Currency() {
     }, [page, size, nameFilter, table]);
 
     return (
-        <Container>
+        <div className="w-full">
             <Breadcrumb
                 pageName={t("Currency")}
             />
@@ -172,6 +172,6 @@ export default function Currency() {
                     />
                 </div>
             </Box>
-        </Container >
+        </div>
     );
 }

@@ -218,8 +218,8 @@ export default function QrDetial() {
                                 </div>
                                 <div>
                                     <div className='flex justify-between  border-gray-400 gap-1'>
-                                        <p className='text-sm font-bold'>{t("ExternalID")}:</p>
-                                        <p>{item.id || "--"}</p>
+                                        <p className='text-sm min-w-[100px] font-bold'>{t("ExternalID")}:</p>
+                                        <p className='whitespace-nowrap text-sm  overflow-hidden text-ellipsis'>{item.id || "--"}</p>
                                     </div>
                                     <div className='flex justify-between  border-gray-400 gap-1'>
                                         <p className='text-sm font-bold'>{t("Fee")}:</p>

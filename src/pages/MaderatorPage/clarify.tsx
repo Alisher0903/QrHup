@@ -99,7 +99,7 @@ export default function Clarify() {
     };
 
     return (
-        <Container>
+        <div className='w-full'>
             <Breadcrumb pageName={t("Action")} />
             <Box sx={{ bgcolor: 'white', padding: 5 }}>
                 <Box sx={{ display: 'grid', flexDirection: 'column' }} gap={2}>
@@ -194,10 +194,14 @@ export default function Clarify() {
                                     <TableRow key={user.id || index}>
                                         <TableCell>{page * 10 + index + 1}</TableCell>
                                         <TableCell align="left">{user.merchantName || '-'}</TableCell>
-                                        <TableCell align="left">{user.amount || '-'}</TableCell>
+                                        <TableCell align="left">{user.amount ? user.amount.toFixed() :' '}</TableCell>
                                         <TableCell align="left">
-                                            {user?.createdAt
-                                                ? new Date(user.createdAt).toISOString().split('T')[0]
+                                        {user?.createdAt
+                                                ? user.createdAt.slice(0, 10)
+                                                : '-'}
+                                                {' '}
+                                                {user?.createdAt
+                                                ? user.createdAt.slice(11, 16)
                                                 : '-'}
                                         </TableCell>
                                         <TableCell className={'uppercase'} align="left">{user.status || '-'}</TableCell>
@@ -521,6 +525,6 @@ export default function Clarify() {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </Container>
+        </div>
     );
 }

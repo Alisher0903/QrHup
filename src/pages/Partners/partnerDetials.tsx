@@ -171,7 +171,7 @@ export default function PartnerDetials() {
             <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
               <p className="text-md font-semibold">{t("Transactions")}:</p>
               <div className="text-md font-semibold flex flex-col items-start justify-start">
-                <span>{statisticsGet?.transactionCount || '0'} ({t("Success")})</span>
+                <span>{statisticsGet?.transactionCount || '0'} {t('Count')}</span>
                 <span>{statisticsGet?.transactionAmount || '0'} UZS</span>
               </div>
             </div>

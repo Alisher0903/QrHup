@@ -7,6 +7,7 @@ import { ActionGet, statistic_dashboard_merchants, statistic_dashboard_transacti
 import { useTranslation } from 'react-i18next';
 
 const ECommerce: React.FC = () => {
+  // const [page, setPage] = useState(0)
   const { t } = useTranslation()
   const currentDate = new Date();
   const currentYear = String(currentDate.getFullYear());
@@ -33,7 +34,7 @@ const ECommerce: React.FC = () => {
   }, [year, month]);
 
   return (
-    <>
+    <div className='w-full'>
       <Breadcrumb pageName={t("statistics")} />
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 ">
         <div className="flex flex-col border rounded-xl bg-white shadow-2 p-6 gap-4 ">
@@ -153,8 +154,13 @@ const ECommerce: React.FC = () => {
                         {user.status || "-"}
                       </TableCell>
                       <TableCell align="left">
+                      {user?.createdAt
+                          ? user.createdAt.slice(0, 10)
+                          : "-"
+                        }
+                        {" "}
                         {user?.createdAt
-                          ? new Date(user.createdAt).toISOString().split('T')[0]
+                          ? user.createdAt.slice(11, 16)
                           : "-"
                         }
                       </TableCell>
@@ -169,10 +175,21 @@ const ECommerce: React.FC = () => {
                 )}
               </TableBody>
             </Table>
+            {/* <Pagination
+                        defaultCurrent={1}
+                        current={page + 1}
+                        total={actionGet?.totalPage || 0}
+                        onChange={async (pageNumber: number, pageSize: number) => {
+                            // await setSize(pageSize);
+                            await setPage(pageNumber - 1);
+                            // await globalDataFunc();
+                        }}
+                        showSizeChanger={true}
+                    /> */}
           </TableContainer>
         )}
       </TableContainer>
-    </>
+    </div>
   );
 };
 

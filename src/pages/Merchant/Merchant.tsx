@@ -41,6 +41,7 @@ export default function Merchant() {
     const getPartnerUrl = () => {
         const queryParams: string = [
             nameFilter ? `name=${nameFilter}` : '',
+            numFilter ? `extId=${numFilter}` : '',
             inn ? `inn=${inn}` : '',
             datePicker(0, date) ? `from=${datePicker(0, date)}` : '',
             datePicker(1, date) ? `to=${datePicker(1, date)}` : '',
@@ -63,7 +64,7 @@ export default function Merchant() {
     }, [page, size, nameFilter, numFilter, emailFilter, status, date, inn, account, mfo]);
 
     return (
-        <Container>
+        <div className="w-full">
             <Breadcrumb
                 pageName={t("AllMerchants")}
             />
@@ -188,10 +189,11 @@ export default function Merchant() {
                                 <TableRow className="bg-gray-300">
                                     <TableCell>No</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">{t("MerchantsName")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("PartnerName")}</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">{t("Account")}</TableCell>
                                     <TableCell className="min-w-[150px] border-l" align="left">{t("mfo")}</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">{t("CreatedTime")}</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">{t("inn")}</TableCell>
+                                    <TableCell className="min-w-[230px] border-l" align="left">{t("CreatedTime")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">INN</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">Ext-ID</TableCell>
                                     <TableCell className="min-w-[160px] border-l" align="left">{t("Status")}</TableCell>
                                     <TableCell className="min-w-[200px]" align="center">{t("Action")}</TableCell>
@@ -206,13 +208,18 @@ export default function Merchant() {
                                                 {partner.name || "-"}
                                             </TableCell>
                                             <TableCell align="left">
+                                                {partner.partnerName || "-"}
+                                            </TableCell>
+                                            <TableCell align="left">
                                                 {partner.account || "-"}
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.mfo || "-"}
                                             </TableCell>
                                             <TableCell align="left">
-                                                {partner.createdTime || "-"}
+                                                {partner.createdAt ? partner.createdAt.slice(0, 10) : ''}
+                                                {' '}
+                                                {partner.createdAt ? partner.createdAt.slice(11, 16) : ''}
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.inn || "-"}
@@ -256,6 +263,6 @@ export default function Merchant() {
                     />
                 </div>
             </Box>
-        </Container>
+        </div>
     );
 }

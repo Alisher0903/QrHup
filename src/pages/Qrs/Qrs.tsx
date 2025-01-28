@@ -25,7 +25,7 @@ const { RangePicker } = DatePicker;
 export default function Partners() {
     const { t } = useTranslation()
     const [nameFilter, setNameFilter] = useState('');
-    const [numFilter, setNumFilter] = useState('');
+    const [extId, setExtId] = useState('');
     const [emailFilter, setEmailFilter] = useState('');
     const [amount, setAmount] = useState(0);
     const [inn, setInn] = useState('');
@@ -46,6 +46,7 @@ export default function Partners() {
             datePicker(1, date) ? `to=${datePicker(1, date)}` : '',
             secondDate ? `expire=${secondDate}` : '',
             secondDate ? `expire=${secondDate}` : '',
+            extId ? `extId=${extId}` : '',
             amount ? `amount=${amount}` : '',
             status ? `status=${status}` : '',
             type ? `type=${type}` : '',
@@ -61,16 +62,16 @@ export default function Partners() {
 
     useEffect(() => {
         globalDataFunc();
-    }, [page, size, nameFilter, numFilter, emailFilter, date, inn, type, amount, secondDate]);
+    }, [page, size, nameFilter, extId, emailFilter, date, inn, type, amount, secondDate, status]);
 
     return (
-        <Container>
+        <div className="w-full">
             <Breadcrumb
                 pageName={t("AllQrs")}
             />
             <Box sx={{ bgcolor: "white", padding: 5 }}>
                 <Typography className="mb-2" color="textPrimary" fontSize={30}>
-                   {t("Filters")}
+                    {t("Filters")}
                 </Typography>
                 <div className="flex flex-col lg:flex-row gap-5 mb-5">
                     <div className="lg:w-[25%] ">
@@ -89,7 +90,7 @@ export default function Partners() {
                             size="large"
                             placeholder={t("SearchwithExtID")}
                             onChange={
-                                (e) => setNumFilter(e.target.value)
+                                (e) => setExtId(e.target.value)
                             }
                         />
                     </div>
@@ -144,44 +145,48 @@ export default function Partners() {
                             onChange={(value) => setStatus(value)}
                             options={[
                                 {
-                                    value: 'ACTIVE',
-                                    label: t("Active"),
-                                },
-                                {
-                                    value: 'INACTIVE',
-                                    label: t("InActive"),
-                                },
-                                {
                                     value: 'NEW',
-                                    label: t("New"),
+                                    label: "NEW",
+                                },
+                                {
+                                    value: 'WAITING',
+                                    label: "WAITING",
                                 },
                                 {
                                     value: 'PENDING',
-                                    label: t("Pending"),
+                                    label: "PENDING",
                                 },
                                 {
                                     value: 'VALIDATION',
-                                    label: t("Validation"),
+                                    label: "VALIDATION",
                                 },
                                 {
                                     value: 'PARTIAL',
-                                    label: t("Patrial"),
+                                    label: "PARTIAL",
                                 },
                                 {
                                     value: 'CLARIFICATION',
-                                    label: t("Clarification"),
+                                    label: "CLARIFICATION",
                                 },
                                 {
                                     value: 'COMPLETED',
-                                    label: t("Completed"),
+                                    label: "COMPLETED",
                                 },
                                 {
                                     value: 'CANCELED',
-                                    label: t("Canceled"),
+                                    label: "CANCELED",
                                 },
                                 {
                                     value: 'EXPIRED',
-                                    label: t("Expired"),
+                                    label: "EXPIRED",
+                                },
+                                {
+                                    value: 'ACTIVE',
+                                    label: "ACTIVE",
+                                },
+                                {
+                                    value: 'EXPIRED',
+                                    label: 'INACTIVE',
                                 },
                             ]}
                         />
@@ -262,8 +267,8 @@ export default function Partners() {
                                                 {partner.type || "-"}
                                             </TableCell>
                                             <TableCell align="left">
-                                                {partner?.createdAt ? partner.createdAt.slice(0,10) : '-'}  {' '}
-                                                {partner?.createdAt ? partner.createdAt.slice(11,16) : '-'}
+                                                {partner?.createdAt ? partner.createdAt.slice(0, 10) : '-'}  {' '}
+                                                {partner?.createdAt ? partner.createdAt.slice(11, 16) : '-'}
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.expire || "-"}
@@ -272,7 +277,7 @@ export default function Partners() {
                                                 {partner.extId || "-"}
                                             </TableCell>
                                             <TableCell align="left">
-                                                <Typography className={` ${partner.status === 'WAITING' ? 'bg-[#F0B732]' : partner.status === 'VALIDATION' ? 'bg-[#2272af]': partner.status === 'COMPLETED' ? 'bg-[#0c9031cc]' : partner.status === 'CANCELED' ? 'bg-[#e82121]' : 'bg-[#ccc]' } uppercase text-center p-3 rounded-full `}>
+                                                <Typography className={` ${partner.status === 'WAITING' ? 'bg-[#F0B732]' : partner.status === 'VALIDATION' ? 'bg-[#2272af]' : partner.status === 'COMPLETED' ? 'bg-[#0c9031cc]' : partner.status === 'CANCELED' ? 'bg-[#e82121]' : 'bg-[#ccc]'} uppercase text-center p-3 rounded-full `}>
                                                     {partner.status || '-'}
                                                 </Typography>
                                             </TableCell>
@@ -307,6 +312,6 @@ export default function Partners() {
                     />
                 </div>
             </Box>
-        </Container>
+        </div>
     );
 }

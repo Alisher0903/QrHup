@@ -72,11 +72,8 @@ export default function MerchantDetials() {
         TerminalEffect();
         TransactionEffect();
     }, [id]);
-    // console.log('Statistic Merchant', statisticsGet);
     const GettingDatass = resGet;
-    // console.log('qr GEtting', resGet);
     const { t } = useTranslation()
-    // // console.log(id);
     return (
         <div className="bg-gray-100  flex flex-col items-center">
             <div className="flex justify-between mb-3 w-full">
@@ -136,15 +133,17 @@ export default function MerchantDetials() {
                                 </p>
                             </div>
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                                <p className="text-sm font-semibold">{t("STATUS")}</p>
+                                <p className="text-sm font-semibold">{t("Status")}</p>
                                 <p className="text-sm font-semibold uppercase">
                                     {GettingDatass?.active ? 'NOT ACTIVE' : 'active'}
                                 </p>
                             </div>
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                                <p className="text-sm font-semibold">{t("STATUS")}</p>
+                                <p className="text-sm font-semibold">{t("CreatedTime")}</p>
                                 <p className="text-sm font-semibold uppercase">
-                                    {new Date(GettingDatass?.createdAt).toLocaleDateString() || '-'}
+                                    {GettingDatass?.createdAt ? GettingDatass?.createdAt.slice(0,10)  : ''}
+                                    {' '}
+                                    {GettingDatass?.createdAt ? GettingDatass?.createdAt.slice(11,16)  : ''}
                                 </p>
                             </div>
                             {/* <div className="flex justify-between pb-2 border-b-2 border-gray-500">
@@ -181,7 +180,7 @@ export default function MerchantDetials() {
                             </p>
                         </div>
                         <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                            <p className="text-sm font-semibold">{t("QRs")}:</p>
+                            <p className="text-sm font-semibold">{t("QR's")}:</p>
                             <p className="text-sm font-semibold flex flex-col items-center justify-center">
                                 <span>
                                     {t("Count")}:
@@ -253,7 +252,9 @@ export default function MerchantDetials() {
                                             </TableCell>
                                             <TableCell align="left">{partner.type || '-'}</TableCell>
                                             <TableCell align="left">
-                                                {partner.createdAt ? new Date(partner.createdAt).toLocaleDateString() : '-'}
+                                                {partner.createdAt ? partner.createdAt.slice(0 ,10) : ' '}
+                                                {' '}
+                                                {partner.createdAt ? partner.createdAt.slice(11 ,16) : ' '}
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.expire || '-'}

@@ -214,7 +214,7 @@ export default function Partners() {
         await EditData();
     };
     return (
-        <Container>
+        <div className="w-full">
             <Breadcrumb
                 pageName={t("AllPartners")}
                 child={
@@ -375,7 +375,7 @@ export default function Partners() {
                                                 {partner.mfo || "-"}
                                             </TableCell>
                                             <TableCell align="left">
-                                                {partner.phone || "-"}
+                                                +{partner.phone || "-"}
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.email || "-"}
@@ -685,6 +685,6 @@ export default function Partners() {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </Container>
+        </div>
     );
 }

@@ -79,7 +79,7 @@ export default function ActionModerator() {
     };
 
     return (
-        <Container>
+        <div className='w-full'>
             <Breadcrumb pageName={t("Action")} />
             <Box sx={{ bgcolor: 'white', padding: 5 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }} gap={2}>
@@ -480,6 +480,6 @@ export default function ActionModerator() {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </Container>
+        </div>
     );
 }

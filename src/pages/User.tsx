@@ -128,7 +128,7 @@ export default function User() {
         await EditData();
     };
     return (
-        <Container>
+        <div className="w-full">
             <Breadcrumb
                 pageName={t("AllUser")}
                 child={
@@ -371,6 +371,6 @@ export default function User() {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </Container>
+        </div>
     );
 }

@@ -78,7 +78,7 @@ export default function AdminTransactions() {
     };
 
     return (
-        <Container>
+        <div className="w-full">
             <Breadcrumb
                 pageName={t("AllTransactions")}
             />
@@ -215,7 +215,9 @@ export default function AdminTransactions() {
                                                     {partner.currency || "-"}
                                                 </TableCell>
                                                 <TableCell align="left">
-                                                    {partner.createdAt ? new Date(partner.createdAt).toLocaleDateString() : ''}
+                                                    {partner.createdAt ? partner.createdAt.slice(0, 10) : ''}
+                                                    {' '}
+                                                    {partner.createdAt ? partner.createdAt.slice(11, 16) : ''}
                                                 </TableCell>
                                                 <TableCell align="left">
                                                     <Button
@@ -276,7 +278,7 @@ export default function AdminTransactions() {
                     <div className="flex flex-col gap-5">
                         <div className="flex justify-between">
                             <p className="text-xl font-bold">{t("PaymentTime")}:</p>
-                            <p className="text-xl">{new Date(selectedItem.paymentTime).toLocaleDateString() || "---"}</p>
+                            <p className="text-xl">{selectedItem.paymentTime ? selectedItem.paymentTime.slice(0,10) : " "} {selectedItem.paymentTime ? selectedItem.paymentTime.slice(11,16) : " "}</p>
                         </div>
                         <div className="flex justify-between">
                             <p className="text-xl font-bold">{t("PayerBank")}:</p>
@@ -306,6 +308,6 @@ export default function AdminTransactions() {
                     <Button className="bg-gray-500" onClick={toggleModal} style={{ marginTop: '10px', backgroundColor: "#F4F4F4", color: '#000' }}>{t("Close")}</Button>
                 </div>
             </Dialog>
-        </Container>
+        </div>
     );
 }

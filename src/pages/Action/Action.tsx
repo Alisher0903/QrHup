@@ -44,7 +44,7 @@ export default function Action() {
     }, [page, size, nameFilter, table, tableName, status]);
 
     return (
-        <Container>
+        <div className="w-full">
             <Breadcrumb
                 pageName={t("Action")}
             />
@@ -143,7 +143,12 @@ export default function Action() {
                                             </TableCell>
                                             <TableCell align="left">
                                                 {user?.createdAt
-                                                    ? new Date(user.createdAt).toISOString().split('T')[0]
+                                                    ? user.createdAt.slice(0, 10)
+                                                    : "-"
+                                                }
+                                                {" "}
+                                                {user?.createdAt
+                                                    ? user.createdAt.slice(11,16)
                                                     : "-"
                                                 }
                                             </TableCell>
@@ -175,6 +180,6 @@ export default function Action() {
                     />
                 </div>
             </Box>
-        </Container>
+        </div>
     );
 }
