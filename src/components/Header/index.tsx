@@ -12,6 +12,7 @@ const Header = (props: {
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
   const role = sessionStorage.getItem('role');
+  const i18nextLng = localStorage.getItem('i18nextLng');
   const { t, i18n } = useTranslation();
 
   const userMe = useGlobalRequest(getMe, 'GET');
@@ -77,7 +78,7 @@ const Header = (props: {
         </div>
 
         <div className="flex items-center gap-3 2xsm:gap-7">
-          <Select defaultValue={'en'}
+          <Select defaultValue={i18nextLng}
             className='w-24'
             onChange={(value) => {
               changeLanguage(value);
