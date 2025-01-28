@@ -238,7 +238,9 @@ export default function PartnerDetials() {
                       </TableCell>
                       <TableCell align="left">{partner.type || '-'}</TableCell>
                       <TableCell align="left">
-                      {partner.createdAt ? new Date(partner.createdAt).toLocaleDateString() : '-'}
+                      {partner.createdAt ? partner.createdAt.slice(0, 10) : ' '}
+                      {' '}
+                      {partner.createdAt ? partner.createdAt.slice(11, 16) : ' '}
                       </TableCell>
                       <TableCell align="left">
                         {partner.expire || '-'}

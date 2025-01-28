@@ -16,7 +16,7 @@
     "NameSearch":"Search with name",
     "SearchID":"Search with tabled-ID...",
     "SearchTable":"Search with Table's Name...",
-    "UserName":"UserName",
+    "UserName":"User's Name",
     "Createtime":"Create time",
     "Table":"Table",
     "ObjectID":"Object id",
@@ -150,5 +150,6 @@
     "QRsToClarify": "QRs To Clarify",
     "MyAction": "My Action",
     "LogOut": "Log out",
-    "MccCodes": "Mcc codes"
+    "MccCodes": "Mcc codes",
+    "SearchWithPartners": "Search with partner's name"
 }

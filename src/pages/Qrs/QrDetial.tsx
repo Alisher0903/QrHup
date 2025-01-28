@@ -12,6 +12,7 @@ export default function QrDetial() {
     const { id } = useParams<string>();
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(10);
+    const [extID, setExtId] = useState('');
     const navigator = useNavigate();
     const qrGetOne = useGlobalRequest(`${qrGetone}/${id}`, 'GET');
     // console.log(qrGetOne);
@@ -25,7 +26,8 @@ export default function QrDetial() {
         rate: 0,
         currency: "",
         amount: 0,
-        fee: ""
+        fee: "",
+        ExtId: ''
     });
     useEffect(() => {
         if (id) {
@@ -49,6 +51,7 @@ export default function QrDetial() {
             paymentTime: "",
             rate: 0,
             senderName: "",
+            ExtId: ''
         })
     }
 
@@ -191,6 +194,7 @@ export default function QrDetial() {
                                     paymentTime: item.createdAt,
                                     rate: item.rate,
                                     senderName: item.sender,
+                                    ExtId: item.id
                                 })
                             }}
                             className='p-5 rounded-xl flex justify-between gap-3 items-center border-[1px] border-black cursor-pointer'
@@ -280,6 +284,10 @@ export default function QrDetial() {
                         <div className="flex justify-between">
                             <p className="text-xl font-bold">{t("Fee")}:</p>
                             <p className="text-xl">{selectedItem.fee || "---"}</p>
+                        </div>
+                        <div className="flex justify-between">
+                            <p className="text-xl font-bold">{t("ExternalID")}:</p>
+                            <p className="text-sm">{selectedItem.ExtId || "---"}</p>
                         </div>
                     </div>
                     <Button className="bg-gray-500" onClick={toggleModal} style={{ marginTop: '10px', backgroundColor: "#F4F4F4", color: '#000' }}>{t("Close")}</Button>

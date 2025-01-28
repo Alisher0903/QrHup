@@ -14,8 +14,10 @@ import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
 import { useGlobalRequest } from "../../hooks/GlobalHook";
 import { useState, useEffect } from "react";
 import { ActionGet } from "../../hooks/url";
-import { Input, Pagination, Select } from "antd";
+import { DatePicker, Input, Pagination, Select } from "antd";
 import { useTranslation } from "react-i18next";
+import { datePicker } from "../../common/global-functions/date-sort";
+const { RangePicker } = DatePicker;
 
 export default function Action() {
     const { t } = useTranslation()
@@ -25,13 +27,16 @@ export default function Action() {
     const [status, setStatus] = useState('');
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(10);
+    const [date, setDate] = useState<any>([]);
 
     const getMccUrl = () => {
         const queryParams: string = [
             nameFilter ? `name=${nameFilter}` : '',
-            table ? `table=${table}` : '',
+            table ? `tableId=${table}` : '',
             tableName ? `tableName=${tableName}` : '',
             status ? `status=${status}` : '',
+            datePicker(0, date) ? `from=${datePicker(0, date)}` : '',
+            datePicker(1, date) ? `to=${datePicker(1, date)}` : '',
         ].filter(Boolean).join('&');
         return `${ActionGet}?${queryParams ? `&${queryParams}&page=${page}&size=${size}` : `page=${page}&size=${size}`}`;
     }
@@ -41,7 +46,7 @@ export default function Action() {
     );
     useEffect(() => {
         globalDataFunc();
-    }, [page, size, nameFilter, table, tableName, status]);
+    }, [page, size, nameFilter, table, tableName, status, date]);
 
     return (
         <div className="w-full">
@@ -87,13 +92,22 @@ export default function Action() {
                                 options={[
                                     {
                                         value: 'PATRIAL',
-                                        label: t("Patrial"),
+                                        label: "PATRIAL",
                                     },
                                     {
                                         value: 'CLARIFICATION',
-                                        label: t("Clarification"),
+                                        label: "CLARIFICATION",
                                     }
                                 ]}
+                            />
+                        </div>
+                        <div className="lg:w-[25%]">
+                            <RangePicker
+                                size="large"
+                                className="w-full"
+                                placeholder={[t("StartDate"), t("EndDate")]}
+                                allowClear
+                                onChange={(dates) => setDate(dates)}
                             />
                         </div>
                     </div>
@@ -148,7 +162,7 @@ export default function Action() {
                                                 }
                                                 {" "}
                                                 {user?.createdAt
-                                                    ? user.createdAt.slice(11,16)
+                                                    ? user.createdAt.slice(11, 16)
                                                     : "-"
                                                 }
                                             </TableCell>

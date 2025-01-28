@@ -62,7 +62,7 @@ export default function Partners() {
 
     useEffect(() => {
         globalDataFunc();
-    }, [page, size, nameFilter, extId, emailFilter, date, inn, type, amount, secondDate, status]);
+    }, [page, size, nameFilter, extId, emailFilter, date, inn, type, amount, secondDate, status, ]);
 
     return (
         <div className="w-full">

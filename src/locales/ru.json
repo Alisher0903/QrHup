@@ -150,5 +150,6 @@
   "QRsToClarify": "QR-коды для уточнения",
   "MyAction": "Мои действия",
   "LogOut": "Выйти",
-  "MccCodes": "Коды MCC"
+  "MccCodes": "Коды MCC",
+  "SearchWithPartners": "Поиск по имени партнера"
 }

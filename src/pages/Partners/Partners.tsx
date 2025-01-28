@@ -238,7 +238,7 @@ export default function Partners() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder={t("UserNameSearch")}
+                            placeholder={t("SearchWithPartners")}
                             onChange={
                                 (e) => setNameFilter(e.target.value)
                             }
