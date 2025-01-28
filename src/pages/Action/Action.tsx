@@ -91,12 +91,12 @@ export default function Action() {
                                 onChange={(value) => setStatus(value)}
                                 options={[
                                     {
-                                        value: 'PATRIAL',
-                                        label: "PATRIAL",
+                                        value: 'CANCELED',
+                                        label: "CANCELED",
                                     },
                                     {
-                                        value: 'CLARIFICATION',
-                                        label: "CLARIFICATION",
+                                        value: 'COMPLETED',
+                                        label: "COMPLETED",
                                     }
                                 ]}
                             />
