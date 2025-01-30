@@ -6,6 +6,9 @@ import { getMe } from '../../hooks/url';
 import { useEffect } from 'react';
 import { Select } from 'antd';
 import { useTranslation } from 'react-i18next';
+import uzbFlag from '../../images/icon/Flag_of_Uzbekistan.svg.png';
+import engFlag from '../../images/icon/gb.png';
+import ruFlag from '../../images/icon/ru.png';
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
@@ -79,22 +82,36 @@ const Header = (props: {
 
         <div className="flex items-center gap-3 2xsm:gap-7">
           <Select defaultValue={i18nextLng || "en"}
-            className='w-24'
+            className='min-w-[135px]'
             onChange={(value) => {
               changeLanguage(value);
             }} options={[
               {
                 value: 'en',
-                label: 'ENGLISH',
+                label: (
+                  <div className="flex items-center gap-2">
+                    <img src={engFlag} alt="English" className="w-5 h-3" />
+                    ENGLISH
+                  </div>
+                ),
               },
               {
                 value: 'uz',
-                label: 'UZBEK',
+                label: (
+                  <div className="flex items-center gap-2">
+                    <img src={uzbFlag} alt="Uzbek" className="w-5 h-3" />
+                    UZBEK
+                  </div>
+                ),
               },
-
               {
                 value: 'ru',
-                label: 'RUSSIAN',
+                label: (
+                  <div className="flex items-center gap-2">
+                    <img src={ruFlag} alt="Russian" className="w-5 h-3" />
+                    RUSSIAN
+                  </div>
+                ),
               }
             ]} />
           <DropdownUser data={userMe.response} />

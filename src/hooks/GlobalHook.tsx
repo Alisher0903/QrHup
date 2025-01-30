@@ -48,7 +48,6 @@ export function useGlobalRequest<T>(
             }
         },
     });
-
     return {
         loading: mutation.isLoading,
         error: mutation.error ? mutation.error : undefined,
