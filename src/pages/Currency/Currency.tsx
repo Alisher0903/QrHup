@@ -14,7 +14,7 @@ import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
 import { useGlobalRequest } from "../../hooks/GlobalHook";
 import { useState, useEffect } from "react";
 import { CurrencyEditActive, CurrencyGet } from "../../hooks/url";
-import { Input, Pagination, Checkbox } from "antd";
+import { Input, Pagination, Checkbox, Select } from "antd";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
@@ -24,6 +24,7 @@ export default function Currency() {
     const [nameFilter, setNameFilter] = useState('');
     const [table, setTable] = useState('');
     const [page, setPage] = useState(0);
+    const [status, setStatus] = useState<boolean>();
     const [size, setSize] = useState(10);
     const [id, setId] = useState(0);
     const [active, setActive] = useState<boolean>();
@@ -32,6 +33,7 @@ export default function Currency() {
         const queryParams: string = [
             nameFilter ? `name=${nameFilter}` : '',
             table ? `code=${table}` : '',
+            status ? `active=${status}` : '',
         ].filter(Boolean).join('&');
         return `${CurrencyGet}${queryParams ? `&${queryParams}&page=${page}&size=${size}` : `page=${page}&size=${size}`}`;
     }
@@ -56,7 +58,7 @@ export default function Currency() {
     }, [responseChange, ErrorChange])
     useEffect(() => {
         globalDataFunc();
-    }, [page, size, nameFilter, table]);
+    }, [page, size, nameFilter, table, status]);
 
     return (
         <div className="w-full">
@@ -86,8 +88,25 @@ export default function Currency() {
                                 }
                             />
                         </div>
-                        <div className="w-[25%]"></div>
-                        <div className="w-[25%]"></div>
+                        <div className="lg:w-[25%]">
+                        <Select
+                            size="large"
+                            allowClear
+                            className="w-full"
+                            placeholder={t("Status")}
+                            onChange={(value) => setStatus(value)}
+                            options={[
+                                {
+                                    value: true,
+                                    label: t("Active"),
+                                },
+                                {
+                                    value: false,
+                                    label: t("InActive"),
+                                }
+                            ]}
+                        />
+                    </div>
                     </div>
                     <Typography className="font-bold" color="textPrimary" mb={3}>
 

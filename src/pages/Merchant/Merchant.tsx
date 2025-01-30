@@ -27,6 +27,7 @@ const { RangePicker } = DatePicker;
 export default function Merchant() {
     const { t } = useTranslation()
     const [nameFilter, setNameFilter] = useState('');
+    const [namePartnerFilter, setNamePartnerFilter] = useState('');
     const [numFilter, setNumFilter] = useState('');
     const [emailFilter, setEmailFilter] = useState('');
     const [inn, setInn] = useState('');
@@ -41,6 +42,7 @@ export default function Merchant() {
     const getPartnerUrl = () => {
         const queryParams: string = [
             nameFilter ? `name=${nameFilter}` : '',
+            namePartnerFilter ? `partner=${namePartnerFilter}` : '',
             numFilter ? `extId=${numFilter}` : '',
             inn ? `inn=${inn}` : '',
             datePicker(0, date) ? `from=${datePicker(0, date)}` : '',
@@ -61,7 +63,7 @@ export default function Merchant() {
 
     useEffect(() => {
         globalDataFunc();
-    }, [page, size, nameFilter, numFilter, emailFilter, status, date, inn, account, mfo]);
+    }, [page, size, nameFilter, namePartnerFilter, numFilter, emailFilter, status, date, inn, account, mfo]);
 
     return (
         <div className="w-full">
@@ -77,6 +79,16 @@ export default function Merchant() {
                             placeholder={t("SearchWithMechants")}
                             onChange={
                                 (e) => setNameFilter(e.target.value)
+                            }
+                        />
+                    </div>
+                    <div className="lg:w-[25%]">
+                        <Input
+                            allowClear
+                            size="large"
+                            placeholder={t("SearchWithPartners")}
+                            onChange={
+                                (e) => setNamePartnerFilter(e.target.value)
                             }
                         />
                     </div>
@@ -111,6 +123,9 @@ export default function Merchant() {
                             }
                         />
                     </div>
+
+                </div>
+                <div className="flex flex-col lg:flex-row gap-5 mb-5">
                     <div className="lg:w-[25%]">
                         <RangePicker
                             size="large"
@@ -119,9 +134,6 @@ export default function Merchant() {
                             onChange={(dates) => setDate(dates)}
                         />
                     </div>
-                </div>
-                <div className="flex flex-col lg:flex-row gap-5 mb-5">
-
                     <div className="lg:w-[25%]">
                         <Input
                             allowClear
@@ -161,7 +173,6 @@ export default function Merchant() {
                             ]}
                         />
                     </div>
-                    <div className="lg:w-[25%]"></div>
                 </div>
                 {loading ? (
                     <Box
@@ -188,12 +199,12 @@ export default function Merchant() {
                             <TableHead>
                                 <TableRow className="bg-gray-300">
                                     <TableCell>No</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">{t("MerchantsName")}</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">{t("PartnerName")}</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">{t("Account")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("MerchantsName")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t('innn')}/PNFL</TableCell>
                                     <TableCell className="min-w-[150px] border-l" align="left">{t("mfo")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("Account")}</TableCell>
                                     <TableCell className="min-w-[230px] border-l" align="left">{t("CreatedTime")}</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">INN</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">Ext-ID</TableCell>
                                     <TableCell className="min-w-[160px] border-l" align="left">{t("Status")}</TableCell>
                                     <TableCell className="min-w-[200px]" align="center">{t("Action")}</TableCell>
@@ -205,24 +216,24 @@ export default function Merchant() {
                                         <TableRow key={partner.id || index}>
                                             <TableCell>{(page * 10 + index + 1)}</TableCell>
                                             <TableCell align="left">
-                                                {partner.name || "-"}
-                                            </TableCell>
-                                            <TableCell align="left">
                                                 {partner.partnerName || "-"}
                                             </TableCell>
                                             <TableCell align="left">
-                                                {partner.account || "-"}
+                                                {partner.name || "-"}
+                                            </TableCell>
+                                            <TableCell align="left">
+                                                {partner.inn || "-"}
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.mfo || "-"}
                                             </TableCell>
                                             <TableCell align="left">
+                                                {partner.account || "-"}
+                                            </TableCell>
+                                            <TableCell align="left">
                                                 {partner.createdAt ? partner.createdAt.slice(0, 10) : ''}
                                                 {' '}
                                                 {partner.createdAt ? partner.createdAt.slice(11, 16) : ''}
-                                            </TableCell>
-                                            <TableCell align="left">
-                                                {partner.inn || "-"}
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.extId || "-"}

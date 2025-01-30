@@ -109,7 +109,7 @@ export default function MerchantDetials() {
                                 </p>
                             </div>
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
-                                <p className="text-sm font-semibold">{t("inn")}</p>
+                                <p className="text-sm font-semibold">{t("innn")}</p>
                                 <p className="text-sm font-semibold">
                                     {GettingDatass?.inn || '-'}
                                 </p>
@@ -161,12 +161,12 @@ export default function MerchantDetials() {
                         </div>
                     </div>
                     <div className="w-[40%] bg-white shadow-md rounded-xl border-l-2 flex flex-col p-6 gap-5">
-                        <div className="flex justify-between pb-2  border-b-2 border-gray-500">
+                        {/* <div className="flex justify-between pb-2  border-b-2 border-gray-500">
                             <p className="text-sm font-semibold">{t("Merchants")}:</p>
                             <p className="text-sm font-semibold">
                                 {statisticsGet?.merchantCount || '0'}
                             </p>
-                        </div>
+                        </div> */}
                         <div className="flex justify-between pb-2 border-b-2 border-gray-500">
                             <p className="text-sm font-semibold">{t("Terminals")}:</p>
                             <p className="text-sm font-semibold">

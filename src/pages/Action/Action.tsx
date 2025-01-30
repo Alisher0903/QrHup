@@ -70,7 +70,7 @@ export default function Action() {
                             <Input
                                 allowClear
                                 size="large"
-                                placeholder={t("SearchID")}
+                                placeholder={t("SearchwithObjectID")}
                                 onChange={(e) => setTable(e.target.value)}
                             />
                         </div>

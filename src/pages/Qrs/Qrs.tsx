@@ -26,6 +26,8 @@ export default function Partners() {
     const { t } = useTranslation()
     const [nameFilter, setNameFilter] = useState('');
     const [extId, setExtId] = useState('');
+    const [namePartnerFilter, setNamePartnerFilter] = useState('');
+
     const [emailFilter, setEmailFilter] = useState('');
     const [amount, setAmount] = useState(0);
     const [inn, setInn] = useState('');
@@ -41,6 +43,7 @@ export default function Partners() {
     const getPartnerUrl = () => {
         const queryParams: string = [
             nameFilter ? `name=${nameFilter}` : '',
+            namePartnerFilter ? `partner=${namePartnerFilter}` : '',
             inn ? `inn=${inn}` : '',
             datePicker(0, date) ? `from=${datePicker(0, date)}` : '',
             datePicker(1, date) ? `to=${datePicker(1, date)}` : '',
@@ -62,7 +65,7 @@ export default function Partners() {
 
     useEffect(() => {
         globalDataFunc();
-    }, [page, size, nameFilter, extId, emailFilter, date, inn, type, amount, secondDate, status, ]);
+    }, [page, size, nameFilter, extId, emailFilter, date, inn, type, amount, secondDate, status, namePartnerFilter]);
 
     return (
         <div className="w-full">
@@ -95,7 +98,6 @@ export default function Partners() {
                         />
                     </div>
                     <div className="lg:w-[25%] ">
-
                         <Input
                             allowClear
                             size="large"
@@ -127,6 +129,16 @@ export default function Partners() {
                     </div>
                 </div>
                 <div className="flex flex-col lg:flex-row gap-5 mb-5">
+                    <div className="lg:w-[25%]">
+                        <Input
+                            allowClear
+                            size="large"
+                            placeholder={t("SearchWithPartners")}
+                            onChange={
+                                (e) => setNamePartnerFilter(e.target.value)
+                            }
+                        />
+                    </div>
                     <div className="lg:w-[25%] ">
                         <RangePicker
                             size="large"
@@ -210,7 +222,7 @@ export default function Partners() {
                             ]}
                         />
                     </div>
-                    <div className="lg:w-[25%]"></div>
+                    {/* <div className="lg:w-[25%]"></div> */}
                 </div>
                 {loading ? (
                     <Box

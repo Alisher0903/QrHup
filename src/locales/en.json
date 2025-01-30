@@ -14,7 +14,7 @@
     "CreatedTime":"Created time",
     "Action":"Action",
     "NameSearch":"Search with name",
-    "SearchID":"Search with tabled-ID...",
+    "SearchwithObjectID":"Search with object-ID...",
     "SearchTable":"Search with Table's Name...",
     "UserName":"User's Name",
     "Createtime":"Create time",
@@ -32,11 +32,11 @@
     "SearchMFO":"Search with MFO",
     "SearchAccount":"Search with Account",
     "PartnerName":"Partner's name",
-    "Account":"Account",
+    "Account":"Bank account",
     "mfo":"MFO",
     "Phone":"Phone",
     "Email":"Email",
-    "innn":"INN",
+    "innn":"TIN",
     "katta":"ACTIVE",
     "inactive":"INACTIVE",
     "Namee":"Name",
@@ -151,5 +151,9 @@
     "MyAction": "My Action",
     "LogOut": "Log out",
     "MccCodes": "Mcc codes",
-    "SearchWithPartners": "Search with partner's name"
+    "SearchWithPartners": "Search with partner's name",
+    "InactivePartner": "Inactive Partners",
+    "ActivePartner": "Active Partners",
+    "Unsuccessful": "Unsuccessful",
+    "Successful": "Successful"
 }

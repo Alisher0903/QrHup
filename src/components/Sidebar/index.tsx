@@ -126,15 +126,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 </li>
                 <li>
                   <NavLink
-                    to="/admin/transactions"
+                    to="/merchant"
                     className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-gray 
-                      ${(pathname === '/admin/transactions' ||
-                        pathname.includes('/admin/transactions')) &&
+                          ${(pathname === '/merchant' ||
+                        pathname.includes('/merchant')) &&
                       'bg-gray-100 text-black'
                       }`}
                   >
-                    <GrTransaction />
-                    {t("Transactions")}
+                    <CiShop size={22} />
+                    {t("Merchant")}
                   </NavLink>
                 </li>
                 <li>
@@ -152,15 +152,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 </li>
                 <li>
                   <NavLink
-                    to="/merchant"
+                    to="/admin/transactions"
                     className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-gray 
-                      ${(pathname === '/merchant' ||
-                        pathname.includes('/merchant')) &&
+                              ${(pathname === '/admin/transactions' ||
+                        pathname.includes('/admin/transactions')) &&
                       'bg-gray-100 text-black'
                       }`}
                   >
-                    <CiShop size={22} />
-                    {t("Merchant")}
+                    <GrTransaction />
+                    {t("Transactions")}
                   </NavLink>
                 </li>
                 <li>
@@ -251,7 +251,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     }`}
                 >
                   <MdCurrencyBitcoin size={22} />
-                  {t("MyAction")} 
+                  {t("MyAction")}
                 </NavLink>
               </li>
             </ul>

@@ -351,11 +351,11 @@ export default function Partners() {
                                 <TableRow className="bg-gray-300">
                                     <TableCell>No</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">{t("PartnerName")}</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">{t("Account")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("innn")}</TableCell>
                                     <TableCell className="min-w-[150px] border-l" align="left">{t("mfo")}</TableCell>
+                                    <TableCell className="min-w-[200px] border-l" align="left">{t("Account")}</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">{t("Phone")}</TableCell>
                                     <TableCell className="min-w-[200px] border-l" align="left">{t("Email")}</TableCell>
-                                    <TableCell className="min-w-[200px] border-l" align="left">{t("innn")}</TableCell>
                                     <TableCell className="min-w-[160px] border-l" align="left">{t("Status")}</TableCell>
                                     <TableCell className="min-w-[250px]" align="center">{t("Action")}</TableCell>
                                 </TableRow>
@@ -369,19 +369,19 @@ export default function Partners() {
                                                 {partner.name || "-"}
                                             </TableCell>
                                             <TableCell align="left">
-                                                {partner.account || "-"}
+                                                {partner.inn || "-"}
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.mfo || "-"}
+                                            </TableCell>
+                                            <TableCell align="left">
+                                                {partner.account || "-"}
                                             </TableCell>
                                             <TableCell align="left">
                                                 +{partner.phone || "-"}
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.email || "-"}
-                                            </TableCell>
-                                            <TableCell align="left">
-                                                {partner.inn || "-"}
                                             </TableCell>
                                             <TableCell align="left">
                                                 <Typography className={!partner.active ? "bg-yellow-500 text-center text-white p-3 rounded-lg" : "bg-green-500 text-white text-center p-3 rounded-lg"}>
