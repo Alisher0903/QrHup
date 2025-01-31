@@ -15,7 +15,7 @@ export default function QrDetial() {
     const [extID, setExtId] = useState('');
     const navigator = useNavigate();
     const qrGetOne = useGlobalRequest(`${qrGetone}/${id}`, 'GET');
-    // console.log(qrGetOne);
+    // //(qrGetOne);
     
     const qrGetTransactions = useGlobalRequest(`${getTransactionsByQrId}/${id}?page=${page}&size=${size}`, 'GET');
     const [isOpen, setIsopen] = useState(false);

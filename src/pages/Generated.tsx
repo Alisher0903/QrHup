@@ -41,7 +41,7 @@ export default function Generated() {
                         {/* OTP Inputs */}
                         <OTP className='min-h-10' value={otp} onChange={(value) => {
                             setOtp(value)
-                            // console.log(value);
+                            // //(value);
                         }} length={6} />
                     </div>
 

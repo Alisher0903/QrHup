@@ -45,7 +45,7 @@ export default function PartnerDetials() {
       `${TransactionPartner}partnerId=${id}&page=${pageTransaction}&size=10`,
       'GET',
     );
-// console.log(TransactionGet);
+// //(TransactionGet);
 
   const navigator = useNavigate();
 

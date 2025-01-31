@@ -9,7 +9,7 @@ const DropdownUser = ({ data }: { data: any }) => {
   const navigate = useNavigate()
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { t } = useTranslation()
-// console.log(data?.name);
+// //(data?.name);
 
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">

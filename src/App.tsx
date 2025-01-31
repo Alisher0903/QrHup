@@ -78,9 +78,37 @@ function App() {
     };
 
     checkAuth();
-    
+    console.clear
   }, [navigate, pathname]);
+  // useEffect(() => {
+  //   const clearConsoleOnMouseMove = () => {
+  //     console.clear();
+  //   };
 
+  //   window.addEventListener("mousemove", clearConsoleOnMouseMove);
+
+  //   return () => {
+  //     window.removeEventListener("mousemove", clearConsoleOnMouseMove);
+  //   };
+  // }, []);
+  useEffect(() => {
+    if (process.env.NODE_ENV === "development") {
+      // = () => { };
+      console.warn = () => { };
+      console.error = () => { };
+    }
+
+    console.clear();
+  }, []);
+  useEffect(() => {
+    const clearConsole = () => {
+      setTimeout(() => {
+        console.clear();
+      }, 1000);
+    };
+
+    clearConsole();
+  }, []);
   // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);

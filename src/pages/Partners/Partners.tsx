@@ -179,7 +179,7 @@ export default function Partners() {
             toast.error(postError);
         }
     }, [postRes, postError]);
-    // console.log('partnerId', getId);
+    // //('partnerId', getId);
 
 
 
@@ -205,10 +205,10 @@ export default function Partners() {
                 toast.error(error);
             }
         } catch (error) {
-            // console.log(error);
+            // //(error);
         }
     };
-    // console.log("FormData", data);
+    // //("FormData", data);
 
     const HandleEdit = async () => {
         await EditData();

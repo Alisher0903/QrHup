@@ -1,3 +1,4 @@
+// export const baseUrl: string = 'http://159.89.21.188:8080/'
 export const baseUrl: string = 'https://api.qrhub.uz/'
 export const LogIn: string = `${baseUrl}api/user/login`
 

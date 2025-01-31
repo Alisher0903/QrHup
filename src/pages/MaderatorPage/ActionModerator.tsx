@@ -65,7 +65,7 @@ export default function ActionModerator() {
         EffectGetOne();
     }, [page, size, nameFilter, table, tableName, id]);
 
-    // console.log('getOne res', getOneRes);
+    // //('getOne res', getOneRes);
 
     const handleModalOpen = (user: any) => {
         setSelectedUser(user);

@@ -17,7 +17,7 @@ const Header = (props: {
   const role = sessionStorage.getItem('role');
   const i18nextLng = localStorage.getItem('i18nextLng');
   const { t, i18n } = useTranslation();
-
+  const token = sessionStorage.getItem('token');
   const userMe = useGlobalRequest(getMe, 'GET');
 
   const changeLanguage = (lng: any) => {
@@ -25,8 +25,10 @@ const Header = (props: {
   };
 
   useEffect(() => {
-    userMe.globalDataFunc();
-  }, [])
+    if(token){
+      userMe.globalDataFunc();
+    }
+  }, [token])
 
   if (!role) {
     return null;
