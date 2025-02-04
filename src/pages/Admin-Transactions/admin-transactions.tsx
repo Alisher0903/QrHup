@@ -70,7 +70,10 @@ export default function AdminTransactions() {
     );
 
     useEffect(() => {
-        globalDataFunc();
+        const timeout = setTimeout(() => {
+            globalDataFunc();
+        }, 1000);
+        return () => clearTimeout(timeout);
     }, [page, size, filters.merchantName, filters.partnerName, filters.status, filters.amount, date, filters.transId,]);
 
     const toggleModal = () => {
@@ -100,7 +103,7 @@ export default function AdminTransactions() {
                             <Input
                                 allowClear
                                 size="large"
-                                placeholder={t("Merchantname")}
+                                placeholder={t("SearchName")}
                                 onChange={(e) => setFilters({ ...filters, merchantName: e.target.value })}
                             />
                         </div>
@@ -118,7 +121,7 @@ export default function AdminTransactions() {
                             <Input
                                 allowClear
                                 size="large"
-                                placeholder={t("PartnerName")}
+                                placeholder={t("SearchWithPartners")}
                                 onChange={(e) => setFilters({ ...filters, partnerName: e.target.value })}
                             />
                         </div>
@@ -134,11 +137,11 @@ export default function AdminTransactions() {
                                 options={[
                                     {
                                         value: 'CANCELED',
-                                        label: t("Canceled"),
+                                        label: "CANCELED",
                                     },
                                     {
                                         value: 'COMPLETED',
-                                        label: t("Completed"),
+                                        label: "COMPLETED",
                                     }
                                 ]}
                             />
@@ -168,8 +171,8 @@ export default function AdminTransactions() {
                             <CircularProgress />
                         </Box>
                     ) : error ? (
-                        <Typography color="error" textAlign="center">
-                            {t("LoadData")}
+                        <Typography color="info" textAlign="center">
+                            {t("TransactionNotFound")}
                         </Typography>
                     ) : (
                         <TableContainer>
@@ -182,7 +185,7 @@ export default function AdminTransactions() {
                                     <TableRow className="bg-gray-300">
                                         <TableCell>No</TableCell>
                                         <TableCell className="min-w-[250px] border-l" align="left">{t("Partner")}</TableCell>
-                                        <TableCell className="min-w-[250px] border-l" align="left">{t("Id")}</TableCell>
+                                        <TableCell className="min-w-[250px] border-l" align="left">{t("ID")}</TableCell>
                                         <TableCell className="min-w-[250px] border-l" align="left">{t("Merchant")}</TableCell>
                                         <TableCell className="min-w-[200px] border-l" align="left">{t("Amount")}</TableCell>
                                         <TableCell className="min-w-[150px] border-l" align="left">{t("Currency")}</TableCell>

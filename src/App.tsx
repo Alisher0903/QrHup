@@ -20,6 +20,7 @@ import ActionModerator from './pages/MaderatorPage/ActionModerator';
 import Clarify from './pages/MaderatorPage/clarify';
 import AdminTransactions from './pages/Admin-Transactions/admin-transactions';
 import Generated from './pages/Generated';
+import { useTranslation } from 'react-i18next';
 
 interface RouteConfig {
   path: string;
@@ -31,18 +32,19 @@ function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const { t } = useTranslation()
 
   const routes: RouteConfig[] = [
-    { path: '/', element: <ECommerce />, title: 'Admin | Statistics' },
-    { path: '/User', element: <User />, title: 'Admin | User' },
-    { path: '/Qrs', element: <Qrs />, title: 'Admin | Qrs' },
-    { path: '/admin/transactions', element: <AdminTransactions />, title: 'Admin | Transactions' },
-    { path: '/mcc', element: <Mcc />, title: 'Admin | Mcc' },
-    { path: '/action', element: <Action />, title: 'Admin | Action' },
-    { path: '/currency', element: <Currency />, title: 'Admin | Currency' },
-    { path: '/merchant', element: <Merchant />, title: 'Settings | TailAdmin - Tailwind CSS Admin Dashboard Template' },
+    { path: '/', element: <ECommerce />, title: t('Dashboard') },
+    { path: '/User', element: <User />, title: t('AllUser') },
+    { path: '/Qrs', element: <Qrs />, title: t('AllQRs') },
+    { path: '/admin/transactions', element: <AdminTransactions />, title: t('AllTransactions') },
+    { path: '/mcc', element: <Mcc />, title: t('mcc') },
+    { path: '/action', element: <Action />, title: t('Action') },
+    { path: '/currency', element: <Currency />, title: t('Currency')},
+    { path: '/merchant', element: <Merchant />, title: t('AllMerchants') },
     { path: '/chart', element: <Chart />, title: 'Basic Chart | TailAdmin - Tailwind CSS Admin Dashboard Template' },
-    { path: '/partners', element: <Partners />, title: 'Admin | Partners' },
+    { path: '/partners', element: <Partners />, title: t('AllPartners') },
     { path: '/partnersDetials/:id', element: <PartnerDetials />, title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template' },
     { path: '/merchantDetials/:id', element: <MerchantDetials />, title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template' },
     { path: '/qrDetial/:id', element: <QrDetial />, title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template' },
@@ -53,12 +55,12 @@ function App() {
     {
       path: '/moderator/Action',
       element: <ActionModerator />,
-      title: 'Action | Moderator',
+      title: t('Action'),
     },
     {
       path: '/moderator/clarify',
       element: <Clarify />,
-      title: 'QRs To Clarify | Moderator',
+      title: t('Clarify'),
     },
   ];
 

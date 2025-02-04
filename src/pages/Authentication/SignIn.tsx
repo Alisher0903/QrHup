@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { LogIn } from '../../hooks/url';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
 
 const SignIn: React.FC = () => {
   const { t } = useTranslation()
@@ -41,12 +43,12 @@ const SignIn: React.FC = () => {
         password,
       });
       if (response?.data?.data) {
-        toast.success('Welcome! You have successfully signed')
+        toast.success(t('Welcome'))
         sessionStorage.setItem('token', response?.data?.data?.token);
         sessionStorage.setItem('role', response?.data?.data?.role);
         setRoles(response?.data?.data?.role)
       } else {
-        toast.error('Something went wrong');
+        toast.error(t('InvalidPhone'));
       }
     } finally {
       setLoading(false);
@@ -98,9 +100,9 @@ const SignIn: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-primary text-white rounded-lg py-3 font-medium transition hover:bg-opacity-90"
+            className="w-full bg-primary text-white flex justify-center items-center rounded-lg text-center py-3 font-medium transition hover:bg-opacity-90"
           >
-            {loading ? 'Kirish...' : 'Kirish'}
+            {loading ? <AiOutlineLoading3Quarters  className="animate-spin h-5 w-5 text-white" /> : 'Kirish'}
           </button>
           
         </form>

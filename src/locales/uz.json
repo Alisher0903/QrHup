@@ -24,9 +24,10 @@
   "AllPartners": "Hamkorlar",
   "AddPartner": "Hamkor qo'shing",
   "UserNameSearch": "Foydalanuvchi nomi bilan qidiring",
-  "SearchPeople": "Telefon bilan qidirish",
+  "SearchUserName": "Telefon raqami bilan qidirish",
   "SearchEmail": "Elektron pochta orqali qidirish",
   "inn": "INN bilan qidirish",
+  "SearchWithInn": "STIR bilan qidirish",
   "Active": "Faol",
   "InActive": "Faol emas",
   "SearchMFO": "MFO bilan qidirish",
@@ -39,7 +40,7 @@
   "innn": "STIR",
   "katta": "FAOL",
   "inactive": "NOFAOL",
-  "Namee": "Ism",
+  "AddUserName": "iltimos ismingizni kiriting*",
   "URL": "URL",
   "Address": "Manzil",
   "ServiceFee": "Xizmat haqi",
@@ -85,22 +86,22 @@
   "Close": "Yopish",
   "CancelPayment": "To'lovni bekor qilish",
   "ConfirmPayment": "Confirm payment",
-  "AllUser": "Foydalanuvchi",
+  "AllUser": "Foydalanuvchilar",
   "AddUser": "Foydalanuvchi qo'shish",
   "Password": "Parol",
   "Add": "Qo'shish",
-  "AllTransactions": "Hisob bo'yicha barcha jarayonlar",
+  "AllTransactions": "O'tkazmalar",
   "Filters": "Filtrlar",
   "TransactionsId": "Tranzaksiya Idsi",
   "Merchantname": "Savdogar nomi",
   "Completed": "Bajarildi",
   "TransactionTime": "Tranzaksiya vaqti",
-  "GoToQR": "GR ga o'ting",
+  "GoToQR": "QR ga o'ting",
   "PaymentTime": "To'lov vaqti",
   "PayerBank": "To'lovchi bank",
   "SenderName": "Yuboruvchi nomi",
   "Fee": "To'lov",
-  "AllQRs": "QR lar",
+  "AllQRs": "QR kodlar",
   "SearchwithExtID": "Ext-ID bilan qidiring",
   "SelectExpireDate": "Yaroqlilik muddatini tanlang",
   "New": "Yangi",
@@ -113,6 +114,7 @@
   "Ext-ID": "",
   "ExternalID": "Tashqi ID",
   "MinimumAmount": "Minimal miqdor",
+  "MaxAmount": "Maximum miqdor",
   "RedirectUrl": "Qayta yo'naltirish url",
   "AllMerchants": "Savdogarlar",
   "SearchWithMechants": "Mechants nomi bilan qidirish...",
@@ -126,7 +128,7 @@
   "Symbol": "Belgi",
   "Purpose": "Maqsad",
   "SignIn": "Tizimga kirish",
-  "EnterYourPassword": "",
+  "EnterYourPassword": "Parolingizni kiriting*",
   "StartDate": "Boshlanish sanasi",
   "EndDate": "Tugash sanasi",
   "ActiveNerchants": "Faol savdogarlar",
@@ -134,7 +136,9 @@
   "ActiveTerminals": "Faol terminallar",
   "InactiveTerminals": "Faol emas terminallar",
   "ActionsSystem": "Tizimdagi oxirgi harakatlar",
-  "VisitorsAnalytics": "Tashrif buyuruvchilar tahlili",
+  "VisitorsAnalytics": "MCC kodlar bo'yicha tahlil",
+  "NotFoundFromChart": "Maʼlumotlar mavjud emas",
+
   "SelectYear": "Yilni tanlang",
   "SelectMonth": "Oyni tanlang",
   "TotalTransactionVolume": "Umumiy tranzaksiya hajmi",
@@ -156,5 +160,49 @@
   "InactivePartner": "Faol bo'lmagan hamkorlar",
   "ActivePartner": "Faol hamkorlar",
   "Unsuccessful": "Muvaffaqiyatsiz",
-  "Successful": "Muvaffaqiyatli"
+  "Successful": "Muvaffaqiyatli",
+  "Welcome": "Xush kelibsiz",
+  "InvalidPhone": " Telefon raqami yoki parol mos kelmadi",
+  "UserDeleted": "Foydalanuvchi muvaffaqiyatli o'chirildi !",
+  "UserEdited": "Foydalanuvchi muvaffaqiyatli tahrir qildi !",
+  "UserAdded": "Foydalanuvchi muvaffaqiyatli qo'shildi !",
+  "ErrorAddUser": "Foydalanuvchi qo‘shishda xatolik yuz berdi! Iltimos, telefon raqamingiz va parolingizni tekshiring",
+  "ErrorEditUser": "Foydalanuvchini tahrirlashda xatolik yuz berdi !",
+  "ErrorDeleteUser": "Foydalanuvchini o‘chirishda xatolik yuz berdi !",
+  "UsersNotFound": "Hech qanday foydalanuvchi topilmadi 😊",
+  "EnterPartnersName": "Hamkorlar nomini kiriting",
+
+  "PartnerNotFound":"Tizimda hamkorlar topilmadi", 
+  "QrsNotFound":"Tizimda QR kodlar topilmadi", 
+
+
+  "PartnerDeleted": "Hamkor muvaffaqiyatli o'chirildi!",
+  "PartnerEdited": "Hamkor muvaffaqiyatli tahrir qildi!",
+  "PartnerAdded": "Hamkor muvaffaqiyatli qo'shildi!",
+
+  "MerchantNotFound": "Tizimda hech qanday savdogar topilmadi",
+  "MerchantsQrNotFound":"Bu sotuvchida QR kodlari yo‘q",
+  "MerchantsTerminalNotFound":"Bu sotuvchida QR terminal yo‘q",
+  "MerchantsTransactionNotFound":"Bu sotuvchida QR kodlari yo‘q",
+
+  "PartnersQrNotFound": "Bu hamkorga tegishli Qr kod topilmadi",
+  "PartnersMerchantNotFound":"Bu hamkorda hech qanday savdogar yo'q",
+  "PartnersTerminalNotFound":"Bu hamkorda hech qanday terminal yo'q",
+  "PartnersTransactionNotFound":"Bu hamkor hech qanday o'tkazmalarga ega emas",
+
+  
+  "TransactionNotFound": "Tizimda hech qanday o'tkazmalar topilmadi",
+
+  "MccNotFound": "Tizimda hech qanday MCC topilmadi",
+
+  "ActionNotFound": "Tizimda hech qanday harakatlar topilmadi",
+
+  "ModeratorActionNotFound": "Sizda hech qanday harakat yo'q",
+
+  "CurrencyNotFound": "Tizimda hech qanday valyuta topilmadi",
+  "ModeratorClarifyNotFound": "Tizimda muammoli QR yoki tranzaktsiyalar mavjud emas",
+
+
+  "":""
+
 }

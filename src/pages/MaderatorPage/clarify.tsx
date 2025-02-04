@@ -83,8 +83,12 @@ export default function Clarify() {
     }, [rePost, errorPost])
 
     useEffect(() => {
-        globalDataFunc();
-        EffectGetOne();
+        // globalDataFunc();
+        const timeout = setTimeout(() => {
+            EffectGetOne();
+            globalDataFunc();
+        }, 1000);
+        return () => clearTimeout(timeout);
     }, [page, size, merchantNameFilter, amountFilter, statusFilter, id, statusFilter, date]);
 
     // //('getOne res', getOneRes);
@@ -159,8 +163,8 @@ export default function Clarify() {
                         <CircularProgress />
                     </Box>
                 ) : error ? (
-                    <Typography color="error" textAlign="center">
-                        {t("LoadData")}
+                    <Typography color="info" textAlign="center">
+                        {t("ModeratorClarifyNotFound")}
                     </Typography>
                 ) : (
                     <TableContainer>

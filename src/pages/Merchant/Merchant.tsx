@@ -62,7 +62,10 @@ export default function Merchant() {
     );
 
     useEffect(() => {
-        globalDataFunc();
+        const timeout = setTimeout(() => {
+            globalDataFunc();
+        }, 500);
+        return () => clearTimeout(timeout);
     }, [page, size, nameFilter, namePartnerFilter, numFilter, emailFilter, status, date, inn, account, mfo]);
 
     return (
@@ -117,7 +120,7 @@ export default function Merchant() {
                         <Input
                             allowClear
                             size="large"
-                            placeholder={t("inn")}
+                            placeholder={t("SearchWithInn")}
                             onChange={
                                 (e) => setInn(e.target.value)
                             }
@@ -186,8 +189,8 @@ export default function Merchant() {
                         <CircularProgress />
                     </Box>
                 ) : error ? (
-                    <Typography color="error" textAlign="center">
-                        {t("LoadData")}
+                    <Typography color="info" textAlign="center">
+                        {t("MerchantNotFound")}
                     </Typography>
                 ) : (
                     <TableContainer>

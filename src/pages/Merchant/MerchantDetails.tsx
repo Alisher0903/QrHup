@@ -141,9 +141,9 @@ export default function MerchantDetials() {
                             <div className="flex justify-between pb-2 border-b-2 border-gray-500">
                                 <p className="text-sm font-semibold">{t("CreatedTime")}</p>
                                 <p className="text-sm font-semibold uppercase">
-                                    {GettingDatass?.createdAt ? GettingDatass?.createdAt.slice(0,10)  : ''}
+                                    {GettingDatass?.createdAt ? GettingDatass?.createdAt.slice(0, 10) : ''}
                                     {' '}
-                                    {GettingDatass?.createdAt ? GettingDatass?.createdAt.slice(11,16)  : ''}
+                                    {GettingDatass?.createdAt ? GettingDatass?.createdAt.slice(11, 16) : ''}
                                 </p>
                             </div>
                             {/* <div className="flex justify-between pb-2 border-b-2 border-gray-500">
@@ -226,10 +226,10 @@ export default function MerchantDetials() {
                                             {t("Account")}
                                         </TableCell>
                                         <TableCell className="min-w-[150px] border-l" align="left">
-                                            {t("Account")}
+                                            {t("Type")}
                                         </TableCell>
                                         <TableCell className="min-w-[200px] border-l" align="left">
-                                             {t("CreatedTime")}
+                                            {t("CreatedTime")}
                                         </TableCell>
                                         <TableCell className="min-w-[200px] border-l" align="left">
                                             {t("ExpireTime")}
@@ -237,11 +237,10 @@ export default function MerchantDetials() {
                                         <TableCell className="min-w-[160px] border-l" align="left">
                                             {t("Status")}
                                         </TableCell>
-                                        {/* <TableCell className="min-w-[200px]" align="center">Action</TableCell> */}
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {QrGet?.object?.map((partner: any, index: number) => (
+                                    {QrGet?.object ? QrGet?.object?.map((partner: any, index: number) => (
                                         <TableRow key={partner.id || index}>
                                             <TableCell>{pageQr * 10 + index + 1}</TableCell>
                                             <TableCell align="left">
@@ -252,9 +251,9 @@ export default function MerchantDetials() {
                                             </TableCell>
                                             <TableCell align="left">{partner.type || '-'}</TableCell>
                                             <TableCell align="left">
-                                                {partner.createdAt ? partner.createdAt.slice(0 ,10) : ' '}
+                                                {partner.createdAt ? partner.createdAt.slice(0, 10) : ' '}
                                                 {' '}
-                                                {partner.createdAt ? partner.createdAt.slice(11 ,16) : ' '}
+                                                {partner.createdAt ? partner.createdAt.slice(11, 16) : ' '}
                                             </TableCell>
                                             <TableCell align="left">
                                                 {partner.expire || '-'}
@@ -267,36 +266,14 @@ export default function MerchantDetials() {
                                                     {partner.status}
                                                 </Typography>
                                             </TableCell>
-                                            {/* <TableCell align="center">
-                                                <Button
-                                                    onClick={() => {
-                                                        navigator(`/partnerDetials/${partner.id}`)
-                                                    }}
-                                                >
-                                                    <FaEye size={25} color="black" />
-                                                </Button>
-                                                <Button
-                                                    onClick={() => {
-                                                        setOpenEditModal(true);
-                                                        setData({
-                                                            name: partner.name,
-                                                            phone: partner.phone,
-                                                            account: partner.account,
-                                                            mfo: partner.mfo,
-                                                            inn: partner.inn,
-                                                            email: partner.email,
-                                                            serviceFee: partner.serviceFee,
-                                                            address: partner.address,
-                                                            url: partner.url,
-                                                        });
-                                                        setGetId(partner.id)
-                                                    }}
-                                                >
-                                                    <MdEdit  size={25} color="black" />
-                                                </Button>
-                                            </TableCell> */}
                                         </TableRow>
-                                    ))}
+                                    )) :
+                                        <TableCell colSpan={10}>
+                                            <Typography color="info" textAlign="center">
+                                                {t("MerchantsQrNotFound")}
+                                            </Typography>
+                                        </TableCell>
+                                    }
                                 </TableBody>
                             </Table>
                             <Pagination
@@ -312,70 +289,6 @@ export default function MerchantDetials() {
                             />
                         </Box>
                     )}
-                    {/* {selectedTab === 1 && (
-                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                            <Table
-                                className="bg-white"
-                                // sx={{ minWidth: 650 }}
-                                aria-label="simple table"
-                            >
-                                <TableHead>
-                                    <TableRow className="bg-gray-300">
-                                        <TableCell>No</TableCell>
-                                        <TableCell className="min-w-[250px] border-l" align="left">
-                                            Merchant
-                                        </TableCell>
-                                        <TableCell className="min-w-[200px] border-l" align="left">
-                                            Addres
-                                        </TableCell>
-                                        <TableCell className="min-w-[150px] border-l" align="left">Ext-ID</TableCell>
-                                        <TableCell className="min-w-[200px] border-l" align="left">
-                                            Mfo
-                                        </TableCell>
-                                        <TableCell className="min-w-[200px] border-l" align="left">
-                                            Account
-                                        </TableCell>
-                                        <TableCell className="min-w-[160px] border-l" align="left">Status</TableCell>
-                                        <TableCell className="min-w-[200px]" align="center">Action</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {MerchantGet?.object?.map((qr: any, index: number) => (
-                                        <TableRow key={qr.id || index}>
-                                            <TableCell>{pageQr * 10 + index + 1}</TableCell>
-                                            <TableCell align="left">{qr.name || '-'}</TableCell>
-                                            <TableCell align="left">
-                                                {qr.address || '-'}
-                                            </TableCell>
-                                            <TableCell align="left">
-                        {qr.extId || "-"}
-                      </TableCell>
-                                            <TableCell align="left">{qr.mfo || '-'}</TableCell>
-                                            <TableCell align="left">
-                                                {qr.account || '-'}
-                                            </TableCell>
-                                            <TableCell align="left">
-                        <Typography fontSize={15} className="bg-[#327bf0] text-white  text-center p-3 rounded-full ">
-                          {qr.status}
-                        </Typography>
-                      </TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                            <Pagination
-                                defaultCurrent={1}
-                                current={pageMerchant + 1}
-                                total={MerchantGet?.totalElements || 0}
-                                // pageSize={size || 10}
-                                onChange={async (pageNumber: number) => {
-                                    await setPageMerchant(pageNumber - 1);
-                                    await QrGet();
-                                }}
-                                showSizeChanger={false}
-                            />
-                        </Box>
-                    )} */}
                     {selectedTab === 1 && (
                         <Typography>
                             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -411,11 +324,10 @@ export default function MerchantDetials() {
                                             >
                                                 {t("Status")}
                                             </TableCell>
-                                            {/* <TableCell className="min-w-[200px]" align="center">Action</TableCell> */}
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {TerminalGet?.object?.map((terminal: any, index: number) => (
+                                        {TerminalGet?.object ? TerminalGet?.object?.map((terminal: any, index: number) => (
                                             <TableRow key={terminal.id || index}>
                                                 <TableCell>{pageQr * 10 + index + 1}</TableCell>
                                                 <TableCell align="left">
@@ -436,7 +348,14 @@ export default function MerchantDetials() {
                                                     </Typography>
                                                 </TableCell>
                                             </TableRow>
-                                        ))}
+                                        ))
+                                    : 
+                                    <TableCell colSpan={10}>
+                                            <Typography color="info" textAlign="center">
+                                                {t("MerchantsTerminalNotFound")}
+                                            </Typography>
+                                        </TableCell>
+                                    }
                                     </TableBody>
                                 </Table>
                                 <Pagination
@@ -500,11 +419,10 @@ export default function MerchantDetials() {
                                             >
                                                 {t("ServiceFee")}
                                             </TableCell>
-                                            {/* <TableCell className="min-w-[200px]" align="center">Action</TableCell> */}
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {TransactionGet?.object?.map((transaction: any, index: number) => (
+                                        {TransactionGet?.object ? TransactionGet?.object?.map((transaction: any, index: number) => (
                                             <TableRow key={transaction.id || index}>
                                                 <TableCell>{pageQr * 10 + index + 1}</TableCell>
                                                 <TableCell align="left">
@@ -525,16 +443,14 @@ export default function MerchantDetials() {
                                                 <TableCell align="left">
                                                     {transaction.serviceFee || '-'}
                                                 </TableCell>
-                                                {/* <TableCell align="left">
-                          <Typography
-                            fontSize={15}
-                            className={` uppercase  text-center p-3 rounded-full ${transaction.active ? 'text-white bg-[#327bf0]' : 'text-red-500'} `}
-                          >
-                            {transaction.active ? 'active' : 'Inactive'}
-                          </Typography>
-                        </TableCell> */}
                                             </TableRow>
-                                        ))}
+                                        )) : 
+                                        <TableCell colSpan={10}>
+                                            <Typography color="info" textAlign="center">
+                                                {t("MerchantsTransactionNotFound")}
+                                            </Typography>
+                                        </TableCell>
+                                        }
                                     </TableBody>
                                 </Table>
                                 <Pagination

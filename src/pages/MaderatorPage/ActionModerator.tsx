@@ -61,8 +61,11 @@ export default function ActionModerator() {
     } = useGlobalRequest(`${ActionModeratorGetOne}${id}`, 'GET');
 
     useEffect(() => {
-        globalDataFunc();
-        EffectGetOne();
+        const timeout = setTimeout(() => {
+            EffectGetOne();
+            globalDataFunc();
+        }, 1000);
+        return () => clearTimeout(timeout);
     }, [page, size, nameFilter, table, tableName, id]);
 
     // //('getOne res', getOneRes);
@@ -125,8 +128,8 @@ export default function ActionModerator() {
                         <CircularProgress />
                     </Box>
                 ) : error ? (
-                    <Typography color="error" textAlign="center">
-                        {t("LoadData")}
+                    <Typography color="info" textAlign="center">
+                        {t("ModeratorActionNotFound")}
                     </Typography>
                 ) : (
                     <TableContainer>

@@ -23,14 +23,15 @@
   "SeeMore": "Смотреть больше",
   "AllPartners": "Партнеры",
   "AddPartner": "Партнеры",
-  "UserNameSearch": "Поиск по имени пользователя",
-  "SearchPeople": "Поиск по телефону",
+  "UserNameSearch": "Поиск по имени пользователя*",
+  "SearchUserName": "Поиск по номеру телефона",
   "SearchEmail": "Поиск по электронной почте",
   "inn": "Поиск по ИНН",
+  "SearchWithInn": "Поиск по ИНН",
   "Active": "Активный",
   "InActive": "Неактивный",
   "SearchMFO": "Поиск с помощью МФО",
-  "SearchAccount": "Поиск по аккаунту",
+  "SearchAccount": "Поиск по счет",
   "PartnerName": "Имя партнера",
   "Account": "Банк cчет",
   "mfo": "МФО",
@@ -39,7 +40,7 @@
   "innn": "ИНН",
   "katta": "АКТИВНЫЙ",
   "inactive": "НЕАКТИВНЫЙ",
-  "Namee": "Имя",
+  "AddUserName": "Пожалуйста, введите свое имя*",
   "URL": "УРЛ",
   "Address": "Адрес",
   "ServiceFee": "Плата за обслуживание",
@@ -100,7 +101,7 @@
   "PayerBank": "Банк плательщика",
   "SenderName": "Имя отправителя",
   "Fee": "Платеж",
-  "AllQrs": "QR и",
+  "AllQRs": "QR-коды",
   "SearchwithExtID": "Поиск с Ext-ID",
   "SelectExpireDate": "Выберите дату истечения срока действия",
   "New": "Новый",
@@ -113,6 +114,7 @@
   "Ext-ID": "",
   "ExternalID": "Внешний идентификатор",
   "MinimumAmount": "Минимальная сумма",
+  "MaxAmount": "Максимальная сумма",
   "RedirectUrl": "URL-адрес перенаправления",
   "Purpose": "Цель",
   "AllMerchants": "Торговцы",
@@ -126,7 +128,7 @@
   "Code": "Код",
   "Symbol": "Символ",
   "SignIn": "Войти",
-  "EnterYourPassword": "Введите ваш пароль",
+  "EnterYourPassword": "Введите ваш пароль*",
   "StartDate": "Дата начала",
   "EndDate": "Дата окончания",
   "ActiveNerchants": "Активные торговцы",
@@ -134,7 +136,10 @@
   "ActiveTerminals": "Активные терминалы",
   "InactiveTerminals": "Неактивные терминалы",
   "ActionsSystem": "Последние действия в системе",
-  "VisitorsAnalytics": "Аналитика посетителей",
+  "VisitorsAnalytics": "Анализ по кодам MCC",
+
+  "NotFoundFromChart": "Данные отсутствуют",
+
   "SelectYear": "Выберите год",
   "SelectMonth": "Выберите месяц",
   "TotalTransactionVolume": "Общий объем транзакций",
@@ -155,5 +160,53 @@
   "InactivePartner": "Неактивные партнеры",
   "ActivePartner": "Активные партнеры",
   "Unsuccessful": "Неудачный",
-  "Successful": "Успешный"
+  "Successful": "Успешный",
+  "Welcome": "Добро пожаловать",
+  "InvalidPhone": "Telefon raqami yoki parol mos kelmadi",
+  "UserDeleted": "Пользователь успешно удален !",
+  "UserEdited": "Пользователь успешно отредактировал !",
+  "UserAdded": "Пользователь успешно добавлен!",
+  "ErrorAddUser": "Произошла ошибка при добавлении пользователя ! Проверьте номер телефона и пароль",
+  "ErrorEditUser": "Произошла ошибка при редактировании пользователя !",
+  "ErrorDeleteUser": "Произошла ошибка при удалении пользователя !",
+  "UsersNotFound": "В системе не найдено ни одного пользователя",
+  "EnterPartnersName": "Введите имя партнера",
+
+
+  "PartnerDeleted": "Партнер успешно удален!",
+  "PartnerEdited": "Партнер успешно отредактирован!",
+  "PartnerAdded": "Партнер успешно добавлен!",
+
+  "MerchantNotFound": "Торговец не найден в системе",
+  "PartnersQrNotFound": "QR-код для этого партнера не найден",
+
+  "PartnerNotFound": "В системе не найдено ни одного партнера",
+
+
+  "TerminalNotFound": "Терминал не найден в системе",
+  "TransactionNotFound": "Транзакция не найдена в системе",
+
+  "TransactionCanceled": "Транзакция отменена",
+  "TransactionCompleted": "Транзакция завершена",
+  "TransactionConfirmed": "Транзакция подтверждена",
+
+  "PartnersMerchantNotFound":"У этого партнера нет торговцев",
+  "PartnersTerminalNotFound":"У этого партнера нет терминалов",
+  "PartnersTransactionNotFound":"У этого партнера нет транзакций",
+
+  "MerchantsQrNotFound":"У этого продавца нет QR-кодов",
+  "MerchantsTerminalNotFound":"У этого продавца нет терминалов",
+  "MerchantsTransactionNotFound":"У этого продавца нет транзакций",
+
+  "MccNotFound": "В системе не найдено ни одного MCC",
+
+  "ActionNotFound": "Никаких действий в системе не найдено",
+  "ModeratorActionNotFound": "У вас нет никаких действий",
+
+
+  "CurrencyNotFound": "В системе не найдено ни одного валюта",
+  "ModeratorClarifyNotFound": "В системе нет QR-запросов или транзакций с проблемами.",
+
+
+  "":""
 }

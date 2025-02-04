@@ -127,7 +127,10 @@ export default function Partners() {
     );
 
     useEffect(() => {
-        globalDataFunc();
+        const timeout = setTimeout(() => {
+            globalDataFunc();
+        }, 1000);
+        return () => clearTimeout(timeout);
     }, [page, size, nameFilter, numFilter, emailFilter, status, date, inn, mFO, account]);
 
     const HandleSendCode = () => {
@@ -172,7 +175,7 @@ export default function Partners() {
     };
     useEffect(() => {
         if (postRes) {
-            toast.success("User added successfully!");
+            toast.success(t("PartnerAdded"));
             handleAddClose();
             globalDataFunc();
         } else if (postError) {
@@ -185,7 +188,7 @@ export default function Partners() {
 
     useEffect(() => {
         if (EditRes) {
-            toast.success("User edited successfully!");
+            toast.success(t("PartnerEdited"));
             globalDataFunc()
             handleEditClose();
             setGetId(null);
@@ -197,7 +200,7 @@ export default function Partners() {
         await deleteData();
         try {
             if (deleteRes) {
-                toast.success("User deleted successfully!");
+                toast.success(t("PartnerDeleted"));
                 handleDeleteClose();
                 globalDataFunc();
                 setGetId(null);
@@ -239,19 +242,15 @@ export default function Partners() {
                             allowClear
                             size="large"
                             placeholder={t("SearchWithPartners")}
-                            onChange={
-                                (e) => setNameFilter(e.target.value)
-                            }
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNameFilter(e.target.value)}
                         />
                     </div>
                     <div className="lg:w-[25%] ">
                         <Input
                             allowClear
                             size="large"
-                            placeholder={t("SearchPeople")}
-                            onChange={
-                                (e) => setNumFilter(e.target.value)
-                            }
+                            placeholder={t("SearchUserName")}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNumFilter(e.target.value)}
                         />
                     </div>
                     <div className="lg:w-[25%]">
@@ -259,19 +258,15 @@ export default function Partners() {
                             allowClear
                             size="large"
                             placeholder={t("SearchEmail")}
-                            onChange={
-                                (e) => setEmailFilter(e.target.value)
-                            }
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmailFilter(e.target.value)}
                         />
                     </div>
                     <div className="lg:w-[25%]">
                         <Input
                             allowClear
                             size="large"
-                            placeholder={t("inn")}
-                            onChange={
-                                (e) => setInn(e.target.value)
-                            }
+                            placeholder={t("SearchWithInn")}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInn(e.target.value)}
                         />
                     </div>
                 </div>
@@ -309,9 +304,7 @@ export default function Partners() {
                             allowClear
                             size="large"
                             placeholder={t("SearchMFO")}
-                            onChange={
-                                (e) => setMFO(e.target.value)
-                            }
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMFO(e.target.value)}
                         />
                     </div>
                     <div className="lg:w-[25%]">
@@ -319,9 +312,7 @@ export default function Partners() {
                             allowClear
                             size="large"
                             placeholder={t("SearchAccount")}
-                            onChange={
-                                (e) => setAccount(e.target.value)
-                            }
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAccount(e.target.value)}
                         />
                     </div>
                 </div>
@@ -337,8 +328,8 @@ export default function Partners() {
                         <CircularProgress />
                     </Box>
                 ) : error ? (
-                    <Typography color="error" textAlign="center">
-                        {t("LoadData")}
+                    <Typography color="info" textAlign="center">
+                        {t("PartnerNotFound")}
                     </Typography>
                 ) : (
                     <TableContainer>
@@ -455,31 +446,31 @@ export default function Partners() {
                 <DialogContent className="flex flex-col gap-3" style={{ width: '600px' }}>
                     <Input
                         allowClear
-                        placeholder={t("Namee")}
+                        placeholder={t("EnterPartnersName")}
                         size="large"
                         value={data.name}
-                        onChange={(e) => setData({ ...data, name: e.target.value })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, name: e.target.value })}
                     />
-                    <Input
-                        allowClear
+                    <Input 
+                        allowClear 
                         placeholder={t("URL")}
-                        size="large"
+                        size="large" 
                         value={data.url}
-                        onChange={(e) => setData({ ...data, url: e.target.value })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, url: e.target.value })}
                     />
                     <Input
                         allowClear
                         placeholder={t("Address")}
                         size="large"
                         value={data.address}
-                        onChange={(e) => setData({ ...data, address: e.target.value })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, address: e.target.value })}
                     />
                     <Input
                         allowClear
                         placeholder={t("Phone")}
                         size="large"
                         value={data.phone}
-                        onChange={(e) => {
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                             let newValue = e.target.value;
                             if (/^\+?\d*$/.test(newValue)) {
                                 if (!newValue.startsWith("+998")) {
@@ -496,14 +487,14 @@ export default function Partners() {
                         placeholder={t("Email")}
                         size="large"
                         value={data.email}
-                        onChange={(e) => setData({ ...data, email: e.target.value })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, email: e.target.value })}
                     />
                     <Input
                         allowClear
                         placeholder={t("innn")}
                         size="large"
                         value={data.inn}
-                        onChange={(e) => setData({ ...data, inn: e.target.value })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, inn: e.target.value })}
                     />
                     <Input
                         type="number"
@@ -511,7 +502,7 @@ export default function Partners() {
                         placeholder={t("ServiceFee")}
                         size="large"
                         value={data.serviceFee}
-                        onChange={(e) => setData({ ...data, serviceFee: e.target.value })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, serviceFee: e.target.value })}
                     />
                     <Input
                         allowClear
@@ -519,7 +510,7 @@ export default function Partners() {
                         type="number"
                         size="large"
                         value={data.mfo}
-                        onChange={(e) => setData({ ...data, mfo: e.target.value })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, mfo: e.target.value })}
                     />
                     <Input
                         allowClear
@@ -527,7 +518,7 @@ export default function Partners() {
                         type="number"
                         size="large"
                         value={data.account}
-                        onChange={(e) => setData({ ...data, account: e.target.value })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, account: e.target.value })}
                     />
                 </DialogContent>
                 <DialogActions>
@@ -557,31 +548,31 @@ export default function Partners() {
                 <DialogContent>
                     <TextField
                         margin="dense"
-                        label={t("Namee")}
+                        label={t("EnterPartnersName")}
                         fullWidth
                         value={data.name}
-                        onChange={(e) => setData({ ...data, name: e.target.value })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, name: e.target.value })}
                     />
                     <TextField
                         margin="dense"
                         label={t("URL")}
                         fullWidth
                         value={data.url}
-                        onChange={(e) => setData({ ...data, url: e.target.value })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, url: e.target.value })}
                     />
                     <TextField
                         margin="dense"
                         label={t("Address")}
                         fullWidth
                         value={data.address}
-                        onChange={(e) => setData({ ...data, address: e.target.value })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, address: e.target.value })}
                     />
                     <TextField
                         margin="dense"
                         label={t("Phone")}
                         fullWidth
                         value={data.phone}
-                        onChange={(e) => {
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                             let newValue = e.target.value;
                             if (/^\+?\d*$/.test(newValue)) {
                                 if (!newValue.startsWith("+998")) {
@@ -598,14 +589,14 @@ export default function Partners() {
                         label={t("Email")}
                         fullWidth
                         value={data.email}
-                        onChange={(e) => setData({ ...data, email: e.target.value })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, email: e.target.value })}
                     />
                     <TextField
                         margin="dense"
                         label={t("innn")}
                         fullWidth
                         value={data.inn}
-                        onChange={(e) => setData({ ...data, inn: e.target.value })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, inn: e.target.value })}
                     />
                     <TextField
                         margin="dense"
@@ -613,21 +604,21 @@ export default function Partners() {
                         fullWidth
                         type="number"
                         value={data.serviceFee}
-                        onChange={(e) => setData({ ...data, serviceFee: e.target.value })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, serviceFee: e.target.value })}
                     />
                     <TextField
                         margin="dense"
                         label={t("mfo")}
                         fullWidth
                         value={data.mfo}
-                        onChange={(e) => setData({ ...data, mfo: e.target.value })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, mfo: e.target.value })}
                     />
                     <TextField
                         margin="dense"
                         label={t("Account")}
                         fullWidth
                         value={data.account}
-                        onChange={(e) => setData({ ...data, account: e.target.value })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, account: e.target.value })}
                     />
                 </DialogContent>
                 <DialogActions>

@@ -75,7 +75,10 @@ export default function Mcc() {
     );
 
     useEffect(() => {
-        globalDataFunc();
+        const timeout = setTimeout(() => {
+            globalDataFunc();
+        }, 1000);
+        return () => clearTimeout(timeout);
     }, [page, size, nameFilter, code]);
 
     // Modal Handlers
@@ -187,7 +190,7 @@ export default function Mcc() {
                     </Box>
                 ) : error ? (
                     <Typography color="error" textAlign="center">
-                        {t("LoadData")}
+                        {t("MccNotFound")}
                     </Typography>
                 ) : (
                     <TableContainer>
@@ -199,8 +202,8 @@ export default function Mcc() {
                             <TableHead>
                                 <TableRow className="bg-gray-300">
                                     <TableCell className="border-l">No</TableCell>
-                                    <TableCell className="border-l" align="left">{t("mcc")}  {t("Namee")}</TableCell>
-                                    <TableCell className="border-l" align="left"> {t("mcc")}  {t("Code")}</TableCell>
+                                    <TableCell className="border-l" align="left">{t("mcc")} </TableCell>
+                                    <TableCell className="border-l" align="left"> {t("mcc")} {t("Code")}</TableCell>
                                     <TableCell className="border-l" align="left"> {t("CreatedTime")}  </TableCell>
                                     <TableCell className="border-l" align="center">{t("Action")}</TableCell>
                                 </TableRow>

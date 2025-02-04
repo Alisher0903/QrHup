@@ -113,7 +113,7 @@ export default function QrDetial() {
                                     </p>
                                 </div>
                                 <div className="flex justify-between pb-2 border-b-[1px] border-gray-500">
-                                    <p className="text-md font-semibold">{t("MinimumAmount")}</p>
+                                    <p className="text-md font-semibold">{t("MaxAmount")}</p>
                                     <p className="text-md font-semibold">
                                         {qrGetOne.response?.maxAmount || '0'}
                                     </p>

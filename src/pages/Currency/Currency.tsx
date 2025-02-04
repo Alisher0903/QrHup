@@ -57,7 +57,10 @@ export default function Currency() {
         }
     }, [responseChange, ErrorChange])
     useEffect(() => {
-        globalDataFunc();
+        const timeout = setTimeout(() => {
+            globalDataFunc();
+        }, 1000);
+        return () => clearTimeout(timeout);
     }, [page, size, nameFilter, table, status]);
 
     return (
@@ -124,8 +127,8 @@ export default function Currency() {
                         <CircularProgress />
                     </Box>
                 ) : error ? (
-                    <Typography color="error" textAlign="center">
-                        {t("LoadData")}
+                    <Typography color="info" textAlign="center">
+                        {t("CurrencyNotFound")}
                     </Typography>
                 ) : (
                     <TableContainer>

@@ -45,7 +45,10 @@ export default function Action() {
         "GET"
     );
     useEffect(() => {
-        globalDataFunc();
+        const timeout = setTimeout(() => {
+            globalDataFunc();
+        }, 1000);
+        return () => clearTimeout(timeout);
     }, [page, size, nameFilter, table, tableName, status, date]);
 
     return (
@@ -124,8 +127,8 @@ export default function Action() {
                         <CircularProgress />
                     </Box>
                 ) : error ? (
-                    <Typography color="error" textAlign="center">
-                        {t("LoadData")}
+                    <Typography color="info" textAlign="center">
+                        {t("ActionNotFound")}
                     </Typography>
                 ) : (
                     <TableContainer>

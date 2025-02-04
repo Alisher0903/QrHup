@@ -189,10 +189,10 @@ export default function PartnerDetials() {
         }}
       >
         <Tabs value={selectedTab} onChange={handleChange}>
-          <Tab label="Qr" />
-          <Tab label="Merchant" />
-          <Tab label="Terminal" />
-          <Tab label="Transactions" />
+          <Tab label={t("Qr")} />
+          <Tab label={t("Merchant")} />
+          <Tab label={t("Terminal")} />
+          <Tab label={t("Transactions")} />
         </Tabs>
         <Box sx={{ p: 3, overflow: 'auto' }}>
           {selectedTab === 0 && (
@@ -256,8 +256,8 @@ export default function PartnerDetials() {
                     </TableRow>
                   )) : (
                     <TableCell colSpan={10}>
-                      <Typography color="error" textAlign="center">
-                        {t("LoadData")}
+                      <Typography color="info" textAlign="center">
+                        {t("PartnersQrNotFound")}
                       </Typography>
                     </TableCell>
                   )}
@@ -315,8 +315,8 @@ export default function PartnerDetials() {
                     </TableRow>
                   )) : (
                     <TableCell colSpan={10}>
-                      <Typography color="error" textAlign="center">
-                        {t("LoadData")}
+                      <Typography color="info" textAlign="center">
+                        {t("PartnersMerchantNotFound")}
                       </Typography>
                     </TableCell>
                   )}
@@ -395,8 +395,8 @@ export default function PartnerDetials() {
                       </TableRow>
                     )) : (
                       <TableCell colSpan={10}>
-                        <Typography color="error" textAlign="center">
-                          {t("LoadData")}
+                        <Typography color="info" textAlign="center">
+                          {t("PartnersTerminalNotFound")}
                         </Typography>
                       </TableCell>
                     )}
@@ -491,8 +491,8 @@ export default function PartnerDetials() {
                       
                     )) : (
                       <TableCell colSpan={10}>
-                        <Typography color="error" textAlign="center">
-                          {t("LoadData")}
+                        <Typography color="info" textAlign="center">
+                          {t("PartnersTransactionNotFound")}
                         </Typography>
                       </TableCell>
                     )}

@@ -64,13 +64,16 @@ export default function Partners() {
     );
 
     useEffect(() => {
-        globalDataFunc();
+        const timeout = setTimeout(() => {
+            globalDataFunc();
+        }, 500);
+        return () => clearTimeout(timeout);
     }, [page, size, nameFilter, extId, emailFilter, date, inn, type, amount, secondDate, status, namePartnerFilter]);
 
     return (
         <div className="w-full">
             <Breadcrumb
-                pageName={t("AllQrs")}
+                pageName={t("AllQRs")}
             />
             <Box sx={{ bgcolor: "white", padding: 5 }}>
                 <Typography className="mb-2" color="textPrimary" fontSize={30}>
@@ -236,8 +239,8 @@ export default function Partners() {
                         <CircularProgress />
                     </Box>
                 ) : error ? (
-                    <Typography color="error" textAlign="center">
-                        {t("LoadData")}
+                    <Typography color="info" textAlign="center">
+                        {t("QrsNotFound")}
                     </Typography>
                 ) : (
                     <TableContainer>

@@ -72,7 +72,10 @@ export default function User() {
     );
 
     useEffect(() => {
-        globalDataFunc();
+        const timeout = setTimeout(() => {
+            globalDataFunc();
+        }, 1000);
+        return () => clearTimeout(timeout);
     }, [page, size, nameFilter, numFilter]);
 
     // Modal Handlers
@@ -92,22 +95,22 @@ export default function User() {
     };
     useEffect(() => {
         if (postRes) {
-            toast.success("User added successfully!");
+            toast.success(t("UserAdded"));
             handleAddClose();
             globalDataFunc();
         } else if (postError) {
-            toast.error(postError);
+            toast.error(t("ErrorAddUser"));
         }
     }, [postRes, postError]);
 
     useEffect(() => {
         if (EditRes) {
-            toast.success("User edited successfully!");
+            toast.success(t("UserEdited"));
             globalDataFunc()
             handleEditClose();
             setGetId(null);
         } else if (EditError) {
-            toast.error(EditError);
+            toast.error(t("ErrorEditUser"));
         }
     }, [EditRes, EditError]);
     const handleDeleteSubmit = async () => {
@@ -116,12 +119,12 @@ export default function User() {
 
     useEffect(() => {
         if (deleteRes) {
-            toast.success("User deleted successfully!");
+            toast.success(t("UserDeleted"));
             handleDeleteClose();
             globalDataFunc();
             setGetId(null);
         } else if (deleteError) {
-            toast.error("Failed to delete user!");
+            toast.error("ErrorDeleteUser");
         }
     }, [deleteRes, deleteError]);
     const HandleEdit = async () => {
@@ -152,18 +155,14 @@ export default function User() {
                         <Input
                             size="large"
                             placeholder={t("UserNameSearch")}
-                            onChange={
-                                (e) => setNameFilter(e.target.value)
-                            }
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNameFilter(e.target.value)}
                         />
                     </div>
                     <div className="lg:w-[25%]">
                         <Input
                             size="large"
-                            placeholder={t("SearchPeople")}
-                            onChange={
-                                (e) => setNumFilter(e.target.value)
-                            }
+                            placeholder={t("SearchUserName")}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNumFilter(e.target.value)}
                         />
                     </div>
                 </div>
@@ -179,8 +178,8 @@ export default function User() {
                         <CircularProgress />
                     </Box>
                 ) : error ? (
-                    <Typography color="error" textAlign="center">
-                        {t("LoadData")}
+                    <Typography color="info" textAlign="center">
+                        {t("UsersNotFound")}
                     </Typography>
                 ) : (
                     <TableContainer>
@@ -192,8 +191,8 @@ export default function User() {
                             <TableHead>
                                 <TableRow className="bg-gray-300">
                                     <TableCell >No</TableCell>
-                                    <TableCell className="border-l" align="left">{t("Namee")}</TableCell>
-                                    <TableCell className="border-l" align="left">{t("Phone")}</TableCell>
+                                    <TableCell className="border-l" align="left">{t("UserName")}</TableCell>
+                                    <TableCell className="border-l" align="left">{t("PhoneNumber")}</TableCell>
                                     <TableCell className="border-l" align="center">{t("Action")}</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -206,7 +205,7 @@ export default function User() {
                                                 {user.name || "-"}
                                             </TableCell>
                                             <TableCell align="left">
-                                                {user.phone || "-"}
+                                                <span className="select-none">{user.phone ? "+" : ''}</span>{user.phone || "-"}
                                             </TableCell>
                                             <TableCell align="center">
                                                 <Button
@@ -260,10 +259,10 @@ export default function User() {
                 <DialogContent>
                     <Input
                         size="large"
-                        placeholder={t("Namee")}
+                        placeholder={t("AddUserName")}
                         className="mb-3"
                         value={data.name}
-                        onChange={(e) =>
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                             setData({ ...data, name: e.target.value })
                         }
                     />
@@ -273,7 +272,7 @@ export default function User() {
                         placeholder={t("Phone")}
                         className="mb-3"
                         value={data.phone}
-                        onChange={(e) => {
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                             let newValue = e.target.value;
                             if (/^\+?\d*$/.test(newValue)) {
                                 if (!newValue.startsWith("+998")) {
@@ -287,9 +286,9 @@ export default function User() {
                     />
                     <Input
                         size="large"
-                        placeholder={t("Password")}
+                        placeholder={t("EnterYourPassword")}
                         type="password"
-                        onChange={(e) =>
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                             setData({ ...data, password: e.target.value })
                         }
                     />
@@ -313,7 +312,7 @@ export default function User() {
                         className="mb-3"
                         placeholder={t("Namee")}
                         value={data.name}
-                        onChange={(e) =>
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                             setData({ ...data, name: e.target.value })
                         }
                     />
@@ -322,7 +321,7 @@ export default function User() {
                         size="large"
                         placeholder={t("Phone")}
                         value={data.phone}
-                        onChange={(e) => {
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                             let newValue = e.target.value;
                             if (/^\+?\d*$/.test(newValue)) {
                                 if (newValue.length <= 13) {
@@ -334,11 +333,11 @@ export default function User() {
                     <Input
                         size="large"
                         // margin="dense"
-                        placeholder={t("Password")}
+                        placeholder={t("EnterYourPassword")}
                         // className="mb-3"
                         type="password"
                         value={data.password}
-                        onChange={(e) =>
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                             setData({ ...data, password: e.target.value })
                         }
                     />

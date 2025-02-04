@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ChartThree from '../../components/Charts/ChartThree';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import { Table, TableHead, TableBody, TableRow, TableCell, TableContainer, Box, CircularProgress, Typography } from '@mui/material';
@@ -131,7 +131,7 @@ const ECommerce: React.FC = () => {
           </Box>
         ) : actionGet.error ? (
           <Typography color="error" textAlign="center">
-            Failed to load data
+            {/* Failed to load data */}
           </Typography>
         ) : (
           <TableContainer>
