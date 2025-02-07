@@ -313,7 +313,7 @@ export default function MerchantDetials() {
                                                 {t("Name")}
                                             </TableCell>
                                             <TableCell
-                                                className="min-w-[150px] border-l"
+                                                className="min-w-[150px] border-l" 
                                                 align="left"
                                             >
                                                 {t("mcc")} 
