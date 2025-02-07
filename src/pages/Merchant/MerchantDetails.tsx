@@ -306,6 +306,7 @@ export default function MerchantDetials() {
                                             >
                                                 {t("TerminalName")}
                                             </TableCell>
+
                                             <TableCell
                                                 className="min-w-[200px] border-l"
                                                 align="left"
