@@ -321,7 +321,7 @@ export default function MerchantDetials() {
                                             <TableCell
                                                 className="min-w-[160px] border-l"
                                                 align="left"
-                                            >
+                                            > 
                                                 {t("Status")}
                                             </TableCell>
                                         </TableRow>
