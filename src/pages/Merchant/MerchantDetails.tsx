@@ -342,9 +342,9 @@ export default function MerchantDetials() {
                                                 <TableCell align="left">
                                                     <Typography
                                                         fontSize={15}
-                                                        className={` uppercase  text-center p-3 rounded-full ${terminal.active ? 'text-white bg-[#327bf0]' : 'text-red-500'} `}
+                                                        className={` uppercase  text-center p-3 rounded-full ${terminal.active ? 'text-red-500 ' : 'text-white bg-[#327bf0]'} `}
                                                     >
-                                                        {terminal.active ? 'active' : 'Inactive'}
+                                                        {terminal.active ? 'Inactive' : 'active'}
                                                     </Typography>
                                                 </TableCell>
                                             </TableRow>
