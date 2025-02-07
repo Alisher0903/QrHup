@@ -316,7 +316,7 @@ export default function MerchantDetials() {
                                                 className="min-w-[150px] border-l"
                                                 align="left"
                                             >
-                                                {t("mcc")}
+                                                {t("mcc")} 
                                             </TableCell>
                                             <TableCell
                                                 className="min-w-[160px] border-l"
