@@ -83,7 +83,7 @@ const Header = (props: {
         </div>
 
         <div className="flex items-center gap-3 2xsm:gap-7">
-          <Select defaultValue={i18nextLng || "en"}
+          <Select defaultValue={"ru"}
             className='min-w-[135px]'
             onChange={(value) => {
               changeLanguage(value);
