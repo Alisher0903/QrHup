@@ -85,20 +85,8 @@ function App() {
     checkAuth();
     console.clear
   }, [navigate, pathname]);
-  // useEffect(() => {
-  //   const clearConsoleOnMouseMove = () => {
-  //     console.clear();
-  //   };
-
-  //   window.addEventListener("mousemove", clearConsoleOnMouseMove);
-
-  //   return () => {
-  //     window.removeEventListener("mousemove", clearConsoleOnMouseMove);
-  //   };
-  // }, []);
   useEffect(() => {
     if (process.env.NODE_ENV === "development") {
-      // = () => { };
       console.warn = () => { };
       console.error = () => { };
     }
@@ -114,7 +102,6 @@ function App() {
 
     clearConsole();
   }, []);
-  // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
     console.clear
