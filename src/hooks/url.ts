@@ -1,4 +1,4 @@
-// export const baseUrl: string = 'http://159.89.21.188:8080/'
+// export const baseUrl: string = ''
 export const baseUrl: string = 'https://api.qrhub.uz/'
 export const LogIn: string = `${baseUrl}api/user/login`
 
@@ -78,3 +78,4 @@ export const statistic_dashboard_transactions_diagram: string = `${baseUrl}api/t
 export const Generate: string = `${baseUrl}api/partner/generate/`
 
 
+export const check_qr: string = `https://socket.qrpay.uz/api/payment/check/order/`

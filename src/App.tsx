@@ -21,6 +21,7 @@ import Clarify from './pages/MaderatorPage/clarify';
 import AdminTransactions from './pages/Admin-Transactions/admin-transactions';
 import Generated from './pages/Generated';
 import { useTranslation } from 'react-i18next';
+import ViewQr from './pages/viewQr';
 
 interface RouteConfig {
   path: string;
@@ -50,6 +51,7 @@ function App() {
     { path: '/qrDetial/:id', element: <QrDetial />, title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template' },
     { path: '/auth/signin', element: <SignIn />, title: 'Signin ' },
     { path: '/generated/:ApiKey', element: <Generated />, title: 'Generated' },
+    { path: '/view/qrcode/:id', element: <ViewQr />, title: 'View | qr' },
 
     // Moderator
     {
@@ -70,8 +72,9 @@ function App() {
       const token = sessionStorage.getItem('token');
       const role = sessionStorage.getItem('role');
       const isApiKeyRoute = /^\/generated\/[^/]+$/.test(pathname);
+      const isQrCheckApi = /^\/view\/qrcode\/[^/]+$/.test(pathname);
 
-      if (!role && !isApiKeyRoute && !token) {
+      if (!role && !isApiKeyRoute && !token && !isQrCheckApi) {
         navigate('/auth/signin');
         setLoading(false);
       } else {
