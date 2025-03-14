@@ -33,25 +33,45 @@ function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   const routes: RouteConfig[] = [
     { path: '/', element: <ECommerce />, title: t('Dashboard') },
     { path: '/User', element: <User />, title: t('AllUser') },
     { path: '/Qrs', element: <Qrs />, title: t('AllQRs') },
-    { path: '/admin/transactions', element: <AdminTransactions />, title: t('AllTransactions') },
+    {
+      path: '/admin/transactions',
+      element: <AdminTransactions />,
+      title: t('AllTransactions'),
+    },
     { path: '/mcc', element: <Mcc />, title: t('mcc') },
     { path: '/action', element: <Action />, title: t('Action') },
-    { path: '/currency', element: <Currency />, title: t('Currency')},
+    { path: '/currency', element: <Currency />, title: t('Currency') },
     { path: '/merchant', element: <Merchant />, title: t('AllMerchants') },
-    { path: '/chart', element: <Chart />, title: 'Basic Chart | TailAdmin - Tailwind CSS Admin Dashboard Template' },
+    {
+      path: '/chart',
+      element: <Chart />,
+      title: 'Basic Chart | TailAdmin - Tailwind CSS Admin Dashboard Template',
+    },
     { path: '/partners', element: <Partners />, title: t('AllPartners') },
-    { path: '/partnersDetials/:id', element: <PartnerDetials />, title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template' },
-    { path: '/merchantDetials/:id', element: <MerchantDetials />, title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template' },
-    { path: '/qrDetial/:id', element: <QrDetial />, title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template' },
+    {
+      path: '/partnersDetials/:id',
+      element: <PartnerDetials />,
+      title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template',
+    },
+    {
+      path: '/merchantDetials/:id',
+      element: <MerchantDetials />,
+      title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template',
+    },
+    {
+      path: '/qrDetial/:id',
+      element: <QrDetial />,
+      title: 'Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template',
+    },
     { path: '/auth/signin', element: <SignIn />, title: 'Signin ' },
     { path: '/generated/:ApiKey', element: <Generated />, title: 'Generated' },
-    { path: '/view/qrcode/:id', element: <ViewQr />, title: 'View | qr' },
+    { path: '/view/qr-code/:id', element: <ViewQr />, title: 'View | qr' },
 
     // Moderator
     {
@@ -72,7 +92,7 @@ function App() {
       const token = sessionStorage.getItem('token');
       const role = sessionStorage.getItem('role');
       const isApiKeyRoute = /^\/generated\/[^/]+$/.test(pathname);
-      const isQrCheckApi = /^\/view\/qrcode\/[^/]+$/.test(pathname);
+      const isQrCheckApi = /^\/view\/qr-code\/[^/]+$/.test(pathname);
 
       if (!role && !isApiKeyRoute && !token && !isQrCheckApi) {
         navigate('/auth/signin');
@@ -83,12 +103,12 @@ function App() {
     };
 
     checkAuth();
-    console.clear
+    console.clear;
   }, [navigate, pathname]);
   useEffect(() => {
-    if (process.env.NODE_ENV === "development") {
-      console.warn = () => { };
-      console.error = () => { };
+    if (process.env.NODE_ENV === 'development') {
+      console.warn = () => {};
+      console.error = () => {};
     }
 
     console.clear();
@@ -104,7 +124,7 @@ function App() {
   }, []);
   useEffect(() => {
     window.scrollTo(0, 0);
-    console.clear
+    console.clear;
   }, [pathname]);
 
   return loading ? (
