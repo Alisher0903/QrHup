@@ -67,9 +67,9 @@ export const adminTransactionsGet: string = `${baseUrl}api/transaction`
 export const ModeratorChangeStatus: string = `${baseUrl}api/transaction/moderator/status?`
 
 // statistic 
-export const statistic_dashboard_transactions: string = `${baseUrl}api/transaction/dashboard/statistic`
-export const statistic_dashboard_merchants: string = `${baseUrl}api/merchant/is-active/merchant-or-terminal`
-export const statistic_dashboard_transactions_diagram: string = `${baseUrl}api/transaction/dashboard/statistic/diagram`
+export const statistic_dashboard_transactions: string = `${baseUrl}api/transaction/dashboard/statistics`
+export const statistic_dashboard_merchants: string = `${baseUrl}api/merchant/is-active/merchant-or-/terminal`
+export const statistic_dashboard_transactions_diagram: string = `${baseUrl}api/transaction/dashboard/statistics/diagram`
 
 
 
@@ -78,4 +78,4 @@ export const statistic_dashboard_transactions_diagram: string = `${baseUrl}api/t
 export const Generate: string = `${baseUrl}api/partner/generate/`
 
 
-export const check_qr: string = `https://socket.qrpay.uz/api/payment/check/order/`
+export const check_qr: string = `https://apk.qrpay.uz/api/payment/check/order/`
