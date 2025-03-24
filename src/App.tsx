@@ -72,6 +72,7 @@ function App() {
     { path: '/auth/signin', element: <SignIn />, title: 'Signin ' },
     { path: '/generated/:ApiKey', element: <Generated />, title: 'Generated' },
     { path: '/view/qr-code/:id', element: <ViewQr />, title: 'View | qr' },
+    { path: '/view/qrcode/:id', element: <ViewQr />, title: 'View | qr' },
 
     // Moderator
     {
@@ -93,8 +94,9 @@ function App() {
       const role = sessionStorage.getItem('role');
       const isApiKeyRoute = /^\/generated\/[^/]+$/.test(pathname);
       const isQrCheckApi = /^\/view\/qr-code\/[^/]+$/.test(pathname);
+      const testisQrCheckApi = /^\/view\/qrcode\/[^/]+$/.test(pathname);
 
-      if (!role && !isApiKeyRoute && !token && !isQrCheckApi) {
+      if (!role && !isApiKeyRoute && !token && !isQrCheckApi && !testisQrCheckApi) {
         navigate('/auth/signin');
         setLoading(false);
       } else {

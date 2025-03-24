@@ -1,17 +1,16 @@
 // export const baseUrl: string = ''
-export const baseUrl: string = 'https://api.qrhub.uz/'
-export const LogIn: string = `${baseUrl}api/user/login`
+export const baseUrl: string = 'https://api.qrhub.uz/';
+export const LogIn: string = `${baseUrl}api/user/login`;
 
-// User 
+// User
 export const UserGet: string = `${baseUrl}api/user/moderator/page?`;
 export const AddUser: string = `${baseUrl}api/user/create`;
 export const DeleteUser: string = `${baseUrl}api/user/deleted?`;
 export const EditUser: string = `${baseUrl}api/user/update?`;
-export const getMe: string = `${baseUrl}api/user/get-me`
+export const getMe: string = `${baseUrl}api/user/get-me`;
 
-// Leave 
+// Leave
 export const LeaveGet: string = `${baseUrl}`;
-
 
 // Partners Api
 
@@ -39,10 +38,10 @@ export const MerchantQrs: string = `${baseUrl}api/qrcode/merchant?`;
 export const QrGet: string = `${baseUrl}api/qrcode/page`;
 export const QrGetOne: string = `${baseUrl}api/qrcode/check/`;
 export const QrTransactions: string = `${baseUrl}api/qrcode/transaction/`;
-export const qrGetone: string = `${baseUrl}api/qrcode/one`
-export const getTransactionsByQrId: string = `${baseUrl}api/transaction`
+export const qrGetone: string = `${baseUrl}api/qrcode/one`;
+export const getTransactionsByQrId: string = `${baseUrl}api/transaction`;
 
-// Mcc 
+// Mcc
 export const MccGet: string = `${baseUrl}api/mcc/mcc/page`;
 export const MccCreate: string = `${baseUrl}api/mcc/create`;
 export const MccEdit: string = `${baseUrl}api/mcc/update?`;
@@ -53,29 +52,23 @@ export const ActionGet: string = `${baseUrl}api/action`;
 export const ActionModeratorGet: string = `${baseUrl}api/action/moderator`;
 export const ActionModeratorGetOne: string = `${baseUrl}api/transaction/detail/`;
 
-
-// Currency 
+// Currency
 export const CurrencyGet: string = `${baseUrl}api/currency/page?`;
 export const CurrencyEditActive: string = `${baseUrl}api/currency/active?`;
 
 // mdelator
 export const ClarifyGet: string = `${baseUrl}api/transaction/moderator?`;
 
-
 // Transactions
-export const adminTransactionsGet: string = `${baseUrl}api/transaction`
-export const ModeratorChangeStatus: string = `${baseUrl}api/transaction/moderator/status?`
+export const adminTransactionsGet: string = `${baseUrl}api/transaction`;
+export const ModeratorChangeStatus: string = `${baseUrl}api/transaction/moderator/status?`;
 
-// statistic 
-export const statistic_dashboard_transactions: string = `${baseUrl}api/transaction/dashboard/statistics`
-export const statistic_dashboard_merchants: string = `${baseUrl}api/merchant/is-active/merchant-or-/terminal`
-export const statistic_dashboard_transactions_diagram: string = `${baseUrl}api/transaction/dashboard/statistics/diagram`
+// statistic
+export const statistic_dashboard_transactions: string = `${baseUrl}api/transaction/dashboard/statistics`;
+export const statistic_dashboard_merchants: string = `${baseUrl}api/merchant/is-active/merchant-or-/terminal`;
+export const statistic_dashboard_transactions_diagram: string = `${baseUrl}api/transaction/dashboard/statistics/diagram`;
 
+export const Generate: string = `${baseUrl}api/partner/generate/`;
 
-
-
-
-export const Generate: string = `${baseUrl}api/partner/generate/`
-
-
-export const check_qr: string = `https://apk.qrpay.uz/api/payment/check/order/`
+export const check_qr: string = `https://apk.qrpay.uz/api/payment/check/order/`;
+export const test_check_qr: string = `https://socket.qrpay.uz/api/payment/check/order/`;

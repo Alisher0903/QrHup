@@ -1,11 +1,13 @@
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import logo2 from '../../public/Logo.png';
-import { check_qr } from '../hooks/url';
+import { check_qr, test_check_qr } from '../hooks/url';
 
 export default function ViewQr() {
   const { id } = useParams();
+  const {pathname} = useLocation();
+  
 
   useEffect(() => {
     getUrlFunction();
@@ -15,7 +17,7 @@ export default function ViewQr() {
 
   const getUrlFunction = async () => {
     try {
-      const { data } = await axios.post(`${check_qr}${id}`, {});
+      const { data } = await axios.post(`${pathname === 'qrcode/' ? check_qr : test_check_qr}${id}`, {});
       if (data?.data) {
         window.location.href = data.data;
       } else {
