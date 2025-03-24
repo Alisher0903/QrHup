@@ -1,0 +1,56 @@
+# secure keys => SERVER_SSH_KEY, SERVER_USER, SERVER_HOST
+
+name: Deploy QrHub Frontend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kodni klonlash
+        uses: actions/checkout@v3
+
+      - name: Node.js o‘rnatish
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Dependencies-ni o‘rnatish
+        run: npm install --force
+
+      - name: Loyihani build qilish
+        run: npm run build
+
+      - name: Server known_hosts ga qo‘shish
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Handle SSH Key
+        id: ssh-key
+        run: |
+          echo "${{ secrets.SERVER_SSH_KEY }}" > private_key
+          chmod 600 private_key
+
+      - name: Serverga build fayllarni yuklash
+        run: |
+          scp -i private_key -o StrictHostKeyChecking=no -r dist/ ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/root/front/
+
+      - name: Server katalogga ko'chirish
+        run: |
+          ssh -i private_key -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << EOF
+             sudo rm -rf /srv/front/dist
+             sudo mkdir -p /srv/front
+             sudo mv /root/front/dist /srv/front/
+          EOF
+
+      - name: Serverda nginx-ni qayta ishga tushirish
+        run: |
+          ssh -i private_key -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << EOF
+            sudo systemctl restart nginx
+          EOF
