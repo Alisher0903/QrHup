@@ -8,7 +8,6 @@ export default function ViewQr() {
   const { id } = useParams();
   const {pathname} = useLocation();
   const urlslice = pathname.slice(6, 13);
-console.log(urlslice);  
 
   useEffect(() => {
     getUrlFunction();
