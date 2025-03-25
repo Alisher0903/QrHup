@@ -7,7 +7,8 @@ import { check_qr, test_check_qr } from '../hooks/url';
 export default function ViewQr() {
   const { id } = useParams();
   const {pathname} = useLocation();
-  
+  const urlslice = pathname.slice(6, 13);
+console.log(urlslice);  
 
   useEffect(() => {
     getUrlFunction();
@@ -17,7 +18,7 @@ export default function ViewQr() {
 
   const getUrlFunction = async () => {
     try {
-      const { data } = await axios.post(`${pathname === 'qrcode/' ? check_qr : test_check_qr}${id}`, {});
+      const { data } = await axios.post(`${urlslice === 'qrcode/' ? check_qr : test_check_qr}${id}`, {});
       if (data?.data) {
         window.location.href = data.data;
       } else {
